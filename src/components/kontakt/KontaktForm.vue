@@ -26,9 +26,9 @@
           </div>
           <div class="col-12">
             <div class="mb-3">
-              <label for="text" class="form-label">Example textarea</label>
+              <label for="text" class="form-label">Nachricht:</label>
               <textarea class="form-control text-area" id="text" rows="3" placeholder="Nachricht*"
-                v-model="name"></textarea>
+                v-model="message"></textarea>
             </div>
           </div>
         </div>
