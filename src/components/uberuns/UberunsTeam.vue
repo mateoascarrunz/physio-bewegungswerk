@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 relative">
                     <div class="coverphoto_container">
-<img class="img_coverphoto" :src="'https://strapi-physio-app.onrender.com' +  selectedTeam.attributes.profilePicture.data.attributes.url" :alt="selectedTeam.attributes.name">
+<img class="img_coverphoto" :src="selectedTeam.attributes.profilePicture.data.attributes.url" :alt="selectedTeam.attributes.name">
 </div>
 </div>
                 <div class="col-lg-6 relative">
