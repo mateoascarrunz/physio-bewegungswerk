@@ -16,4 +16,10 @@ padding: 50px;
 height: 100%;
 width: 100%;
 position: relative;
+}
+@media (max-width: 500px){
+    div{
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+}
 }</style>

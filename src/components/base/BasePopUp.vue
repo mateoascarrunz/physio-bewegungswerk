@@ -43,8 +43,15 @@ export default {
     align-items: center
 
 }
+@media (max-width: 500px){
+  .background{
+padding-left:5%;
+padding-right: 5%;
+  }
+}
 .box{
 overflow-y: auto;
+overflow-x: hidden;
 }
 
 </style>

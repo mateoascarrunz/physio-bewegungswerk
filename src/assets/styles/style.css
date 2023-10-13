@@ -283,3 +283,8 @@ grid-column: span 2;
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 500px){
+  .closed_button {  margin-left: 85% !important;}
+
+}

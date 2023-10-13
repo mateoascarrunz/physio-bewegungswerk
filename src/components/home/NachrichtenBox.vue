@@ -239,4 +239,7 @@ align-items: center;
 
 .icon {
   margin-bottom: 10px;
-}</style>
+}
+
+
+</style>

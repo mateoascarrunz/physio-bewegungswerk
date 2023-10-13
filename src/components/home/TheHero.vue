@@ -136,8 +136,8 @@
   </div>
 </template>
 <script>
-import IconDiploma from '../icon/IconDiploma.vue'
-import IconLanguages from '../icon/IconLanguages.vue'
+import IconDiploma from '../icon/IconDiploma.vue';
+import IconLanguages from '../icon/IconLanguages.vue';
 import IconLinkedIn from '../icon/IconLinkedIn.vue';
 import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
@@ -498,6 +498,14 @@ right: 5;
   .hero{
   height: 150vh;
   }
+}
+@media (max-width: 500px){
+  .hero {
+
+  max-height: 600px;
+
+
+}
 }
 @media (max-height: 950px) and (min-width: 990px) {
   .img_contaner {
