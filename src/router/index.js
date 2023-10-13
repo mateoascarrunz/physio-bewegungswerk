@@ -7,39 +7,51 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+
     },
     {
       path: '/kontakt',
       name: 'kontakt',
 
-      component: () => import('../views/KontaktView.vue')
+      component: () => import('../views/KontaktView.vue'),
+
     },
     {
-      path: '/dienstleistungen',
-      name: 'dienstleistungen',
+      path: '/behandlungstechniken',
+      name: 'behandlungstechniken',
 
-      component: () => import('../views/DienstleistungenView.vue')
+      component: () => import('../views/BehandlungstechnikenView.vue'),
+
     },
     {
       path: '/uberuns',
       name: 'uberuns',
 
-      component: () => import('../views/UberUnsView.vue')
+      component: () => import('../views/UberUnsView.vue'),
+
     },
     {
       path: '/nachrichten',
       name: 'nachrichten',
 
-      component: () => import('../views/NachrichtenView.vue')
+      component: () => import('../views/NachrichtenView.vue'),
+   
     },
     {
       path: '/faq',
       name: 'faq',
 
-      component: () => import('../views/FaqView.vue')
+      component: () => import('../views/FaqView.vue'),
+ 
     },
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
+  
 })
+
+
 
 export default router

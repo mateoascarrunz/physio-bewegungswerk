@@ -9,11 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/vue-lottie-player": "^1.1.0",
     "@popperjs/core": "^2.11.8",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.1",
+    "emailjs-com": "^3.2.0",
+    "markdown-it": "^13.0.2",
     "swiper": "^10.2.0",
     "vue": "^3.3.4",
+    "vue-custom-element": "^3.3.0",
+    "vue-intersect": "^3.0.0",
+    "vue-plugin-load-script": "^2.1.1",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {

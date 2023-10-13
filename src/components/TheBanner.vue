@@ -59,7 +59,7 @@
     font-weight: 700;
   } 
   .banner-container{
-    background-color: #004FF1;
+    background-color: #3F63A7;
     position: relative;
     width: 100%;
     top: 0px;

@@ -1,3 +1,10 @@
 <template>
-    <h1>nachrichten</h1>
+<NachrichtenContainer/>
 </template>
+<script>
+import NachrichtenContainer from '../components/nachrichten/NachrichtenContainer.vue';
+export default{
+    components:{
+        NachrichtenContainer
+    }
+}</script>

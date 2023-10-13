@@ -1,5 +1,10 @@
 <template>
-    <div>
-    <h1 class="center">this is contact</h1>
-</div>
+<KontaktContainer/>
 </template>
+<script>
+import KontaktContainer from '../components/kontakt/KontaktContainer.vue';
+export default{
+    components:{
+        KontaktContainer
+    }
+}</script>

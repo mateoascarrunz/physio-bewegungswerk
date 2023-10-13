@@ -1,16 +1,24 @@
 <template>
-    <div class="container-fluid-costume"> 
+<BasePageTransition></BasePageTransition>
+    <div class="container-hero"> 
     <div class="grid_container">
-        <BaseBox class="grid-col-2" :color="lightblue">
 
-        </BaseBox>
-      <TechniquesBox>
+        <Transition name="slide-fade" v-intersect="onIntersect">
+        <PartnersBox class="grid-col-2" :color="lightblue">
+
+
+        </PartnersBox>
+    </Transition>
+      <TechniquesBox class="grid_mobile">
         
-      </TechniquesBox>
-        <BaseBox></BaseBox>
-      <NachrichtenBox/>
-       <ActionBox/>
+      </TechniquesBox >
+      <UberunsBox class="grid_mobile"/>
     </div>
+      <NachrichtenBox/>
+      <div class="grid_container">
+       <ActionBox class="grid_mobile"/>
+    </div>
+
 </div>
 
 </template>
@@ -18,20 +26,31 @@
 import TechniquesBox from './TechniquesBox.vue';
 import ActionBox from './ActionBox.vue';
 import NachrichtenBox from './NachrichtenBox.vue'
+import PartnersBox from './PartnersBox.vue';
+import UberunsBox from './UberunsBox.vue';
+
 export default{
     components:{
         ActionBox,
         NachrichtenBox,
-        TechniquesBox
+        TechniquesBox,
+        PartnersBox,
+        UberunsBox
     },
+    data(){
+        return{
+            inViewport: false,
+        }
+    },
+    methods: {
+    onIntersect(entries) {
+      this.inViewport = entries[0].isIntersecting;
+    },
+  },
     inject:['blue', 'lightblue'],
 }</script>
 <style >
 
-.container-fluid-costume{
-    margin-top: -80px;
-    padding: 0px;
-}
 
 .img_cover{
     object-fit: cover;

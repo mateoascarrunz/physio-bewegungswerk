@@ -34,7 +34,14 @@ height: 560px;
 padding: 25px 25px 10px 25px;
 justify-content: center;
     align-items: center;
-    border: 2px dashed #004FF1;
+    border: 2px dashed #3F63A7;
     flex-direction: column;
+}
+@media(max-width:990px) {
+  .card_container{
+    width: 280px;
+height: 460px;
+
+}
 }
 </style>

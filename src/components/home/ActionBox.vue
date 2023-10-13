@@ -7,9 +7,12 @@
     <br>
      <span class="paragraph white block">Ihre Gesundheit ist unsere Priorität. Buchen Sie jetzt Ihren Termin, um Unterstützung auf Ihrem Weg zu einem aktiveren Leben zu erhalten. Wir freuen uns darauf, Sie zu betreuen."</span>
      <br>
-     <BaseButtonBlue > <span class="white">Termin Vereinbaren</span></BaseButtonBlue>
+     <BaseButtonBlue > <span class="white mobil-nowhite">Termin Vereinbaren</span></BaseButtonBlue>
      <br>
     </div> 
+    <div class="col-lg-4">
+
+    </div>
     </div>
      <img class="icon" src="../../assets/images/physio_icon_white.svg" alt="">
      </BaseBox>
@@ -33,4 +36,13 @@ height: 90%;
 bottom: 0px;
 z-index: 1;
 opacity: 0.3;
+}
+@media(max-width: 990px){
+    .col-lg-9{
+    margin-top: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+z-index: 2;
+}  
 }</style>

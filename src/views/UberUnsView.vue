@@ -1,3 +1,12 @@
 <template>
-    <h1>uber uns</h1>
+<UberunsContainer>
+    
+</UberunsContainer>
 </template>
+<script>
+import UberunsContainer from '../components/uberuns/UberunsContainer.vue';
+export default{
+    components:{
+        UberunsContainer
+    }
+}</script>

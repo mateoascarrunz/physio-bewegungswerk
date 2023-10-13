@@ -2,28 +2,27 @@
    <!-- Navbar-->
   <nav class="sticky-top  navbar navbar-expand-lg flex-lg-nowrap flex-wrap">
     <div class="container-fluid">
-            <a class="navbar-brand" href="index.html"><img style="width: 75%;" src="../assets/images/physio_icon.svg" alt="Physio icon"></a>
+        <RouterLink class="navbar-brand" to="/"><img style="width: 75%;" src="../assets/images/physio_icon.svg" alt="Physio icon"></Routerlink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <span class="navbar-toggler-icon"></span></button>
         <div class="navbar-collapse collapse justify-content-center" id="navbarNavDropdown">
             <ul class="navbar-nav mx-auto">
               
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/">Home
+                    <RouterLink class="nav-link" to="/" @click="toggleMobileMenu">Home
                 </RouterLink>
                 </li>
                 <li class="nav-item">
-                     <RouterLink class="nav-link" to="/dienstleistungen"> Unsere Dienstleistungen </RouterLink>
+                     <RouterLink class="nav-link" to="/behandlungstechniken" @click="toggleMobileMenu"> Unsere Behandlungstechniken </RouterLink>
                 </li>
                 <li class="nav-item">
-                      <RouterLink class="nav-link" to="/uberuns"> Über uns </RouterLink>
+                      <RouterLink class="nav-link" to="/uberuns" @click="toggleMobileMenu"> Über uns </RouterLink>
                 </li>
                 <li class="nav-item">
-                      <RouterLink class="nav-link" to="/nachrichten"> Nachrichten </RouterLink>
+                      <RouterLink class="nav-link" to="/nachrichten" @click="toggleMobileMenu"> Nachrichten </RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink class="nav-link" to="/kontakt"><span class="" aria-current="page" href=""> Kontakt </span>
+                    <RouterLink class="nav-link" to="/kontakt" @click="toggleMobileMenu"><span class="" aria-current="page" href=""> Kontakt </span>
                 </RouterLink>
                 </li>
          
@@ -41,7 +40,22 @@
 </nav>
 
 </template>
-
+<script>
+export default {
+  methods: {
+    toggleMobileMenu() {
+      const navbar = document.querySelector('.navbar-collapse');
+      if (navbar) {
+        const isOpen = navbar.classList.contains('show');
+        if (isOpen) {
+          // Close the mobile menu
+          navbar.classList.remove('show');
+        }
+      }
+    },
+  },
+};
+</script>
 <style scoped>
 .sticky-top{
 top: 28px !important;
@@ -58,6 +72,8 @@ top: 28px !important;
     background: rgba(255, 255, 255, 0.10);
 backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
+padding-left: 10px;
+padding-right: 10px;
 
 }
 .nav-link{
@@ -65,10 +81,13 @@ backdrop-filter: blur(20px);
     font-weight: 400;
     font-family: 'Montserrat', sans-serif;
 }
+.navbar-brand{
+    border-color: transparent !important;
+}
 .router-link-active {
-  border-bottom: 1px solid #004FF1;
+  border-bottom: 1px solid #3F63A7;
   font-weight: 600;
-  color: #004FF1;
+  color: #3F63A7;
   text-decoration: underline;
   
 }
@@ -90,6 +109,7 @@ s
 .nav-item{
     margin-left: 0.938rem;
     margin-right: 0.938rem;
+
 }
 
 .nav-item-contact{
@@ -115,19 +135,36 @@ border-radius: 50px;
 background: #D6E3FF;
 
     text-align: center;
-margin-top: 50px;
-padding: 20PX;
+margin-top: 35px;
+padding: 20px;
 }
 .navbar-termin{
-    margin-top: 30px;  
-    background-color: transparent !important;
+    margin-top: -5px;  
+    background-color: transparent;
     box-shadow: none;
+}
+.nav-item-contact{
+    margin: 0px !important;
+
+}
+.nav-link{
+    width: 100%;
 }
 .router-link-active {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
   
+}
+.navbar-brand{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+}
+.navbar-toggler{
+margin-left: auto;
 }
 .nav-item-contact {
     margin-right: 0rem;
