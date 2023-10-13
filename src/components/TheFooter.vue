@@ -44,7 +44,7 @@
                    <span class="info links blue" > Datenschutz </span>
                 </div>
                 <div class="col-lg-6 right center_mobile">
-                    <span class="info blue">Design and Develop by: <a class="semibold blue" target="_blank" rel="noopener noreferrer" href="https://mateoascarrunz.com/">Mateo Ascarrunz</a></span>
+                    <span class="info blue">Designed and Developed by: <a class="semibold blue" target="_blank" rel="noopener noreferrer" href="https://mateoascarrunz.com/">Mateo Ascarrunz</a></span>
                   
                 </div>
                 </div>
