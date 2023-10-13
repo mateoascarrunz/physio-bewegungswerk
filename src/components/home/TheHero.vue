@@ -100,7 +100,7 @@
         <img class="img_hero_background" src="../../assets/images/hero_img_physio_background_fadeout_2.png" alt="">
         <div class="marit_hover_container">
           <div class="marit_hover" @mouseover="isMaritHovered = true" @mouseout="isMaritHovered = false">
-            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupById(1)">Marit Hesser</BaseButtonBlue>
+            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupById(1)">Marit Hesse</BaseButtonBlue>
           </div>
 
 
