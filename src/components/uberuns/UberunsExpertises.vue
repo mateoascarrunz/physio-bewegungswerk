@@ -52,28 +52,29 @@ Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung
             <br>
             <span class="paragraph">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir kreativ auf die individuellen Ziele unserer Patienten eingehen.</span>
             <br>
-            <BaseButtonBlue @click="popup1 = !popup1">close</BaseButtonBlue>
+
         </div>
         
 </BasePopUp>
 <BasePopUp v-if="popup2" :theheight="'fit-content'">
     <BaseCloseButton @click="popup2 = !popup2"/>
     <div class="center_flex height">
-            <span class="title bold blue">Wertschätzung</span>
+            <span class="title bold blue">Kreativität</span>
             <br>
-            <span class="paragraph">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir kreativ auf die individuellen Ziele unserer Patienten eingehen.</span>
+            <span class="paragraph">Durch die fortlaufende Weiterbildung unserer Therapeuten und ihre <strong>kreative</strong> Herangehensweise an die Behandlung gewährleisten wir eine professionelle Physiotherapie gemäss den aktuellen Standards.</span>
             <br>
-            <BaseButtonBlue @click="popup2 = !popup2">close</BaseButtonBlue>
+
         </div>
 </BasePopUp>
 <BasePopUp v-if="popup3"  :theheight="'fit-content'">
     <BaseCloseButton @click="popup3 = !popup3" />
         <div class="center_flex height">
-            <span class="title bold blue">Wertschätzung</span>
+            <span class="title bold blue">Vertrauen und Respekt</span>
             <br>
-            <span class="paragraph">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir kreativ auf die individuellen Ziele unserer Patienten eingehen.</span>
+            <span class="paragraph">Unsere Patienten und deren <strong>Vertrauen</strong> stehen für uns immer im Mittelpunkt der Therapie.
+Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung und eine offene Kommunikation zwischen Patienten und Therapeuten elementar.</span>
             <br>
-            <BaseButtonBlue @click="popup3 = !popup3">close</BaseButtonBlue>
+
         </div>
        
 </BasePopUp>

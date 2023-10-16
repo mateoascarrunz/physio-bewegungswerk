@@ -19,7 +19,7 @@
                       <RouterLink class="nav-link" to="/uberuns" @click="toggleMobileMenu"> Über uns </RouterLink>
                 </li>
                 <li class="nav-item">
-                      <RouterLink class="nav-link" to="/nachrichten" @click="toggleMobileMenu"> Nachrichten </RouterLink>
+                      <RouterLink class="nav-link" to="/news" @click="toggleMobileMenu"> News </RouterLink>
                 </li>
                 <li class="nav-item">
                     <RouterLink class="nav-link" to="/kontakt" @click="toggleMobileMenu"><span class="" aria-current="page" href=""> Kontakt </span>

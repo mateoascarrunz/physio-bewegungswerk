@@ -18,17 +18,16 @@
                     <span class="title blue bold center">Therapieangebot</span>
                 </div>
                 <br>
-                <span class="paragraph left">Herzlich willkommen im <strong class="bold">Physio Bewegungswerk!</strong>
-                    <br>
-                    <br>
-                    Wir sind hier, um Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern auch dabei zu unterstützen, ein aktiveres Leben zu führen. Wir stehen Ihnen zur Verfügung, um Sie auf Ihrer Reise zu begleiten und die bestmögliche Betreuung zu gewährleisten.
+                <span class="paragraph left">
+                    Herzlich willkommen beim <strong class="bold">Phyiso Bewegungswerk.</strong> Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten.
                    <br>
                     <br>
-                    Entdecken Sie unsere verschiedenen Ansätze und bewährten Techniken:
-Jeder Mensch ist einzigartig, daher haben auch unsere Patienten individuelle Beschwerden, Bedürfnisse und Ziele. Wir bieten eine breite Palette bewährter Methoden und Techniken an, um Ihre spezifischen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen.
+                    Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen.
 <br>
 <br>
-Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfen oder einfach Ihre Beweglichkeit und Lebensqualität verbessern möchten – wir sind hier, um Ihre Bedürfnisse zu verstehen und gemeinsam mit Ihnen passende Lösungen zu erarbeiten.</span>
+Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfen oder Ihre Beweglichkeit und Lebensqualität verbessern möchten, wir sind hier, um gemeinsam geeignete Lösungen zu entwickeln.</span>
+<br>
+<br>
                 <!-- services -->
                 <div class="container services_container">
                     <div class="row no_padding">
@@ -36,7 +35,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                             <div class="sticky_element">
                             <div class="img_services_container center">
                                
-                                <img v-if="selectedService !== null" class="img_services" :src="'/src/assets/images/' + selectedService.img" alt="">
+                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="'/src/assets/images/' + selectedService.img" alt="">
                                 <img v-if="selectedService === null" class="icon" src="../../assets/images/physio_icon.svg" alt="">
                                 
                             </div>
@@ -51,10 +50,16 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                         </div>
                         </div>
                         <div class="col-lg-8 order-first  text_services">
-                            <span class="paragraph">Hier sind einige unserer herausragenden Dienstleistungen:</span>
+                            <span class="paragraph">Hier sind unsere Dienstleistungen:</span>
                             <br>
                             <br>
-                            <BaseButtonBlue @click="Popup = !Popup" class="services_button"><span v-if="selectedService !== null"  class="paragraph text_break" >{{ selectedService.title }}</span><span v-if="selectedService === null" class="subtitle">Wählen Sie eine Dienstleistung  +</span></BaseButtonBlue>
+                            <BaseButtonBlue @click="Popup = !Popup" class="services_button relative"><span v-if="selectedService !== null"  class="paragraph text_break" >{{ selectedService.title }}</span><span v-if="selectedService === null" class="subtitle">Wählen Sie eine Dienstleistung  +</span>
+                            <div class="btn_message left" v-if="selectedService === null">
+                                <IconArrow class="arrow"></IconArrow>
+                                <span class="paragraph  magenta">Wählen Sie eine Dienstleistung,
+                                    <br> 
+um mehr zu erfahren</span>
+                            </div></BaseButtonBlue>
                             <br>
                             <br>
                             <span v-if="selectedService !== null" class="paragraph block" v-for="(paragraph, index) in selectedService.description" :key="index" v-html="paragraph"></span>
@@ -69,9 +74,11 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
 
 <script>
 import DropdownMenu from  './DropdownMenu.vue'
+import IconArrow from '../icon/IconArrow.vue';
 export default{
     components:{
         DropdownMenu,
+        IconArrow
     },
     data(){
         return{
@@ -80,14 +87,19 @@ export default{
             services:[
                 {
                    title:'Myofasziale Triggerpunkt-Therapie',
-                   description:['Bei der myofaszialen Triggerpunkt-Therapie werden Triggerpunkte mit gezielten Behandlungsgriffen behandelt. Mit einzelnen Fingern wird Druck auf die Verhärtung im Muskel ausgeübt, umso eine Normalisierung der Blutzirkulation und der Spannungsverhältnisse zu erreichen'],
-                   img:'img_services_1.jpeg', 
+                   description:[`Die Triggerpunkttherapie ist eine Behandlungsmethode, die darauf ausgerichtet ist, schmerzhafte Triggerpunkte in den Muskeln zu identifizieren und gezielt zu behandeln. Triggerpunkte sind lokale Verhärtungen in den Muskeln, die aufgrund von Verspannungen, Verletzungen oder anderen Ursachen auftreten können. Diese schmerzhaften Knoten in den Muskeln führen oft zu Beschwerden und können die Beweglichkeit einschränken.`,
+        `Der Prozess der Triggerpunkttherapie beginnt mit der Identifizierung der Triggerpunkte. Dies geschieht oft durch manuelle Untersuchung und das Ertasten von schmerzhaften Stellen im Muskelgewebe.`,
+        `Sobald die Triggerpunkte identifiziert sind, werden verschiedene Techniken angewendet, um sie zu behandeln. Dies umfasst in der Regel manuellen Druck, bei dem der Therapeut gezielt Druck auf die Triggerpunkte ausübt, um die Verspannungen zu lösen. Gleichzeitig können spezielle Dehnungsübungen gezeigt werden, um die Muskeln zu entspannen und die Flexibilität zu fördern.`,
+        `Die Therapie kann auch Massage und myofasziale Techniken beinhalten, um die Muskulatur weiter zu entspannen und die Durchblutung zu verbessern. Oft erhält der Patient Anleitungen für Selbstmanagement-Techniken, einschließlich der Möglichkeit, Triggerpunkte selbst zu massieren und Dehnungsübungen zu Hause durchzuführen, um die Schmerzen zu lindern.`,
+        `Diese Therapie kann bei verschiedenen Erkrankungen eingesetzt werden, bei denen Muskelverspannungen und schmerzhafte Triggerpunkte eine Rolle spielen, wie beispielsweise bei Nacken- und Rückenschmerzen, Kopfschmerzen, Tennisellenbogen und Fibromyalgie. Trotz möglicher Schmerzen während der Therapie zielt die Triggerpunkttherapie darauf ab, langfristige Linderung und eine verbesserte Muskelgesundheit zu bieten.`,],
+                   img:'img_services_myofasziale.jpg', 
                    vertical: true,
                 },
                 {
                    title:'Manuelle Therapie',
-                   description:['Die manuelle Therapie in der Physiotherapie ist ein spezieller Ansatz zur Diagnose und Behandlung von Muskel-Skelett-Erkrankungen, die sich auf die Verwendung manueller Techniken durch Physiotherapeuten konzentriert. Diese Techniken beinhalten die gezielte Anwendung von Mobilisation, Gleitbewegungen, Traktion und Kompression, um Schmerzen zu lindern, die Gelenkbeweglichkeit zu verbessern, Muskelverspannungen zu lösen und die Funktion des Muskel-Skelett-Systems zu optimieren'],
-                   img:'img_services_2.jpeg', 
+                   description:[`Die manuelle Therapie in der Physiotherapie ist ein spezieller Ansatz zur Diagnose und Behandlung von Muskel-Skelett-Erkrankungen, die sich auf die Verwendung manueller Techniken durch Physiotherapeuten konzentriert.`,
+        `Diese Techniken beinhalten die gezielte Anwendung von Mobilisation, Gleitbewegungen, Traktion und Kompression, um Schmerzen zu lindern, die Gelenkbeweglichkeit zu verbessern, Muskelverspannungen zu lösen und die Funktion des Muskel-Skelett-Systems zu optimieren.`,],
+                   img:'img_services_manuelle.jpeg', 
                 },
                 {
                    title:'Postoperative Rehabilitation ',
@@ -120,10 +132,10 @@ export default{
         Die postoperative Physiotherapie kann nach einer Vielzahl von Operationen erforderlich sein, einschließlich orthopädischer Eingriffe wie Hüft- oder Knieersatz, Herzoperationen, Bauchchirurgie, Wirbelspäuleneingriffen und vielen anderen. Sie ist entscheidend, um eine vollständige Genesung zu unterstützen und die Rückkehr des Patienten zu einem aktiven und funktionalen Leben zu ermöglichen.
         `,
       ],
-                   img:'img_services_3.jpeg', 
+                   img:'img_services_postoperative.jpeg', 
                 },
                 {
-                   title:'Rehabilitation und MTT',
+                   title:'MTT',
                    description:[`MTT steht für "Medizinische Trainingstherapie" oder auch "Medizinisches Training" und ist eine wichtige Komponente in der Physiotherapie und Rehabilitation. Es handelt sich um ein spezialisiertes Training, das darauf abzielt, die körperliche Leistungsfähigkeit, Funktion und Mobilität von Patienten zu verbessern oder wiederherzustellen, die aufgrund von Verletzungen, Krankheiten oder chirurgischen Eingriffen eingeschränkt sind. Es wird auf Antrag bei der Krankenkasse während drei Monaten bis zu 36 mal übernommen.`,
         `Die Medizinische Trainingstherapie hat das Hauptziel, die funktionelle Gesundheit des Patienten zu fördern. Dies wird erreicht, indem gezielte Übungen und Trainingsprogramme entwickelt werden, die speziell auf die individuellen Bedürfnisse und die medizinische Geschichte des Patienten zugeschnitten sind.`,
         `Jedes MTT-Programm wird auf den individuellen Gesundheitszustand, die Diagnose und die Rehabilitationsziele des Patienten abgestimmt.`,
@@ -134,12 +146,12 @@ export default{
         `Kardiologie: Zur Verbesserung der Herz-Kreislauf-Gesundheit bei Patienten mit Herzproblemen.`,
         `Neurologie: Bei Erkrankungen des Nervensystems wie Schlaganfall oder Parkinson, um die Muskelkontrolle und Mobilität zu verbessern.`,
         `Sportmedizin: Zur Verletzungsprävention und -rehabilitation bei Sportlern.`,],
-                   img:'img_services_4.jpeg', 
+                   img:'img_services_mtt.jpeg', 
                 },
                 {
                    title:'Manuelle Lymphdrainage inkl. Kompressionsbehandlung',
                    description:['Manuelle Lymphdrainage inkl. Kompressionsbehandlung '],
-                   img:'img_services_5.jpeg', 
+                   img:'img_services_lymphdrainage.jpg', 
                 },
                 {
                    title:'Neurologische Rehabilitation nach Bobath (Schlaganfall, M. Parkinson, MS) ',
@@ -147,59 +159,76 @@ export default{
         `Die neurologische Rehabilitation in der Physiotherapie ist ein Spezialgebiet, das sich auf die Rehabilitation von Menschen mit neurologischen Erkrankungen oder Verletzungen des Nervensystems konzentriert. Dies kann Erkrankungen wie Schlaganfall, zerebrale Lähmung, Multiple Sklerose, Parkinson-Krankheit, Rückenmarkverletzungen und andere neurologische Störungen umfassen. Das Hauptziel der neurologischen Rehabilitation in der Physiotherapie besteht darin, die Funktion und die Lebensqualität von Menschen mit neurologischen Beeinträchtigungen zu verbessern.`,
         `Wir beide sind ausgebildete Bobath-Therapeuten und erarbeiten gemeinsam mit dem Patienten an einem von ihm festgelegten Ziel.`,
         `Bei vielen neurologischen Erkrankungen ist die Wiederherstellung der Gehfähigkeit ein wichtiges Ziel. Wir Physiotherapeuten arbeiten an Gangtraining und Mobilitätstechniken, um den Patienten zu helfen, sicherer und selbstständiger zu gehen.`],
-                   img:'img_services_6.jpeg', 
+                   img:'img_services_neurologische.jpeg', 
                 },
                 {
                    title:'Ultraschalltherapie',
-                   description:[`Die Ultraschalltherapie ist eine medizinische Behandlungsmethode, bei der hochfrequente Schallwellen verwendet werden, um gezielte Gewebetiefe im Körper zu erreichen.`,
-        `Bei der Ultraschalltherapie werden Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs erzeugt. Diese Schallwellen können in das Körpergewebe eindringen, ohne die Haut zu verletzen.`,
+                   description:[`Die Ultraschalltherapie ist eine medizinische Behandlungsmethode, bei der hochfrequente Schallwellen verwendet werden, um gezielte Gewebetiefe im Körper zu erreichen. Bei der Ultraschalltherapie werden Schallwellen mit einer Frequenz oberhalb des hörbaren Bereichs erzeugt. Diese Schallwellen können in das Körpergewebe eindringen, ohne die Haut zu verletzen.`,
         `Die Schallwellen erzeugen durch mechanische Schwingungen Wärme im Gewebe. Diese Erwärmung kann dabei helfen, Schmerzen zu lindern, die Durchblutung zu verbessern und die Muskelentspannung zu fördern.`,
         `Die Ultraschalltherapie wird häufig bei muskulären Verletzungen, Entzündungen und Schmerzen eingesetzt. Sie kann auch zur Behandlung von Sehnen- und Gelenkproblemen verwendet werden.`,
         `Während der Behandlung wird ein Ultraschallgel auf die Haut aufgetragen, um die Übertragung der Schallwellen zu verbessern. Ein Therapeut bewegt ein Handgerät, das die Schallwellen erzeugt, sanft über die betroffene Stelle.`,
         `Ultraschalltherapie gilt in der Regel als sicher und nicht-invasiv. Sie wird oft als Teil eines umfassenderen Rehabilitationsplans eingesetzt.`,],
-                   img:'img_services_7.jpeg', 
+                   img:'img_services_ultraschalltherapie.jpeg', 
+                },
+                {
+                   title:'Elektrotherapie',
+                   description:[`Die Elektrotherapie ist eine bewährte Behandlungsmethode, die elektrische Ströme gezielt einsetzt, um Schmerzen zu lindern, die Muskelfunktion zu verbessern und die Gesundheit des Gewebes zu fördern. Diese vielseitige Technik bietet eine Bandbreite von Anwendungen, die auf die individuellen Bedürfnisse der Patienten abgestimmt sind.`,
+        `Eine der häufigsten Anwendungen der Elektrotherapie ist die Transkutane Elektrische Nervenstimulation (TENS). Hierbei werden schwache elektrische Impulse mithilfe von Elektroden auf die Haut übertragen, um Schmerzen zu lindern. Diese Methode kann Schmerzsignale im Nervensystem blockieren oder abschwächen.`,
+        `Eine weitere wichtige Anwendung ist die Neuromuskuläre Elektrostimulation (NMES), die dazu dient, Muskeln zu stimulieren und zu stärken. Insbesondere bei Muskelschwäche oder nach Verletzungen kann NMES die normale Muskelaktivität wiederherstellen.`,
+        `Interferenzstrom (IFS) ist eine Technik, die zwei hochfrequente Wechselströme verwendet, um tiefere Gewebe zu stimulieren. IFS verbessert die Durchblutung und reduziert Schmerzen, insbesondere bei Verletzungen und schmerzhaften Zuständen.`,
+        `Schließlich ermöglicht die Iontophorese die gezielte Abgabe von Medikamenten durch die Haut in das Gewebe, was bei entzündlichen Erkrankungen äußerst hilfreich ist.`,
+        `Wir passen die Elektrotherapie individuell an die Bedürfnisse jedes Patienten an. Die Art, Menge und Dauer der Elektrotherapie variieren je nach den Symptomen, der Diagnose und dem Gesundheitszustand des Patienten, um eine optimale Schmerzlinderung, Muskelstärkung und Genesung zu gewährleisten.`,],
+                   img:'img_services_elektrotherapie.jpeg', 
                 },
                 {
                    title:'Atemtherapie',
-                   description:['Erkrankungen der Lunge, Nachbehandlung nach Covid'],
-                   img:'img_services_8.jpeg', 
+                   description:[`Die Atemtherapie ist eine therapeutische Technik, die darauf abzielt, die Atmung zu verbessern und Atemprobleme zu behandeln.`,
+        `Die Kernprinzipien der Atemtherapie umfassen das Bewusstsein für die eigene Atmung, das Erkennen und Korrigieren von ungesunden Atemmustern wie flacher Atmung oder Hyperventilation, die Steigerung der Atemkapazität und -effizienz durch Atemübungen, die gezielte Stärkung der Atemmuskulatur und die Verbesserung der Atemkontrolle.`,
+        `Die Therapie kann auch Entspannungstechniken einschließen, die helfen, Stress und Anspannung abzubauen, und den Patienten befähigen, ihre Atmung bewusst zu kontrollieren. In einigen Fällen werden Atemhilfsmittel wie Masken oder Atemgeräte verwendet, um die Atmung zu unterstützen, insbesondere bei Menschen mit schweren Lungenerkrankungen.`,
+        `Die Anwendungsgebiete der Atemtherapie sind breit gefächert und umfassen Erkrankungen wie Asthma, chronisch obstruktive Lungenerkrankung (COPD), Atembeschwerden nach Operationen oder Verletzungen, Hyperventilationssyndrom, Atemstörungen bei Schlafapnoe und mehr. Die Therapie ist immer auf die individuellen Bedürfnisse und Symptome des Patienten zugeschnitten.`,
+        `Insgesamt dient die Atemtherapie dazu, die Atmung zu optimieren, Atemprobleme zu behandeln und die Lebensqualität der Patienten zu verbessern.`,],
+                   img:'img_services_atemtherapie.jpeg', 
                 },
                 {
                    title:'Geratrische Rehabilitation inkl. Sturzprophylaxe',
                    description:[`Die geriatrische Physiotherapie ist ein spezialisiertes Gebiet der Physiotherapie, das sich auf die Gesundheit und Rehabilitation älterer Menschen konzentriert. Mit zunehmendem Alter treten oft körperliche Veränderungen und gesundheitliche Herausforderungen auf, die eine spezielle Herangehensweise erfordern. Die geriatrische Physiotherapie zielt darauf ab, die Lebensqualität, die Mobilität und die Unabhängigkeit von älteren Menschen zu verbessern oder aufrechtzuerhalten.`,
-        `Funktionserhalt und -verbesserung: Die Therapie konzentriert sich darauf, die alltäglichen Funktionen und Aktivitäten, wie Gehen, Aufstehen, Sitzen und Anziehen, zu erhalten oder zu verbessern. Dies trägt dazu bei, die Selbstständigkeit und Lebensqualität älterer Menschen zu steigern.`,
-        `Sturzprävention: Stürze sind bei älteren Menschen eine häufige Ursache für Verletzungen. Die geriatrische Physiotherapie beinhaltet Übungen und Techniken zur Verbesserung des Gleichgewichts und der Stabilität, um das Sturzrisiko zu minimieren.`,
-        `Schmerzmanagement: Viele ältere Menschen leiden an chronischen Schmerzen, sei es aufgrund von Arthrose, Osteoporose oder anderen Erkrankungen. Die Physiotherapeuten helfen bei der Schmerzlinderung und fördern die Beweglichkeit.`,
-        `Rehabilitation nach Krankheit oder Verletzung: Nach einem Schlaganfall, einer Hüftfraktur oder anderen gesundheitlichen Ereignissen kann die geriatrische Physiotherapie eine wichtige Rolle bei der Wiederherstellung der Funktion und Mobilität spielen.`,
-        `Mobilität und Fitness: Die Therapeuten fördern regelmäßige körperliche Aktivität, um die allgemeine Gesundheit und Fitness älterer Menschen zu erhalten. Dies kann die Herz-Kreislauf-Fitness, Muskelkraft und Ausdauer verbessern.`,
-        `Anpassung an altersbedingte Veränderungen: Im Alter können Veränderungen wie Muskelschwund, Gelenksteifigkeit und verminderte Flexibilität auftreten. Die geriatrische Physiotherapie hilft dabei, mit diesen Veränderungen besser umzugehen und sie zu minimieren.`,
-        `Kommunikation und Zusammenarbeit: Physiotherapeuten in der geriatrischen Rehabilitation arbeiten oft eng mit anderen Gesundheitsdienstleistern zusammen, um die umfassende Versorgung älterer Menschen sicherzustellen.`,
+                   `Hier sind einige der Schlüsselelemente der geriatrischen Physiotherapie:`,
+        ` <strong>Funktionserhalt und -verbesserung:</strong> Die Therapie konzentriert sich darauf, die alltäglichen Funktionen und Aktivitäten, wie Gehen, Aufstehen, Sitzen und Anziehen, zu erhalten oder zu verbessern. Dies trägt dazu bei, die Selbstständigkeit und Lebensqualität älterer Menschen zu steigern.`,
+        ` <strong>Sturzprävention:</strong> Stürze sind bei älteren Menschen eine häufige Ursache für Verletzungen. Die geriatrische Physiotherapie beinhaltet Übungen und Techniken zur Verbesserung des Gleichgewichts und der Stabilität, um das Sturzrisiko zu minimieren.`,
+        ` <strong>Schmerzmanagement:</strong> Viele ältere Menschen leiden an chronischen Schmerzen, sei es aufgrund von Arthrose, Osteoporose oder anderen Erkrankungen. Die Physiotherapeuten helfen bei der Schmerzlinderung und fördern die Beweglichkeit.`,
+        ` <strong>Rehabilitation nach Krankheit oder Verletzung:</strong> Nach einem Schlaganfall, einer Hüftfraktur oder anderen gesundheitlichen Ereignissen kann die geriatrische Physiotherapie eine wichtige Rolle bei der Wiederherstellung der Funktion und Mobilität spielen.`,
+        ` <strong>Mobilität und Fitness:</strong> Die Therapeuten fördern regelmäßige körperliche Aktivität, um die allgemeine Gesundheit und Fitness älterer Menschen zu erhalten. Dies kann die Herz-Kreislauf-Fitness, Muskelkraft und Ausdauer verbessern.`,
+        ` <strong>Anpassung an altersbedingte Veränderungen:</strong> Im Alter können Veränderungen wie Muskelschwund, Gelenksteifigkeit und verminderte Flexibilität auftreten. Die geriatrische Physiotherapie hilft dabei, mit diesen Veränderungen besser umzugehen und sie zu minimieren.`,
+        ` <strong>Kommunikation und Zusammenarbeit:</strong> Physiotherapeuten in der geriatrischen Rehabilitation arbeiten oft eng mit anderen Gesundheitsdienstleistern zusammen, um die umfassende Versorgung älterer Menschen sicherzustellen.`,
         `Die geriatrische Physiotherapie zielt darauf ab, ältere Menschen dabei zu unterstützen, aktive, unabhängige und qualitativ hochwertige Leben zu führen. Die Therapiepläne sind in der Regel individuell angepasst und berücksichtigen die spezifischen Bedürfnisse und Gesundheitszustände jedes Patienten.`,],
-                   img:'img_services_9.jpeg', 
+                   img:'img_services_geratrische.jpeg', 
                 },
                 {
                    title:'Domizilbehandlungen / Hausbesuche',
                    description:[`Die Physiotherapie im häuslichen Umfeld ist eine Form der medizinischen Versorgung, bei der Physiotherapeuten Patienten in ihrem eigenen Zuhause behandeln.`,
         `Diese Art der Versorgung kann für Personen erforderlich sein, die aufgrund von Mobilitätsproblemen, schweren Krankheiten oder anderen gesundheitlichen Einschränkungen nicht in der Lage sind, in eine Praxis oder ein Krankenhaus zu gehen.`,],
-                   img:'img_services_10.jpeg', 
+                   img:'img_services_domizilbehandlungen.jpeg', 
                 },
                 {
                    title:'Mobilisation nach Mulligan',
                    description:[`Die Mulligan-Konzept-Physiotherapie ist eine spezialisierte physiotherapeutische Methode, die von dem neuseeländischen Physiotherapeuten Brian Mulligan entwickelt wurde. Diese Methode befasst sich hauptsächlich mit der Diagnose und Behandlung von Muskel-Skelett-Problemen und -Schmerzen. Das Mulligan-Konzept basiert auf manuellen Therapieansätzen und Übungen, die darauf abzielen, Schmerzen zu lindern, Beweglichkeit und Funktion wiederherzustellen und Fehlfunktionen des Muskel-Skelett-Systems zu korrigieren.`,
         `Hier sind einige der Grundprinzipien und Techniken des Mulligan-Konzepts:`,
-        `Mobilisation mit Bewegung (MWM): Ein Schlüsselprinzip des Mulligan-Konzepts ist die Mobilisation von Gelenken während aktiver Bewegungen des Patienten. Der Physiotherapeut führt sanfte manuelle Techniken aus, um die Gelenke in eine verbesserte Position zu bringen, während der Patient eine bestimmte Bewegung durchführt. Dies kann dazu beitragen, Schmerzen zu lindern und die Beweglichkeit zu erhöhen.`,
-        `Schmerz als Leitfaden: Schmerz ist ein wichtiger Leitfaden im Mulligan-Konzept. Wenn ein Patient während einer Bewegung Schmerzen empfindet, signalisiert dies dem Therapeuten, dass eine bestimmte Korrektur oder Technik angewendet werden sollte, um den Schmerz zu lindern und die Funktion zu verbessern.`,
-        `Dynamische Bandagen und Tapes: Das Mulligan-Konzept beinhaltet manchmal den Einsatz von speziellen Bändern und Tapes, um die Gelenkbewegung zu unterstützen und zu stabilisieren.`,
-        `Korrektur von Fehlfunktionen: Das Ziel des Konzepts ist es, Funktionsstörungen im Muskel-Skelett-System zu korrigieren. Dies kann durch die gezielte Anwendung von Mobilisationstechniken und Übungen erreicht werden.`,
-        `Patientenaktive Beteiligung: Im Mulligan-Konzept wird viel Wert auf die aktive Beteiligung des Patienten gelegt. Der Patient wird ermutigt, Übungen und Bewegungen aktiv auszuführen, während der Therapeut die notwendigen manuellen Korrekturen vornimmt.`,
-        `Individuelle Anpassung: Die Therapiepläne im Mulligan-Konzept sind individuell auf die Bedürfnisse und Ziele des Patienten zugeschnitten. Der Therapeut berücksichtigt den spezifischen Zustand und die Symptome des Patienten.`,
+        `<strong>Mobilisation mit Bewegung (MWM):</strong> Ein Schlüsselprinzip des Mulligan-Konzepts ist die Mobilisation von Gelenken während aktiver Bewegungen des Patienten. Der Physiotherapeut führt sanfte manuelle Techniken aus, um die Gelenke in eine verbesserte Position zu bringen, während der Patient eine bestimmte Bewegung durchführt. Dies kann dazu beitragen, Schmerzen zu lindern und die Beweglichkeit zu erhöhen.`,
+        `<strong>Schmerz als Leitfaden:</strong> Schmerz ist ein wichtiger Leitfaden im Mulligan-Konzept. Wenn ein Patient während einer Bewegung Schmerzen empfindet, signalisiert dies dem Therapeuten, dass eine bestimmte Korrektur oder Technik angewendet werden sollte, um den Schmerz zu lindern und die Funktion zu verbessern.`,
+        `<strong>Dynamische Bandagen und Tapes:</strong> Das Mulligan-Konzept beinhaltet manchmal den Einsatz von speziellen Bändern und Tapes, um die Gelenkbewegung zu unterstützen und zu stabilisieren.`,
+        `<strong>Korrektur von Fehlfunktionen:</strong> Das Ziel des Konzepts ist es, Funktionsstörungen im Muskel-Skelett-System zu korrigieren. Dies kann durch die gezielte Anwendung von Mobilisationstechniken und Übungen erreicht werden.`,
+        `<strong>Patientenaktive Beteiligung:</strong> Im Mulligan-Konzept wird viel Wert auf die aktive Beteiligung des Patienten gelegt. Der Patient wird ermutigt, Übungen und Bewegungen aktiv auszuführen, während der Therapeut die notwendigen manuellen Korrekturen vornimmt.`,
+        `<strong>Individuelle Anpassung:</strong> Die Therapiepläne im Mulligan-Konzept sind individuell auf die Bedürfnisse und Ziele des Patienten zugeschnitten. Der Therapeut berücksichtigt den spezifischen Zustand und die Symptome des Patienten.`,
       ],
-                   img:'img_services_11.jpeg', 
+                   img:'img_services_mobilisation.jpeg', 
                 },
                 {
                    title:'Kinesio - Tape',
-                   description:['Kinesio - Tape'],
-                   img:'img_services_12.jpeg', 
+                   description:[`Kinesiotaping, oft auch als Kinesiologie-Tape oder Kinesio-Tape bezeichnet, ist eine Therapiemethode, die in der Physiotherapie und Sportmedizin angewendet wird. Bei dieser Technik werden spezielle, elastische Klebebänder auf die Haut aufgebracht. Die Grundidee besteht darin, diese Tapes so anzulegen, dass sie unterschiedliche therapeutische Ziele erreichen.`,
+        `Einer der Hauptzwecke des Kinesiotapings ist die Unterstützung und Stabilisierung von Gelenken und Muskeln. Dies kann besonders hilfreich bei Verletzungen oder zur Vorbeugung von Überlastungsschäden sein. Das elastische Tape erlaubt jedoch immer noch eine gewisse Bewegungsfreiheit, im Gegensatz zu starren Verbänden oder Gips, was während der Rehabilitation von Vorteil sein kann.`,
+        `Ein weiterer Vorteil des Kinesiotapings ist die Schmerzlinderung. Das Tape kann die Durchblutung fördern und Druck von schmerzhaften Stellen nehmen, was dazu beitragen kann, Schmerzen zu reduzieren. Durch das Anheben der Haut unter dem Tape kann auch der Lymphfluss verbessert werden, was bei der Reduzierung von Schwellungen hilfreich ist.`,
+        `Darüber hinaus beeinflusst das Kinesiotape die sensorische Wahrnehmung der Haut, was dem Körper helfen kann, auf Verletzungen oder Beschwerden zu reagieren. Kinesiotape wird bei verschiedenen Zuständen eingesetzt, einschließlich Muskelverletzungen, Gelenkschmerzen und Überlastungssyndromen, und kann auch zur Verbesserung der sportlichen Leistung verwendet werden.`,],
+                   img:'img_services_kinesio.jpg', 
                 },
 
 
@@ -218,6 +247,10 @@ export default{
 </script>
 
 <style scoped>
+.services_container{
+    padding-left: 0px;
+    padding-right: 0px;
+}
 .margin_title {
     margin-top: 60px;
 }
@@ -232,6 +265,7 @@ export default{
     margin-right: auto;
     max-width: 500px;
     margin-top: 50px;
+
 }
 .sticky_element{
     position: sticky;
@@ -241,7 +275,14 @@ export default{
     height: 100%;
     opacity: 0.5;
     background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
 
+}
+.services_vertical{
+    width: 100% !important;
+    height: auto !important;
 }
 .services_button{
     display: block;
@@ -267,6 +308,16 @@ export default{
     transform: translate(-50%, -50%);
     width: 50%;
     opacity: 0.5;
+}
+.btn_message{
+    position: absolute;
+    bottom: -40%;
+    transform: translateY(50%);
+}
+.arrow{
+    -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  display: block;
 }
 .block{
     display: block;
@@ -296,6 +347,13 @@ export default{
 
     padding-right: 0px;
     padding-left: 0px;
+}
+.services_container{
+    padding-left: inherit;
+    padding-right: inherit;
+}
+.btn_message{
+    display: none;
 }
 }
 </style>

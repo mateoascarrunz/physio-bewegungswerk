@@ -1,5 +1,5 @@
 <template>
-    <BaseBox>
+    <BaseBox class="base_box">
             <div class="center_flex index_high" >
                 <div class="center_flex z-1 contact_text">
                 <span class="title bold blue">Kontakt</span>
@@ -101,6 +101,7 @@ bottom: 0px;
 width: 100%;
 left: 50%;
 transform: translateX(-50%);
+min-width: 500px;
 }
 .info_contact{
 position: absolute;
@@ -119,4 +120,8 @@ bottom: 120px;
 .icon{
     width: 30px;
 }
+.base_box{
+    overflow-x: hidden;
+}
+
 </style>

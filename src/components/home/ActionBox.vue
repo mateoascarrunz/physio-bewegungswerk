@@ -3,9 +3,8 @@
         <div class="row">
             <div class="col-lg-9">
                 <br>
-     <span class="megatitle white block bold">Vereinbaren Sie einen Termin mit uns und bleiben Sie immer in Bewegung.</span>
+     <span class="megatitle white block bold">Vereinbaren Sie gerne online einen Termin mit uns</span>
     <br>
-     <span class="paragraph white block">Ihre Gesundheit ist unsere Priorität. Buchen Sie jetzt Ihren Termin, um Unterstützung auf Ihrem Weg zu einem aktiveren Leben zu erhalten. Wir freuen uns darauf, Sie zu betreuen."</span>
      <br>
      <BaseButtonBlue > <span class="white mobil-nowhite">Termin Vereinbaren</span></BaseButtonBlue>
      <br>

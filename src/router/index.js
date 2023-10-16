@@ -32,8 +32,8 @@ const router = createRouter({
 
     },
     {
-      path: '/nachrichten',
-      name: 'nachrichten',
+      path: '/news',
+      name: 'news',
 
       component: () => import('../views/NachrichtenView.vue'),
    
@@ -43,6 +43,13 @@ const router = createRouter({
       name: 'faq',
 
       component: () => import('../views/FaqView.vue'),
+ 
+    },
+    {
+      path: '/datenschutz',
+      name: 'datenschutz',
+
+      component: () => import('../views/DatenschutzView.vue'),
  
     },
   ],

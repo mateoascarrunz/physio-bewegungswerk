@@ -43,7 +43,7 @@
             <br>
             <BaseButtonMag @click="openPopup(newsItem)" class="news_button">mehr</BaseButtonMag>
         </BaseCard>
-        <BaseEmptyCard v-if="news.length < 3" class="center_box"><span class="subtitle block blue">More news</span><span class="subtitle block blue">Coming soon</span></BaseEmptyCard>
+        <BaseEmptyCard v-if="news.length < 3" class="center_box"><span class="subtitle block blue">Weitere News</span><span class="subtitle block blue">Coming soon</span></BaseEmptyCard>
 
 </div>
 </div>

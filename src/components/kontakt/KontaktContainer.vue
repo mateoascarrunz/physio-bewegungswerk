@@ -22,8 +22,15 @@ export default{
 }
 
 </script>
-<style>
+<style scoped>
 .box_maps{
     padding: 0px !important;
     overflow: hidden;
+    min-height: 500px;
+}
+@media(max-width: 500px){
+    .grid_mobile{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+} 
 }</style>

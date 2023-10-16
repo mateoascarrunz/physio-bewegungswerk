@@ -203,6 +203,9 @@ position: relative;
   left: 50%;
   top: 5%;
   transform: translate(-50%);
+  width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .tech_text{
   position: absolute;

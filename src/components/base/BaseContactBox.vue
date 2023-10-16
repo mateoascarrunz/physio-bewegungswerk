@@ -20,5 +20,6 @@
     flex-wrap: nowrap;
     justify-content: space-evenly;
     align-items: center;
+    min-width: 300px;
 
 }</style>

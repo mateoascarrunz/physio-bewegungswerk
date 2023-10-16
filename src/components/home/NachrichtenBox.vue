@@ -29,7 +29,7 @@
 
   <div class="grid_container padding_null">
     <BaseBox class="grid-col-2 center">
-      <span class="title bold blue">Neueste Nachrichten</span>
+      <span class="title bold blue">News</span>
       <div class="news_container">
         <BaseCard v-for="newsItem in latestNews" :key="newsItem.id" class="cards_news">
           <template v-slot:img_card>
@@ -44,14 +44,14 @@
           <BaseButtonMag @click="openPopup(newsItem)" class="news_button">mehr</BaseButtonMag>
         </BaseCard>
         <BaseEmptyCard v-if="latestNews.length < 3">
-          <span class="subtitle block blue">More news</span>
+          <span class="subtitle block blue">Weitere News</span>
           <span class="subtitle block blue">Coming soon</span>
         </BaseEmptyCard>
       </div>
       <br>
       <br>
-      <RouterLink class="nav-link" to="/nachrichten">
-        <BaseButtonMag>Alle Nachrichten sehen</BaseButtonMag>
+      <RouterLink class="nav-link" to="/news">
+        <BaseButtonMag>Alle News sehen</BaseButtonMag>
       </RouterLink>
     </BaseBox>
   </div>

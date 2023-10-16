@@ -6,14 +6,13 @@
                 <br>
                 
                 <div class="left">
-<span class="paragraph"> In unserer Therapiepraxis sehen wir jeden Menschen als individuelles Wesen mit einzigartigen Bedürfnissen und Hintergründen. Unser Therapieansatz zeichnet sich durch seine Anpassungsfähigkeit aus. Wir entwickeln unsere Behandlungspläne sorgfältig, um die spezifischen Anforderungen jedes einzelnen Patienten zu berücksichtigen. Dabei arbeiten wir eng mit unseren Patienten zusammen, um gemeinsam Strategien zu entwickeln, die darauf abzielen, die von ihnen festgelegten Ziele zu erreichen.
+<span class="paragraph"> In unserer Therapiepraxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel, da wir individuell angepasste Behandlungspläne entwickeln, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen, um gemeinsam Strategien zu erarbeiten, die darauf abzielen, die gewünschten Ergebnisse zu erreichen.
 <br>
 <br>
-Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Unser Ziel ist es, langfristige Verbesserungen im Wohlbefinden unserer Patienten zu erreichen.
+Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Das Hauptziel ist es, langfristige Verbesserungen im Wohlbefinden unserer Patienten zu erreichen.
 <br>
 <br>
-Insgesamt legen wir großen Wert darauf, dass jeder Mensch in unserer Obhut als einzigartiges Individuum behandelt wird, und wir arbeiten hart daran, individuelle Lösungen für individuelle Bedürfnisse anzubieten.
-<br>
+Wir legen großen Wert darauf, dass wir jeden unserer Patienten respektvoll und individuell behandeln, und wir setzen uns dafür ein, maßgeschneiderte Lösungen für ihre speziellen Bedürfnisse anzubieten.<br>
 <br></span>
 <div class="btn_container">
 <BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue>

@@ -21,7 +21,7 @@
                 </RouterLink>
                 <RouterLink class="nav-link" to="/behandlungstechniken"><span class="info block links" >Unsere Behandlungstechniken</span> </RouterLink>
                 <RouterLink class="nav-link" to="/uberuns"><span class="info block links" >Über uns</span></RouterLink>
-                    <RouterLink class="nav-link" to="/nachrichten"><span class="info block links" >Nachrichten</span></RouterLink>
+                    <RouterLink class="nav-link" to="/news"><span class="info block links" >News</span></RouterLink>
                    <a><span class="info block links" >Termin Vereinbaren</span></a>
                 </div>
                 </div>
@@ -40,8 +40,8 @@
                     <hr class="blue">
                     <div class="row">
                         <div class="col-lg-6 flex_mobile_lastlinks left">
-                    <span class="info links blue"> Impressum  </span>
-                   <span class="info links blue" > Datenschutz </span>
+                            <RouterLink class="nav-link" to="/impressum"><span class="info links blue"> Impressum  </span></RouterLink>
+                            <RouterLink class="nav-link" to="/datenschutz"><span class="info links blue" > Datenschutz </span></RouterLink>
                 </div>
                 <div class="col-lg-6 right center_mobile">
                     <span class="info blue">Designed and Developed by: <a class="semibold blue" target="_blank" rel="noopener noreferrer" href="https://mateoascarrunz.com/">Mateo Ascarrunz</a></span>
@@ -95,6 +95,10 @@ text-decoration: underline;
 hr{
     opacity: 0.5;
     margin-top: 0px;
+}
+.flex_mobile_lastlinks{
+    display: flex;
+    flex-direction:row;
 }
 @media (max-width: 990px){
     .grid_container{

@@ -28,7 +28,7 @@
             <div class="mb-3">
               <label for="text" class="form-label">Nachricht:</label>
               <textarea class="form-control text-area" id="text" rows="3" placeholder="Nachricht*"
-                v-model="message"></textarea>
+                v-model="text"></textarea>
             </div>
           </div>
         </div>
@@ -76,27 +76,27 @@ export default {
 
     }
   },
-  methods: {
-    sendEmail() {
-      const templateParams = {
-        name: this.name,
-        number: this.phone,
-        email: this.email,
-        message: this.text,
-      };
+  // methods: {
+  //   sendEmail() {
+  //     const templateParams = {
+  //       name: this.name,
+  //       number: this.phone,
+  //       email: this.email,
+  //       message: this.text,
+  //     };
 
-      emailjs.send('service_z7v4wso', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
-        .then((response) => {
-          console.log('Email sent successfully:', response);
-          this.success = 'success'
+  //     emailjs.send('service_z7v4wso', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
+  //       .then((response) => {
+  //         console.log('Email sent successfully:', response);
+  //         this.success = 'success'
 
-        })
-        .catch((error) => {
-          console.error('Email sending failed:', error);
-          this.success = 'error'
-        });
-    },
-  },
+  //       })
+  //       .catch((error) => {
+  //         console.error('Email sending failed:', error);
+  //         this.success = 'error'
+  //       });
+  //   },
+  // },
 }
 </script>
 
