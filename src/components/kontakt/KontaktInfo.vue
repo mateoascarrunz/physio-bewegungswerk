@@ -72,7 +72,7 @@ export default{
       window.location.href = 'mailto:info@physio-bewegungswerk.ch';
     },
     openURL() {
-      window.open('https://www.linkedin.com', '_blank');
+      window.open('https://www.linkedin.com/company/100080030', '_blank');
     },
     makePhoneCall() {
       window.location.href = 'tel:0445436368';
