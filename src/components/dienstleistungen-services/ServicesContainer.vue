@@ -101,11 +101,11 @@ export default{
                    title:'Manuelle Therapie',
                    description:[`Die manuelle Therapie in der Physiotherapie ist ein spezieller Ansatz zur Diagnose und Behandlung von Muskel-Skelett-Erkrankungen, die sich auf die Verwendung manueller Techniken durch Physiotherapeuten konzentriert.`,
         `Diese Techniken beinhalten die gezielte Anwendung von Mobilisation, Gleitbewegungen, Traktion und Kompression, um Schmerzen zu lindern, die Gelenkbeweglichkeit zu verbessern, Muskelverspannungen zu lösen und die Funktion des Muskel-Skelett-Systems zu optimieren.`,],
-                   img:'img_services_manuelle.jpeg', 
+                   img:'/img_services_manuelle.jpeg', 
                 },
                 {
                     id:'3',
-                   title:'/Postoperative Rehabilitation ',
+                   title:'Postoperative Rehabilitation ',
                    description:[
         `
         Die postoperative Physiotherapie, auch als postoperative Rehabilitation oder postoperative Physiotherapie genannt, ist ein entscheidender Bestandteil des Genesungsprozesses nach chirurgischen Eingriffen. Ihr Hauptziel ist es, die Funktion und Mobilität des Patienten nach einer Operation wiederherzustellen oder zu verbessern, Schmerzen zu lindern und Komplikationen zu verhindern.
@@ -288,6 +288,9 @@ created() {
 }
 .margin_title {
     margin-top: 60px;
+}
+a{
+    color: inherit !important;
 }
 .img_services_container{
     border-radius: 50px;
