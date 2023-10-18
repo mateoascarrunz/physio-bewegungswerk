@@ -35,7 +35,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                             <div class="sticky_element">
                             <div class="img_services_container center">
                                
-                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="'/src/assets/images/' + selectedService.img" alt="">
+                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="'../../src/assets/images/' + selectedService.img" alt="">
                                 <img v-if="selectedService === null" class="icon" src="../../assets/images/physio_icon.svg" alt="">
                                 
                             </div>
@@ -92,7 +92,7 @@ export default{
         `Sobald die Triggerpunkte identifiziert sind, werden verschiedene Techniken angewendet, um sie zu behandeln. Dies umfasst in der Regel manuellen Druck, bei dem der Therapeut gezielt Druck auf die Triggerpunkte ausübt, um die Verspannungen zu lösen. Gleichzeitig können spezielle Dehnungsübungen gezeigt werden, um die Muskeln zu entspannen und die Flexibilität zu fördern.`,
         `Die Therapie kann auch Massage und myofasziale Techniken beinhalten, um die Muskulatur weiter zu entspannen und die Durchblutung zu verbessern. Oft erhält der Patient Anleitungen für Selbstmanagement-Techniken, einschließlich der Möglichkeit, Triggerpunkte selbst zu massieren und Dehnungsübungen zu Hause durchzuführen, um die Schmerzen zu lindern.`,
         `Diese Therapie kann bei verschiedenen Erkrankungen eingesetzt werden, bei denen Muskelverspannungen und schmerzhafte Triggerpunkte eine Rolle spielen, wie beispielsweise bei Nacken- und Rückenschmerzen, Kopfschmerzen, Tennisellenbogen und Fibromyalgie. Trotz möglicher Schmerzen während der Therapie zielt die Triggerpunkttherapie darauf ab, langfristige Linderung und eine verbesserte Muskelgesundheit zu bieten.`,],
-                   img:'../../assets/images/img_services_myofasziale.jpg', 
+                   img:'img_services_myofasziale.jpg', 
                    vertical: true,
                 },
                 {
