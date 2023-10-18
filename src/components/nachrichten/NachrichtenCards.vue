@@ -33,7 +33,7 @@
  <div class="grid-col-2">
 <div class="grid_container_3">
 
-<BaseCard  :theheight="'50%'" v-for="newsItem in news" :key="newsItem.id" class="center_box center">
+<BaseCard  :theheight="'50%'" v-for="newsItem in latestNews" :key="newsItem.id" class="center_box center">
   <template v-slot:img_card>
 <img class="img_card" :src="newsItem.attributes.img.data.attributes.url" :alt="newsItem.attributes.img.data.attributes.name">
   </template>
@@ -112,6 +112,14 @@ export default {
   beforeDestroy() {
     // Remove the resize event listener when the component is destroyed
     window.removeEventListener('resize', this.updateMaxWordsForDescription);
+  },
+  computed: {
+    latestNews() {
+      const sortedNews = this.news.sort((a, b) => {
+        return new Date(b.attributes.date) - new Date(a.attributes.date);
+      });
+      return sortedNews;
+    },
   },
 };
 </script>

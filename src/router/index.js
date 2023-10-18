@@ -53,6 +53,13 @@ const router = createRouter({
  
     },
     {
+      path: '/impressum',
+      name: 'impressum',
+
+      component: () => import('../views/ImpresumView.vue'),
+ 
+    },
+    {
       path: '/admin',
       name: 'admin',
 

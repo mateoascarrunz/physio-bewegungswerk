@@ -90,7 +90,10 @@ export default {
   },
   computed: {
     latestNews() {
-      return this.news.slice(0, 3);
+      const sortedNews = this.news.sort((a, b) => {
+        return new Date(b.attributes.date) - new Date(a.attributes.date);
+      });
+      return sortedNews.slice(0, 3);
     },
   },
   methods: {

@@ -150,7 +150,14 @@ export default{
                 },
                 {
                    title:'Manuelle Lymphdrainage inkl. Kompressionsbehandlung',
-                   description:['Manuelle Lymphdrainage inkl. Kompressionsbehandlung '],
+                   description:[`Die Manuelle Lymphdrainage (MLD) ist eine spezielle Technik, die in der Physiotherapie häufig angewendet wird. In diesem Kontext dient die Manuelle Lymphdrainage dazu, lymphatische Stauungen zu behandeln und den Lymphfluss im Körper zu fördern. Physiotherapeuten, die auf MLD spezialisiert sind, nutzen spezifische Handgriffegriffe und Techniken, um die Lymphgefäße anzuregen und Stauungen zu reduzieren. Dabei handelt es sich um eine sanfte und schmerzfreie Technik.`,
+        `Die Manuelle Lymphdrainage in der Physiotherapie wird oft bei verschiedenen Gesundheitsproblemen eingesetzt, darunter:`,
+        `Lymphödeme: Dies sind Schwellungen, die aufgrund einer gestörten Lymphdrainage auftreten. MLD kann dazu beitragen, diese Schwellungen zu reduzieren und die Lebensqualität der Betroffenen zu verbessern.`,
+        `Nach Operationen: Nach chirurgischen Eingriffen kann es zu Schwellungen und Flüssigkeitsansammlungen im operierten Bereich kommen. MLD kann helfen, diese postoperativen Schwellungen zu reduzieren und die Genesung zu unterstützen.`,
+        `Traumatische Verletzungen: Bei Verletzungen wie Verstauchungen oder Prellungen kann MLD dazu beitragen, Schwellungen zu verringern und den Heilungsprozess zu beschleunigen.`,
+        `Entzündliche Erkrankungen: Bei bestimmten entzündlichen Erkrankungen, wie Rheuma, kann MLD zur Linderung von Schwellungen und Beschwerden beitragen.`,
+        `Die Kombination aus Manueller Lymphdrainage und Kompressionsbehandlung ist oft sehr effektiv bei der Behandlung von Lymphödemen und anderen lymphatischen Erkrankungen. Die MLD löst Stauungen und bewegt die Lymphflüssigkeit, während die Kompressionsbehandlung hilft, den Fortschritt der Schwellung zu verhindern und die erzielten Effekte aufrechtzuerhalten.`,
+      ],
                    img:'img_services_lymphdrainage.jpg', 
                 },
                 {
@@ -242,7 +249,7 @@ export default{
       this.selectedService = service;
       this.Popup = false; 
     },
-}
+},
 }
 </script>
 
