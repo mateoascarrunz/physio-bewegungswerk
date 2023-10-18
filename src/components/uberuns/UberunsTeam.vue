@@ -197,13 +197,14 @@ beforeDestroy() {
         computedSlidesPerView() {
   const totalTeams = this.teams.length;
 
+
   if (totalTeams === 1) {
     return 1;
   } else if (totalTeams === 2) {
     if (this.windowWidth < 890) {
       return 1;}
     return 2;
-  } else if (totalTeams === 3) {
+  } else if (totalTeams >= 3) {
     if (this.windowWidth < 890) {
       return 1;
     } else if (this.windowWidth < 1400){

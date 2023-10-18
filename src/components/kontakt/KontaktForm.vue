@@ -7,8 +7,8 @@
     <div class="container left">
       <form @submit.prevent="sendEmail">
         <div class="mb-3">
-          <label for="name" class="form-label">Vor- und Nachname *</label>
-          <input type="text" class="form-control" id="name" placeholder="Max Mustermann" v-model="name">
+          <label for="name" class="form-label">Vor- und Nachname * </label>
+          <input type="text" class="form-control " id="name" placeholder="Max Mustermann" v-model="name" :class="{ 'error': namenotfilled }">
         </div>
         <div class="row">
           <div class="col-lg-6">
@@ -19,30 +19,32 @@
           </div>
           <div class="col-lg-6">
             <div class="mb-3">
-              <label for="email" class="form-label">Email*</label>
+              <label for="email" class="form-label">Email* </label >
               <input type="email" class="form-control" id="email" placeholder="max.mustermann@example.com"
-                v-model="email">
+                v-model="email"  :class="{ 'error': emailnotfilled }">
             </div>
           </div>
           <div class="col-12">
             <div class="mb-3">
-              <label for="text" class="form-label">Nachricht:</label>
+              <label for="text" class="form-label">Nachricht* </label>
               <textarea class="form-control text-area" id="text" rows="3" placeholder="Nachricht*"
-                v-model="text"></textarea>
+                v-model="text" :class="{ 'error': textnotfilled }"></textarea>
             </div>
           </div>
         </div>
       </form>
     </div>
-    <BaseButtonMag type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Senden</BaseButtonMag>
+    <span class="pargraph magenta" v-if="validationFailed">Bitte füllen Sie alle mit einem Sternchen (*) gekennzeichneten Felder aus</span>
+    <br>
+    <BaseButtonMag type="submit" @click="sendEmail" >Senden</BaseButtonMag>
   </BaseBox>
 </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div v-if="showmodal" class="modal fade show" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block;">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header center">
        
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" @click="closeModal"></button>
       </div>
       <div class="modal-body center">
         <div class="spinner-border text-primary" role="status" v-if="success === null">
@@ -54,9 +56,7 @@
         <span class="minitext mainfont green" v-if="success === 'success'">Wir haben Ihre Anfrage erhalten und werden uns innerhalb von 24 Stunden an Werktagen bei Ihnen melden. </span>
         <span class="minitext mainfont green"  v-if="success === 'error'">Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut. Wenn das Problem weiterhin besteht, können Sie uns direkt unter der E-Mail-Adresse <br> <strong class="bold">info@physio-bewegungswerk.ch</strong> kontaktieren. <br> <br>Wir entschuldigen uns für die Unannehmlichkeiten.</span>
       </div>
-      <div class="modal-footer">
-        <BaseButtonBlue type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</BaseButtonBlue>
-      </div>
+
     </div>
   </div>
 </div>
@@ -73,14 +73,50 @@ export default {
       email: '',
       text: '',
       success: null,
+      namenotfilled:false,
+      emailnotfilled:false,
+      textnotfilled:false,
+      validationFailed : false,
+      showmodal: false,
 
     }
   },
   methods: {
+closeModal(){
+  this.showmodal= false;
+},
     sendEmail() {
-      if (!this.name || !this.email || !this.text) {
-        alert('Bitte füllen Sie alle erforderlichen Felder aus.');
-        return;
+      console.log('sendEmail method called');
+      if (!this.name) {
+        this.namenotfilled = true;
+        this.validationFailed = true;
+        this.showmodal= false;
+      } else {
+        this.namenotfilled = false;
+      }
+
+      if (!this.email) {
+        this.emailnotfilled = true;
+        this.validationFailed = true;
+        this.showmodal= false;
+      } else {
+        this.emailnotfilled = false;
+      }
+
+      if (!this.text) {
+        this.textnotfilled = true;
+        this.validationFailed = true;
+        this.showmodal= false;
+      } else {
+        this.textnotfilled = false;
+      }
+
+      if (this.name && this.email && this.text) {
+        this.validationFailed = false;
+      }
+
+      if (!this.validationFailed) {
+        this.showmodal = true; 
       }
 
       const templateParams = {
@@ -90,18 +126,41 @@ export default {
         message: this.text,
       };
 
-      emailjs
-        .send('service_z7v4wso', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
+      if(!this.validationFailed) {emailjs
+        .send('service_bphnx5s', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
+        
         .then((response) => {
+          this.validationFailed = false;
           console.log('Email sent successfully:', response);
           this.success = 'success';
+
         })
         .catch((error) => {
+          this.validationFailed = false;
           console.error('Email sending failed:', error);
           this.success = 'error';
         });
+      }
     },
   },
+  watch: {
+    showmodal(newValue) {
+      if (newValue) {
+        document.body.classList.add('scroll-out');
+      } else {
+        document.body.classList.remove('scroll-out');
+      }
+    },
+  },
+  mounted() {
+    this.$watch('showmodal', (newValue) => {
+      if (newValue) {
+        document.body.classList.add('scroll-out');
+      } else {
+        document.body.classList.remove('scroll-out');
+      }
+    });
+  }
 }
 </script>
 
@@ -139,4 +198,11 @@ export default {
 .modal-content{
   border-radius: 25px;
 
+}
+.error{
+border: 1px solid #E2097F !important;
+}
+.modal{
+  background: #ffffff70;
+    backdrop-filter: blur(10px);
 }</style>
