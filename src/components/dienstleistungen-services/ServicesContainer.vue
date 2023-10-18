@@ -35,7 +35,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                             <div class="sticky_element">
                             <div class="img_services_container center">
                                
-                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="'../../src/assets/images/' + selectedService.img" alt="">
+                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="'../../assets/images/' + selectedService.img" alt="">
                                 <img v-if="selectedService === null" class="icon" src="../../assets/images/physio_icon.svg" alt="">
                                 
                             </div>
