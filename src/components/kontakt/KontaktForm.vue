@@ -5,7 +5,7 @@
     <span class="title">Kontaktieren Sie uns!</span><br> <span>Bei offenen Fragen sind wir gerne per E-Mail oder
       telefonisch von Montag bis Freitag von 09:00 bis 17:00 Uhr erreichbar.</span><br><br>
     <div class="container left">
-      <form action="">
+      <form @submit.prevent="sendEmail">
         <div class="mb-3">
           <label for="name" class="form-label">Vor- und Nachname *</label>
           <input type="text" class="form-control" id="name" placeholder="Max Mustermann" v-model="name">
@@ -34,7 +34,7 @@
         </div>
       </form>
     </div>
-    <BaseButtonMag @click="sendEmail"  data-bs-toggle="modal" data-bs-target="#exampleModal">Senden</BaseButtonMag>
+    <BaseButtonMag type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Senden</BaseButtonMag>
   </BaseBox>
 </div>
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -76,27 +76,32 @@ export default {
 
     }
   },
-  // methods: {
-  //   sendEmail() {
-  //     const templateParams = {
-  //       name: this.name,
-  //       number: this.phone,
-  //       email: this.email,
-  //       message: this.text,
-  //     };
+  methods: {
+    sendEmail() {
+      if (!this.name || !this.email || !this.text) {
+        alert('Bitte füllen Sie alle erforderlichen Felder aus.');
+        return;
+      }
 
-  //     emailjs.send('service_z7v4wso', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
-  //       .then((response) => {
-  //         console.log('Email sent successfully:', response);
-  //         this.success = 'success'
+      const templateParams = {
+        name: this.name,
+        number: this.phone,
+        email: this.email,
+        message: this.text,
+      };
 
-  //       })
-  //       .catch((error) => {
-  //         console.error('Email sending failed:', error);
-  //         this.success = 'error'
-  //       });
-  //   },
-  // },
+      emailjs
+        .send('service_z7v4wso', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
+        .then((response) => {
+          console.log('Email sent successfully:', response);
+          this.success = 'success';
+        })
+        .catch((error) => {
+          console.error('Email sending failed:', error);
+          this.success = 'error';
+        });
+    },
+  },
 }
 </script>
 

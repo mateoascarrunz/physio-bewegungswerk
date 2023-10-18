@@ -22,7 +22,7 @@
                 <RouterLink class="nav-link" to="/behandlungstechniken"><span class="info block links" >Unsere Behandlungstechniken</span> </RouterLink>
                 <RouterLink class="nav-link" to="/uberuns"><span class="info block links" >Über uns</span></RouterLink>
                     <RouterLink class="nav-link" to="/news"><span class="info block links" >News</span></RouterLink>
-                   <a><span class="info block links" >Termin Vereinbaren</span></a>
+                   <a href="https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg" target="_blank"><span class="info block links" >Termin Vereinbaren</span></a>
                 </div>
                 </div>
                 <div class="col-lg-4 center">
@@ -30,6 +30,8 @@
                    <span class="subtitle bold block">Support </span>
                    <RouterLink class="nav-link" to="/kontakt"> <span class="info block links" >Kontakt</span></RouterLink>
                    <RouterLink class="nav-link" to="/faq"> <span class="info block links" >FAQ</span></RouterLink>
+                  <a href="https://data.physio-bewegungswerk.ch/admin/" target="_blank"><span class="info block links" >Admin</span></a>
+
                 </div>
                 </div>
                 <div class="col-lg-12 center">

@@ -2,8 +2,6 @@
     <div class="page_container" v-if="PageTransition" >
         <div class="fade_out_animation">
         <img class="icon_page" src="../../assets/images/physio_icon.svg" alt="">
-        <br>
-        <span class="paragraph bold blue page_text">Physio…. Logisch</span>
     </div>
     </div>
 </template>
@@ -19,10 +17,10 @@ export default {
     mounted() {
         setTimeout(() => {
             this.PageTransition = false;
-        }, 2500);
+        }, 1500);
         setTimeout(() => {
             document.body.classList.remove('popup-open');
-        }, 2500);
+        }, 1500);
     },
     beforeMount() {
         document.body.classList.add('popup-open');
@@ -45,7 +43,7 @@ export default {
     left: 0px;
     z-index: 10;
     animation: fade-out 0.5s forwards ease;
-    animation-delay: 2s;
+    animation-delay: 1s;
 }
 
 .icon_page {
@@ -56,7 +54,7 @@ export default {
 }
 .fade_out_animation{
     animation: fade-out 0.5s forwards ease;
-    animation-delay: 1.8s;
+    animation-delay: 1s;
     display: flex;
     flex-direction: column;
     justify-content: center;

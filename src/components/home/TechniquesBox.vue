@@ -3,14 +3,17 @@
         <div class="techniques-container">
         <span class=" tech_title title bold blue text_break center">Behandlungs&shy;techniken</span>
        
-        <swiper
+        <swiper-container
         class="swiper"
     :modules="modules"
     :slides-per-view="1"
-    navigation
-    :pagination="{ clickable: true }"
+    :spaceBetween="40"
+    :pagination="{ el: '.swiper-pagination' }"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
+    speed="300" autoplay="true"
+                    navigation="true"
+                    loop="true" 
   >
     <swiper-slide>
       <div class="img img1">
@@ -145,7 +148,8 @@
       <BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag>
     </div>
     </swiper-slide>
-  </swiper>
+  </swiper-container>
+  
   </div>
 </BaseBox>
 </template>
@@ -188,6 +192,7 @@
 .white_fade{
   border-radius: 38px 38px 0px 0px;
   background: linear-gradient(0deg, #00000078 1%, rgba(255, 255, 255, 0) 99%);
+  border-radius: 50px;
 width: 100%;
 height: 100%;
 position: absolute;
@@ -220,46 +225,46 @@ position: relative;
     background-position: center;
     height: 100%;
     width: 100%;
-    border-radius: 40px;
+    border-radius: 50px;
     position: relative;
     opacity: 0.5;
     background-color: transparent;
 }
 .img1{
-  background-image: url(../../assets/images/img_services_1.jpeg);
+  background-image: url(../../assets/images/img_services_myofasziale.jpg);
 }
 .img2{
-  background-image: url(../../assets/images/img_services_2.jpeg);
+  background-image: url(../../assets/images/img_services_manuelle.jpeg);
 }
 .img3{
-  background-image: url(../../assets/images/img_services_3.jpeg);
+  background-image: url(../../assets/images/img_services_postoperative.jpeg);
 }
 .img4{
-  background-image: url(../../assets/images/img_services_4.jpeg);
+  background-image: url(../../assets/images/img_services_mtt.jpeg);
 }
 .img5{
-  background-image: url(../../assets/images/img_services_5.jpeg);
+  background-image: url(../../assets/images/img_services_lymphdrainage.jpg);
 }
 .img6{
-  background-image: url(../../assets/images/img_services_6.jpeg);
+  background-image: url(../../assets/images/img_services_neurologische.jpeg);
 }
 .img7{
-  background-image: url(../../assets/images/img_services_7.jpeg);
+  background-image: url(../../assets/images/img_services_elektrotherapie.jpeg);
 }
 .img8{
-  background-image: url(../../assets/images/img_services_8.jpeg);
+  background-image: url(../../assets/images/img_services_atemtherapie.jpeg);
 }
 .img9{
-  background-image: url(../../assets/images/img_services_9.jpeg);
+  background-image: url(../../assets/images/img_services_geratrische.jpeg);
 }
 .img10{
-  background-image: url(../../assets/images/img_services_10.jpeg);
+  background-image: url(../../assets/images/img_services_domizilbehandlungen.jpeg);
 }
 .img11{
-  background-image: url(../../assets/images/img_services_11.jpeg);
+  background-image: url(../../assets/images/img_services_mobilisation.jpeg);
 }
 .img12{
-  background-image: url(../../assets/images/img_services_12.jpeg);
+  background-image: url(../../assets/images/img_services_kinesio.jpg);
 }
 
 .swiper{
