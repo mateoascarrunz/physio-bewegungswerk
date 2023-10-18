@@ -15,10 +15,12 @@ Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behande
 Wir legen großen Wert darauf, dass wir jeden unserer Patienten respektvoll und individuell behandeln, und wir setzen uns dafür ein, maßgeschneiderte Lösungen für ihre speziellen Bedürfnisse anzubieten.<br>
 <br></span>
 <div class="btn_container">
-<BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue>
-<BaseButtonBlue class="margin_left">FAQ</BaseButtonBlue>
+  <div>
+<BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue></div>
+<div>
+<RouterLink class="nav-link" to="/faq"> <BaseButtonBlue class="margin_left">FAQ</BaseButtonBlue></RouterLink></div>
 </div>
-<br><br>
+<br><br> 
                 </div>
             </div>
             <div class="col-lg-6 img">
@@ -62,6 +64,11 @@ justify-content: center;
 
 
 }
+.btn_container{
+display: flex;
+
+justify-content: space-evenly
+    }
 .img_hero_uberuns::before {    
     content: '';
     background-image: url(../../assets/images/img_physio1.png);
