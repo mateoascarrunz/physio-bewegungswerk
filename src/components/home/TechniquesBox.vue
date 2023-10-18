@@ -24,7 +24,7 @@
       <span class="white  title2 ">Myofasziale Triggerpunkt-Therapie</span>
       <br>
       <br>
-      <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+      <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '1' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
   </swiper-slide>
     <swiper-slide>
@@ -35,7 +35,7 @@
     <div class="tech_text center">
       <span class="white title2">Manuelle Therapie</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+      <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '2' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -46,7 +46,7 @@
     <div class="tech_text center">
       <span class="white title2">Postoperative Rehabilitation</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '3' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -57,7 +57,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Rehabilitation und Medizinische Trainingstherapie MTT</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '4' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -68,7 +68,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Manuelle Lymphdrainage inkl. Kompressionsbehandlung </span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '5' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -79,7 +79,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Neurologische Rehabilitation nach Bobath (Schlaganfall, M. Parkinson, MS)</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '6' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -90,7 +90,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Elektrotherapie und Ultraschallbehandlungen inkl. Ionto-/Sonophorese</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '8' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -101,7 +101,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Atemtherapie</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '9' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -112,7 +112,10 @@
     <div class="tech_text center">
       <span class="white  title2 ">Geratrische Rehabilitation inkl. Sturzprophylaxe</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+      <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '10' } }">
+  <BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag>
+</router-link>
+
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -123,7 +126,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Domizilbehandlungen / Hausbesuche</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '11' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -134,7 +137,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Mobilisation nach Mulligan</span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '12' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
     <swiper-slide>
@@ -145,7 +148,7 @@
     <div class="tech_text center">
       <span class="white  title2 ">Kinesio - Taping  </span>
       <br>
-            <router-link :to="{ name: 'behandlungstechniken' }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
+            <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '13' } }"><BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag></router-link>
     </div>
     </swiper-slide>
   </swiper-container>

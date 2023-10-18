@@ -20,10 +20,15 @@ const router = createRouter({
     {
       path: '/behandlungstechniken',
       name: 'behandlungstechniken',
-
+      component: () => import('../views/BehandlungstechnikenView.vue'),
+    },
+    {
+      path: '/behandlungstechniken/:serviceid',
+      name: 'behandlungstechnikenitem',
       component: () => import('../views/BehandlungstechnikenView.vue'),
 
     },
+
     {
       path: '/uberuns',
       name: 'uberuns',
