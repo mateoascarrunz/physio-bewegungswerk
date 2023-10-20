@@ -10,6 +10,15 @@
     </div>
 
 </template>
+<script>
+export default{
+    mounted() {
+    document.body.classList.add('scroll-out');
+  },
+  unmounted() {
+    document.body.classList.remove('scroll-out');
+  }
+}</script>
 <style scoped>
 .dropdown_container{
     position: fixed;
