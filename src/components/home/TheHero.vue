@@ -459,9 +459,9 @@ display: none;
 }
 }
 @media (max-width: 699px){
-  .hero{
+  /* .hero{
     max-height: 800px;
-  }
+  } */
   .text_hero{
 width: 100%;
   }
