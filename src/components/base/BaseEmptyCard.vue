@@ -1,5 +1,5 @@
 <template>
-<div class="card_container transition-5" v-motion-fade-visible-once>
+<div class="card_container transition-5">
  
   <div class="card-body">
     <slot>
