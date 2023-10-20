@@ -174,6 +174,7 @@ export default{
         `Wir beide sind ausgebildete Bobath-Therapeuten und erarbeiten gemeinsam mit dem Patienten an einem von ihm festgelegten Ziel.`,
         `Bei vielen neurologischen Erkrankungen ist die Wiederherstellung der Gehfähigkeit ein wichtiges Ziel. Wir Physiotherapeuten arbeiten an Gangtraining und Mobilitätstechniken, um den Patienten zu helfen, sicherer und selbstständiger zu gehen.`],
                    img:'/img_services_neurologische.jpeg', 
+                   vertical: true,
                 },
                 {
                     id:'7',
