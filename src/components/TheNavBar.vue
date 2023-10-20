@@ -8,7 +8,7 @@
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span></button>
       <div class="navbar-collapse collapse justify-content-center" id="navbarNavDropdown">
-        <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto center">
 
           <li class="nav-item">
             <RouterLink class="nav-link" to="/" @click="toggleMobileMenu">Home
