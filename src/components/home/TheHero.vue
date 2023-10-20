@@ -501,8 +501,15 @@ right: 5;
 }
 @media (max-width: 500px){
   .hero{
-  height: 100vh;
+  height: 94vh;
   }
+  .img_contaner {
+
+    bottom: 50px;
+
+
+}
+  
 }
 /* @media (max-width: 500px){
   .hero {
