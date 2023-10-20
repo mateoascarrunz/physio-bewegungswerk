@@ -501,7 +501,7 @@ right: 5;
 }
 @media (max-width: 500px){
   .hero{
-  height: 150vh;
+  height: 100vh;
   }
 }
 /* @media (max-width: 500px){
