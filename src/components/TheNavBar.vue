@@ -2,7 +2,7 @@
   <!-- Navbar-->
   <nav class="sticky-top  navbar navbar-expand-lg flex-lg-nowrap flex-wrap">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" to="/"><img style="width: 75%;" src="../assets/images/physio_icon.svg"
+      <RouterLink class="navbar-brand" to="/" @click="toggleMobileMenu"><img style="width: 75%;" src="../assets/images/physio_icon.svg"
           alt="Physio icon"></Routerlink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

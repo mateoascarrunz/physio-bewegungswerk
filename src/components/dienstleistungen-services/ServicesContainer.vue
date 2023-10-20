@@ -44,8 +44,8 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                                 <span class="paragraph">Haben Sie Fragen?</span>
                                 <br>
                                 <div class="btn_ask">
-                                    <BaseButtonBlue>Kontakt</BaseButtonBlue>
-                                    <BaseButtonBlue>FAQ</BaseButtonBlue>
+                                    <RouterLink class="nav-link" to="/kontakt"><BaseButtonBlue>Kontakt</BaseButtonBlue></RouterLink>
+                                    <RouterLink class="nav-link" to="/faq"><BaseButtonBlue>FAQ</BaseButtonBlue></RouterLink>
                                 </div>
                                 </div>
                         </div>
