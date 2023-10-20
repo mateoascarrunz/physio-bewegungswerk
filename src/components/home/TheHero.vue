@@ -122,8 +122,7 @@
         <div class="title_box_hero ">
           <span class="ultramegatitle blue bold block z-1 position-relative">Bleib beweglich</span>
           <div class="left text_hero">
-            <span class="paragraph  z-1 position-relative">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sodales sapien. Ut
-              rutrum at. </span>
+            <span class="paragraph  z-1 position-relative hero_text">Wer wir sind. Gerne stellen wir uns vor.</span>
               <br>
               <RouterLink  to="/uberuns">
             <BaseButtonBlue class=" btn_mehr z-1 position-relative">mehr</BaseButtonBlue>
@@ -337,6 +336,9 @@ aspect-ratio: 1/1.5;
 .text_hero{
   position: relative;
 }
+.hero_text{
+  margin-left: 10px;
+}
 @media (max-width:1400px){
 
 .img_hero_background {
@@ -411,6 +413,9 @@ right: 10%;
 }
 }
 @media (max-width: 990px) {
+  .hero_text{
+  margin-left: 0px;
+}
   .text_hero{
     margin-top: 10px;
   }
@@ -499,14 +504,14 @@ right: 5;
   height: 150vh;
   }
 }
-@media (max-width: 500px){
+/* @media (max-width: 500px){
   .hero {
 
   max-height: 600px;
 
 
-}
-}
+} 
+}*/
 @media (max-height: 950px) and (min-width: 990px) {
   .img_contaner {
 
@@ -520,7 +525,7 @@ right: 5;
     bottom: -300px;
   }
 
-  @media (max-width: 990px) {}
+
 }
 
 

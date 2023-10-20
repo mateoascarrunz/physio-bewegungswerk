@@ -11,6 +11,7 @@ import BaseCloseButton from './components/base/BaseCloseButton.vue';
 import LoadScript from 'vue-plugin-load-script';
 import vueCustomElement from 'vue-custom-element';
 import BasePageTransition from './components/base/BasePageTransition.vue';
+import { MotionPlugin } from '@vueuse/motion'
 
 
 // Import all of Bootstrap's JS
@@ -19,8 +20,8 @@ const app = createApp(App)
 
 app.use(router)
 app.use(LoadScript)
-app.use(vueCustomElement);
-
+app.use(vueCustomElement)
+app.use(MotionPlugin)
 
 app
   .component('BaseBox', BaseBox)

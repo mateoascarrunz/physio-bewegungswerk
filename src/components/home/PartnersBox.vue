@@ -1,5 +1,7 @@
 <template>
-  <BaseBox class="partner center" v-if="partnerImages.length > 0">
+
+  <BaseBox class="partner center" v-if="partnerImages.length > 0" >
+
 <span class="title blue partners_title">Partners</span>
 <br>
 
@@ -19,7 +21,9 @@
   </swiper-slide>
 
 </swiper>
+
   </BaseBox>
+
 </template>
 
 <script>

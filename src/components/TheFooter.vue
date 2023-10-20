@@ -1,6 +1,6 @@
 <template>
-    <div class="grid_container">
-        <BaseBox class="grid-col-2">
+    <div class="grid_container transition-5"  v-motion-slide-visible-bottom >
+        <BaseBox class="grid-col-2" >
             <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 center">
@@ -62,6 +62,7 @@
 </template>
 
 <style scoped>
+
 a{
     text-decoration: none;
     color: inherit;

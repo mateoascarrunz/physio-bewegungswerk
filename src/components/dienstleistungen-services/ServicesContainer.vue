@@ -13,7 +13,7 @@
         <div class="grid_container">
             <BaseBox class=" grid-col-2">
                 <div class="container">
-
+                <div v-if="selectedService === null">
                 <div class="margin_title center">
                     <span class="title blue bold center">Therapieangebot</span>
                 </div>
@@ -28,6 +28,7 @@
 Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfen oder Ihre Beweglichkeit und Lebensqualität verbessern möchten, wir sind hier, um gemeinsam geeignete Lösungen zu entwickeln.</span>
 <br>
 <br>
+</div >
                 <!-- services -->
                 <div class="container services_container">
                     <div class="row no_padding">
@@ -49,7 +50,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                                 </div>
                         </div>
                         </div>
-                        <div class="col-lg-8 order-first  text_services">
+                        <div class="col-lg-8 order-first  text_services " :class="{'margin_title': selectedService !== null}">
                             <span class="paragraph">Hier sind unsere Dienstleistungen:</span>
                             <br>
                             <br>
@@ -207,7 +208,7 @@ export default{
                 },
                 {
                     id:'10',
-                   title:'Geratrische Rehabilitation inkl. Sturzprophylaxe',
+                   title:'Geriatrische Rehabilitation und Sturzprofilaxe',
                    description:[`Die geriatrische Physiotherapie ist ein spezialisiertes Gebiet der Physiotherapie, das sich auf die Gesundheit und Rehabilitation älterer Menschen konzentriert. Mit zunehmendem Alter treten oft körperliche Veränderungen und gesundheitliche Herausforderungen auf, die eine spezielle Herangehensweise erfordern. Die geriatrische Physiotherapie zielt darauf ab, die Lebensqualität, die Mobilität und die Unabhängigkeit von älteren Menschen zu verbessern oder aufrechtzuerhalten.`,
                    `Hier sind einige der Schlüsselelemente der geriatrischen Physiotherapie:`,
         ` <strong>Funktionserhalt und -verbesserung:</strong> Die Therapie konzentriert sich darauf, die alltäglichen Funktionen und Aktivitäten, wie Gehen, Aufstehen, Sitzen und Anziehen, zu erhalten oder zu verbessern. Dies trägt dazu bei, die Selbstständigkeit und Lebensqualität älterer Menschen zu steigern.`,

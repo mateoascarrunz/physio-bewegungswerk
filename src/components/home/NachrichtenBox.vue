@@ -28,7 +28,7 @@
   </BasePopUp>
 
   <div class="grid_container padding_null">
-    <BaseBox class="grid-col-2 center">
+    <BaseBox class="grid-col-2 center" v-motion-fade-visible-once>
       <span class="title bold blue">News</span>
       <div class="news_container">
         <BaseCard v-for="newsItem in latestNews" :key="newsItem.id" class="cards_news">

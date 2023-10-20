@@ -110,7 +110,7 @@
       
     </div>
     <div class="tech_text center">
-      <span class="white  title2 ">Geratrische Rehabilitation inkl. Sturzprophylaxe</span>
+      <span class="white  title2 ">Geriatrische Rehabilitation und Sturzprofilaxe</span>
       <br>
       <router-link :to="{ name: 'behandlungstechnikenitem', params: { serviceid: '10' } }">
   <BaseButtonMag class="white mobil-nowhite">mehr</BaseButtonMag>

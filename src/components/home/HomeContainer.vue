@@ -1,26 +1,20 @@
 <template>
-<BasePageTransition></BasePageTransition>
-    <div class="container-hero"> 
+  <BasePageTransition></BasePageTransition>
+  <div class="container-hero">
     <div class="grid_container">
+      <PartnersBox class="grid-col-2 transition-3" :color="lightblue"   :delay="200">
+      </PartnersBox>
+      <TechniquesBox class="grid_mobile transition-3"  v-motion-fade-visible-once>
 
-        <Transition name="slide-fade" v-intersect="onIntersect">
-        <PartnersBox class="grid-col-2" :color="lightblue">
-
-
-        </PartnersBox>
-    </Transition>
-      <TechniquesBox class="grid_mobile">
-        
-      </TechniquesBox >
-      <UberunsBox class="grid_mobile"/>
+      </TechniquesBox>
+      <UberunsBox class="grid_mobile transition-3"  v-motion-fade-visible-once/>
     </div>
-      <NachrichtenBox/>
-      <div class="grid_container">
-       <ActionBox class="grid_mobile"/>
+    <NachrichtenBox />
+    <div class="grid_container">
+      <ActionBox class="grid_mobile transition-3"  v-motion-fade-visible-once :delay="200"/>
     </div>
 
-</div>
-
+  </div>
 </template>
 <script>
 import TechniquesBox from './TechniquesBox.vue';
@@ -29,30 +23,19 @@ import NachrichtenBox from './NachrichtenBox.vue'
 import PartnersBox from './PartnersBox.vue';
 import UberunsBox from './UberunsBox.vue';
 
-export default{
-    components:{
-        ActionBox,
-        NachrichtenBox,
-        TechniquesBox,
-        PartnersBox,
-        UberunsBox
-    },
-    data(){
-        return{
-            inViewport: false,
-        }
-    },
-    methods: {
-    onIntersect(entries) {
-      this.inViewport = entries[0].isIntersecting;
-    },
+export default {
+  components: {
+    ActionBox,
+    NachrichtenBox,
+    TechniquesBox,
+    PartnersBox,
+    UberunsBox
   },
-    inject:['blue', 'lightblue'],
-}</script>
+  inject: ['blue', 'lightblue'],
+}
+</script>
 <style >
-
-
-.img_cover{
-    object-fit: cover;
+.img_cover {
+  object-fit: cover;
 }
 </style>

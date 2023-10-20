@@ -1,5 +1,5 @@
 <template>
-<div class="card_container">
+<div class="card_container transition-5" v-motion-fade-visible-once>
   <slot name="img_card"></slot>
   <div class="card-body" :style="{height: theheight }">
     <slot>

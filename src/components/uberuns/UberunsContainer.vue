@@ -3,11 +3,11 @@
  <div class="grid_container">
 <UberunsHero class="grid-col-2"></UberunsHero>
    
-        <UberunsTeam class="grid-col-2"/>
-    <UberunsStandort class="grid-col-2"/>
-    <UberunsCompany class="grid-col-2"/>
-    <UberunsExpertises class="grid-col-2"  :color="lightblue"/>
-    <UberunsStellen class="grid-col-2"/>
+        <UberunsTeam class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+    <UberunsStandort class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+    <UberunsCompany class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+    <UberunsExpertises class="grid-col-2 transition-3"  :color="lightblue" v-motion-fade-visible-once/>
+    <UberunsStellen class="grid-col-2 transition-3" v-motion-fade-visible-once/>
     </div>
    
     

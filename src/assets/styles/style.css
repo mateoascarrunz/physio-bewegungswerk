@@ -288,3 +288,11 @@ grid-column: span 2;
   .closed_button {  margin-left: 85% !important;}
 
 }
+
+/* transition animation */
+.transition-5{
+  transition: all 500ms ease;
+}
+.transition-3{
+  transition: all 300ms ease;
+}
