@@ -12,10 +12,12 @@
         <BaseButtonBlue @click="PopupPhoto = !PopupPhoto">Fotos ansehen</BaseButtonBlue>
     </BaseBox>
 </div>
-<BasePopUp v-if="PopupPhoto" >
+<BasePopUp v-if="PopupPhoto"  class="center">
     <BaseCloseButton @click="PopupPhoto = !PopupPhoto">
         </BaseCloseButton>
-        <div class="flex">
+        <span class="title blue title_popup">Unsere Standort</span>
+        <div class="flex ">
+          
         <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
                     <swiper-slide class="swiper_slide" >
 <img class="office_photo" src="../../assets/images/img_standort_2.jpg" alt="">
@@ -30,7 +32,7 @@
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_5.jpg" alt="">
+<img class="office_photo vertical" src="../../assets/images/img_standort_5.jpg" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
@@ -65,13 +67,19 @@ export default{
     height: 100%;
     position: relative;
 }
+.title_popup{
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .swiper_container{
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    height: 90%;
+    border-radius: 20px;
     overflow: hidden;
-    z-index: 3;
-}
+    margin-top: 20px;
+    z-index: 3;}
 .swiper_slide{
 overflow: hidden;
 }
@@ -107,5 +115,9 @@ overflow: hidden;
 left: 50%;
 top: 50%;
 transform: translate(-50%, -50%);
+}
+.vertical{
+    width: auto !important;
+    height: 100%;
 }
 </style>
