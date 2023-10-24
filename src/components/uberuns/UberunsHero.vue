@@ -25,7 +25,7 @@ Wir legen großen Wert darauf, dass wir jeden unserer Patienten respektvoll und 
             </div>
             <div class="col-lg-6 img">
                 <div class="img_hero_uberuns ">
-                    <img class="logo" src="../../assets/images/physio_logo.svg" alt="">
+                    <!-- <img class="logo" src="../../assets/images/physio_icon.svg" alt=""> -->
                 </div>
             </div>
         </div>
@@ -47,9 +47,12 @@ export default {
 };
 </script>
 <style scoped>
-.logo{
-        width: 35%;
-}
+/* .logo{
+        width: 10%;
+        opacity: 1;
+         margin-bottom: 30px;
+         margin-right: 30px;
+} */
 .margin_left{
 margin-left: 50px;
 }
@@ -59,8 +62,8 @@ height: 100%;
 position: relative;
 aspect-ratio: 1.3/1;
 display: flex;
-justify-content: center;
-    align-items: center;
+justify-content: flex-end;
+    align-items: flex-end;
 
 
 }
@@ -71,7 +74,7 @@ justify-content: space-evenly
     }
 .img_hero_uberuns::before {    
     content: '';
-    background-image: url(../../assets/images/img_physio1.png);
+    background-image: url(../../assets/images/img_physio_team2.png);
     background-size: cover;
     background-position: center;
     position: absolute;
