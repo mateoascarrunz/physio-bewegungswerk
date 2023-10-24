@@ -4,7 +4,10 @@
 <UberunsHero class="grid-col-2"></UberunsHero>
    
         <UberunsTeam class="grid-col-2 transition-3" v-motion-fade-visible-once/>
-    <UberunsStandort class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+   
+</div>
+<UberunsStandort class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+<div class="grid_container">
     <UberunsCompany class="grid-col-2 transition-3" v-motion-fade-visible-once/>
     <UberunsExpertises class="grid-col-2 transition-3"  :color="lightblue" v-motion-fade-visible-once/>
     <UberunsStellen class="grid-col-2 transition-3" v-motion-fade-visible-once/>

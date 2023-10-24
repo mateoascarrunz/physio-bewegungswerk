@@ -1,17 +1,80 @@
 
 <template>
-        
-    <BaseBox class="container_flex center">
+        <div class="grid_container">
+    <BaseBox class="container_flex center grid-col-2 padding_null">
         <span class="title bold blue z-1">Unsere Standort</span>
         <br>
         <span class="paragraph z-1">Bergstrasse 3, 8625 Gossau</span>
         <br>
 
         <a href="https://maps.app.goo.gl/cF5gTcjpVvmXUC6T7" target="_blank" rel="noopener noreferrer"><BaseButtonBlue z-1>Siehe Standort</BaseButtonBlue></a>
+        <br>
+        <BaseButtonBlue @click="PopupPhoto = !PopupPhoto">Fotos ansehen</BaseButtonBlue>
     </BaseBox>
+</div>
+<BasePopUp v-if="PopupPhoto" >
+    <BaseCloseButton @click="PopupPhoto = !PopupPhoto">
+        </BaseCloseButton>
+        <div class="flex">
+        <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
+                    <swiper-slide class="swiper_slide" >
+<img class="office_photo" src="../../assets/images/img_standort_2.jpg" alt="">
+                    </swiper-slide>
 
+                    <swiper-slide class="swiper_slide">
+<img class="office_photo" src="../../assets/images/img_standort_3.jpg" alt="">
+                    </swiper-slide>
+
+                    <swiper-slide class="swiper_slide">
+<img class="office_photo" src="../../assets/images/img_standort_4.jpg" alt="">
+                    </swiper-slide>
+
+                    <swiper-slide class="swiper_slide">
+<img class="office_photo" src="../../assets/images/img_standort_5.jpg" alt="">
+                    </swiper-slide>
+
+                    <swiper-slide class="swiper_slide">
+<img class="office_photo" src="../../assets/images/img_standort_6.jpg" alt="">
+                    </swiper-slide>
+
+                </swiper-container>
+            </div>
+</BasePopUp>
 </template>
+<script>
+import BasePopUp from '../base/BasePopUp.vue'
+import BaseCloseButton from '../base/BaseCloseButton.vue'
+export default{
+    components:{
+    BasePopUp,
+    BaseCloseButton
+    },
+    data(){
+        return{
+            PopupPhoto: false
+        }
+    },
+}
+</script>
 <style scoped>
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.swiper_container{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 3;
+}
+.swiper_slide{
+overflow: hidden;
+}
 .container_flex{
     display: flex;
     flex-direction: column;
@@ -37,5 +100,12 @@
     z-index: 0;
     
 
+}
+.office_photo{
+   width: 100%;
+   position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
 }
 </style>

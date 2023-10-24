@@ -13,5 +13,6 @@ div{
     right: 20px;
     top: 20px;
     cursor: pointer;
+    z-index: 4;
 }
 </style>
