@@ -106,7 +106,7 @@
                             <template v-slot:img_card>
 <img class="img_card" :src="team.attributes.profilePicture.data.attributes.url" :alt="team.attributes.name">
   </template>
-                            <span class="paragraph blue">{{ team.attributes.name }}</span>
+                            <span class="paragraph blue bold">{{ team.attributes.name }}</span>
                             <br>
                             <span class="info magenta">{{ team.attributes.workPosition }}</span>
                             <br>
