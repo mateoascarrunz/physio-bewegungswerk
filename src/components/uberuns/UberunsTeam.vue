@@ -289,6 +289,8 @@ beforeDestroy() {
     aspect-ratio: 1/1.22;
     overflow: hidden;
     border-radius: 40px;
+    position: sticky;
+    top: 0px;
 }
 .img_coverphoto{
     width: 100%;
