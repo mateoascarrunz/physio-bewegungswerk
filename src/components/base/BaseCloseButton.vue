@@ -15,4 +15,10 @@ div{
     cursor: pointer;
     z-index: 4;
 }
+@media (max-width:990px){
+    div{
+        top: 0px;
+    }
+}
+
 </style>
