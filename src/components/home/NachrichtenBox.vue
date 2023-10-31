@@ -82,7 +82,6 @@ export default {
   },
   mounted() {
     axios.get('https://strapi-physio-app.onrender.com/api/news-items?populate=*').then((response) => {
-      console.log('news', response.data.data);
       this.news = response.data.data;
     });
     window.addEventListener('resize', this.updateMaxWordsForDescription);

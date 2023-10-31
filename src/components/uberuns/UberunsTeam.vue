@@ -175,16 +175,13 @@ beforeDestroy() {
             this.popup = true;
         },
         getTeamCoverPhotoUrl(team) {
-        // Ensure that team and coverPhoto data exist
-        if (team && team.attributes.coverPhoto && team.attributes.coverPhoto.data.attributes.url) {
-            // Log the URL for debugging
-            console.log('Team Cover Photo URL:', team.attributes.coverPhoto.data.attributes.url);
 
-            // Construct and return the complete image URL
+        if (team && team.attributes.coverPhoto && team.attributes.coverPhoto.data.attributes.url) {
+
             return team.attributes.coverPhoto.data.attributes.url;
         } else {
-            // Handle the case where the data is missing or invalid
-            return ''; // Or provide a default image URL
+           
+            return ''; 
         }
     },
     handleWindowResize() {

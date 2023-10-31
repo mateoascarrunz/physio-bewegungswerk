@@ -54,7 +54,6 @@
 <script>
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
 import BaseCard from '../base/BaseCard.vue';
-import img1 from '../../assets/images/img_news_1.jpeg';
 import BasePopUp from '../base/BasePopUp.vue';
 import axios from 'axios';
 import BaseRitchText from '../base/BaseRitchText.vue';
@@ -76,7 +75,6 @@ export default {
   },
   mounted() {
     axios.get('https://strapi-physio-app.onrender.com/api/news-items?populate=*').then((response) => {
-      console.log(response.data.data);
       this.news = response.data.data;
     });
 

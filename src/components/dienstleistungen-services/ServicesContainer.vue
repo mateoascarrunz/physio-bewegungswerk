@@ -278,16 +278,13 @@ export default{
 created() {
 
   const serviceid = this.$route.params.serviceid;
-  console.log(serviceid);
   const service = this.services.find((item) => item.id === serviceid);
 
   if (service) {
     this.selectedService = service;
-    console.log('service found');
 
   } else {
     this.selectedService = null;
-    console.log('service not found');
   }
 },
 }

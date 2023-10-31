@@ -65,9 +65,7 @@ export default {
     // Make the axios request to fetch partner images here
     axios.get('https://strapi-physio-app.onrender.com/api/partners?populate=*')
       .then(response => {
-        console.log(response.data.data);
         this.partnerImages = response.data.data;
-        console.log('partner images' + this.partnerImages);
       })
       .catch(error => {
         console.error('Error fetching partner images:', error);

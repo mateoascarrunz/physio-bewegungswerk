@@ -13,7 +13,6 @@ import vueCustomElement from 'vue-custom-element';
 import BasePageTransition from './components/base/BasePageTransition.vue';
 import { MotionPlugin } from '@vueuse/motion'
 
-
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 const app = createApp(App)

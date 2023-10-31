@@ -48,13 +48,11 @@ export default {
   mounted() {
     axios.get('https://strapi-physio-app.onrender.com/api/banners')
       .then(response => {
-        console.log(response.data.data);
         this.bannerMessage = response.data.data;
       });
 
     axios.get('https://strapi-physio-app.onrender.com/api/partners?populate=*')
       .then(response => {
-        console.log(response.data.data);
         this.partnerImages = response.data.data;
       })
       .catch(error => {
@@ -91,16 +89,13 @@ retrieveVisited() {
     const ONE_HOUR_IN_MS = 60 * 60 * 1000;
 
     if (lastVisitTimestamp && now - lastVisitTimestamp < ONE_HOUR_IN_MS) {
-      console.log("is working")
       return true;
      
     } else {
       localStorage.setItem('lastVisitTimestamp', now.toString());
-      console.log("is working else del medio")
       return false;
     }
   } else {
-    console.log("is working else utlimo")
     return false;
   }
 },
