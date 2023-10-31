@@ -100,6 +100,9 @@ justify-content: space-evenly
     z-index: -1;
     
 }
+.termin_btn{
+    display: none;
+}
 
 @media (max-width: 990px){
     .img_hero_uberuns{
@@ -112,6 +115,9 @@ justify-content: space-evenly
     }
     .margin_left{
         margin-left: 0px;
+    }
+    .termin_btn{
+        display: inline-block;
     }
 }
 

@@ -4,6 +4,9 @@
 :root {
   font-family: 'Montserrat', sans-serif;
 }
+a{
+  color: inherit;
+}
 .popup-open {
   overflow: hidden;
 }

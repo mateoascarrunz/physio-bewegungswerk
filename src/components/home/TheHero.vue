@@ -124,9 +124,12 @@
           <div class="left text_hero">
             <span class="paragraph  z-1 position-relative hero_text">Gerne stellen wir uns vor…</span>
               <br>
+              <div class="hero_btns">
               <RouterLink  to="/uberuns">
             <BaseButtonBlue class=" btn_mehr z-1 position-relative">mehr</BaseButtonBlue>
           </RouterLink>
+          <BaseButtonMag class="termin_btn">Termin vereinbaren</BaseButtonMag>
+        </div>
           </div>
 
         </div>
@@ -230,7 +233,7 @@ export default {
 }
 
 .text_hero {
-  width: 40%;
+  width: 60%;
 }
 
 .title_box_hero {
@@ -339,7 +342,12 @@ aspect-ratio: 1/1.5;
 .hero_text{
   margin-left: 10px;
 }
+.termin_btn{
+    display: none;
+    margin-top: 10px;
+}
 @media (max-width:1400px){
+
 
 .img_hero_background {
 
@@ -413,6 +421,21 @@ right: 10%;
 }
 }
 @media (max-width: 990px) {
+  .hero_btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 290px;
+}
+.termin_btn {
+  font-size: 12px;
+}
+.btn_mehr{
+  font-size: 12px !important;
+}
+  .termin_btn{
+        display: inline-block;
+    }
   .hero_text{
   margin-left: 0px;
 }
@@ -535,7 +558,11 @@ right: 5;
 
 }
 
-
+@media(max-width: 360px){
+  .btn_mehr{
+  font-size: 12px !important;
+}
+}
 
 
 
