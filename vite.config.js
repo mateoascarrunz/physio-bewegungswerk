@@ -9,7 +9,7 @@ export default defineConfig({
     vue({
     template: {
       compilerOptions: {
-        isCustomElement: (tag) =>['swiper-container'].includes(tag), 
+        isCustomElement: (tag) =>['swiper-container', 'swiper-slide'].includes(tag), 
       }
     }
   })

@@ -94,6 +94,7 @@
             </div>
         </div>
     </BasePopUp>
+    <div class="grid_container padding_null" > 
         <BaseBox class="center grid-col-2">
             <span class="title bold blue">Lernen Sie unser Team kennen</span>
             <br>
@@ -116,7 +117,7 @@
                 </swiper-container>
             </div>
         </BaseBox>
-
+    </div>
 </template>
 <script>
 import IconDiploma from '../icon/IconDiploma.vue'
