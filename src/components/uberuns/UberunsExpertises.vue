@@ -47,6 +47,7 @@ Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung
 <Teleport to="body">
 <BasePopUp v-if="popup1" :theheight="'fit-content'">
     <BaseCloseButton @click="popup1 = !popup1"/>
+    <br>
         <div class="center_flex height">
             <span class="title bold blue">Wertschätzung</span>
             <br>
@@ -60,6 +61,7 @@ Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung
 <Teleport to="body">
 <BasePopUp v-if="popup2" :theheight="'fit-content'">
     <BaseCloseButton @click="popup2 = !popup2"/>
+    <br>
     <div class="center_flex height">
             <span class="title bold blue">Kreativität</span>
             <br>
@@ -72,6 +74,7 @@ Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung
 <Teleport to="body">
 <BasePopUp v-if="popup3"  :theheight="'fit-content'">
     <BaseCloseButton @click="popup3 = !popup3" />
+    <br>
         <div class="center_flex height">
             <span class="title bold blue">Vertrauen und Respekt</span>
             <br>
