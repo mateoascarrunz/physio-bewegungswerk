@@ -56,7 +56,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                         </div>
                         </div>
                         <div class="col-lg-8 order-first  text_services " :class="{'margin_title': selectedService !== null}">
-                            <BaseButtonMag class="btn_back" @click="selectedService = null" v-if="selectedService !== null">⬅</BaseButtonMag>
+                            <BaseButtonMag class="btn_back" @click="selectedService = null" v-if="selectedService !== null">&larr;</BaseButtonMag>
                             <br>
                             <span class="paragraph">Hier sind unsere Dienstleistungen:</span>
                             <br>
