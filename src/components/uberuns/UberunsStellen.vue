@@ -27,7 +27,6 @@ jobs:[],
     mounted() {
         axios.get('https://strapi-physio-app.onrender.com/api/jobs')
             .then(response => {
-                console.log(response.data.data);
                 this.jobs = response.data.data;
             });
     },

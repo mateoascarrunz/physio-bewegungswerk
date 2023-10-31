@@ -159,7 +159,6 @@ export default {
     mounted() {
         axios.get('https://strapi-physio-app.onrender.com/api/teams?populate=*')
             .then(response => {
-                console.log(response.data.data);
         
                 this.teams = response.data.data;
 
