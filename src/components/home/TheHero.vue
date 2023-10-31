@@ -128,7 +128,7 @@
               <RouterLink  to="/uberuns">
             <BaseButtonBlue class=" btn_mehr z-1 position-relative">mehr</BaseButtonBlue>
           </RouterLink>
-          <BaseButtonMag class="termin_btn">Termin vereinbaren</BaseButtonMag>
+          <BaseButtonMag class="termin_btn"  @click="goToLink()">Termin vereinbaren</BaseButtonMag>
         </div>
           </div>
 
@@ -157,6 +157,7 @@ export default {
     },
   data() {
     return {
+      LinkAppointment: 'https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg',
       isMaritHovered: false,
       isDominikHovered: false,
       mobile822:false,
@@ -198,6 +199,9 @@ export default {
         this.mobile822 = true;
       }
     },
+    goToLink() {
+    window.open(this.LinkAppointment, '_blank');
+  },
     openPopupById(teamId) {
   const team = this.teams.find((t) => t.id === teamId);
   if (team) {
@@ -428,10 +432,10 @@ right: 10%;
   max-width: 290px;
 }
 .termin_btn {
-  font-size: 12px;
+  font-size: 14px;
 }
 .btn_mehr{
-  font-size: 12px !important;
+  font-size: 14px !important;
 }
   .termin_btn{
         display: inline-block;
