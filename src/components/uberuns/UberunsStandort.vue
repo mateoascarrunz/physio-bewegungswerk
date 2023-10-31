@@ -15,7 +15,7 @@
 <BasePopUp v-if="PopupPhoto"  class="center">
     <BaseCloseButton @click="PopupPhoto = !PopupPhoto">
         </BaseCloseButton>
-        <span class="title blue title_popup">Unsere Standort</span>
+        <span class="title blue title_popup">Unser Standort</span>
         <div class="flex ">
           
         <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
