@@ -8,10 +8,10 @@
     </div>
    </div>
    
-   <div v-if="jobs.length === 0 || jobs === null" class="stelle_container  blank_stelle">
+   <!-- <div v-if="jobs.length === 0 || jobs === null" class="stelle_container  blank_stelle">
     <span class="paragraph  blue">Stelle in Kürze</span>
 
-   </div>
+   </div> -->
 </template>
 
 <script>

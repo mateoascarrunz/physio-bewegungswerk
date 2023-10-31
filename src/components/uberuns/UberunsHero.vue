@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 center center_flex hero_about_text" >
-                <span class="title blue bold">2 Physiotherapeuten</span>
+                <span class="title blue bold">Unser Behandlungsansatz</span>
                 <br>
                 
                 <div class="left">
@@ -12,10 +12,10 @@
 Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Das Hauptziel ist es, langfristige Verbesserungen im Wohlbefinden unserer Patienten zu erreichen.
 <br>
 <br>
-Wir legen großen Wert darauf, dass wir jeden unserer Patienten respektvoll und individuell behandeln, und wir setzen uns dafür ein, maßgeschneiderte Lösungen für ihre speziellen Bedürfnisse anzubieten.<br>
+Wir legen grossen Wert darauf, dass wir jeden unserer Patienten respektvoll und individuell behandeln, und wir setzen uns dafür ein, maßgeschneiderte Lösungen für ihre speziellen Bedürfnisse anzubieten.<br>
 <br></span>
 <div class="btn_container">
-  <div>
+  <div v-if="jobs.length !== 0">
 <BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue></div>
 <div>
 <RouterLink class="nav-link" to="/faq"> <BaseButtonBlue class="margin_left">FAQ</BaseButtonBlue></RouterLink></div>
@@ -32,7 +32,14 @@ Wir legen großen Wert darauf, dass wir jeden unserer Patienten respektvoll und 
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
+  data(){
+        return{
+jobs:[],
+        }
+    },
+   
   methods: {
     scrollToStellen() {
       const stellenElement = document.getElementById('stellen');
@@ -44,6 +51,13 @@ export default {
       }
     },
   },
+  mounted() {
+        axios.get('https://strapi-physio-app.onrender.com/api/jobs')
+            .then(response => {
+                console.log(response.data.data);
+                this.jobs = response.data.data;
+            });
+    },
 };
 </script>
 <style scoped>

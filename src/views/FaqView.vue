@@ -29,9 +29,9 @@
             </li>
         </ul>
 
-        <span class="paragraph">Wir bitten sie bei ansteckenden Erkrankungen oder Fieber zum Schutz anderer Patienten und der Therapeuten ihren Termin abzusagen. Dabei sind wir einmalig kulant mit der Nicht-Verrechnung des Termins auch innerhalb der 24h Frist.
+        <span class="paragraph">Wir bitten Sie bei ansteckenden Erkrankungen oder Fieber zum Schutz anderer Patienten und der Therapeuten Ihren Termin abzusagen. Dabei sind wir einmalig kulant mit der Nicht-Verrechnung des Termins auch innerhalb der 24h Frist.
 
-Bei leichten Grippesymptomen würden sie bitten, eine Hygienemaske zu tragen. </span>
+Bei leichten Grippesymptomen würden wir Sie bitten, eine Hygienemaske zu tragen. </span>
     </div>
     </div>
   </div>

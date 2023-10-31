@@ -122,7 +122,7 @@
         <div class="title_box_hero ">
           <span class="ultramegatitle blue bold block z-1 position-relative">Bleib beweglich</span>
           <div class="left text_hero">
-            <span class="paragraph  z-1 position-relative hero_text">Wer wir sind. Gerne stellen wir uns vor.</span>
+            <span class="paragraph  z-1 position-relative hero_text">Gerne stellen wir uns vor…</span>
               <br>
               <RouterLink  to="/uberuns">
             <BaseButtonBlue class=" btn_mehr z-1 position-relative">mehr</BaseButtonBlue>

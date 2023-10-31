@@ -9,7 +9,7 @@
 
         <a href="https://maps.app.goo.gl/cF5gTcjpVvmXUC6T7" target="_blank" rel="noopener noreferrer"><BaseButtonBlue z-1>Siehe Standort</BaseButtonBlue></a>
         <br>
-        <BaseButtonBlue @click="PopupPhoto = !PopupPhoto">Fotos ansehen</BaseButtonBlue>
+        <BaseButtonBlue @click="PopupPhoto = !PopupPhoto">Impressionen</BaseButtonBlue>
     </BaseBox>
 </div>
 <BasePopUp v-if="PopupPhoto"  class="center">

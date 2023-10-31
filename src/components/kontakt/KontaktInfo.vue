@@ -32,7 +32,7 @@
             </div>
             <div class="contact_box center z-1">
                 <div class="info_contact">
-                <span class="info"><strong>Öffnungszeit: Mo-Fr</strong> 8-18 Uhr</span>
+                <span class="info"><strong>Öffnungszeiten: Mo-Fr</strong> 8-18 Uhr</span>
                 <br>
                 <span class="info">Parkplätze vor der Praxis vorhanden </span>
             </div>

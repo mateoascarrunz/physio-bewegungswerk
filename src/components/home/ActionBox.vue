@@ -6,7 +6,7 @@
                 <span class="megatitle white block bold">Vereinbaren Sie gerne online einen Termin mit uns</span>
                 <br>
                 <br>
-                <BaseButtonBlue> <span class="white mobil-nowhite" @click="goToLink()">Termin Vereinbaren</span>
+                <BaseButtonBlue> <span class="white mobil-nowhite" @click="goToLink()">Termin vereinbaren</span>
                 </BaseButtonBlue>
                 <br>
             </div>

@@ -31,9 +31,13 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
 </div >
                 <!-- services -->
                 <div class="container services_container">
+                    
                     <div class="row no_padding">
+                        
                         <div class="col-lg-4 order-last ">
+                            
                             <div class="sticky_element">
+                                
                             <div class="img_services_container center">
                                
                                 <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="selectedService.img" alt="">
@@ -41,6 +45,7 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                                 
                             </div>
                             <div class="text_info_btns center">
+                                
                                 <span class="paragraph">Haben Sie Fragen?</span>
                                 <br>
                                 <div class="btn_ask">
@@ -51,10 +56,12 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                         </div>
                         </div>
                         <div class="col-lg-8 order-first  text_services " :class="{'margin_title': selectedService !== null}">
+                            <BaseButtonMag class="btn_back" @click="selectedService = null" v-if="selectedService !== null">⬅</BaseButtonMag>
+                            <br>
                             <span class="paragraph">Hier sind unsere Dienstleistungen:</span>
                             <br>
                             <br>
-                            <BaseButtonBlue @click="Popup = !Popup" class="services_button relative"><span v-if="selectedService !== null"  class="paragraph text_break" >{{ selectedService.title }}</span><span v-if="selectedService === null" class="subtitle">Wählen Sie eine Dienstleistung  +</span>
+                            <BaseButtonBlue @click="Popup = !Popup" class="services_button relative"><span v-if="selectedService !== null"  class="paragraph text_break" >{{ selectedService.title }}</span><span v-if="selectedService === null" class="subtitle">Wählen Sie eine Methode +</span>
                             <div class="btn_message left" v-if="selectedService === null">
                                 <IconArrow class="arrow"></IconArrow>
                                 <span class="paragraph  magenta">Wählen Sie eine Dienstleistung,
@@ -264,6 +271,9 @@ export default{
       this.selectedService = service;
       this.Popup = false; 
     },
+    handleBehandlungstechnikenClick() {
+      this.selectedService = null;
+    },
 },
 created() {
 
@@ -380,6 +390,13 @@ a{
 }
 .paragraph{
     line-height: inherit;
+}
+.btn_back{
+    display: block;
+    width: fit-content;
+    /* position: sticky;
+    top: 150px; */
+    color: #E2097F ;
 }
 
 @media (max-width:990px){
