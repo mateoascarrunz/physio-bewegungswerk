@@ -2,7 +2,7 @@
 <template>
         <div class="grid_container padding_null">
     <BaseBox class="container_flex center grid-col-2 transition-3" v-motion-fade-visible-once>
-        <span class="title bold blue z-1">Unsere Standort</span>
+        <span class="title bold blue z-1">Unser Standort</span>
         <br>
         <span class="paragraph z-1">Bergstrasse 3, 8625 Gossau</span>
         <br>
