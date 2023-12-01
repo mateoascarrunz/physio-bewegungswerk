@@ -9,6 +9,14 @@
 import TheHero from '../components/home/TheHero.vue';
 import HomeContainer from '../components/home/HomeContainer.vue';
   export default {
+
+    metaInfo: {
+    title: 'Physio Bewegungswerk in Gossau',
+    meta: [
+      { name: 'description', content: 'Bleib beweglich. Vom Traum zur Realität: Unsere eigene Praxis - Eine Reise von 10 Jahren Zusammenarbeit' },
+    ]
+    },
+
     components:{
 TheHero,
 HomeContainer

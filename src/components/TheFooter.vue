@@ -22,7 +22,6 @@
                 <RouterLink class="nav-link" to="/behandlungstechniken"><span class="info block links" >Unsere Behandlungstechniken</span> </RouterLink>
                 <RouterLink class="nav-link" to="/uberuns"><span class="info block links" >Über uns</span></RouterLink>
                     <RouterLink class="nav-link" to="/news"><span class="info block links" >News</span></RouterLink>
-                   <a href="https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg" target="_blank"><span class="info block links" >Termin vereinbaren</span></a>
                 </div>
                 </div>
                 <div class="col-lg-4 center">
@@ -30,14 +29,15 @@
                    <span class="subtitle bold block">Support </span>
                    <RouterLink class="nav-link" to="/kontakt"> <span class="info block links" >Kontakt</span></RouterLink>
                    <RouterLink class="nav-link" to="/faq"> <span class="info block links" >FAQ</span></RouterLink>
+                   <a href="https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg" target="_blank"><span class="info block links" >Termin vereinbaren</span></a>
                   <a href="https://data.physio-bewegungswerk.ch/admin/" target="_blank"><span class="info block links" >Admin</span></a>
 
                 </div>
                 </div>
-                <div class="col-lg-12 center">
-                    <span class="info"> <span class="bold">Öffnungszeiten: Mo-Fr</span> 8-18 Uhr -</span>
+                <!-- <div class="col-lg-12 center">
+                    <span class="info"> <span class="bold">Termine nach Vereinbarung </span>-</span>
                     <span class="info"> Parkplätze vor der Praxis vorhanden </span>
-                </div>
+                </div> -->
                 <div class="col-lg-12 info_footer">
                     <hr class="blue">
                     <div class="row">
@@ -97,7 +97,7 @@ text-decoration: underline;
 }
 hr{
     opacity: 0.5;
-    margin-top: 0px;
+    margin-top: 50px;
 }
 .flex_mobile_lastlinks{
     display: flex;
@@ -112,9 +112,6 @@ hr{
 }
 .links{
     margin-right: 0px;
-}
-.info_footer{
-    margin-top: 50px;
 }
 .flex_mobile_lastlinks{
     display: flex;

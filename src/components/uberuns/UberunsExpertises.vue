@@ -14,7 +14,7 @@
         <span class="paragraph blue bold">Wertschätzung</span>
         <br>
         <div class="left">
-            <span class="info blue">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir kreativ auf die individuellen Ziele unserer Patienten eingehen.</span>
+            <span class="info blue">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir auf die individuellen Ziele unserer Patienten eingehen.</span>
         </div>
     </div>
 <BaseButtonBlue @click="popup1 = !popup1" v-if="viewportWidth < 800" class=" icon icon_1 margin_button"><span class="info">Wertschätzung</span></BaseButtonBlue>

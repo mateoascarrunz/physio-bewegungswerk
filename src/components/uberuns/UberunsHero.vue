@@ -6,13 +6,15 @@
                 <br>
                 
                 <div class="left">
-<span class="paragraph"> In unserer Therapiepraxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel, da wir individuell angepasste Behandlungspläne entwickeln, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen, um gemeinsam Strategien zu erarbeiten, die darauf abzielen, die gewünschten Ergebnisse zu erreichen.
+<span class="paragraph"> In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel.
+Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind.
+Wir arbeiten eng mit unseren Patienten zusammen. um gemeinsam Strategien zu gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen.
 <br>
 <br>
 Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Das Hauptziel ist es, langfristige Verbesserungen im Wohlbefinden unserer Patienten zu erreichen.
 <br>
 <br>
-Wir legen grossen Wert darauf, dass wir jeden unserer Patienten respektvoll und individuell behandeln, und wir setzen uns dafür ein, maßgeschneiderte Lösungen für ihre speziellen Bedürfnisse anzubieten.<br>
+Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer Einzigartigkeit zu behandeln. Wir engagieren uns dafür, individuell angepasste Lösungen für ihre spezifischen Bedürfnisse bereitzustellen.
 <br></span>
 <div class="btn_container">
   <div v-if="jobs.length !== 0">

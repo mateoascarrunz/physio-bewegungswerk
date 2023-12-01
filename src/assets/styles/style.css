@@ -7,6 +7,9 @@
 a{
   color: inherit;
 }
+.mag_btn{
+  background-color: #E2097F !important;
+}
 .popup-open {
   overflow: hidden;
 }

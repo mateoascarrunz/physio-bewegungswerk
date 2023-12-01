@@ -34,7 +34,7 @@
         <ul class="navbar-nav navbar-termin">
           <li class="nav-item-contact ">
             <!-- link to software -->
-            <BaseButtonMag type="button" class="nav-link  btn_magenta" @click="goToLink()">Termin vereinbaren
+            <BaseButtonMag type="button" class="nav-link mag_btn white  btn_magenta" @click="goToLink()">Termin vereinbaren
             </BaseButtonMag>
           </li>
         </ul>
