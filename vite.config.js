@@ -1,9 +1,7 @@
-import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import ViteSitemap from 'vite-plugin-sitemap';
-
 
 const paths = [
   { path: '/', lastmod: new Date(), priority: 1.0, changefreq: 'yearly' },
@@ -12,6 +10,7 @@ const paths = [
   { path: '/news', lastmod: new Date(), priority: 0.6, changefreq: 'monthly' },
   { path: '/behandlungstechniken', lastmod: new Date(), priority: 0.7, changefreq: 'yearly' },
 ];
+console.log('Paths:', paths);
 
 export default defineConfig({
   plugins: [
@@ -22,20 +21,19 @@ export default defineConfig({
         },
       },
     }),
+    ViteSitemap({
+      baseUrl: 'https://www.physio-bewegungswerk.ch',
+      paths: paths,
+    }),
   ],
   build: {
     rollupOptions: {
-      plugins: [
-        ViteSitemap({
-          baseUrl: 'https://www.physio-bewegungswerk.ch',
-          paths: paths,
-        }),
-      ],
+      plugins: [],
     },
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': path.resolve(__dirname, 'src'),
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
     },
   },

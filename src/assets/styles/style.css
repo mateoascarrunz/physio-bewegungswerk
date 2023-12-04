@@ -164,7 +164,7 @@ span{
 }
 @media(max-width:990px){
   .mobil-nowhite{
-    color: inherit !important;
+    color: #3F63A7!important;
   }
 }
 .magenta{

@@ -6,7 +6,7 @@
                 <span class="megatitle white block bold">Vereinbaren Sie gerne online einen Termin mit uns</span>
                 <br>
                 <br>
-                <BaseButtonMag class="mag_btn"> <span class="white mobil-nowhite" @click="goToLink()">Termin vereinbaren</span>
+                <BaseButtonMag class="mag_btn"> <span class="white" @click="goToLink()">Termin vereinbaren</span>
                 </BaseButtonMag>
                 <br>
             </div>

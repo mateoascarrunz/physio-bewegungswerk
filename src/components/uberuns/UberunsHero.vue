@@ -20,7 +20,7 @@ Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer E
   <div v-if="jobs.length !== 0">
 <BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue></div>
 <div>
-<RouterLink class="nav-link" to="/faq"> <BaseButtonBlue class="margin_left">FAQ</BaseButtonBlue></RouterLink></div>
+<RouterLink class="nav-link" to="/faq"> <BaseButtonBlue>FAQ</BaseButtonBlue></RouterLink></div>
 </div>
 <br><br> 
                 </div>
@@ -84,7 +84,7 @@ justify-content: flex-end;
 }
 .btn_container{
 display: flex;
-
+margin-top: 50px;
 justify-content: space-evenly
     }
 .img_hero_uberuns::before {    
