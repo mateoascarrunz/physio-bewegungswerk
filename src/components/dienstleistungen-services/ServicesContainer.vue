@@ -1,7 +1,7 @@
 
 <template>
 <BasePageTransition></BasePageTransition>
-    <DropdownMenu v-if="Popup"> 
+    <DropdownMenu v-if="Popup"  @closePopup="closeDropdown"> 
     <div  class="dropdown_button " v-for="service in services"  :key="service.title">
         <BaseButtonBlue  @click="selectService(service)" >{{service.title}}</BaseButtonBlue>
         
@@ -83,10 +83,12 @@ um mehr zu erfahren</span>
 <script>
 import DropdownMenu from  './DropdownMenu.vue'
 import IconArrow from '../icon/IconArrow.vue';
+import BaseCloseButton from '../base/BaseCloseButton.vue'
 export default{
     components:{
         DropdownMenu,
-        IconArrow
+        IconArrow,
+        BaseCloseButton
     },
     data(){
         return{
@@ -259,13 +261,29 @@ export default{
         `Darüber hinaus beeinflusst das Kinesiotape die sensorische Wahrnehmung der Haut, was dem Körper helfen kann, auf Verletzungen oder Beschwerden zu reagieren. Kinesiotape wird bei verschiedenen Zuständen eingesetzt, einschließlich Muskelverletzungen, Gelenkschmerzen und Überlastungssyndromen, und kann auch zur Verbesserung der sportlichen Leistung verwendet werden.`,],
                    img:'/img_services_kinesio.jpg', 
                 },
+                {
+                    id:'14',
+                   title:'Dry Needling',
+                   description: [
+                   `<strong>Dry Needling – Präzise Behandlung myofaszialer Triggerpunkte</strong>`,
+
+    `Dry Needling ist eine evidenzbasierte, invasive Technik zur gezielten Behandlung myofaszialer Triggerpunkte und faszialer Dysfunktionen. Dabei werden sterile, feine Einwegnadeln direkt in die hyperirritablen Muskelareale eingeführt, um pathologische Spannungen zu reduzieren, die lokale Durchblutung zu verbessern und neurophysiologische Regulationsmechanismen anzustoßen.`,
+    `Diese Methode findet insbesondere Anwendung bei muskuloskelettalen Beschwerden wie chronischen myofaszialen Schmerzsyndromen, Bewegungseinschränkungen oder funktionellen Störungen des Bewegungsapparats. Dry Needling unterscheidet sich von der traditionellen Akupunktur durch seinen anatomischen Fokus und die gezielte Intervention in gestörtes Muskelgewebe.`,
+    `Herr Dominik Geissberger gewährleistet eine präzise Diagnostik und individuell angepasste Behandlung – für eine nachhaltige Linderung von Beschwerden und eine Verbesserung der Funktionalität des Bewegungsapparats.`
+],
+
+                   img:'/img_services_dry_needling.jpg', 
+                },
 
 
             ]
         }
     },
     methods:{
-
+        closeDropdown(){
+            console.log('emited close was called');
+            this.Popup = false;
+        },
     
     selectService(service) {
       this.selectedService = service;

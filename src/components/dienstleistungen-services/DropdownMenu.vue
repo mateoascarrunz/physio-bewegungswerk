@@ -1,8 +1,9 @@
 <template>
 
     <div class="dropdown_container">
-       
-        <div class="menu">
+ 
+        <div class="menu parent">
+            <BaseCloseButton @click="emitClose" ></BaseCloseButton>
             <span class="title blue">Behandlungstechniken</span>
         <br>
         <slot></slot>
@@ -11,7 +12,17 @@
 
 </template>
 <script>
+import BaseCloseButton from '../base/BaseCloseButtonSticky.vue'
+
 export default{
+    components:{
+        BaseCloseButton
+    },
+    methods: {
+    emitClose() {
+      this.$emit('closePopup');
+    },
+  },
     mounted() {
     document.body.classList.add('scroll-out');
   },
@@ -43,17 +54,25 @@ export default{
     flex-wrap: nowrap;
     overflow-y: scroll;
     width: 100%;
+    max-width: 900px;
+    max-height: 800px;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    padding-top: 180px;
+    background-color: rgba(255, 255, 255, 0.491);
+position: relative;
+    margin-top:50px;
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 20px;
 
 }
 @media(max-width:990px){
     .menu{
-
-    padding-top: 160px;
+        border:none;
+        background-color: transparent;
+        box-shadow:none;
+    margin-top: 160px;
 
 }   
 }</style>
