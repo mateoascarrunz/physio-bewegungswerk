@@ -110,11 +110,11 @@
           </div>
         </div>
 
-        <img :class="{ 'active': isMaritHovered }" class="img_marit" src="../../assets/images/hero_img_physio_marit.png"
+        <img :class="{ 'active': isMaritHovered }" class="img_marit" src="../../assets/images/hero_img_physio_marit.webp"
           alt="">
 
         <img :class="{ 'active': isDominikHovered }" class="img_dominik"
-          src="../../assets/images/hero_img_physio_dominik.png" alt="">
+          src="../../assets/images/hero_img_physio_dominik.webp" alt="">
 
       </div>
       <div class="text_hero_container">

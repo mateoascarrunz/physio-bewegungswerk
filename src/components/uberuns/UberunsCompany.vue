@@ -40,7 +40,7 @@ justify-content: center;
 }
 .img_company_uberuns::before {    
     content: '';
-    background-image: url(../../assets/images/img_physio_team.png);
+    background-image: url(../../assets/images/img_physio_team.webp);
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -48,7 +48,7 @@ justify-content: center;
       right: 0px;
       bottom: 0px;
       left: 0px;
-    opacity: 0.5;
+    opacity: 0.8;
     border-radius: 40px;
     z-index: -1;
     

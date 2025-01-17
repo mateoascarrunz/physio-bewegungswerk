@@ -89,7 +89,7 @@ justify-content: space-evenly
     }
 .img_hero_uberuns::before {    
     content: '';
-    background-image: url(../../assets/images/img_physio_team2.png);
+    background-image: url(../../assets/images/img_physio_team2.webp);
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -97,7 +97,7 @@ justify-content: space-evenly
       right: 0px;
       bottom: 0px;
       left: 0px;
-    opacity: 0.5;
+    opacity: 0.8;
     border-radius: 40px;
     z-index: -1;
     
