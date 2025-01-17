@@ -27,6 +27,7 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/kontakt" @click="toggleMobileMenu"><span class="" aria-current="page"
                 href=""> Kontakt </span>
+                
             </RouterLink>
           </li>
 
