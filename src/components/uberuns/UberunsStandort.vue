@@ -12,14 +12,27 @@
         <BaseButtonBlue @click="PopupPhoto = !PopupPhoto">Impressionen</BaseButtonBlue>
     </BaseBox>
 </div>
-<BasePopUp v-if="PopupPhoto"  class="center">
+<BasePopUp v-if="PopupPhoto" theheight="80vh"  class="center">
     <BaseCloseButton @click="PopupPhoto = !PopupPhoto">
         </BaseCloseButton>
         <span class="title blue title_popup">Unser Standort</span>
         <div class="flex ">
           
-        <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
-                    <swiper-slide class="swiper_slide" >
+        <!-- <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
+                                <swiper-slide class="swiper_slide" >
+<img class="office_photo" src="../../assets/images/img_standort_7.webp" alt="">
+                    </swiper-slide>
+                                        <swiper-slide class="swiper_slide" >
+<img class="office_photo vertical" src="../../assets/images/img_standort_8.webp" alt="">
+                    </swiper-slide>
+                                        <swiper-slide class="swiper_slide" >
+<img class="office_photo vertical" src="../../assets/images/img_standort_9.webp" alt="">
+                    </swiper-slide>
+                                        <swiper-slide class="swiper_slide" >
+<img class="office_photo" src="../../assets/images/img_standort_10.webp" alt="">
+                    </swiper-slide>        
+            
+            <swiper-slide class="swiper_slide" >
 <img class="office_photo" src="../../assets/images/img_standort_2.jpg" alt="">
                     </swiper-slide>
 
@@ -39,7 +52,23 @@
 <img class="office_photo" src="../../assets/images/img_standort_6.jpg" alt="">
                     </swiper-slide>
 
-                </swiper-container>
+                </swiper-container> -->
+                <swiper-container
+  :slides-per-view="1"
+  :speed="500"
+  :loop="true"
+  class="swiper_container"
+  :navigation="true"
+  :pagination="true"
+  space-between="50px"
+>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_7.webp');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_8.webp');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_9.webp');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_10.webp');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_5.jpg');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_6.jpg');"></swiper-slide>
+</swiper-container>
             </div>
 </BasePopUp>
 </template>
@@ -80,8 +109,14 @@ export default{
     overflow: hidden;
     margin-top: 20px;
     z-index: 3;}
-.swiper_slide{
-overflow: hidden;
+
+.swiper_slide {
+  width: 100%;
+  height: 100%;
+  background-size: contain; 
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
 }
 .container_flex{
     display: flex;
@@ -109,6 +144,7 @@ overflow: hidden;
     
 
 }
+
 .office_photo{
    width: 100%;
    position: absolute;

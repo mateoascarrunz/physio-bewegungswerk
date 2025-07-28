@@ -38,7 +38,7 @@ export default {
     z-index: 3;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 100px 50px 50px 50px;
+    padding: 150px 50px 50px 50px;
     display: flex;
     align-items: center
 
