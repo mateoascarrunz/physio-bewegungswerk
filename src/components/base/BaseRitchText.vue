@@ -21,12 +21,11 @@
   };
   </script>
 
-  <style>
-
-#new_container p img{
+<style scoped>
+:deep(#news_container p img) {
   margin-top: 50px;
   width: 100%;
-margin-bottom: 20px;
-border-radius: 20px;
-}</style>
-  
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+</style>
