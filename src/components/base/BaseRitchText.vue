@@ -1,5 +1,5 @@
 <template>
-    <span v-html="renderedHTML" class="news_container"></span>
+    <span v-html="renderedHTML" id="news_container"></span>
   </template>
   
   <script>
@@ -23,7 +23,7 @@
 
   <style>
 
-.new_container img{
+#new_container img{
   margin-top: 50px;
   width: 100%;
 margin-bottom: 20px;
