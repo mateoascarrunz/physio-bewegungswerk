@@ -21,8 +21,8 @@
   };
   </script>
 
-<style scoped>
-:deep(#news_container p img) {
+<style>
+#news_container img {
   margin-top: 50px;
   width: 100%;
   margin-bottom: 20px;
