@@ -23,7 +23,7 @@
 
   <style>
 
-#new_container img{
+#new_container p img{
   margin-top: 50px;
   width: 100%;
 margin-bottom: 20px;
