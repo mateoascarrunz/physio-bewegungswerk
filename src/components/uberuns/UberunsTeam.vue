@@ -1,5 +1,5 @@
 <template>
-    <BasePopUp v-if="popup">
+    <BasePopUp v-if="popup && selectedTeam">
         <BaseCloseButton @click="popup = !popup">
         </BaseCloseButton>
         <div class="container scroll">
@@ -31,14 +31,14 @@
                                 
                                 <div class="info_team">
                                     
-                                <span class="info"><IconDiploma/> {{ selectedTeam.attributes.diploma }}</span>
-                                <span class="info"><IconLanguages/> {{ selectedTeam.attributes.languages }}</span>
+                                <span v-if="selectedTeam.attributes.diploma " class="info"><IconDiploma/> {{ selectedTeam.attributes.diploma }}</span>
+                                <span v-if="selectedTeam.attributes.languages" class="info"><IconLanguages/> {{ selectedTeam.attributes.languages }}</span>
                             </div>
                                 <br>
                                 <br>
                                 <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                                    @click="collapse = !collapse">
+                                    @click="collapse = !collapse" v-if="selectedTeam.attributes.education">
                                     <span> Aus- und Weiterbildungen:</span>
                                     <span class="icon blue title " v-show="!collapse">+</span>
                                     <span class="icon icon2 blue title" v-show="collapse">-</span>
@@ -57,13 +57,13 @@
                                 <br>
                                 <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample2" aria-expanded="false"
-                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2">
+                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2" v-if="selectedTeam.attributes.specialties">
                                     <span> Therapeutische Spezialgebiete:</span>
                                     <span class="icon blue title " v-show="!collapse2">+</span>
                                     <span class="icon icon2 blue title" v-show="collapse2">-</span>
                                 </BaseButtonBlue>
 
-                                <div class="collapse" id="collapseExample2">
+                                <div class="collapse" id="collapseExample2" v-if="">
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
