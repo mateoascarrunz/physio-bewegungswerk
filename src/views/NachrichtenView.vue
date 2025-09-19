@@ -1,8 +1,8 @@
 <template>
-<NachrichtenContainer/>
+<PrivatContainer/>
 </template>
 <script>
-import NachrichtenContainer from '../components/nachrichten/NachrichtenContainer.vue';
+import PrivatContainer from '../components/private/privateContainer.vue';
 export default{
     metaInfo: {
     title: 'News - Physio Bewegungswerk',
@@ -11,6 +11,6 @@ export default{
     ]
     },
     components:{
-        NachrichtenContainer
+        PrivatContainer
     }
 }</script>

@@ -63,7 +63,7 @@
                                     <span class="icon icon2 blue title" v-show="collapse2">-</span>
                                 </BaseButtonBlue>
 
-                                <div class="collapse" id="collapseExample2" v-if="">
+                                <div class="collapse" id="collapseExample2" v-if="selectedTeam.attributes.specialties">
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
@@ -94,7 +94,7 @@
             </div>
         </div>
     </BasePopUp>
-    <div class="grid_container padding_null" > 
+    <div class="grid_container padding_null" v-if="teams"  > 
         <BaseBox class="center grid-col-2">
             <span class="title bold blue">Lernen Sie unser Team kennen</span>
             <br>

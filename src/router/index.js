@@ -43,6 +43,13 @@ const router = createRouter({
       component: () => import('../views/NachrichtenView.vue'),
    
     },
+        {
+      path: '/private',
+      name: 'private',
+
+      component: () => import('../views/PrivateView.vue'),
+   
+    },
     {
       path: '/faq',
       name: 'faq',

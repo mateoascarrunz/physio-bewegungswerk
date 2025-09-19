@@ -1,6 +1,6 @@
 <template>
   <!-- Navbar-->
-  <nav class="sticky-top  navbar navbar-expand-lg flex-lg-nowrap flex-wrap">
+  <nav class="sticky-top  navbar navbar-expand-xl flex-lg-nowrap flex-wrap">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" to="/" @click="toggleMobileMenu"><img style="width: 75%;" src="../assets/images/physio_icon.svg"
           alt="Physio icon"></Routerlink>
@@ -16,6 +16,10 @@
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/behandlungstechniken" @click="toggleMobileMenu" > Unsere Behandlungstechniken
+            </RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/private" @click="toggleMobileMenu" > Private Physiotherapie
             </RouterLink>
           </li>
           <li class="nav-item">

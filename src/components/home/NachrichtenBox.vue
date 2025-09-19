@@ -27,7 +27,7 @@
     </div>
   </BasePopUp>
 
-  <div class="grid_container padding_null">
+  <div class="grid_container padding_null" v-if="latestNews.length ">
     <BaseBox class="grid-col-2 center" v-motion-fade-visible-once>
       <span class="title bold blue">News</span>
       <div class="news_container">
