@@ -8,6 +8,10 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+    "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
   "dependencies": {
     "@lottiefiles/vue-lottie-player": "^1.1.0",
     "@popperjs/core": "^2.11.8",
