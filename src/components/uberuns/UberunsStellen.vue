@@ -13,7 +13,7 @@
 </template>
 <script>
 import BaseStelleBox from '../base/BaseStelleBox.vue';
-import axios from 'axios';
+import { fetchJobs } from '@/services/cms';
 export default{
 
     components:{
@@ -25,10 +25,9 @@ jobs:[],
         }
     },
     mounted() {
-        axios.get('https://strapi-physio-app.onrender.com/api/jobs')
-            .then(response => {
-                this.jobs = response.data.data;
-            });
+        fetchJobs().then((jobs) => {
+      this.jobs = jobs;
+    });
     },
 }
 </script>

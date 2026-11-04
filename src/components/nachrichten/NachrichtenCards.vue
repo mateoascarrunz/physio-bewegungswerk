@@ -55,7 +55,7 @@
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BasePopUp from '../base/BasePopUp.vue';
-import axios from 'axios';
+import { fetchNews } from '@/services/cms';
 import BaseRitchText from '../base/BaseRitchText.vue';
 
 export default {
@@ -74,8 +74,8 @@ export default {
     };
   },
   mounted() {
-    axios.get('https://strapi-physio-app.onrender.com/api/news-items?populate=*').then((response) => {
-      this.news = response.data.data;
+    fetchNews().then((news) => {
+      this.news = news;
     });
 
     // Add a resize event listener to update maxWordsForDescription on window resize

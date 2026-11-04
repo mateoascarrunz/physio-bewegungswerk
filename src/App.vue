@@ -23,7 +23,7 @@ import LogoAnimationIntro from './components/LogoAnimationIntro.vue';
 <script>
 import { register } from 'swiper/element/bundle';
 register();
-import axios from 'axios';
+import { fetchBanners } from '@/services/cms';
 export default {
   provide() {
     return {
@@ -38,7 +38,6 @@ export default {
     return {
 
       bannerMessage: [],
-      partnerImages: [],
       showComponent: true,
       opacity:1,
 
@@ -46,18 +45,9 @@ export default {
     };
   },
   mounted() {
-    axios.get('https://strapi-physio-app.onrender.com/api/banners')
-      .then(response => {
-        this.bannerMessage = response.data.data;
-      });
-
-    axios.get('https://strapi-physio-app.onrender.com/api/partners?populate=*')
-      .then(response => {
-        this.partnerImages = response.data.data;
-      })
-      .catch(error => {
-        console.error('Error fetching partner images:', error);
-      });
+    fetchBanners().then((banners) => {
+      this.bannerMessage = banners;
+    });
        setTimeout(() => {
             this.opacity = 0;
                 setTimeout(() => {

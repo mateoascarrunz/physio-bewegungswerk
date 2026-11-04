@@ -127,7 +127,7 @@ import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
-import axios from 'axios';
+import { fetchTeams } from '@/services/cms';
 export default {
     
     components: {
@@ -158,12 +158,9 @@ export default {
     this.handleWindowResize();
   },
     mounted() {
-        axios.get('https://strapi-physio-app.onrender.com/api/teams?populate=*')
-            .then(response => {
-        
-                this.teams = response.data.data;
-
-            });
+        fetchTeams().then((teams) => {
+      this.teams = teams;
+    });
     },
 
 beforeDestroy() {

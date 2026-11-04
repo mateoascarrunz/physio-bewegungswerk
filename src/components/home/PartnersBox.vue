@@ -28,7 +28,7 @@
 
 <script>
 import { Navigation, Autoplay } from 'swiper/modules';
-import axios from 'axios';
+import { fetchPartners } from '@/services/cms';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
 export default {
@@ -62,14 +62,9 @@ export default {
     };
   },
   mounted() {
-    // Make the axios request to fetch partner images here
-    axios.get('https://strapi-physio-app.onrender.com/api/partners?populate=*')
-      .then(response => {
-        this.partnerImages = response.data.data;
-      })
-      .catch(error => {
-        console.error('Error fetching partner images:', error);
-      });
+    fetchPartners().then((partners) => {
+      this.partnerImages = partners;
+    });
   },
   computed: {
     computedSlidesPerView() {

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { fetchNews } from '@/services/cms';
 import BaseButtonMag from '../base/BaseButtonMag.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
@@ -81,8 +81,8 @@ export default {
     };
   },
   mounted() {
-    axios.get('https://strapi-physio-app.onrender.com/api/news-items?populate=*').then((response) => {
-      this.news = response.data.data;
+    fetchNews().then((news) => {
+      this.news = news;
     });
     window.addEventListener('resize', this.updateMaxWordsForDescription);
     this.updateMaxWordsForDescription();

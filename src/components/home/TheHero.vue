@@ -97,7 +97,11 @@
   <div class="hero ">
     <BaseBox class=" box_hero center_mini_mobile" :class="{'center': mobile822}" >
       <div class="img_contaner">
-        <img class="img_hero_background" src="../../assets/images/hero_img_physio_background_fadeout_2.png" alt="">
+        <picture>
+          <source type="image/avif" srcset="../../assets/images/hero/hero-team-828.avif 828w, ../../assets/images/hero/hero-team-1280.avif 1280w, ../../assets/images/hero/hero-team-1920.avif 1920w, ../../assets/images/hero/hero-team-2560.avif 2560w" sizes="(max-width: 699px) 170vw, (max-width: 990px) 150vw, 110vw">
+          <source type="image/webp" srcset="../../assets/images/hero/hero-team-828.webp 828w, ../../assets/images/hero/hero-team-1280.webp 1280w, ../../assets/images/hero/hero-team-1920.webp 1920w, ../../assets/images/hero/hero-team-2560.webp 2560w" sizes="(max-width: 699px) 170vw, (max-width: 990px) 150vw, 110vw">
+          <img class="img_hero_background" src="../../assets/images/hero/hero-team-1280.webp" alt="" fetchpriority="high" decoding="async">
+        </picture>
         <div class="marit_hover_container">
           <div class="marit_hover" @mouseover="isMaritHovered = true" @mouseout="isMaritHovered = false">
             <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupById(1)">Marit Hesse</BaseButtonBlue>
@@ -144,7 +148,7 @@ import IconLinkedIn from '../icon/IconLinkedIn.vue';
 import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
-import axios from 'axios';
+import { fetchTeams } from '@/services/cms';
 export default {
       
   components: {
@@ -170,13 +174,9 @@ export default {
     };
   },
   mounted() {
-        axios.get('https://strapi-physio-app.onrender.com/api/teams?populate=*')
-            .then(response => {
-                
-        
-                this.teams = response.data.data;
-
-            });
+        fetchTeams().then((teams) => {
+      this.teams = teams;
+    });
     },
   created() {
     // Add an event listener to monitor window resize

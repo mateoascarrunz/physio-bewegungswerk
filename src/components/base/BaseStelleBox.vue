@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { fetchJobs } from '@/services/cms';
 export default{
     data(){
         return{
@@ -23,10 +23,9 @@ jobs:[],
         }
     },
     mounted() {
-        axios.get('https://strapi-physio-app.onrender.com/api/jobs')
-            .then(response => {
-                this.jobs = response.data.data;
-            });
+        fetchJobs().then((jobs) => {
+      this.jobs = jobs;
+    });
     },
 }</script>
 
