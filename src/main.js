@@ -9,17 +9,14 @@ import BaseButtonMag from './components/base/BaseButtonMag.vue';
 import BasePopUp from './components/base/BasePopUp.vue';
 import BaseCloseButton from './components/base/BaseCloseButton.vue';
 import LoadScript from 'vue-plugin-load-script';
-import vueCustomElement from 'vue-custom-element';
 import BasePageTransition from './components/base/BasePageTransition.vue';
 import { MotionPlugin } from '@vueuse/motion'
 
-// Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 const app = createApp(App)
 
 app.use(router)
 app.use(LoadScript)
-app.use(vueCustomElement)
 app.use(MotionPlugin)
 
 app
