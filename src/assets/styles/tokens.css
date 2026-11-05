@@ -106,13 +106,19 @@
   --shadow-md: 0 2px 6px rgb(0 28 84 / 0.08), 0 18px 40px rgb(0 28 84 / 0.12);
   --shadow-lg: 0 6px 16px rgb(0 28 84 / 0.1), 0 32px 80px rgb(0 28 84 / 0.22);
 
-  /* Motion */
+  /* Motion: one family of curves and a few durations, so every movement feels related.
+     ease-out-expo starts quickly and settles slowly; it carries reveals and expansions. */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-instant: 120ms;
   --duration-fast: 160ms;
   --duration-base: 240ms;
   --duration-slow: 420ms;
   --duration-slower: 700ms;
+  --duration-story: 900ms;
+  --stagger: 70ms;
+  --reveal-distance: 1.75rem;
 
   /* Focus */
   --focus-color: var(--blue-600);
@@ -120,6 +126,6 @@
   --focus-offset: 3px;
 
   /* Layout */
-  --header-h: clamp(3.75rem, 3.3rem + 1.2vw, 4.5rem);
-  --header-offset: clamp(0.5rem, 1vw, 1rem);
+  --header-h: clamp(3.5rem, 3.35rem + 0.4vw, 3.75rem);
+  --header-offset: clamp(0.5rem, 0.9vw, 0.75rem);
 }

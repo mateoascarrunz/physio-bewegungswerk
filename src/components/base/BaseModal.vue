@@ -1,15 +1,16 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import BaseIconButton from './BaseIconButton.vue';
+import { isViewTransitionRunning, notifyModalSettled } from '@/services/viewTransition';
 
 /*
  * The single modal foundation for the site, built on the native <dialog>.
  * showModal() supplies focus containment, an inert background, top-layer
  * stacking and focus restoration; this component adds the entrance and exit.
  */
-// A little longer than the entrance itself, so the class never cuts it short.
-const OPEN_DURATION_MS = 320;
-const CLOSE_DURATION_MS = 180;
+// Longer than any entrance, so the class never cuts one short.
+const OPEN_DURATION_MS = 640;
+const CLOSE_DURATION_MS = 200;
 
 const props = defineProps({
   open: { type: Boolean, default: false },
@@ -23,6 +24,10 @@ const props = defineProps({
   size: { type: String, default: 'md' },
   closeLabel: { type: String, default: 'Schliessen' },
   hideClose: { type: Boolean, default: false },
+  /** view-transition-name for the panel, so it can grow out of the card that opened it. */
+  surfaceName: { type: String, default: null },
+  /** Viewport point a full-screen dialog grows out of, as "x y". */
+  revealOrigin: { type: String, default: null },
 });
 
 const emit = defineEmits(['close', 'closed']);
@@ -44,10 +49,12 @@ async function show() {
   clearTimeout(closeTimer);
   clearTimeout(openTimer);
   isClosing.value = false;
-  isEntering.value = true;
+  // During a view transition the browser animates the dialog, so its own entrance stays off.
+  isEntering.value = !isViewTransitionRunning();
   isRendered.value = true;
   await nextTick();
   if (dialog.value && !dialog.value.open) dialog.value.showModal();
+  notifyModalSettled();
   openTimer = setTimeout(() => {
     isEntering.value = false;
   }, OPEN_DURATION_MS);
@@ -61,12 +68,13 @@ function finishClosing() {
   isClosing.value = false;
   // The browser can close a dialog by itself, for example on a repeated Escape.
   if (props.open) emit('close');
+  notifyModalSettled();
   emit('closed');
 }
 
 function hide() {
   if (!isRendered.value) return;
-  if (prefersReducedMotion()) {
+  if (prefersReducedMotion() || isViewTransitionRunning()) {
     finishClosing();
     return;
   }
@@ -88,6 +96,12 @@ onBeforeUnmount(() => {
   clearTimeout(openTimer);
   if (dialog.value?.open) dialog.value.close();
 });
+
+// The entrance ends with the dialog's own animation, so a later resize or rotation
+// that swaps the keyframes cannot replay it. The timer only covers dialogs that never animate.
+function onAnimationEnd(event) {
+  if (event.target === dialog.value && !event.pseudoElement) isEntering.value = false;
+}
 
 function onPointerDown(event) {
   pointerStartedOnBackdrop = event.target === dialog.value;
@@ -111,10 +125,12 @@ defineExpose({ dialog });
     :class="[`modal--${variant}`, `modal--${size}`, { 'is-entering': isEntering, 'is-closing': isClosing }]"
     :aria-labelledby="labelledby || undefined"
     :aria-label="labelledby ? undefined : label"
+    :style="{ viewTransitionName: surfaceName ?? undefined, '--reveal-origin': revealOrigin ?? undefined }"
     @cancel.prevent="emit('close')"
     @close="finishClosing"
     @pointerdown="onPointerDown"
     @click="onClick"
+    @animationend="onAnimationEnd"
   >
     <BaseIconButton
       v-if="!hideClose"
@@ -164,11 +180,11 @@ defineExpose({ dialog });
 }
 
 .modal.is-closing {
-  animation: modal-out 180ms var(--ease-in-out) forwards;
+  animation: modal-out 200ms var(--ease-in-out) forwards;
 }
 
 .modal.is-closing::backdrop {
-  animation: modal-fade-out 180ms var(--ease-in-out) forwards;
+  animation: modal-fade-out 200ms var(--ease-in-out) forwards;
 }
 
 .modal--sm {
@@ -232,12 +248,13 @@ defineExpose({ dialog });
   box-shadow: none;
 }
 
+/* A full-screen dialog opens as a circle growing out of its trigger. */
 .modal--full.is-entering {
-  animation-name: modal-full-in;
+  animation: modal-reveal-in 600ms var(--ease-out-expo);
 }
 
 .modal--full.is-closing {
-  animation-name: modal-full-out;
+  animation: modal-reveal-out 200ms var(--ease-in-out) forwards;
 }
 
 @keyframes modal-in {
@@ -268,17 +285,23 @@ defineExpose({ dialog });
   }
 }
 
-@keyframes modal-full-in {
+@keyframes modal-reveal-in {
   from {
-    opacity: 0;
-    transform: translateY(-0.5rem);
+    clip-path: circle(1.375rem at var(--reveal-origin, 100% 0));
+  }
+
+  to {
+    clip-path: circle(150% at var(--reveal-origin, 100% 0));
   }
 }
 
-@keyframes modal-full-out {
+@keyframes modal-reveal-out {
+  from {
+    clip-path: circle(150% at var(--reveal-origin, 100% 0));
+  }
+
   to {
-    opacity: 0;
-    transform: translateY(-0.25rem);
+    clip-path: circle(1.375rem at var(--reveal-origin, 100% 0));
   }
 }
 

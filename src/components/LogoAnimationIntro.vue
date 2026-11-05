@@ -4,16 +4,19 @@
     class="page_intro"
     :class="{ page_intro_leaving: isLeaving }"
     @click="leave"
-    @transitionend.self="isVisible = false"
+    @transitionend.self="remove"
   >
     <div ref="logoContainer" class="logo"></div>
   </div>
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 
 const SEEN_KEY = 'introSeen';
+// Added by the inline script in index.html before the first paint, so the page
+// never shows before the intro covers it. Entrances start when it is removed.
+const PENDING_CLASS = 'intro-pending';
 const PLAYBACK_SPEED = 1.5;
 const MAX_DURATION_MS = 4000;
 const SKIP_EVENTS = ['wheel', 'touchmove', 'keydown'];
@@ -21,13 +24,13 @@ const SKIP_EVENTS = ['wheel', 'touchmove', 'keydown'];
 // player failed before the first paint, no transitionend arrives to remove it.
 const REMOVE_AFTER_MS = 600;
 
-function readSeen() {
-  try {
-    return sessionStorage.getItem(SEEN_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
+const isVisible = ref(false);
+const isLeaving = ref(false);
+const logoContainer = ref(null);
+
+let animation = null;
+let safetyTimer = null;
+let removeTimer = null;
 
 function markSeen() {
   try {
@@ -37,40 +40,31 @@ function markSeen() {
   }
 }
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isVisible = ref(!prefersReducedMotion && !readSeen());
-const isLeaving = ref(false);
-const logoContainer = ref(null);
-
-// Page entrances wait for this class, so they play as the intro lifts.
-const INTRO_ACTIVE_CLASS = 'intro-active';
-if (isVisible.value) document.documentElement.classList.add(INTRO_ACTIVE_CLASS);
-
-let animation = null;
-let safetyTimer = null;
-let removeTimer = null;
-
 function removeSkipListeners() {
   SKIP_EVENTS.forEach((event) => window.removeEventListener(event, leave));
+}
+
+function remove() {
+  isVisible.value = false;
 }
 
 function leave() {
   if (isLeaving.value) return;
   isLeaving.value = true;
-  removeTimer = setTimeout(() => {
-    isVisible.value = false;
-  }, REMOVE_AFTER_MS);
-  document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
+  document.documentElement.classList.remove(PENDING_CLASS);
   markSeen();
   clearTimeout(safetyTimer);
   removeSkipListeners();
+  removeTimer = setTimeout(remove, REMOVE_AFTER_MS);
 }
 
 onMounted(async () => {
-  if (!isVisible.value) return;
+  if (!document.documentElement.classList.contains(PENDING_CLASS)) return;
 
+  isVisible.value = true;
   SKIP_EVENTS.forEach((event) => window.addEventListener(event, leave, { passive: true }));
   safetyTimer = setTimeout(leave, MAX_DURATION_MS);
+  await nextTick();
 
   try {
     const [{ default: lottie }, { default: animationData }] = await Promise.all([
@@ -93,7 +87,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-  document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
+  document.documentElement.classList.remove(PENDING_CLASS);
   clearTimeout(safetyTimer);
   clearTimeout(removeTimer);
   removeSkipListeners();

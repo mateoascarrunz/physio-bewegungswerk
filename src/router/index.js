@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { applyPageMeta } from './pageMeta'
+import { installViewTransitions } from './viewTransitions'
+import { canUseViewTransitions } from '@/services/viewTransition'
 
 // Keeps the address as typed while showing the not found page.
 function notFound(to) {
@@ -112,7 +114,9 @@ const router = createRouter({
     // Opening a modal only changes the query, so the page must stay where it is.
     if (to.path === from.path) return to.hash ? { el: to.hash } : false;
     const position = savedPosition ?? (to.hash ? { el: to.hash } : { top: 0 });
-    // Wait for the old page to fade out, so it does not jump before it leaves.
+    // A view transition captures the old page first, so the scroll can happen at once.
+    // The fallback fade has to finish before the old page may jump.
+    if (canUseViewTransitions()) return position;
     return new Promise((resolve) => setTimeout(() => resolve(position), PAGE_LEAVE_MS));
   },
 })
@@ -120,5 +124,6 @@ const router = createRouter({
 
 
 router.afterEach(applyPageMeta)
+installViewTransitions(router)
 
 export default router

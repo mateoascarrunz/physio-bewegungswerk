@@ -368,22 +368,148 @@ main:focus {
   min-height: 100vh;
 }
 
-/* Scroll reveal: content is only hidden once the observer is attached. */
-.reveal {
-  opacity: 0;
-  transform: translateY(1rem);
+/*
+ * The logo intro covers a first visit. index.html decides before the first
+ * paint and draws this cover; it lifts itself after five seconds in case the
+ * intro never starts.
+ */
+html.intro-pending body::after {
+  content: '';
+  position: fixed;
+  z-index: 9998;
+  inset: 0;
+  background: var(--white);
+  animation: intro-cover-failsafe 1ms linear 5s forwards;
 }
 
-.reveal_visible {
+@keyframes intro-cover-failsafe {
+  to {
+    visibility: hidden;
+  }
+}
+
+/*
+ * Reveal patterns. Content is visible by default: the directive only hides an
+ * element once its observer exists, and hands it back when the motion is done.
+ */
+.reveal--rise {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+}
+
+.reveal--rise.reveal_visible {
   opacity: 1;
   transform: none;
   transition:
     opacity var(--duration-slower) var(--ease-out),
-    transform var(--duration-slower) var(--ease-out);
+    transform var(--duration-story) var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-/* Page changes stay quick so navigation never feels blocked. */
+/* Mask: the frame opens upwards while the photo settles inside it. */
+.reveal--mask {
+  clip-path: inset(24% 0 0 0 round var(--radius-lg));
+}
+
+.reveal--mask img {
+  transform: scale(1.14);
+}
+
+.reveal--mask.reveal_visible {
+  clip-path: inset(0 0 0 0 round var(--radius-lg));
+  transition: clip-path var(--duration-story) var(--ease-out-expo) var(--reveal-delay, 0ms);
+}
+
+.reveal--mask.reveal_visible img {
+  transform: none;
+  transition: transform 1300ms var(--ease-out-expo) var(--reveal-delay, 0ms);
+}
+
+/* Title: a heading rises out of its own baseline. */
+.reveal--title {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(0.45em);
+}
+
+.reveal--title.reveal_visible {
+  clip-path: inset(-0.3em -0.3em -0.4em -0.3em);
+  transform: none;
+  transition:
+    clip-path var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Assemble: the boxes of one composition arrive one after another. */
+.reveal--assemble > * {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance)) scale(0.97);
+}
+
+.reveal--assemble.reveal_visible > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slower) var(--ease-out),
+    transform var(--duration-story) var(--ease-out-expo);
+  transition-delay: calc(var(--reveal-delay, 0ms) + var(--reveal-index, 0) * var(--stagger));
+}
+
+/* Expand: a banner opens out from its centre. */
+.reveal--expand {
+  clip-path: inset(0 9% 0 9% round var(--radius-xl));
+}
+
+.reveal--expand.reveal_visible {
+  clip-path: inset(0 0 0 0 round var(--radius-xl));
+  transition: clip-path 1000ms var(--ease-out-expo) var(--reveal-delay, 0ms);
+}
+
+/*
+ * Attention: in a group of cards, the one under the pointer or keyboard focus
+ * grows a little and its neighbours step back. Transforms only, so the grid
+ * never reflows and nothing shifts.
+ */
+.attention > .attention__item {
+  transition:
+    transform var(--duration-slow) var(--ease-out-expo),
+    box-shadow var(--duration-slow) var(--ease-out);
+}
+
+.attention > .attention__item img {
+  transition:
+    transform var(--duration-slower) var(--ease-out),
+    filter var(--duration-slow) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .attention:has(> .attention__item:hover) > .attention__item:not(:hover) {
+    transform: scale(0.975);
+  }
+
+  .attention:has(> .attention__item:hover) > .attention__item:not(:hover) img {
+    filter: saturate(0.65);
+  }
+
+  .attention > .attention__item:hover {
+    z-index: 1;
+    transform: scale(1.015);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .attention:has(> .attention__item:focus-visible, > .attention__item :focus-visible)
+    > .attention__item:not(:focus-visible, :has(:focus-visible)) {
+    transform: scale(0.975);
+  }
+
+  .attention > .attention__item:is(:focus-visible, :has(:focus-visible)) {
+    z-index: 1;
+    transform: scale(1.015);
+  }
+}
+
+/* Fallback page change where the View Transitions API is missing. */
 .page-enter-active {
   transition:
     opacity var(--duration-base) var(--ease-out),
@@ -401,6 +527,93 @@ main:focus {
 
 .page-leave-to {
   opacity: 0;
+}
+
+/* View Transitions: pages hand over with a short directional move, cards grow into their detail. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-transition='page']::view-transition-old(root) {
+    animation: vt-leave 160ms var(--ease-in-out) both;
+  }
+
+  html[data-transition='page']::view-transition-new(root) {
+    animation: vt-enter 520ms var(--ease-out-expo) 110ms both;
+  }
+
+  ::view-transition-group(shared-media),
+  ::view-transition-group(shared-surface) {
+    animation-duration: 560ms;
+    animation-timing-function: var(--ease-out-expo);
+  }
+
+  ::view-transition-old(shared-media),
+  ::view-transition-new(shared-media) {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ::view-transition-old(shared-surface) {
+    animation: vt-fade-out 180ms ease both;
+  }
+
+  ::view-transition-new(shared-surface) {
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    animation: vt-fade-in 320ms ease 120ms both;
+  }
+
+  ::view-transition-group(nav-indicator) {
+    animation-duration: 460ms;
+    animation-timing-function: var(--ease-out-expo);
+  }
+}
+
+@keyframes vt-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes vt-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Drift: large editorial photos move slightly against the scroll, where the browser supports it. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .drift img {
+      scale: 1.12;
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@keyframes drift {
+  from {
+    translate: 0 -4%;
+  }
+
+  to {
+    translate: 0 4%;
+  }
 }
 
 /* Shared image hover used by every image-led card. */
@@ -441,8 +654,10 @@ main:focus {
 }
 
 @media print {
-  .reveal {
+  .reveal,
+  .reveal > * {
     opacity: 1;
+    clip-path: none;
     transform: none;
   }
 }

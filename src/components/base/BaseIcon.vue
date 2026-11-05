@@ -6,6 +6,7 @@ const ICONS = {
   'arrow-right': ['M5 12h14', 'm13 6 6 6-6 6'],
   'arrow-left': ['M19 12H5', 'm11 18-6-6 6-6'],
   'arrow-up-right': ['M7 17 17 7', 'M8 7h9v9'],
+  'arrow-up': ['M12 19V5', 'm6 11 6-6 6 6'],
   close: ['M6 6l12 12', 'M18 6 6 18'],
   plus: ['M12 5v14', 'M5 12h14'],
   check: ['M20 6 9 17l-5-5'],

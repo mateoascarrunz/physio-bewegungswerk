@@ -5,12 +5,15 @@ import BaseModal from './base/BaseModal.vue';
 import BaseButton from './base/BaseButton.vue';
 import BaseIcon from './base/BaseIcon.vue';
 import { BOOKING_URL, NAV_LINKS, PRACTICE } from '@/content/practice';
-import logoUrl from '@/assets/images/physio_logo_horizontal.svg';
+import { canUseViewTransitions } from '@/services/viewTransition';
+import iconUrl from '@/assets/images/physio_icon.svg';
 
 const DESKTOP_QUERY = '(min-width: 75rem)';
 
 const props = defineProps({
   open: { type: Boolean, default: false },
+  /** Viewport point of the button that opened the menu. */
+  origin: { type: String, default: null },
 });
 
 const emit = defineEmits(['update:open']);
@@ -35,9 +38,11 @@ function closeOnDesktop(event) {
 
 // The dialog returns focus to the menu button when it closes. After a page
 // change the new content is the better place to continue from.
-function followLink() {
+// With view transitions the menu stays until the new page replaces it, so the two
+// cross-fade; otherwise it closes straight away.
+function followLink(link) {
   hasNavigated = true;
-  close();
+  if (link.to === route.path || !canUseViewTransitions()) close();
 }
 
 function onClosed() {
@@ -63,11 +68,19 @@ onBeforeUnmount(() => desktopQuery?.removeEventListener('change', closeOnDesktop
 </script>
 
 <template>
-  <BaseModal :open="open" variant="full" label="Menü" hide-close @close="close" @closed="onClosed">
+  <BaseModal
+    :open="open"
+    variant="full"
+    label="Menü"
+    hide-close
+    :reveal-origin="origin"
+    @close="close"
+    @closed="onClosed"
+  >
     <div id="site-menu" class="menu">
       <div class="menu__bar">
         <RouterLink class="menu__logo" to="/" aria-label="Physio Bewegungswerk, zur Startseite" @click="close">
-          <img :src="logoUrl" alt="" width="738" height="189" />
+          <img :src="iconUrl" alt="" width="58" height="60" />
         </RouterLink>
         <button class="menu-toggle menu__close" type="button" aria-label="Menü schliessen" @click="close">
           <span class="menu-toggle__icon menu-toggle__icon--close" aria-hidden="true"></span>
@@ -82,7 +95,7 @@ onBeforeUnmount(() => desktopQuery?.removeEventListener('change', closeOnDesktop
               :class="{ 'is-active': isActive(link.to) }"
               :to="link.to"
               :aria-current="isActive(link.to) ? 'page' : undefined"
-              @click="followLink"
+              @click="followLink(link)"
             >
               <span>{{ link.softLabel ?? link.label }}</span>
               <BaseIcon class="menu__link-arrow" name="arrow-right" :size="22" />
@@ -131,18 +144,21 @@ onBeforeUnmount(() => desktopQuery?.removeEventListener('change', closeOnDesktop
   justify-content: space-between;
   height: calc(var(--header-h) + var(--header-offset));
   padding-block-start: var(--header-offset);
-  padding-inline: clamp(0.875rem, 1.6vw, 1.5rem) 0.5rem;
+  padding-inline: 0.625rem 0.5rem;
   background: var(--white);
 }
 
 .menu__logo {
-  display: block;
-  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
 }
 
 .menu__logo img {
   width: auto;
-  height: clamp(2.25rem, 2rem + 0.5vw, 2.625rem);
+  height: 2.125rem;
 }
 
 /* The two lines of the menu button rotate into a cross as the menu opens. */
@@ -242,14 +258,25 @@ onBeforeUnmount(() => desktopQuery?.removeEventListener('change', closeOnDesktop
 }
 
 .menu__links > li {
-  animation: menu-item-in var(--duration-slow) var(--ease-out) both;
-  animation-delay: calc(var(--i) * 24ms);
+  animation: menu-item-in var(--duration-slower) var(--ease-out-expo) backwards;
+  animation-delay: calc(120ms + var(--i) * 40ms);
 }
 
 @keyframes menu-item-in {
   from {
     opacity: 0;
-    transform: translateY(0.625rem);
+    transform: translateY(1rem);
+  }
+}
+
+/* The active page settles into its pill once the links have arrived. */
+.menu__link.is-active {
+  animation: menu-active-in var(--duration-slower) var(--ease-out-expo) 360ms backwards;
+}
+
+@keyframes menu-active-in {
+  from {
+    background-color: transparent;
   }
 }
 
@@ -257,7 +284,7 @@ onBeforeUnmount(() => desktopQuery?.removeEventListener('change', closeOnDesktop
   display: grid;
   gap: var(--space-4);
   padding-inline: clamp(0.875rem, 1.6vw, 1.5rem);
-  animation: menu-item-in var(--duration-slow) var(--ease-out) 120ms both;
+  animation: menu-item-in var(--duration-slower) var(--ease-out-expo) 300ms backwards;
 }
 
 .menu__contact {

@@ -4,16 +4,24 @@ import { useRoute } from 'vue-router';
 import BaseButton from './base/BaseButton.vue';
 import TheMobileMenu from './TheMobileMenu.vue';
 import { BOOKING_URL, NAV_LINKS } from '@/content/practice';
-import logoUrl from '@/assets/images/physio_logo_horizontal.svg';
+import iconUrl from '@/assets/images/physio_icon.svg';
 
 const route = useRoute();
 const isMenuOpen = ref(false);
+const menuOrigin = ref(null);
 const isScrolled = ref(false);
 const sentinel = ref(null);
 let observer = null;
 
 function isActive(path) {
   return route.path === path || route.path.startsWith(`${path}/`);
+}
+
+// The menu grows out of the button that opened it.
+function openMenu(event) {
+  const { left, top, width, height } = event.currentTarget.getBoundingClientRect();
+  menuOrigin.value = `${Math.round(left + width / 2)}px ${Math.round(top + height / 2)}px`;
+  isMenuOpen.value = true;
 }
 
 onMounted(() => {
@@ -31,7 +39,7 @@ onBeforeUnmount(() => observer?.disconnect());
   <header class="site-header" :class="{ 'is-scrolled': isScrolled }">
     <div class="site-header__bar">
       <RouterLink class="site-header__logo" to="/" aria-label="Physio Bewegungswerk, zur Startseite">
-        <img :src="logoUrl" alt="" width="738" height="189" />
+        <img :src="iconUrl" alt="" width="58" height="60" />
       </RouterLink>
 
       <nav class="site-nav" aria-label="Hauptnavigation">
@@ -43,6 +51,7 @@ onBeforeUnmount(() => observer?.disconnect());
               :to="link.to"
               :aria-current="isActive(link.to) ? 'page' : undefined"
             >
+              <span v-if="isActive(link.to)" class="site-nav__indicator" aria-hidden="true"></span>
               {{ link.label }}
             </RouterLink>
           </li>
@@ -62,14 +71,14 @@ onBeforeUnmount(() => observer?.disconnect());
           aria-controls="site-menu"
           :aria-expanded="isMenuOpen"
           aria-label="Menü öffnen"
-          @click="isMenuOpen = true"
+          @click="openMenu"
         >
           <span class="menu-toggle__icon" aria-hidden="true"></span>
         </button>
       </div>
     </div>
   </header>
-  <TheMobileMenu v-model:open="isMenuOpen" />
+  <TheMobileMenu v-model:open="isMenuOpen" :origin="menuOrigin" />
 </template>
 
 <style>
@@ -82,14 +91,18 @@ onBeforeUnmount(() => observer?.disconnect());
   pointer-events: none;
 }
 
+/* The header keeps its place during page transitions; only the content changes. */
 .site-header {
   position: sticky;
   z-index: 40;
   top: var(--header-offset);
   margin-block-start: var(--header-offset);
   padding-inline: var(--gutter);
+  view-transition-name: site-header;
 }
 
+/* Proportions: the vertical space around the 44px controls equals the inset of the
+   icon, so the bar reads as one even band rather than a tall floating slab. */
 .site-header__bar {
   display: flex;
   align-items: center;
@@ -97,28 +110,62 @@ onBeforeUnmount(() => observer?.disconnect());
   max-width: calc(var(--container) - 2 * var(--gutter));
   height: var(--header-h);
   margin-inline: auto;
-  padding-inline: clamp(0.875rem, 1.6vw, 1.5rem) 0.5rem;
+  padding-inline: 0.625rem 0.5rem;
   border-radius: var(--radius-pill);
-  background: rgb(255 255 255 / 0.96);
+  background: rgb(255 255 255 / 0.94);
   box-shadow: 0 0 0 1px transparent;
-  transition: box-shadow var(--duration-base) var(--ease-out);
+  transform-origin: 50% 0;
+  transition:
+    box-shadow var(--duration-slow) var(--ease-out),
+    background-color var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out-expo);
+  animation: header-in 640ms var(--ease-out-expo) backwards;
 }
 
+html.intro-pending .site-header__bar {
+  animation: none;
+}
+
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+}
+
+/* After scrolling the bar tightens and lifts. Transforms only, so nothing below it moves. */
 .is-scrolled .site-header__bar {
+  background: var(--white);
   box-shadow:
     0 0 0 1px var(--line),
     var(--shadow-sm);
+  transform: translateY(calc(var(--header-offset) * -0.5)) scale(0.985);
 }
 
 .site-header__logo {
-  display: block;
+  display: grid;
+  place-items: center;
   flex: none;
-  border-radius: var(--radius-sm);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  transition: background-color var(--duration-fast) var(--ease-out);
 }
 
 .site-header__logo img {
   width: auto;
-  height: clamp(2.25rem, 2rem + 0.5vw, 2.625rem);
+  height: 2.125rem;
+  transition: transform var(--duration-slow) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-header__logo:hover {
+    background: var(--blue-50);
+  }
+
+  .site-header__logo:hover img {
+    transform: rotate(-8deg) scale(1.05);
+  }
 }
 
 .site-nav {
@@ -134,9 +181,11 @@ onBeforeUnmount(() => observer?.disconnect());
 }
 
 .site-nav__link {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
-  height: 2.75rem;
+  height: 2.5rem;
   padding-inline: 0.875rem;
   border-radius: var(--radius-pill);
   color: var(--blue-950);
@@ -145,20 +194,46 @@ onBeforeUnmount(() => observer?.disconnect());
   letter-spacing: -0.006em;
   text-decoration: none;
   white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Hover: a soft pill grows in behind the label. */
+.site-nav__link::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--surface);
+  opacity: 0;
+  transform: scale(0.88);
   transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+/* The active pill is one named element, so page transitions slide it from link to link. */
+.site-nav__indicator {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--blue-100);
+  view-transition-name: nav-indicator;
 }
 
 .site-nav__link.is-active {
-  background: var(--blue-100);
   color: var(--blue-700);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .site-nav__link:not(.is-active):hover {
-    background: var(--surface);
     color: var(--blue-700);
+  }
+
+  .site-nav__link:not(.is-active):hover::before {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -220,7 +295,7 @@ onBeforeUnmount(() => observer?.disconnect());
   height: 2px;
   border-radius: 2px;
   background: currentColor;
-  transition: width var(--duration-base) var(--ease-out);
+  transition: width var(--duration-base) var(--ease-out-expo);
 }
 
 .menu-toggle__icon::before {
@@ -239,7 +314,7 @@ onBeforeUnmount(() => observer?.disconnect());
   }
 }
 
-/* Phones: logo, a short booking pill where it fits, and the menu. */
+/* Phones: icon, a short booking pill where it fits, and the menu. */
 @media (max-width: 47.99rem) {
   .site-header__cta-long {
     display: none;

@@ -6,13 +6,16 @@ import TheNavBar from './components/TheNavBar.vue';
 import TheFooter from './components/TheFooter.vue';
 import LogoAnimationIntro from './components/LogoAnimationIntro.vue';
 import { banners } from '@/services/cms';
+import { canUseViewTransitions } from '@/services/viewTransition';
 
 const route = useRoute();
 const router = useRouter();
 const main = ref(null);
 const isFirstRouteLoading = ref(true);
-// The first page appears at once; only moves between pages fade.
+// The first page appears at once; only moves between pages are animated, by the
+// View Transitions API where available and by a short fade elsewhere.
 const hasNavigated = ref(false);
+const usesViewTransitions = canUseViewTransitions();
 
 router.isReady().finally(() => {
   isFirstRouteLoading.value = false;
@@ -43,7 +46,8 @@ watch(
   <TheNavBar />
   <main id="main" ref="main" tabindex="-1" :class="{ main_first_load: isFirstRouteLoading }">
     <RouterView v-slot="{ Component, route: viewRoute }">
-      <Transition :name="hasNavigated ? 'page' : 'page-none'" mode="out-in">
+      <component :is="Component" v-if="usesViewTransitions" :key="viewRoute.path" />
+      <Transition v-else :name="hasNavigated ? 'page' : 'page-none'" mode="out-in">
         <component :is="Component" :key="viewRoute.path" />
       </Transition>
     </RouterView>
