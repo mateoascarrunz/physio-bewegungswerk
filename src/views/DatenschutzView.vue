@@ -84,7 +84,7 @@ E-Mail-Adresse: <p>info@physio-bewegungswerk.ch</p>
 </template>
 <style scoped>
 h1,h2,p,li{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
     
 }
 a{

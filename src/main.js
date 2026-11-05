@@ -8,16 +8,14 @@ import BaseButtonBlue from './components/base/BaseButtonBlue.vue';
 import BaseButtonMag from './components/base/BaseButtonMag.vue';
 import BasePopUp from './components/base/BasePopUp.vue';
 import BaseCloseButton from './components/base/BaseCloseButton.vue';
-import LoadScript from 'vue-plugin-load-script';
 import BasePageTransition from './components/base/BasePageTransition.vue';
-import { MotionPlugin } from '@vueuse/motion'
+import { reveal } from './directives/reveal';
 
-import * as bootstrap from 'bootstrap'
+import 'bootstrap/js/dist/collapse';
 const app = createApp(App)
 
 app.use(router)
-app.use(LoadScript)
-app.use(MotionPlugin)
+app.directive('reveal', reveal)
 
 app
   .component('BaseBox', BaseBox)
