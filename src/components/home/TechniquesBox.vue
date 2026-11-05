@@ -208,34 +208,34 @@ position: relative;
   background-image: url(../../assets/images/img_services_myofasziale.jpg);
 }
 .img2{
-  background-image: url(../../assets/images/img_services_manuelle.jpeg);
+  background-image: url(../../assets/images/img_services_manuelle.webp);
 }
 .img3{
-  background-image: url(../../assets/images/img_services_postoperative.jpeg);
+  background-image: url(../../assets/images/img_services_postoperative.webp);
 }
 .img4{
-  background-image: url(../../assets/images/img_services_mtt.jpeg);
+  background-image: url(../../assets/images/img_services_mtt.webp);
 }
 .img5{
   background-image: url(../../assets/images/img_services_lymphdrainage.jpg);
 }
 .img6{
-  background-image: url(../../assets/images/img_services_neurologische.jpeg);
+  background-image: url(../../assets/images/img_services_neurologische.webp);
 }
 .img7{
-  background-image: url(../../assets/images/img_services_elektrotherapie.jpeg);
+  background-image: url(../../assets/images/img_services_elektrotherapie.webp);
 }
 .img8{
-  background-image: url(../../assets/images/img_services_atemtherapie.jpeg);
+  background-image: url(../../assets/images/img_services_atemtherapie.webp);
 }
 .img9{
-  background-image: url(../../assets/images/img_services_geratrische.jpeg);
+  background-image: url(../../assets/images/img_services_geratrische.webp);
 }
 .img10{
-  background-image: url(../../assets/images/img_services_domizilbehandlungen.jpeg);
+  background-image: url(../../assets/images/img_services_domizilbehandlungen.webp);
 }
 .img11{
-  background-image: url(../../assets/images/img_services_mobilisation.jpeg);
+  background-image: url(../../assets/images/img_services_mobilisation.webp);
 }
 .img12{
   background-image: url(../../assets/images/img_services_kinesio.jpg);

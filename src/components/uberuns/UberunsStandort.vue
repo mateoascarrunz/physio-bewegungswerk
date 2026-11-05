@@ -33,23 +33,23 @@
                     </swiper-slide>        
             
             <swiper-slide class="swiper_slide" >
-<img class="office_photo" src="../../assets/images/img_standort_2.jpg" alt="">
+<img class="office_photo" src="../../assets/images/img_standort_2.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_3.jpg" alt="">
+<img class="office_photo" src="../../assets/images/img_standort_3.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_4.jpg" alt="">
+<img class="office_photo" src="../../assets/images/img_standort_4.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo vertical" src="../../assets/images/img_standort_5.jpg" alt="">
+<img class="office_photo vertical" src="../../assets/images/img_standort_5.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_6.jpg" alt="">
+<img class="office_photo" src="../../assets/images/img_standort_6.webp" alt="">
                     </swiper-slide>
 
                 </swiper-container> -->
@@ -66,8 +66,8 @@
   <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_8.webp');"></swiper-slide>
   <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_9.webp');"></swiper-slide>
   <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_10.webp');"></swiper-slide>
-  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_5.jpg');"></swiper-slide>
-  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_6.jpg');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_5.webp');"></swiper-slide>
+  <swiper-slide class="swiper_slide" style="background-image: url('/img_standort_6.webp');"></swiper-slide>
 </swiper-container>
             </div>
 </BasePopUp>
@@ -134,7 +134,7 @@ export default{
 .container_flex::before{
 
     content: '';
-    background-image: url(../../assets/images/img_standort_1.jpg);
+    background-image: url(../../assets/images/img_standort_1.webp);
     background-size: cover;
     background-position: center;
     position: absolute;

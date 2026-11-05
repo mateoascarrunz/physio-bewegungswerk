@@ -111,7 +111,7 @@ export default{
                    title:'Manuelle Therapie',
                    description:[`Die manuelle Therapie in der Physiotherapie ist ein spezieller Ansatz zur Diagnose und Behandlung von Muskel-Skelett-Erkrankungen, die sich auf die Verwendung manueller Techniken durch Physiotherapeuten konzentriert.`,
         `Diese Techniken beinhalten die gezielte Anwendung von Mobilisation, Gleitbewegungen, Traktion und Kompression, um Schmerzen zu lindern, die Gelenkbeweglichkeit zu verbessern, Muskelverspannungen zu lösen und die Funktion des Muskel-Skelett-Systems zu optimieren.`,],
-                   img:'/img_services_manuelle.jpeg', 
+                   img:'/img_services_manuelle.webp', 
                 },
                 {
                     id:'3',
@@ -145,7 +145,7 @@ export default{
         Die postoperative Physiotherapie kann nach einer Vielzahl von Operationen erforderlich sein, einschließlich orthopädischer Eingriffe wie Hüft- oder Knieersatz, Herzoperationen, Bauchchirurgie, Wirbelspäuleneingriffen und vielen anderen. Sie ist entscheidend, um eine vollständige Genesung zu unterstützen und die Rückkehr des Patienten zu einem aktiven und funktionalen Leben zu ermöglichen.
         `,
       ],
-                   img:'/img_services_postoperative.jpeg', 
+                   img:'/img_services_postoperative.webp', 
                 },
                 {
                     id:'4',
@@ -160,7 +160,7 @@ export default{
         `Kardiologie: Zur Verbesserung der Herz-Kreislauf-Gesundheit bei Patienten mit Herzproblemen.`,
         `Neurologie: Bei Erkrankungen des Nervensystems wie Schlaganfall oder Parkinson, um die Muskelkontrolle und Mobilität zu verbessern.`,
         `Sportmedizin: Zur Verletzungsprävention und -rehabilitation bei Sportlern.`,],
-                   img:'/img_services_mtt.jpeg', 
+                   img:'/img_services_mtt.webp', 
                 },
                 {
                     id:'5',
@@ -182,7 +182,7 @@ export default{
         `Die neurologische Rehabilitation in der Physiotherapie ist ein Spezialgebiet, das sich auf die Rehabilitation von Menschen mit neurologischen Erkrankungen oder Verletzungen des Nervensystems konzentriert. Dies kann Erkrankungen wie Schlaganfall, zerebrale Lähmung, Multiple Sklerose, Parkinson-Krankheit, Rückenmarkverletzungen und andere neurologische Störungen umfassen. Das Hauptziel der neurologischen Rehabilitation in der Physiotherapie besteht darin, die Funktion und die Lebensqualität von Menschen mit neurologischen Beeinträchtigungen zu verbessern.`,
         `Wir beide sind ausgebildete Bobath-Therapeuten und erarbeiten gemeinsam mit dem Patienten an einem von ihm festgelegten Ziel.`,
         `Bei vielen neurologischen Erkrankungen ist die Wiederherstellung der Gehfähigkeit ein wichtiges Ziel. Wir Physiotherapeuten arbeiten an Gangtraining und Mobilitätstechniken, um den Patienten zu helfen, sicherer und selbstständiger zu gehen.`],
-                   img:'/img_services_neurologische.jpeg', 
+                   img:'/img_services_neurologische.webp', 
                    vertical: true,
                 },
                 {
@@ -193,7 +193,7 @@ export default{
         `Die Ultraschalltherapie wird häufig bei muskulären Verletzungen, Entzündungen und Schmerzen eingesetzt. Sie kann auch zur Behandlung von Sehnen- und Gelenkproblemen verwendet werden.`,
         `Während der Behandlung wird ein Ultraschallgel auf die Haut aufgetragen, um die Übertragung der Schallwellen zu verbessern. Ein Therapeut bewegt ein Handgerät, das die Schallwellen erzeugt, sanft über die betroffene Stelle.`,
         `Ultraschalltherapie gilt in der Regel als sicher und nicht-invasiv. Sie wird oft als Teil eines umfassenderen Rehabilitationsplans eingesetzt.`,],
-                   img:'/img_services_ultraschalltherapie.jpeg', 
+                   img:'/img_services_ultraschalltherapie.webp', 
                 },
                 {
                     id:'8',
@@ -204,7 +204,7 @@ export default{
         `Interferenzstrom (IFS) ist eine Technik, die zwei hochfrequente Wechselströme verwendet, um tiefere Gewebe zu stimulieren. IFS verbessert die Durchblutung und reduziert Schmerzen, insbesondere bei Verletzungen und schmerzhaften Zuständen.`,
         `Schließlich ermöglicht die Iontophorese die gezielte Abgabe von Medikamenten durch die Haut in das Gewebe, was bei entzündlichen Erkrankungen äußerst hilfreich ist.`,
         `Wir passen die Elektrotherapie individuell an die Bedürfnisse jedes Patienten an. Die Art, Menge und Dauer der Elektrotherapie variieren je nach den Symptomen, der Diagnose und dem Gesundheitszustand des Patienten, um eine optimale Schmerzlinderung, Muskelstärkung und Genesung zu gewährleisten.`,],
-                   img:'/img_services_elektrotherapie.jpeg', 
+                   img:'/img_services_elektrotherapie.webp', 
                 },
                 {
                     id:'9',
@@ -214,7 +214,7 @@ export default{
         `Die Therapie kann auch Entspannungstechniken einschließen, die helfen, Stress und Anspannung abzubauen, und den Patienten befähigen, ihre Atmung bewusst zu kontrollieren. In einigen Fällen werden Atemhilfsmittel wie Masken oder Atemgeräte verwendet, um die Atmung zu unterstützen, insbesondere bei Menschen mit schweren Lungenerkrankungen.`,
         `Die Anwendungsgebiete der Atemtherapie sind breit gefächert und umfassen Erkrankungen wie Asthma, chronisch obstruktive Lungenerkrankung (COPD), Atembeschwerden nach Operationen oder Verletzungen, Hyperventilationssyndrom, Atemstörungen bei Schlafapnoe und mehr. Die Therapie ist immer auf die individuellen Bedürfnisse und Symptome des Patienten zugeschnitten.`,
         `Insgesamt dient die Atemtherapie dazu, die Atmung zu optimieren, Atemprobleme zu behandeln und die Lebensqualität der Patienten zu verbessern.`,],
-                   img:'/img_services_atemtherapie.jpeg', 
+                   img:'/img_services_atemtherapie.webp', 
                 },
                 {
                     id:'10',
@@ -229,14 +229,14 @@ export default{
         ` <strong>Anpassung an altersbedingte Veränderungen:</strong> Im Alter können Veränderungen wie Muskelschwund, Gelenksteifigkeit und verminderte Flexibilität auftreten. Die geriatrische Physiotherapie hilft dabei, mit diesen Veränderungen besser umzugehen und sie zu minimieren.`,
         ` <strong>Kommunikation und Zusammenarbeit:</strong> Physiotherapeuten in der geriatrischen Rehabilitation arbeiten oft eng mit anderen Gesundheitsdienstleistern zusammen, um die umfassende Versorgung älterer Menschen sicherzustellen.`,
         `Die geriatrische Physiotherapie zielt darauf ab, ältere Menschen dabei zu unterstützen, aktive, unabhängige und qualitativ hochwertige Leben zu führen. Die Therapiepläne sind in der Regel individuell angepasst und berücksichtigen die spezifischen Bedürfnisse und Gesundheitszustände jedes Patienten.`,],
-                   img:'/img_services_geratrische.jpeg', 
+                   img:'/img_services_geratrische.webp', 
                 },
                 {
                     id:'11',
                    title:'Domizilbehandlungen / Hausbesuche',
                    description:[`Die Physiotherapie im häuslichen Umfeld ist eine Form der medizinischen Versorgung, bei der Physiotherapeuten Patienten in ihrem eigenen Zuhause behandeln.`,
         `Diese Art der Versorgung kann für Personen erforderlich sein, die aufgrund von Mobilitätsproblemen, schweren Krankheiten oder anderen gesundheitlichen Einschränkungen nicht in der Lage sind, in eine Praxis oder ein Krankenhaus zu gehen.`,],
-                   img:'/img_services_domizilbehandlungen.jpeg', 
+                   img:'/img_services_domizilbehandlungen.webp', 
                 },
                 {
                     id:'12',
@@ -250,7 +250,7 @@ export default{
         `<strong>Patientenaktive Beteiligung:</strong> Im Mulligan-Konzept wird viel Wert auf die aktive Beteiligung des Patienten gelegt. Der Patient wird ermutigt, Übungen und Bewegungen aktiv auszuführen, während der Therapeut die notwendigen manuellen Korrekturen vornimmt.`,
         `<strong>Individuelle Anpassung:</strong> Die Therapiepläne im Mulligan-Konzept sind individuell auf die Bedürfnisse und Ziele des Patienten zugeschnitten. Der Therapeut berücksichtigt den spezifischen Zustand und die Symptome des Patienten.`,
       ],
-                   img:'/img_services_mobilisation.jpeg', 
+                   img:'/img_services_mobilisation.webp', 
                 },
                 {
                     id:'13',
@@ -272,7 +272,7 @@ export default{
     `Herr Dominik Geissberger gewährleistet eine präzise Diagnostik und individuell angepasste Behandlung – für eine nachhaltige Linderung von Beschwerden und eine Verbesserung der Funktionalität des Bewegungsapparats.`
 ],
 
-                   img:'/img_services_dry_needling.jpg', 
+                   img:'/img_services_dry_needling.webp', 
                 },
 
 
