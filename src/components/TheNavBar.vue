@@ -1,211 +1,296 @@
-<template>
-  <!-- Navbar-->
-  <nav class="sticky-top  navbar navbar-expand-xl flex-lg-nowrap flex-wrap">
-    <div class="container-fluid">
-      <RouterLink class="navbar-brand" to="/" @click="toggleMobileMenu"><img loading="lazy" style="width: 75%;" src="../assets/images/physio_icon.svg"
-          alt="Physio icon"></Routerlink>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span></button>
-      <div class="navbar-collapse collapse justify-content-center" id="navbarNavDropdown">
-        <ul class="navbar-nav mx-auto center">
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import BaseButton from './base/BaseButton.vue';
+import TheMobileMenu from './TheMobileMenu.vue';
+import { BOOKING_URL, NAV_LINKS } from '@/content/practice';
+import logoUrl from '@/assets/images/physio_logo_horizontal.svg';
 
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/" @click="toggleMobileMenu">Home
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/behandlungstechniken" @click="toggleMobileMenu" > Unsere Behandlungstechniken
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/private" @click="toggleMobileMenu" > Private Physiotherapie
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/uberuns" @click="toggleMobileMenu"> Über uns </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/news" @click="toggleMobileMenu"> News </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/kontakt" @click="toggleMobileMenu"><span class="" aria-current="page"
-                href=""> Kontakt </span>
-                
-            </RouterLink>
-          </li>
+const route = useRoute();
+const isMenuOpen = ref(false);
+const isScrolled = ref(false);
+const sentinel = ref(null);
+let observer = null;
 
-        </ul>
-        <ul class="navbar-nav navbar-termin">
-          <li class="nav-item-contact ">
-            <!-- link to software -->
-            <BaseButtonMag type="button" class="nav-link mag_btn white  btn_magenta" @click="goToLink()">Termin vereinbaren
-            </BaseButtonMag>
-          </li>
-        </ul>
+function isActive(path) {
+  return route.path === path || route.path.startsWith(`${path}/`);
+}
 
-      </div>
+onMounted(() => {
+  observer = new IntersectionObserver(([entry]) => {
+    isScrolled.value = !entry.isIntersecting;
+  });
+  observer.observe(sentinel.value);
+});
 
-    </div>
-  </nav>
-</template>
-<script>
-export default {
-  data() {
-    return {
-      LinkAppointment: 'https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg',
-    }
-  },
-  methods: {
-    toggleMobileMenu() {
-      const navbar = document.querySelector('.navbar-collapse');
-      if (navbar) {
-        const isOpen = navbar.classList.contains('show');
-        if (isOpen) {
-          // Close the mobile menu
-          navbar.classList.remove('show');
-        }
-      }
-    },
-    goToLink() {
-    window.open(this.LinkAppointment, '_blank');
-  }
-  },
-  
-};
+onBeforeUnmount(() => observer?.disconnect());
 </script>
-<style scoped>
-.sticky-top {
-  top: 28px !important;
 
+<template>
+  <div ref="sentinel" class="header-sentinel" aria-hidden="true"></div>
+  <header class="site-header" :class="{ 'is-scrolled': isScrolled }">
+    <div class="site-header__bar">
+      <RouterLink class="site-header__logo" to="/" aria-label="Physio Bewegungswerk, zur Startseite">
+        <img :src="logoUrl" alt="" width="738" height="189" />
+      </RouterLink>
+
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <ul class="site-nav__list">
+          <li v-for="link in NAV_LINKS" :key="link.to" :class="{ 'site-nav__item--secondary': !link.priority }">
+            <RouterLink
+              class="site-nav__link"
+              :class="{ 'is-active': isActive(link.to) }"
+              :to="link.to"
+              :aria-current="isActive(link.to) ? 'page' : undefined"
+            >
+              {{ link.label }}
+            </RouterLink>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <BaseButton class="site-header__cta" variant="accent" size="sm" :href="BOOKING_URL">
+          <span class="site-header__cta-long">Termin vereinbaren</span>
+          <span class="site-header__cta-short" aria-hidden="true">Termin</span>
+          <span class="sr-only site-header__cta-sr">vereinbaren</span>
+        </BaseButton>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="site-menu"
+          :aria-expanded="isMenuOpen"
+          aria-label="Menü öffnen"
+          @click="isMenuOpen = true"
+        >
+          <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <TheMobileMenu v-model:open="isMenuOpen" />
+</template>
+
+<style>
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 12px;
+  pointer-events: none;
 }
 
-.navbar {
-  border-radius: 3rem;
-  margin-top: 40px;
-  margin-left: 8%;
-  margin-right: 8%;
-  height: 5rem;
-  font-weight: bold;
-  z-index: 10 !important;
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding-left: 10px;
-  padding-right: 10px;
-
+.site-header {
+  position: sticky;
+  z-index: 40;
+  top: var(--header-offset);
+  margin-block-start: var(--header-offset);
+  padding-inline: var(--gutter);
 }
 
-.nav-link {
-  color: rgba(0, 28, 84, 0.50);
-  font-weight: 400;
-  font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: calc(var(--container) - 2 * var(--gutter));
+  height: var(--header-h);
+  margin-inline: auto;
+  padding-inline: clamp(0.875rem, 1.6vw, 1.5rem) 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.96);
+  box-shadow: 0 0 0 1px transparent;
+  transition: box-shadow var(--duration-base) var(--ease-out);
 }
 
-.navbar-brand {
-  border-color: transparent !important;
+.is-scrolled .site-header__bar {
+  box-shadow:
+    0 0 0 1px var(--line),
+    var(--shadow-sm);
 }
 
-.router-link-active {
-  border-bottom: 1px solid #3F63A7;
-  font-weight: 600;
-  color: #3F63A7;
-  text-decoration: underline;
-
+.site-header__logo {
+  display: block;
+  flex: none;
+  border-radius: var(--radius-sm);
 }
 
-a {
-  text-decoration: none !important;
+.site-header__logo img {
+  width: auto;
+  height: clamp(2.25rem, 2rem + 0.5vw, 2.625rem);
 }
 
-.nav-link:hover {
-  color: rgba(0, 28, 84, 1);
-  border-bottom-color: rgba(0, 28, 84, 1);
+.site-nav {
+  display: none;
+  flex: 1;
+  min-width: 0;
 }
 
-s .white {
-  color: white !important;
+.site-nav__list {
+  display: flex;
+  justify-content: center;
+  gap: 0.125rem;
 }
 
-.lightgrey {
-  color: #7B7B7B !important;
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  padding-inline: 0.875rem;
+  border-radius: var(--radius-pill);
+  color: var(--blue-950);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  letter-spacing: -0.006em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
-.nav-item {
-  margin-left: 0.938rem;
-  margin-right: 0.938rem;
-
+.site-nav__link.is-active {
+  background: var(--blue-100);
+  color: var(--blue-700);
 }
 
-.nav-item-contact {
-  margin-right: 20px;
-
-}
-
-.navbar-toggler {
-  border-radius: 200px;
-  aspect-ratio: 1/1;
-  border: none;
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;
-  border: 1px solid #E2097F;
-}
-
-
-
-
-@media (max-width: 991px) {
-  .navbar-nav {
-    border-radius: 50px;
-    background: #D6E3FF;
-
-    text-align: center;
-    margin-top: 35px;
-    padding: 20px;
+@media (hover: hover) and (pointer: fine) {
+  .site-nav__link:not(.is-active):hover {
+    background: var(--surface);
+    color: var(--blue-700);
   }
+}
 
-  .navbar-termin {
-    margin-top: -5px;
-    background-color: transparent;
-    box-shadow: none;
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+
+.site-header__cta {
+  white-space: nowrap;
+}
+
+.site-header__cta-short,
+.site-header__cta-sr {
+  display: none;
+}
+
+.menu-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-950);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.menu-toggle:active {
+  transform: scale(0.94);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover {
+    background: var(--blue-200);
   }
+}
 
-  .nav-item-contact {
-    margin: 0px !important;
+/* Two offset lines: lighter than the classic three-bar stack, and the same
+   shape rotates into the close icon inside the menu. */
+.menu-toggle__icon {
+  position: relative;
+  display: block;
+  width: 1.25rem;
+  height: 0.75rem;
+}
 
-  }
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: width var(--duration-base) var(--ease-out);
+}
 
-  .nav-link {
+.menu-toggle__icon::before {
+  top: 0;
+  width: 100%;
+}
+
+.menu-toggle__icon::after {
+  bottom: 0;
+  width: 65%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover .menu-toggle__icon::after {
     width: 100%;
   }
+}
 
-  .router-link-active {
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-
+/* Phones: logo, a short booking pill where it fits, and the menu. */
+@media (max-width: 47.99rem) {
+  .site-header__cta-long {
+    display: none;
   }
 
-  .navbar-brand {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+  .site-header__cta-short {
+    display: inline;
   }
 
-  .navbar-toggler {
-    margin-left: auto;
+  .site-header__cta-sr {
+    display: inline;
   }
 
-  .nav-item-contact {
-    margin-right: 0rem;
-    margin-bottom: 0rem;
-    margin-top: 0rem;
+  .site-header__cta {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 22.49rem) {
+  .site-header__cta {
+    display: none;
+  }
+}
+
+/* Landscape phones: the bar would eat too much of a short screen. */
+@media (max-height: 30rem) {
+  .site-header {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* Tablet landscape and small laptops: three key links, the rest in the menu. */
+@media (min-width: 60rem) {
+  .site-nav {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
   }
-}</style>
+
+  .site-nav__item--secondary {
+    display: none;
+  }
+}
+
+/* Full navigation only once every label fits on one line with room to spare. */
+@media (min-width: 75rem) {
+  .site-nav__item--secondary {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+}
+</style>

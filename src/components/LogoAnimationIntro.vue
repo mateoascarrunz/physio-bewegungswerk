@@ -39,6 +39,10 @@ const isVisible = ref(!prefersReducedMotion && !readSeen());
 const isLeaving = ref(false);
 const logoContainer = ref(null);
 
+// Page entrances wait for this class, so they play as the intro lifts.
+const INTRO_ACTIVE_CLASS = 'intro-active';
+if (isVisible.value) document.documentElement.classList.add(INTRO_ACTIVE_CLASS);
+
 let animation = null;
 let safetyTimer = null;
 
@@ -48,6 +52,7 @@ function removeSkipListeners() {
 
 function leave() {
   isLeaving.value = true;
+  document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
   markSeen();
   clearTimeout(safetyTimer);
   removeSkipListeners();
@@ -80,6 +85,7 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
+  document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
   clearTimeout(safetyTimer);
   removeSkipListeners();
   animation?.destroy();
@@ -95,7 +101,7 @@ onBeforeUnmount(() => {
   place-content: center;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  transition: opacity 0.4s ease;
+  transition: opacity var(--duration-slow) var(--ease-out);
 }
 .page_intro_leaving {
   opacity: 0;

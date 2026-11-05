@@ -1,33 +1,45 @@
 <script setup>
-import { provide, ref } from 'vue';
-import { RouterView, useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
+import { RouterView, useRoute, useRouter } from 'vue-router';
 import TheBanner from './components/TheBanner.vue';
 import TheNavBar from './components/TheNavBar.vue';
 import TheFooter from './components/TheFooter.vue';
 import LogoAnimationIntro from './components/LogoAnimationIntro.vue';
 import { banners } from '@/services/cms';
 
-provide('blue', '#3F63A7');
-provide('lightblue', '#D6E3FF');
-
+const route = useRoute();
+const main = ref(null);
 const isFirstRouteLoading = ref(true);
+
 useRouter().isReady().finally(() => {
   isFirstRouteLoading.value = false;
 });
 
+function focusMain() {
+  main.value?.focus({ preventScroll: true });
+}
+
+// A new page moves focus to its content, so keyboard and screen reader users
+// start there rather than back in the header.
+watch(
+  () => route.path,
+  (_to, from) => {
+    if (from) focusMain();
+  },
+);
 </script>
 
 <template>
+  <a class="skip-link" href="#main" @click.prevent="focusMain">Zum Inhalt springen</a>
   <LogoAnimationIntro />
-  <TheBanner :bannerMessage="banners" />
+  <TheBanner :banner-message="banners" />
   <TheNavBar />
-  <div class="container-fluid">
-    <main :class="{ main_first_load: isFirstRouteLoading }">
-
-
-      <RouterView />
-
-    </main>
-    <TheFooter></TheFooter>
-  </div>
+  <main id="main" ref="main" tabindex="-1" :class="{ main_first_load: isFirstRouteLoading }">
+    <RouterView v-slot="{ Component, route: viewRoute }">
+      <Transition name="page" mode="out-in">
+        <component :is="Component" :key="viewRoute.path" />
+      </Transition>
+    </RouterView>
+  </main>
+  <TheFooter />
 </template>

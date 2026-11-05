@@ -1,123 +1,129 @@
-<template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 center center_flex hero_about_text" >
-                <span class="title blue bold">Unser Behandlungsansatz</span>
-                <br>
-                
-                <div class="left">
-<span class="paragraph"> In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel.
-Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind.
-Wir arbeiten eng mit unseren Patienten zusammen. um gemeinsam Strategien zu gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen.
-<br>
-<br>
-Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Das Hauptziel ist es, langfristige Verbesserungen im Wohlbefinden unserer Patienten zu erreichen.
-<br>
-<br>
-Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer Einzigartigkeit zu behandeln. Wir engagieren uns dafür, individuell angepasste Lösungen für ihre spezifischen Bedürfnisse bereitzustellen.
-<br></span>
-<div class="btn_container">
-  <div v-if="jobs.length !== 0">
-<BaseButtonBlue @click="scrollToStellen">Offene Stellen</BaseButtonBlue></div>
-<div>
-<RouterLink class="nav-link" to="/faq"> <BaseButtonBlue>FAQ</BaseButtonBlue></RouterLink></div>
-</div>
-<br><br> 
-                </div>
-            </div>
-            <div class="col-lg-6 img">
-                <div class="img_hero_uberuns ">
-                    <!-- <img class="logo" src="../../assets/images/physio_icon.svg" alt=""> -->
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-<script>
+<script setup>
+import BaseButton from '../base/BaseButton.vue';
+import { responsiveImage } from '@/content/media';
 import { jobs } from '@/services/cms';
-export default {
-  data(){
-        return{
-jobs:[],
-        }
-    },
-   
-  methods: {
-    scrollToStellen() {
-      const stellenElement = document.getElementById('stellen');
-      if (stellenElement) {
-        stellenElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }
-    },
-  },
-  mounted() {
-        this.jobs = jobs;
-    },
-};
+
+const image = responsiveImage('places/team-desk');
+
+function scrollToJobs() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('stellen')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+}
 </script>
+
+<template>
+  <section class="about-intro bento" aria-labelledby="about-title">
+    <div class="about-intro__lead">
+      <p class="t-label">Über uns</p>
+      <h1 id="about-title" class="t-h1">Unser Behandlungs&shy;ansatz</h1>
+      <p class="t-lead">
+        In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel.
+        Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten
+        zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen, um gemeinsam Strategien zu
+        gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen.
+      </p>
+      <div class="about-intro__actions">
+        <BaseButton v-if="jobs.length" @click="scrollToJobs">Offene Stellen</BaseButton>
+        <BaseButton variant="secondary" to="/faq">FAQ</BaseButton>
+      </div>
+    </div>
+
+    <div class="about-intro__media">
+      <img
+        v-bind="image"
+        sizes="(max-width: 60rem) 96vw, 58vw"
+        alt="Dominik Geissberger und Marit Hesse im Gespräch an einem Tisch in der Praxis"
+        width="1600"
+        height="1067"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+
+    <div class="about-intro__point card">
+      <h2 class="t-h3">Ganzheitlich</h2>
+      <p class="t-body">
+        Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde
+        liegenden Ursachen und den Gesamtzusammenhang berücksichtigen. Das Hauptziel ist es, langfristige Verbesserungen
+        im Wohlbefinden unserer Patienten zu erreichen.
+      </p>
+    </div>
+    <div class="about-intro__point card card--blue">
+      <h2 class="t-h3">Individuell</h2>
+      <p class="t-body">
+        Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer Einzigartigkeit zu behandeln. Wir
+        engagieren uns dafür, individuell angepasste Lösungen für ihre spezifischen Bedürfnisse bereitzustellen.
+      </p>
+    </div>
+  </section>
+</template>
+
 <style scoped>
-/* .logo{
-        width: 10%;
-        opacity: 1;
-         margin-bottom: 30px;
-         margin-right: 30px;
-} */
-.margin_left{
-margin-left: 50px;
-}
-.img_hero_uberuns{
-width: 100%;
-height: 100%;
-position: relative;
-aspect-ratio: 1.3/1;
-display: flex;
-justify-content: flex-end;
-    align-items: flex-end;
-
-
-}
-.btn_container{
-display: flex;
-margin-top: 50px;
-justify-content: space-evenly
-    }
-.img_hero_uberuns::before {    
-    content: '';
-    background-image: url(../../assets/images/img_physio_team2.webp);
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-    opacity: 0.8;
-    border-radius: 40px;
-    z-index: -1;
-    
-}
-.termin_btn{
-    display: none;
+.about-intro__lead {
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block: clamp(1rem, 3vw, 2.5rem) var(--space-3);
 }
 
-@media (max-width: 990px){
-    .img_hero_uberuns{
-        aspect-ratio: 1.6/1;
-    }
-    .btn_container{
-display: flex;
-
-justify-content: space-evenly
-    }
-    .margin_left{
-        margin-left: 0px;
-    }
-    .termin_btn{
-        display: inline-block;
-    }
+.about-intro__lead h1 {
+  hyphens: manual;
 }
 
+.about-intro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-start: var(--space-2);
+}
+
+.about-intro__media {
+  grid-column: span 12;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+}
+
+.about-intro__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 40%;
+}
+
+.about-intro__point {
+  grid-column: span 12;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+
+.about-intro__point.card--blue .t-body {
+  color: var(--blue-950);
+}
+
+@media (min-width: 40rem) {
+  .about-intro__point {
+    grid-column: span 6;
+  }
+}
+
+/* Desktop: text in five columns, a larger photo in seven, so the page opens on people. */
+@media (min-width: 60rem) {
+  .about-intro__lead {
+    grid-column: span 5;
+    justify-content: center;
+    padding-block: var(--space-5);
+    padding-inline-end: clamp(0rem, 2vw, 2rem);
+  }
+
+  .about-intro__media {
+    grid-column: span 7;
+    aspect-ratio: auto;
+    min-height: clamp(26rem, 38vw, 40rem);
+  }
+}
 </style>

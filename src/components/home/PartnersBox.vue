@@ -1,109 +1,40 @@
-<template>
-
-  <BaseBox class="partner center" v-if="partnerImages.length > 0" >
-
-<span class="title blue partners_title">Partners</span>
-<br>
-
-        <swiper-container
-    class="swiper"
-    :slides-per-view="computedSlidesPerView"
-    navigation="true"
-    autoplay-delay="3000"
-    autoplay-disable-on-interaction="false"
-  >
-  <swiper-slide v-for="partner in partnerImages" :key="partner.id" class="img_container">
-    <img loading="lazy" class="img_partner" :class="{ 'horizontal_img': partner.isHorizontal }" :src="partner.Partner_logo[0].url"
-        :alt="partner.Partner_logo[0].name" />
-  </swiper-slide>
-
-</swiper-container>
-
-  </BaseBox>
-
-</template>
-
-<script>
+<script setup>
 import { partners } from '@/services/cms';
-import { registerSwiperElement } from '@/services/swiperElement';
-
-export default {
-  data() {
-    return {
-      partnerImages: [],
-      // Add a data property to store the current window width
-      windowWidth: window.innerWidth,
-    };
-  },
-  created() {
-    registerSwiperElement();
-    window.addEventListener('resize', this.handleWindowResize);
-    this.handleWindowResize();
-  },
-  mounted() {
-    this.partnerImages = partners;
-  },
-  computed: {
-    computedSlidesPerView() {
-      // Use this.windowWidth to calculate slides per view
-      const totalPartner = this.partnerImages.length;
-      if (totalPartner === 1) {
-        return 1;
-      } else if (totalPartner === 2) {
-        return 2;
-      } else {
-        // Determine the number of slides per view based on the viewport width
-        if (this.windowWidth < 890) {
-          return 1; 
-
-        } else {
-          return 3; // Default value
-        }
-      }
-    },
-  },
-  beforeUnmount() {
-    // Remove the event listener when the component is destroyed
-    window.removeEventListener('resize', this.handleWindowResize);
-  },
-  methods: {
-    // Define a method to handle window resize
-    handleWindowResize() {
-      this.windowWidth = window.innerWidth;
-    },
-  },
-};
 </script>
 
+<template>
+  <section v-if="partners.length" class="partners" aria-labelledby="partners-title">
+    <h2 id="partners-title" class="t-label">Partners</h2>
+    <ul class="partners__list">
+      <li v-for="partner in partners" :key="partner.id">
+        <img
+          :src="partner.Partner_logo[0].url"
+          :alt="partner.Partner_logo[0].alternativeText || partner.Partner_logo[0].name"
+          loading="lazy"
+          decoding="async"
+        />
+      </li>
+    </ul>
+  </section>
+</template>
 
 <style scoped>
-.partner {
+.partners {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.partners__list {
   display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5) clamp(2rem, 5vw, 4.5rem);
+}
 
-}
-.img_partner{
-height: 65%;
-width: auto;
-}
-.horizontal_img{
-  height: auto !important;
-  width: 65% !important;
-  max-width: 300px;
-
-}
-.img_container{
-display: flex;
-justify-content: center;
-    align-items: center;
-}
-  .swiper{
-    width: 100%;
-    height: 100%;
-  }
-.swiper-pagination-bullets.swiper-pagination-horizontal{
-bottom: -30px !important;
+.partners__list img {
+  width: auto;
+  max-width: 11rem;
+  height: 3.25rem;
+  object-fit: contain;
 }
 </style>

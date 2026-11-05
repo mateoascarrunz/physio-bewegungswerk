@@ -1,96 +1,31 @@
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  bannerMessage: { type: Array, default: () => [] },
+});
+
+const messages = computed(() => props.bannerMessage.filter((banner) => banner.Visible));
+</script>
+
 <template>
-  <div v-for="banner in bannerMessage" :key="banner.id">
-    <div class="banner-container" v-if="banner.Visible">
+  <div v-if="messages.length" class="site-banner" role="region" aria-label="Mitteilungen">
+    <p v-for="banner in messages" :key="banner.id">{{ banner.BannerTitle }}</p>
+  </div>
+</template>
 
-        <div class="banner-message" >
-  <span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-          
-      </div>
-      <div class="banner-message" >
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
-
-
-
-
-</div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      bannerMessage: Array, // Define the prop to accept an array
-    },
-  };
-  </script>
-  
-  
-  <style scoped>
-    .banner-message {
-    color: white;
-    font-size: 30px;
-    font-weight: 700;
-  } 
-  .banner-container{
-    background-color: #3F63A7;
-    position: relative;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    overflow: hidden;
-    padding:  12px 0px;
-    white-space: nowrap;
-  }
-  .banner-message{
-
-    animation: 105s moveBanner infinite linear;
-    display: inline-block;
-
-  }
-  
-
-  
-  @keyframes moveBanner {
-from{
-    transform: translateX(0);
+<style scoped>
+.site-banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-6);
+  padding: var(--space-2) var(--gutter);
+  background: var(--blue-950);
+  color: var(--white);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+  text-align: center;
 }
-to{
-    transform: translateX(-100%);
-}
-}
-@media (max-width: 991px){
-  .banner-message {
-
-    font-size:16px;
-
-  } 
-}
-  </style>
-  
+</style>

@@ -1,290 +1,177 @@
-<template>
-    <BasePopUp v-if="popup && selectedTeam">
-        <BaseCloseButton @click="popup = !popup">
-        </BaseCloseButton>
-        <div class="container scroll">
-
-            <div class="row">
-                <div class="col-lg-6 relative">
-                    <div class="coverphoto_container">
-<img loading="lazy" class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
-</div>
-</div>
-                <div class="col-lg-6 relative">
-                    <div class="relative">
-                        <!-- hero -->
-                        <div class="center">
-                            <br>
-                            <span class="subtitle">"{{ selectedTeam.quote }}"</span>
-                            <br>
-                            <br>
-                            <span class="title bold blue">{{ selectedTeam.name }} </span>
-                            <br>
-                            <span class="info magenta">{{ selectedTeam.workPosition }}</span>
-                        </div>
-                        <!-- description -->
-                        <div>
-                            <br>
-                            <span class="paragraph left">{{ selectedTeam.description }}</span>
-
-                            <div>
-                                
-                                <div class="info_team">
-                                    
-                                <span v-if="selectedTeam.diploma " class="info"><IconDiploma/> {{ selectedTeam.diploma }}</span>
-                                <span v-if="selectedTeam.languages" class="info"><IconLanguages/> {{ selectedTeam.languages }}</span>
-                            </div>
-                                <br>
-                                <br>
-                                <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                                    @click="collapse = !collapse" v-if="selectedTeam.education">
-                                    <span> Aus- und Weiterbildungen:</span>
-                                    <span class="icon blue title " v-show="!collapse">+</span>
-                                    <span class="icon icon2 blue title" v-show="collapse">-</span>
-                                </BaseButtonBlue>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <ul>
-                                            <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.education.split('•').filter(Boolean)"
-                                                :key="item.trim()">
-                                                <span class="paragraph">{{ item.trim() }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <br>
-                                <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample2" aria-expanded="false"
-                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2" v-if="selectedTeam.specialties">
-                                    <span> Therapeutische Spezialgebiete:</span>
-                                    <span class="icon blue title " v-show="!collapse2">+</span>
-                                    <span class="icon icon2 blue title" v-show="collapse2">-</span>
-                                </BaseButtonBlue>
-
-                                <div class="collapse" id="collapseExample2" v-if="selectedTeam.specialties">
-                                    <div class="card card-body">
-                                        <ul>
-                                            <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.specialties.split('•').filter(Boolean)"
-                                                :key="item.trim()">
-                                                <span class="paragraph">{{ item.trim() }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                </div>
-                <BaseContactBox v-if="selectedTeam.linkedIn !== null || selectedTeam.email !== null || selectedTeam.phone !== null">
-              
-                    <IconLinkedIn v-if="selectedTeam.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.linkedIn" />
-                    <IconEmail v-if="selectedTeam.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.email" />
-                    <IconPhone v-if="selectedTeam.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.phone" />
-
-            </BaseContactBox>
-            </div>
-        </div>
-    </BasePopUp>
-    <div class="grid_container padding_null" v-if="teams"  > 
-        <BaseBox class="center grid-col-2">
-            <span class="title bold blue">Lernen Sie unser Team kennen</span>
-            <br>
-            <br>
-            <div class="container-fluid">
-                <swiper-container :slides-per-view="computedSlidesPerView" speed="500" css-mode="true" autoplay="true"
-                    navigation="true" pagination="true">
-                    <swiper-slide v-for="team in teams" :key="team.id">
-                        <BaseCard :theheight="'25%'" class="block-center" @click="openPopup(team)">
-                            <template v-slot:img_card>
-<img loading="lazy" class="img_card" :src="cardImageUrl(team.profilePicture.url)" :alt="team.name">
-  </template>
-                            <span class="paragraph blue bold">{{ team.name }}</span>
-                            <br>
-                            <span class="info magenta">{{ team.workPosition }}</span>
-                            <br>
-                        </BaseCard>
-                    </swiper-slide>
-
-                </swiper-container>
-            </div>
-        </BaseBox>
-    </div>
-</template>
-<script>
-import IconDiploma from '../icon/IconDiploma.vue'
-import IconLanguages from '../icon/IconLanguages.vue'
-import IconLinkedIn from '../icon/IconLinkedIn.vue';
-import IconEmail from '../icon/IconEmail.vue';
-import IconPhone from '../icon/IconPhone.vue';
-import BaseCard from '../base/BaseCard.vue';
-import BaseContactBox from '../base/BaseContactBox.vue';
-import { cardImageUrl, teams } from '@/services/cms';
-import { registerSwiperElement } from '@/services/swiperElement';
-export default {
-    
-    components: {
-        BaseCard,
-
-        IconLinkedIn,
-        IconEmail,
-        IconPhone,
-        IconDiploma,
-        IconLanguages,
-        BaseContactBox
-    },
-    data() {
-        return {
-            teams: [],
-            popup: false,
-            selectedTeam: null,
-            collapse: false,
-            collapse2: false,
-            url: null,
-            windowWidth: window.innerWidth,
-
-        }
-    },
-    created() {
-
-    window.addEventListener('resize', this.handleWindowResize);
-    this.handleWindowResize();
-  },
-    mounted() {
-        registerSwiperElement();
-        this.teams = teams;
-    },
-
-beforeUnmount() {
-    window.removeEventListener('resize', this.handleWindowResize);
-  },
-  methods: {
-    cardImageUrl,
-        openPopup(team) {
-            this.selectedTeam = team;
-            this.popup = true;
-        },
-        getTeamCoverPhotoUrl(team) {
-
-        if (team && team.coverPhoto && team.coverPhoto.url) {
-
-            return team.coverPhoto.url;
-        } else {
-           
-            return ''; 
-        }
-    },
-    handleWindowResize() {
-      this.windowWidth = window.innerWidth;
-    },
-    },
-
-
-    computed: {
-        computedSlidesPerView() {
-    const maxSlides = this.windowWidth < 890 ? 1 : this.windowWidth < 1400 ? 2 : 3;
-    return Math.min(maxSlides, Math.max(this.teams.length, 1));
-  },
-},
-}
+<script setup>
+import BaseIcon from '../base/BaseIcon.vue';
+import { cardImageUrl, cmsSrcset, teams } from '@/services/cms';
 </script>
 
+<template>
+  <section v-if="teams.length" class="team" aria-labelledby="team-title">
+    <div class="team__intro card card--blue">
+      <h2 id="team-title" class="t-h2">Lernen Sie unser Team kennen</h2>
+      <p class="t-body">Wählen Sie eine Person, um mehr über ihre Ausbildung und ihre Spezialgebiete zu erfahren.</p>
+    </div>
+    <RouterLink
+      v-for="(member, index) in teams"
+      :key="member.id"
+      v-reveal="(index % 3) * 60"
+      class="team-card zoom-trigger"
+      :to="{ query: { team: member.id } }"
+    >
+      <span class="team-card__media zoom-media">
+        <img
+          :src="cardImageUrl(member.profilePicture.url)"
+          :srcset="cmsSrcset(member.profilePicture.url)"
+          sizes="(max-width: 40rem) 47vw, (max-width: 60rem) 47vw, 31vw"
+          :alt="member.name.trim()"
+          :width="member.profilePicture.width"
+          :height="member.profilePicture.height"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+      <div class="team-card__caption">
+        <div class="team-card__text">
+          <h3 class="team-card__name">{{ member.name.trim() }}</h3>
+          <p class="team-card__role">{{ member.workPosition }}</p>
+        </div>
+        <span class="team-card__arrow"><BaseIcon name="arrow-right" :size="18" /></span>
+      </div>
+    </RouterLink>
+  </section>
+</template>
+
 <style scoped>
-.box {
-    height: 100px !important;
+.team {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.2vw, 2rem) var(--gap);
 }
 
-.block-center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
+.team__intro {
+  grid-column: 1 / -1;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
 }
 
-.dropdown {
-    display: block;
-    width: 100%;
-    position: relative;
+.team__intro .t-body {
+  color: var(--blue-950);
 }
 
-.icon {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+.team-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.icon2 {
-    top: 40%;
+.team-card__media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
 }
 
-.card {
-    background-color: transparent;
-    border-color: transparent;
-    padding-left: 0px;
-    padding-right: 0px;
+.team-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
 }
 
-.contact {
-    position: absolute;
-    border-radius: 50px;
-    background: rgba(63, 99, 167, 0.20);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    width: 50%;
-    height: 93px;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-
+.team-card__caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
-.scroll {
-    overflow-y: scroll;
-    height: 100% !important;
-}
-.info_team{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-.coverphoto_container{
-    width: 100%;
-    aspect-ratio: 1/1.22;
-    overflow: hidden;
-    border-radius: 40px;
-    position: sticky;
-    top: 0px;
-}
-.img_coverphoto{
-    width: 100%;
-    overflow: hidden;
-}
-@media (max-width: 990px){
-    .coverphoto_container{
-    width: 50vw;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-}
-.contact{
-    width: 80%;
-}
+.team-card__text {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
 }
 
+.team-card__name {
+  color: var(--blue-950);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.014em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.team-card__role {
+  color: var(--color-text-soft);
+  font-size: var(--text-small);
+}
+
+.team-card__arrow {
+  display: none;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.team-card__arrow svg {
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .team-card:hover .team-card__arrow {
+    background: var(--color-brand);
+    color: var(--white);
+  }
+
+  .team-card:hover .team-card__arrow svg {
+    transform: translateX(2px);
+  }
+
+  .team-card:hover .team-card__name {
+    color: var(--blue-700);
+  }
+}
+
+/* An odd person out on two columns gets the full row and a wider crop. */
+.team-card:last-child:nth-child(even) {
+  grid-column: 1 / -1;
+}
+
+.team-card:last-child:nth-child(even) .team-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+@media (min-width: 30rem) {
+  .team-card__arrow {
+    display: grid;
+  }
+}
+
+@media (min-width: 60rem) {
+  .team {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .team__intro {
+    grid-column: span 1;
+  }
+
+  .team-card:last-child:nth-child(even) {
+    grid-column: auto;
+  }
+
+  .team-card:last-child:nth-child(even) .team-card__media {
+    aspect-ratio: 4 / 5;
+  }
+}
 </style>

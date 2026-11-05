@@ -22,4 +22,6 @@ Vercel build -> scripts/fetch-cms-content.mjs -> src/content/cms-snapshot.json -
 
 **The intro never blocks the site.** The page renders behind it. It plays once per browser session, can be skipped, respects reduced motion, and clears itself if the player fails.
 
-**Libraries load on demand.** Routes, Swiper, the Lottie player and Markdown rendering are separate chunks.
+**Libraries load on demand.** Routes, the Lottie player, Markdown rendering and EmailJS are separate chunks. There is no CSS framework or carousel library; the interface is built from the components described in `DESIGN_SYSTEM.md`.
+
+**Third parties wait for consent.** Google Maps only loads after the visitor asks for the map on the contact page.

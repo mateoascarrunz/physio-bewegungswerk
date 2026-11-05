@@ -1,127 +1,169 @@
+<script setup>
+import BaseIcon from '../base/BaseIcon.vue';
+import { PRACTICE } from '@/content/practice';
+
+const CONTACTS = [
+  { icon: 'phone', label: 'Telefon', value: PRACTICE.phone.label, href: PRACTICE.phone.href },
+  { icon: 'mobile', label: 'Mobil', value: PRACTICE.mobile.label, href: PRACTICE.mobile.href },
+  { icon: 'mail', label: 'E-Mail', value: PRACTICE.email.label, href: PRACTICE.email.href },
+  { icon: 'map-pin', label: 'Adresse', value: PRACTICE.address, href: PRACTICE.mapsUrl, external: true },
+  { icon: 'linkedin', label: 'LinkedIn', value: 'Physio Bewegungswerk', href: PRACTICE.linkedInUrl, external: true },
+];
+</script>
+
 <template>
-    <BaseBox class="base_box">
-            <div class="center_flex index_high" >
-                <div class="center_flex z-1 contact_text">
-                <span class="title bold blue">Kontakt</span>
-                <br>
-                <br>
-                <br>
-                <div>
-                <span class="paragraph">
-                 <IconLocation class="icon"/><span class="paragraph"> Bergstrasse 3, 8625 Gossau</span>
-                </span>
-                <br>
+  <section class="contact-info" aria-labelledby="contact-title">
+    <header class="contact-info__header">
+      <p class="t-label">Wir sind für Sie da</p>
+      <h1 id="contact-title" class="t-h1">Kontakt</h1>
+      <p class="t-lead">
+        Bei offenen Fragen sind wir gerne per E-Mail oder telefonisch von Montag bis Freitag von 09:00 bis 17:00 Uhr
+        erreichbar.
+      </p>
+    </header>
 
-                <span class="paragraph">
-                  <IconPhoneLine class="icon"/> <span class="paragraph"> 044 543 63 68</span>
-                </span>
-                <br>
+    <ul class="contact-info__list">
+      <li v-for="contact in CONTACTS" :key="contact.label">
+        <a
+          class="contact-row"
+          :href="contact.href"
+          :target="contact.external ? '_blank' : undefined"
+          :rel="contact.external ? 'noopener noreferrer' : undefined"
+        >
+          <span class="contact-row__icon"><BaseIcon :name="contact.icon" :size="20" /></span>
+          <span class="contact-row__text">
+            <span class="contact-row__label">{{ contact.label }}</span>
+            <span class="contact-row__value">{{ contact.value }}</span>
+          </span>
+          <BaseIcon class="contact-row__arrow" :name="contact.external ? 'arrow-up-right' : 'arrow-right'" :size="20" />
+        </a>
+      </li>
+    </ul>
 
-                <span class="paragraph">
-                    <IconPhoneLine class="icon"/><span class="paragraph"> 076 543 63 68 (mobil)</span>
-                </span>
-                <br>
-
-                <span class="paragraph">
-                   <IconEmailLine class="icon"/><span class="paragraph"> info@physio-bewegungswerk.ch</span>
-                </span>
-            </div>
-                <br>
-           
-
-            </div>
-            <div class="contact_box center z-1">
-                <div class="info_contact">
-                <span class="info"><strong>Termine nach Vereinbarung</strong></span>
-                <br>
-                <span class="info">Parkplätze vor der Praxis vorhanden </span>
-            </div>
-        </div>
-                <BaseContactBox>
-                <IconLinkedin class="btn_link" @click="openURL"/>
-                <IconPhone class="btn_link" @click="makePhoneCall"/>
-                <IconEmail class="btn_link" @click="sendEmail"/>
-            </BaseContactBox>
-
-            </div>
-            <img class="logo" src="../../assets/images/physio_icon.svg" alt="">
-        </BaseBox>
+    <ul class="contact-info__notes">
+      <li>
+        <BaseIcon name="clock" :size="20" />
+        <span><strong>{{ PRACTICE.hours }}</strong><br />Termine nach Vereinbarung</span>
+      </li>
+      <li>
+        <BaseIcon name="parking" :size="20" />
+        <span>Parkplätze vor der Praxis vorhanden</span>
+      </li>
+    </ul>
+  </section>
 </template>
-<script>
-import BaseContactBox from '../base/BaseContactBox.vue';
-import IconLocation from '../icon/IconLocation.vue';
-import IconPhoneLine from '../icon/IconPhoneLine.vue';
-import IconEmailLine from '../icon/IconEmailLine.vue';
-import IconLinkedin from '../icon/IconLinkedIn.vue';
-import IconPhone from '../icon/IconPhone.vue';
-import IconEmail from '../icon/IconEmail.vue';
-export default{
-    components:{
-        BaseContactBox,
-        IconLocation,
-        IconPhoneLine,
-        IconEmailLine,
-        IconLinkedin,
-        IconPhone,
-        IconEmail,
 
-    
-    },
-    methods:{
-        sendEmail() {
-      window.location.href = 'mailto:info@physio-bewegungswerk.ch';
-    },
-    openURL() {
-      window.open('https://www.linkedin.com/company/100080030', '_blank');
-    },
-    makePhoneCall() {
-      window.location.href = 'tel:0445436368';
-    },
-    }
-}</script>
 <style scoped>
-
-.index_high{
-    z-index: 2;
-    position: relative;
-}
-.btn_link{
-    z-index: 2;
-    position: relative;
-}
-.contact_text{
-    margin-bottom: 200px;
-    margin-top: 100px;
-    z-index: 2;
-
-}
-.contact_box{
-position: absolute;
-bottom: 0px;
-width: 100%;
-left: 50%;
-transform: translateX(-50%);
-min-width: 500px;
-}
-.info_contact{
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
-bottom: 120px;
-}
-.logo{
-    position: absolute;
-    bottom: 0px;
-    right: 20px;
-    height: 80%;
-    opacity: 0.1;
-    z-index: 0;
-}
-.icon{
-    width: 30px;
-}
-.base_box{
-    overflow-x: hidden;
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: clamp(1rem, 3vw, 2.5rem) 0;
+  padding-inline-end: clamp(0rem, 2vw, 2rem);
 }
 
+.contact-info__header {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.contact-info__list {
+  display: grid;
+  border-block-start: 1px solid var(--line);
+}
+
+.contact-info__list li {
+  border-block-end: 1px solid var(--line);
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 4.5rem;
+  padding-block: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-row__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-700);
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.contact-row__text {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+
+.contact-row__label {
+  color: var(--color-text-faint);
+  font-size: var(--text-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+}
+
+.contact-row__value {
+  color: var(--blue-950);
+  font-size: clamp(0.9375rem, 0.9rem + 0.3vw, 1.0625rem);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.008em;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.contact-row__arrow {
+  color: var(--color-brand);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.contact-row:active .contact-row__icon {
+  background: var(--color-brand);
+  color: var(--white);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-row:hover .contact-row__icon {
+    background: var(--color-brand);
+    color: var(--white);
+  }
+
+  .contact-row:hover .contact-row__arrow {
+    transform: translateX(3px);
+  }
+}
+
+.contact-info__notes {
+  display: grid;
+  gap: var(--space-3);
+  color: var(--color-text-soft);
+  font-size: var(--text-small);
+  line-height: 1.5;
+}
+
+.contact-info__notes li {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.contact-info__notes svg {
+  margin-block-start: 0.0625rem;
+  color: var(--color-brand);
+}
+
+.contact-info__notes strong {
+  color: var(--blue-950);
+}
 </style>

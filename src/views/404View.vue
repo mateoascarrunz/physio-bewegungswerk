@@ -1,42 +1,57 @@
+<script setup>
+import BaseButton from '@/components/base/BaseButton.vue';
+import Icon404 from '@/components/icon/Icon404.vue';
+</script>
+
 <template>
-<div class="container error_container center">
-    <div>
-    <span class="ultramegatitle blue bold">404</span>
-<br>
-    <span class="megatitle blue">Hoppla!</span>
-</div><div>
-    <span class="paragraph blue">"Sie haben sich verlaufen. Kein Problem, bleib beweglich. <br>
-Kehren Sie zur Startseite zurück, um den Weg zur Gesundheit zu finden.</span>
-<br>
-<br>
-<RouterLink class="nav-link" to="/"><BaseButtonBlue>Home</BaseButtonBlue></RouterLink>
-</div>
-   
-    <Icon404 class="icon_notfound"></Icon404>
-</div>
+  <div class="page shell">
+    <section class="not-found" aria-labelledby="not-found-title">
+      <div class="not-found__text">
+        <p class="t-label">Fehler 404</p>
+        <h1 id="not-found-title" class="t-display not-found__title">Hoppla!</h1>
+        <p class="t-lead">
+          Sie haben sich verlaufen. Kein Problem, bleib beweglich. Kehren Sie zur Startseite zurück, um den Weg zur
+          Gesundheit zu finden.
+        </p>
+        <BaseButton arrow to="/">Zur Startseite</BaseButton>
+      </div>
+      <Icon404 class="not-found__art" aria-hidden="true" />
+    </section>
+  </div>
 </template>
-<script>
 
-import Icon404 from '../components/icon/Icon404.vue';
-
-export default{
-    components:{
-    Icon404,
-
+<style scoped>
+.not-found {
+  display: grid;
+  align-items: center;
+  gap: var(--space-5);
+  overflow: hidden;
+  padding: var(--card-pad);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
 }
-}</script>
-<style>
-.error_container{
-width: 100vw;
-height: 80vh;
-display: flex;
-flex-direction: column;
-align-items: center;
 
+.not-found__text {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+  max-width: 34rem;
 }
-.icon_notfound{
-    margin-bottom: 50px;
-    width: 80%;
-    height: auto;
+
+.not-found__title {
+  color: var(--color-brand);
+}
+
+.not-found__art {
+  justify-self: center;
+  width: min(100%, 28rem);
+  height: auto;
+}
+
+@media (min-width: 60rem) {
+  .not-found {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 34rem;
+  }
 }
 </style>

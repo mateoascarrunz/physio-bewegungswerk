@@ -1,6 +1,7 @@
 <template>
-    <div class="container">
-        <div class="center"> <h1>Datenschutzerklärung</h1></div>
+  <div class="page shell">
+    <div class="prose privacy">
+    <h1 class="t-h1">Datenschutz&shy;erklärung</h1>
    
 <h2 id="m716">Präambel</h2>
 <p>Mit der folgenden Datenschutzerklärung möchten wir Sie darüber aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als "Daten" bezeichnet) wir zu welchen Zwecken und in welchem Umfang verarbeiten. Die Datenschutzerklärung gilt für alle von uns durchgeführten Verarbeitungen personenbezogener Daten, sowohl im Rahmen der Erbringung unserer Leistungen als auch insbesondere auf unseren Webseiten, in mobilen Applikationen sowie innerhalb externer Onlinepräsenzen, wie z. B. unserer Social-Media-Profile (nachfolgend zusammenfassend bezeichnet als "Onlineangebot").</p>
@@ -81,12 +82,30 @@ E-Mail-Adresse: <p>info@physio-bewegungswerk.ch</p>
 <br>
 <br>
 </div>
+  </div>
 </template>
+
 <style scoped>
-h1,h2,p,li{
-    font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
-    
+.privacy {
+  margin-inline: auto;
+  padding-block-start: clamp(1rem, 3vw, 2.5rem);
 }
-a{
-    color: #3F63A7;
-}</style>
+
+.privacy :deep(.index) {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.privacy :deep(.index-link) {
+  display: inline-block;
+  padding-block: var(--space-1);
+}
+
+.privacy :deep(.index li::before) {
+  display: none;
+}
+
+.privacy :deep(.index li) {
+  padding-inline-start: 0;
+}
+</style>

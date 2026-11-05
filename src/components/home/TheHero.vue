@@ -1,657 +1,454 @@
-<template>
-  <BasePopUp v-if="popup">
-        <BaseCloseButton @click="popup = !popup">
-        </BaseCloseButton>
-        <div class="container scroll">
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import BaseButton from '../base/BaseButton.vue';
+import BaseIcon from '../base/BaseIcon.vue';
+import { BOOKING_URL, PRACTICE } from '@/content/practice';
 
-            <div class="row">
-                <div class="col-lg-6 relative">
-                    <div class="coverphoto_container">
-<img loading="lazy" class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
-</div>
-</div>
-                <div class="col-lg-6 relative">
-                    <div class="relative">
-                        <!-- hero -->
-                        <div class="center">
-                            <br>
-                            <span class="subtitle">"{{ selectedTeam.quote }}"</span>
-                            <br>
-                            <br>
-                            <span class="title bold blue">{{ selectedTeam.name }} </span>
-                            <br>
-                            <span class="info magenta">{{ selectedTeam.workPosition }}</span>
-                        </div>
-                        <!-- description -->
-                        <div>
-                            <br>
-                            <span class="paragraph left">{{ selectedTeam.description }}</span>
+const MAX_DEPTH_PX = 6;
 
-                            <div>
-                                
-                                <div class="info_team">
-                                    
-                                <span class="info"><IconDiploma/> {{ selectedTeam.diploma }}</span>
-                                <span class="info"><IconLanguages/> {{ selectedTeam.languages }}</span>
-                            </div>
-                                <br>
-                                <br>
-                                <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                                    @click="collapse = !collapse">
-                                    <span> Aus- und Weiterbildungen:</span>
-                                    <span class="icon blue title " v-show="!collapse">+</span>
-                                    <span class="icon icon2 blue title" v-show="collapse">-</span>
-                                </BaseButtonBlue>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <ul>
-                                            <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.education.split('•').filter(Boolean)"
-                                                :key="item.trim()">
-                                                <span class="paragraph">{{ item.trim() }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <br>
-                                <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample2" aria-expanded="false"
-                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2">
-                                    <span> Therapeutische Spezialgebiete:</span>
-                                    <span class="icon blue title " v-show="!collapse2">+</span>
-                                    <span class="icon icon2 blue title" v-show="collapse2">-</span>
-                                </BaseButtonBlue>
+defineEmits(['select-person']);
 
-                                <div class="collapse" id="collapseExample2">
-                                    <div class="card card-body">
-                                        <ul>
-                                            <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.specialties.split('•').filter(Boolean)"
-                                                :key="item.trim()">
-                                                <span class="paragraph">{{ item.trim() }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
+const hero = ref(null);
+const depth = ref(null);
+// The sharper colour layers only serve mouse users, so touch devices skip them.
+const hasPrecisePointer = ref(false);
+let reducedMotion = true;
+let frame = null;
+let pointerX = 0;
 
-                </div>
-                <BaseContactBox v-if="selectedTeam.linkedIn !== null || selectedTeam.email !== null || selectedTeam.phone !== null">
-              
-                    <IconLinkedIn v-if="selectedTeam.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.linkedIn" />
-                    <IconEmail v-if="selectedTeam.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.email" />
-                    <IconPhone v-if="selectedTeam.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.phone" />
-
-            </BaseContactBox>
-            </div>
-        </div>
-    </BasePopUp>
-  <div class="hero ">
-    <BaseBox class=" box_hero center_mini_mobile" :class="{'center': mobile822}" >
-      <div class="img_contaner">
-        <picture>
-          <source type="image/avif" srcset="../../assets/images/hero/hero-team-828.avif 828w, ../../assets/images/hero/hero-team-1280.avif 1280w, ../../assets/images/hero/hero-team-1920.avif 1920w, ../../assets/images/hero/hero-team-2560.avif 2560w" sizes="(max-width: 699px) 170vw, (max-width: 990px) 150vw, 110vw">
-          <source type="image/webp" srcset="../../assets/images/hero/hero-team-828.webp 828w, ../../assets/images/hero/hero-team-1280.webp 1280w, ../../assets/images/hero/hero-team-1920.webp 1920w, ../../assets/images/hero/hero-team-2560.webp 2560w" sizes="(max-width: 699px) 170vw, (max-width: 990px) 150vw, 110vw">
-          <img class="img_hero_background" src="../../assets/images/hero/hero-team-1280.webp" alt="" fetchpriority="high" decoding="async">
-        </picture>
-        <div class="marit_hover_container">
-          <div class="marit_hover" @mouseover="isMaritHovered = true" @mouseout="isMaritHovered = false">
-            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupByName('Marit Hesse')">Marit Hesse</BaseButtonBlue>
-          </div>
-
-
-          <div class="dominik_hover" @mouseover="isDominikHovered = true" @mouseout="isDominikHovered = false">
-            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isDominikHovered }" @click="openPopupByName('Dominik Geissberger')">Dominik Geissberger
-            </BaseButtonBlue>
-          </div>
-        </div>
-
-        <img loading="lazy" :class="{ 'active': isMaritHovered }" class="img_marit" src="../../assets/images/hero_img_physio_marit.webp"
-          alt="">
-
-        <img loading="lazy" :class="{ 'active': isDominikHovered }" class="img_dominik"
-          src="../../assets/images/hero_img_physio_dominik.webp" alt="">
-
-      </div>
-      <div class="text_hero_container">
-        <span class="megatitle blue block z-1 position-relative">Willkommen beim <span class="semibold">Physio Bewegungswerk</span></span>
-        <div class="title_box_hero ">
-          <span class="ultramegatitle blue bold block z-1 position-relative">Bleib beweglich</span>
-          <div class="left text_hero">
-            <span class="paragraph  z-1 position-relative hero_text">Gerne stellen wir uns vor…</span>
-              <br>
-              <div class="hero_btns">
-              <RouterLink  to="/uberuns">
-            <BaseButtonBlue class=" btn_mehr z-1 position-relative">mehr</BaseButtonBlue>
-          </RouterLink>
-          <BaseButtonMag class="termin_btn"  @click="goToLink()">Termin vereinbaren</BaseButtonMag>
-        </div>
-          </div>
-
-        </div>
-      </div>
-    </BaseBox>
-  </div>
-</template>
-<script>
-import IconDiploma from '../icon/IconDiploma.vue';
-import IconLanguages from '../icon/IconLanguages.vue';
-import IconLinkedIn from '../icon/IconLinkedIn.vue';
-import IconEmail from '../icon/IconEmail.vue';
-import IconPhone from '../icon/IconPhone.vue';
-import BaseContactBox from '../base/BaseContactBox.vue';
-import { teams } from '@/services/cms';
-export default {
-      
-  components: {
-        IconLinkedIn,
-        IconEmail,
-        IconPhone,
-        IconDiploma,
-        IconLanguages,
-        BaseContactBox
-    },
-  data() {
-    return {
-      LinkAppointment: 'https://onlinecalendar.medidoc.ch/BookAppointment?cgid=GLLYOUHTXUK45FADLLmoKA&ssid=gUj7CbnQGk.1KiYHwBRBVg',
-      isMaritHovered: false,
-      isDominikHovered: false,
-      mobile822:false,
-            teams: [],
-            popup: false,
-            selectedTeam: null,
-            collapse: false,
-            collapse2: false,
-            url: null,
-    };
-  },
-  mounted() {
-        this.teams = teams;
-    },
-  created() {
-    // Add an event listener to monitor window resize
-    window.addEventListener('resize', this.handleWindowResize);
-    
-    // Call the handler initially to set the initial value
-    this.handleWindowResize();
-  },
-  methods: {
-    handleWindowResize() {
-      // Get the current viewport width
-      const viewportWidth = window.innerWidth;
-      
-      // Check if the viewport width is less than or equal to 822px
-      if (viewportWidth <= 990) {
-        // Update the mobile822 data property to false
-        this.mobile822 = false;
-      } else {
-        // Update the mobile822 data property to true
-        this.mobile822 = true;
-      }
-    },
-    goToLink() {
-    window.open(this.LinkAppointment, '_blank');
-  },
-    openPopupByName(name) {
-  const team = this.teams.find((t) => t.name === name);
-  if (team) {
-    this.selectedTeam = team;
-    this.popup = true;
-  }
+function applyDepth() {
+  frame = null;
+  depth.value?.style.setProperty('--depth-x', `${pointerX.toFixed(1)}px`);
 }
-  },
-  beforeUnmount() {
-    // Remove the event listener when the component is destroyed
-    window.removeEventListener('resize', this.handleWindowResize);
-  },
 
-};
+function onPointerMove(event) {
+  if (reducedMotion || event.pointerType !== 'mouse' || !hero.value) return;
+  const { left, width } = hero.value.getBoundingClientRect();
+  pointerX = (0.5 - (event.clientX - left) / width) * 2 * MAX_DEPTH_PX;
+  if (frame === null) frame = requestAnimationFrame(applyDepth);
+}
+
+function onPointerLeave() {
+  pointerX = 0;
+  if (frame === null) frame = requestAnimationFrame(applyDepth);
+}
+
+onMounted(() => {
+  hasPrecisePointer.value = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+});
+
+onBeforeUnmount(() => {
+  if (frame !== null) cancelAnimationFrame(frame);
+});
 </script>
 
+<template>
+  <section ref="hero" class="hero" aria-labelledby="hero-title" @pointermove="onPointerMove" @pointerleave="onPointerLeave">
+    <div class="hero__text">
+      <p class="hero__eyebrow">Willkommen beim <strong>Physio Bewegungswerk</strong></p>
+      <h1 id="hero-title" class="t-display hero__title">Bleib <br />beweglich</h1>
+      <p class="t-lead hero__lead">Gerne stellen wir uns vor…</p>
+      <div class="hero__actions">
+        <BaseButton variant="accent" arrow :href="BOOKING_URL">Termin vereinbaren</BaseButton>
+        <BaseButton variant="secondary" to="/uberuns">Mehr über uns</BaseButton>
+      </div>
+      <ul class="hero__facts">
+        <li>
+          <a :href="PRACTICE.mapsUrl" target="_blank" rel="noopener noreferrer">
+            <BaseIcon name="map-pin" :size="18" />{{ PRACTICE.address }}
+          </a>
+        </li>
+        <li>
+          <a :href="PRACTICE.phone.href"><BaseIcon name="phone" :size="18" />{{ PRACTICE.phone.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero__stage">
+      <div ref="depth" class="hero__depth">
+        <picture class="hero__base">
+          <source
+            type="image/avif"
+            srcset="
+              @/assets/images/hero/hero-team-828.avif   828w,
+              @/assets/images/hero/hero-team-1280.avif 1280w,
+              @/assets/images/hero/hero-team-1920.avif 1920w,
+              @/assets/images/hero/hero-team-2560.avif 2560w
+            "
+            sizes="(max-width: 47.99rem) 175vw, (max-width: 59.99rem) 130vw, 115vw"
+          />
+          <source
+            type="image/webp"
+            srcset="
+              @/assets/images/hero/hero-team-828.webp   828w,
+              @/assets/images/hero/hero-team-1280.webp 1280w,
+              @/assets/images/hero/hero-team-1920.webp 1920w,
+              @/assets/images/hero/hero-team-2560.webp 2560w
+            "
+            sizes="(max-width: 47.99rem) 175vw, (max-width: 59.99rem) 130vw, 115vw"
+          />
+          <img
+            src="@/assets/images/hero/hero-team-1280.webp"
+            alt="Marit Hesse und Dominik Geissberger in ihrer Praxis, gemeinsam an einem Gymnastikball"
+            width="2560"
+            height="1643"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+
+        <template v-if="hasPrecisePointer">
+          <picture class="hero__overlay hero__overlay--marit">
+            <source
+              type="image/avif"
+              srcset="
+                @/assets/images/hero/hero-marit-1280.avif 1280w,
+                @/assets/images/hero/hero-marit-1920.avif 1920w,
+                @/assets/images/hero/hero-marit-2560.avif 2560w
+              "
+              sizes="115vw"
+            />
+            <img src="@/assets/images/hero/hero-marit-1280.webp" alt="" width="2560" height="1643" loading="lazy" />
+          </picture>
+          <picture class="hero__overlay hero__overlay--dominik">
+            <source
+              type="image/avif"
+              srcset="
+                @/assets/images/hero/hero-dominik-1280.avif 1280w,
+                @/assets/images/hero/hero-dominik-1920.avif 1920w,
+                @/assets/images/hero/hero-dominik-2560.avif 2560w
+              "
+              sizes="115vw"
+            />
+            <img src="@/assets/images/hero/hero-dominik-1280.webp" alt="" width="2560" height="1643" loading="lazy" />
+          </picture>
+        </template>
+
+        <!-- Each person is one large button; the two meet with no gap, so moving
+             between them crossfades instead of dropping the emphasis. -->
+        <button
+          class="hero__person hero__person--marit"
+          type="button"
+          aria-label="Marit Hesse, Profil öffnen"
+          @click="$emit('select-person', 'Marit Hesse')"
+        >
+          <span class="hero__chip">
+            Marit<span class="hero__chip-rest">&nbsp;Hesse</span>
+            <BaseIcon class="hero__chip-arrow" name="arrow-right" :size="16" />
+          </span>
+        </button>
+        <button
+          class="hero__person hero__person--dominik"
+          type="button"
+          aria-label="Dominik Geissberger, Profil öffnen"
+          @click="$emit('select-person', 'Dominik Geissberger')"
+        >
+          <span class="hero__chip">
+            Dominik<span class="hero__chip-rest">&nbsp;Geissberger</span>
+            <BaseIcon class="hero__chip-arrow" name="arrow-right" :size="16" />
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+</template>
 
 <style scoped>
 .hero {
-  width: 100%;
-  top: -80px;
-  height: 100vh;
-  max-height: 1100px;
+  --hero-h: clamp(34rem, min(56vw, 100vh - var(--header-h) - 2 * var(--header-offset) - 3 * var(--gap)), 54rem);
+  --hero-h: clamp(34rem, min(56vw, 100svh - var(--header-h) - 2 * var(--header-offset) - 3 * var(--gap)), 54rem);
+  --stage-width: 172%;
   position: relative;
-
-}
-
-
-.box_hero {
-  padding-top: 140px;
-  position: relative;
-  overflow: hidden;
-}
-
-.text_hero {
-  width: 60%;
-}
-
-.title_box_hero {
-  display: inline-block;
-}
-
-.img_hero_background {
-  width: 110vw;
-  position: absolute;
-  bottom: -130px;
-  right: -100px;
-  opacity: 0.8;
-  z-index: 0;
-}
-
-.img_marit,
-.img_dominik {
-  width: 110vw;
-  position: absolute;
-bottom: -130px;
-  right: -100px;
-opacity: 0.3;   /* estaba en 3 */
-
-  transition: opacity 0.3s ease-in-out;
-  z-index: 0;
-}
-
-.marit_hover_container {
-  width: inherit;
-  height: inherit;
-  position: relative;
-}
-
-.marit_hover {
-  background-color: transparent;
-  width: 15%;
-  aspect-ratio: 1/1.8;
-  position: absolute;
-  right: 38%;
-  bottom: 100px;
-display: flex;
-flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-  z-index: 2;
-
-  transition: opacity 0.3s ease-in-out;
-
-}
-
-.dominik_hover_container {
-  width: inherit;
-  height: inherit;
-  position: relative;
-}
-
-.dominik_hover {
-  width: 21%;
-aspect-ratio: 1/1.5;
-  position: absolute;
-
-  right: 5%;
-  bottom: 100px;
-  z-index: 2;
   display: flex;
   flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-  transition: opacity 0.3s ease-in-out;
-
-
+  /* clip, not hidden: focus must never be able to scroll the artwork sideways. */
+  overflow: hidden;
+  overflow: clip;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--surface) 0%, #edf1f9 100%);
 }
 
-.hero_team_button {
-  margin-top: 100px;
-  width: fit-content;
-  height: fit-content;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 2;
-  color: white !important; ;
-}
-
-.active {
-  opacity: 1 !important;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.img_contaner {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  right: -100px;
-  bottom: -100px;
-}
-.btn_mehr{
-  margin-top: 50px;
-
-
-}
-.text_hero{
+.hero__text {
   position: relative;
-}
-.hero_text{
-  margin-left: 10px;
-}
-.termin_btn{
-    display: none;
-    margin-top: 10px;
-}
-@media (max-width:1400px){
-
-
-.img_hero_background {
-
-  bottom: 0px;
-  right: -50px;
-
-}
-.img_marit,
-.img_dominik {
-
-bottom: 0px;
-right: -50px;
-
-}
-.img_contaner {
-
-  bottom: 0px;
-  right: -50px;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+  padding: clamp(1.75rem, 4vw, 3rem) var(--card-pad) 0;
 }
 
-
-.marit_hover {
-  width: 15%;
-  aspect-ratio: 1/2.4;
-  right: 38%;
-  bottom: 100px;
+.hero__text > * {
+  animation: hero-rise var(--duration-slower) var(--ease-out) both;
 }
-.dominik_hover {
-  width: 21%;
-aspect-ratio: 1/2.25;
-  right: 6%;
-  bottom: 0px;
+
+.hero__text > :nth-child(2) {
+  animation-delay: 60ms;
 }
+
+.hero__text > :nth-child(3) {
+  animation-delay: 120ms;
 }
-@media (max-width:1154px){
-  .btn_mehr{
-  margin-top: 20px;
 
-
+.hero__text > :nth-child(4) {
+  animation-delay: 180ms;
 }
-.img_hero_background {
 
-bottom: 0px;
-right: 0px;
-
-
+.hero__text > :nth-child(5) {
+  animation-delay: 240ms;
 }
-.img_marit,
-.img_dominik {
 
-bottom: 0px;
-right: 0px;
-
+:global(html.intro-active) .hero__text > *,
+:global(html.intro-active) .hero__stage {
+  animation-play-state: paused;
 }
-.img_contaner {
 
-bottom: 0px;
-right: 0px;
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
 }
-.dominik_hover {
 
-aspect-ratio: 1/2.55;
-right: 10%;
-
+.hero__eyebrow {
+  color: var(--blue-700);
+  font-size: var(--text-lead);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  text-wrap: balance;
 }
-.marit_hover {
 
-  aspect-ratio: 1/2.7;
-  right: 42%;
+.hero__eyebrow strong {
+  font-weight: var(--weight-bold);
+}
 
+.hero__title {
+  color: var(--color-brand);
 }
-}
-@media (max-width: 990px) {
-  .hero_btns{
+
+.hero__actions {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: 290px;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-start: var(--space-1);
 }
-.termin_btn {
-  font-size: 14px;
+
+.hero__facts {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0 var(--space-5);
+  color: var(--color-text-soft);
+  font-size: var(--text-small);
 }
-.btn_mehr{
-  font-size: 14px !important;
+
+.hero__facts a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
 }
-  .termin_btn{
-        display: inline-block;
-    }
-  .hero_text{
-  margin-left: 0px;
+
+.hero__facts svg {
+  color: var(--color-brand);
 }
-  .text_hero{
-    margin-top: 10px;
+
+@media (hover: hover) and (pointer: fine) {
+  .hero__facts a:hover {
+    color: var(--blue-700);
   }
-  .btn_mehr{
-  margin-top: 10px;
-
-
 }
-  .img_hero_background {
-width: auto;
-height: 100%;
-bottom: -50px;
-right: -10vw;
 
-
+/* The stage shares its box with the people, so percentages stay in step with
+   the artwork at every width. People occupy roughly 47% to 93% of its width. */
+.hero__stage {
+  position: relative;
+  flex: none;
+  width: var(--stage-width);
+  aspect-ratio: 2560 / 1643;
+  margin-block-start: calc(var(--stage-width) * -0.15);
+  margin-inline-start: calc(50% - var(--stage-width) * 0.705);
+  animation: hero-stage 900ms var(--ease-out) both;
 }
-  .img_marit,
-.img_dominik {
-  width: auto;
-  height: 100%;
-  right: -10vw;
-bottom: -50px;
-opacity: 1; 
 
+@keyframes hero-stage {
+  from {
+    transform: translateY(1.25rem);
+  }
 }
-.img_contaner {
-  width: auto;
-  height: 100%;
-bottom: -50px;
-right: -10vw;
 
+.hero__depth {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(var(--depth-x, 0), 0, 0);
+  transition: transform var(--duration-slower) var(--ease-out);
 }
-.hero_team_button {
 
-display: none;
-
-}
-.ultramegatitle{
+.hero__base img,
+.hero__overlay img {
   width: 100%;
-  font-size:65px;
+  height: 100%;
 }
+
+.hero__base {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transition: opacity var(--duration-slow) var(--ease-out);
 }
-@media (max-width: 699px){
-  /* .hero{
-    max-height: 800px;
-  } */
-  .text_hero{
-width: 100%;
+
+.hero__overlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.hero__person {
+  position: absolute;
+  bottom: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero__person--marit {
+  left: 46.5%;
+  width: 22.5%;
+  top: 36%;
+}
+
+.hero__person--dominik {
+  left: 69%;
+  width: 25%;
+  top: 31%;
+}
+
+.hero__person:focus-visible {
+  outline: none;
+}
+
+.hero__chip {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(0.625rem, 2.2vw, 1.75rem);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.95);
+  box-shadow: var(--shadow-sm);
+  color: var(--blue-950);
+  font-size: 0.8125rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.hero__chip-rest {
+  display: none;
+}
+
+.hero__chip-arrow {
+  margin-inline-start: 0.375rem;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.hero__person:focus-visible .hero__chip {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+.hero__person:active .hero__chip,
+.hero__person:focus-visible .hero__chip {
+  background: var(--color-brand);
+  color: var(--white);
+}
+
+/* Emphasis: the room and the other person recede, the chosen person stays
+   crisp and in full colour. Opacity alone keeps the two layers aligned. */
+@media (hover: hover) and (pointer: fine) {
+  .hero__depth:has(.hero__person:hover) .hero__base,
+  .hero__depth:has(.hero__person:focus-visible) .hero__base {
+    opacity: 0.5;
   }
-  .ultramegatitle{
 
-  font-size:8.9vw;
-}
-.megatitle{
-  font-size:5vw;
-}
-.img_hero_background {
-
-height: 110vw;
-
-right: 5%;
-
-
-}
-  .img_marit,
-.img_dominik {
-
-  height: 110vw;
-  right: 5%;
-
-
-}
-.img_contaner {
-  width: auto;
-  height: 110vw;
-
-
-}
-.center_mini_mobile{
-  text-align: center !important;
-}
-}
-@media (max-width: 500px){
-  .hero{
-  height: 94vh;
+  .hero__depth:has(.hero__person--marit:hover) .hero__overlay--marit,
+  .hero__depth:has(.hero__person--marit:focus-visible) .hero__overlay--marit,
+  .hero__depth:has(.hero__person--dominik:hover) .hero__overlay--dominik,
+  .hero__depth:has(.hero__person--dominik:focus-visible) .hero__overlay--dominik {
+    opacity: 1;
   }
-  .img_contaner {
 
-    bottom: 50px;
+  .hero__person:hover .hero__chip {
+    background: var(--color-brand);
+    color: var(--white);
+  }
 
-
+  .hero__person:hover .hero__chip-arrow {
+    transform: translateX(3px);
+  }
 }
-  
+
+@media (min-width: 26.5rem) {
+  .hero__chip-rest {
+    display: inline;
+  }
 }
-/* @media (max-width: 500px){
+
+/* Tablet portrait: text above, people set right of centre to leave it breathing. */
+@media (min-width: 48rem) {
   .hero {
+    --stage-width: 128%;
+  }
 
-  max-height: 600px;
+  .hero__text {
+    gap: var(--space-5);
+  }
 
+  .hero__facts {
+    display: flex;
+  }
 
-} 
-}*/
-@media (max-height: 950px) and (min-width: 990px) {
-  .img_contaner {
+  .hero__stage {
+    margin-block-start: calc(var(--stage-width) * -0.2);
+    margin-inline-start: calc(66% - var(--stage-width) * 0.705);
+  }
 
-    bottom: -200px;
+  .hero__chip {
+    font-size: 0.875rem;
   }
 }
 
-@media (max-height: 770px) and (min-width: 990px) {
-  .img_contaner {
-
-    bottom: -300px;
+/* From tablet landscape the classic composition returns: text left, people right. */
+@media (min-width: 60rem) {
+  .hero {
+    --stage-width: min(116%, var(--hero-h) * 2.15);
+    justify-content: center;
+    min-height: var(--hero-h);
   }
 
+  .hero__text {
+    width: min(50%, 42rem);
+    padding-block: var(--card-pad);
+  }
 
-}
-
-@media(max-width: 360px){
-  .btn_mehr{
-  font-size: 12px !important;
-}
-}
-
-
-
-
-.box {
-    height: 100px !important;
-}
-
-.block-center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-}
-
-.dropdown {
-    display: block;
-    width: 100%;
-    position: relative;
-}
-
-.icon {
+  .hero__stage {
     position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
+    right: -5.5%;
+    bottom: 0;
+    margin: 0;
+  }
 
-.icon2 {
-    top: 40%;
-}
-
-.card {
-    background-color: transparent;
-    border-color: transparent;
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.contact {
-    position: absolute;
-    border-radius: 50px;
-    background: rgba(63, 99, 167, 0.20);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    width: 50%;
-    height: 93px;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-
-}
-
-.scroll {
-    overflow-y: scroll;
-    height: 100% !important;
-}
-.info_team{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-.coverphoto_container{
-    width: 100%;
-    aspect-ratio: 1/1.22;
-    overflow: hidden;
-    border-radius: 40px;
-}
-.img_coverphoto{
-    width: 100%;
-    overflow: hidden;
-}
-@media (max-width: 990px){
-    .coverphoto_container{
-    width: 50vw;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-}
-.contact{
-    width: 80%;
-}
+  .hero__base {
+    mask-image: linear-gradient(90deg, transparent 20%, #000 46%);
+  }
 }
 </style>

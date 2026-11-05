@@ -1,260 +1,93 @@
-<template>
-    <BaseBox class="basebox">
-<div class="center">
-    <span class="title bold blue">Unsere Werte</span>
-    <br>
-    <br>
-</div>
-<div class="illustration" :class="{'safari': isSafari}">
-<IconExpertiseContainer class="illu_background"  v-if="viewportWidth > 800"></IconExpertiseContainer>
-<IconExpertiseContainerVertical class="illu_background"  v-if="viewportWidth < 800"></IconExpertiseContainerVertical>
-<img loading="lazy" class="icon icon_1" src="../../assets/images/icon_expertise_1.svg" alt=" expertise_1">
-<IconLineDot v-if="viewportWidth > 800" class="icon icon_1 line"/>
-    <div class="center illu_text text1" v-if="viewportWidth > 800">
-        <span class="paragraph blue bold">Wertschätzung</span>
-        <br>
-        <div class="left">
-            <span class="info blue">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir auf die individuellen Ziele unserer Patienten eingehen.</span>
-        </div>
-    </div>
-<BaseButtonBlue @click="popup1 = !popup1" v-if="viewportWidth < 800" class=" icon icon_1 margin_button"><span class="info">Wertschätzung</span></BaseButtonBlue>
-<img loading="lazy" class="icon icon_2" src="../../assets/images/icon_expertise_2.svg" alt="expertise_2">
-<div class="center illu_text text2" v-if="viewportWidth > 800">
-        <span class="paragraph blue bold">Kreativität</span>
-        <br>
-        <div class="left">
-            <span class="info blue">Durch die fortlaufende Weiterbildung unserer Therapeuten und ihre <strong>kreative</strong> Herangehensweise an die Behandlung gewährleisten wir eine professionelle Physiotherapie gemäss den aktuellen Standards.</span>
-        </div>
-    </div>
-<IconLineDot v-if="viewportWidth > 800" class="icon icon_2 line"/>
-<BaseButtonBlue @click="popup2 = !popup2" v-if="viewportWidth < 800" class=" icon icon_2 margin_button"><span class="info">Kreativität</span></BaseButtonBlue>
-<img loading="lazy" class="icon icon_3" src="../../assets/images/icon_expertise_3.svg" alt="expertise_3">
-<div class="center illu_text text3" v-if="viewportWidth > 800">
-        <span class="paragraph blue bold">Vertrauen und Respekt</span>
-        <br>
-        <div class="left">
-            <span class="info blue">Unsere Patienten und deren <strong>Vertrauen</strong> stehen für uns immer im Mittelpunkt der Therapie.
-Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung und eine offene Kommunikation zwischen Patienten und Therapeuten elementar.</span>
-        </div>
-    </div>
-<IconLineDot v-if="viewportWidth > 800" class="icon icon_3 line"/>
-<BaseButtonBlue @click="popup3 = !popup3" v-if="viewportWidth < 800" class=" icon icon_3 margin_button"><span class="info">Vertrauen und Respekt</span></BaseButtonBlue>
-</div>
-
-
-
-
-<Teleport to="body">
-<BasePopUp v-if="popup1" :theheight="'fit-content'">
-    <BaseCloseButton @click="popup1 = !popup1"/>
-    <br>
-        <div class="center_flex height">
-            <span class="title bold blue">Wertschätzung</span>
-            <br>
-            <span class="paragraph">Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir kreativ auf die individuellen Ziele unserer Patienten eingehen.</span>
-            <br>
-
-        </div>
-        
-</BasePopUp>
-</Teleport>
-<Teleport to="body">
-<BasePopUp v-if="popup2" :theheight="'fit-content'">
-    <BaseCloseButton @click="popup2 = !popup2"/>
-    <br>
-    <div class="center_flex height">
-            <span class="title bold blue">Kreativität</span>
-            <br>
-            <span class="paragraph">Durch die fortlaufende Weiterbildung unserer Therapeuten und ihre <strong>kreative</strong> Herangehensweise an die Behandlung gewährleisten wir eine professionelle Physiotherapie gemäss den aktuellen Standards.</span>
-            <br>
-
-        </div>
-</BasePopUp>
-</Teleport>
-<Teleport to="body">
-<BasePopUp v-if="popup3"  :theheight="'fit-content'">
-    <BaseCloseButton @click="popup3 = !popup3" />
-    <br>
-        <div class="center_flex height">
-            <span class="title bold blue">Vertrauen und Respekt</span>
-            <br>
-            <span class="paragraph">Unsere Patienten und deren <strong>Vertrauen</strong> stehen für uns immer im Mittelpunkt der Therapie.
-Für eine erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung und eine offene Kommunikation zwischen Patienten und Therapeuten elementar.</span>
-            <br>
-
-        </div>
-       
-</BasePopUp>
-</Teleport>
-
-    </BaseBox>
-</template>
-<script>
-
-
-import IconExpertiseContainer from '../icon/IconExpertiseContainer.vue';
-import IconExpertiseContainerVertical from '../icon/IconExpertiseContainerVertical.vue';
-import IconLineDot from '../icon/IconLineDot.vue';
-
-export default{
-components:{
-    IconExpertiseContainer,
-    IconExpertiseContainerVertical,
-    IconLineDot,
-   
-
-},
-data() {
-    return {
-      viewportWidth: window.innerWidth,
-      popup1:false,
-      popup2:false,
-      popup3:false,
-      isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
-    };
-  },
-  created() {
-    // Listen for window resize events to update viewportWidth
-    window.addEventListener('resize', this.handleResize);
-  },
-  unmounted() {
-    // Remove the resize event listener when the component is destroyed
-    window.removeEventListener('resize', this.handleResize);
-  },
-  methods: {
-    handleResize() {
-      // Update viewportWidth when the window is resized
-      this.viewportWidth = window.innerWidth;
-    },
-  },
-};
+<script setup>
+import BaseIcon from '../base/BaseIcon.vue';
 </script>
 
+<template>
+  <section class="values" aria-labelledby="values-title">
+    <div class="section-head">
+      <h2 id="values-title" class="t-h2">Unsere Werte</h2>
+    </div>
+    <ul class="values__grid">
+      <li v-reveal class="values__card values__card--wide card card--blue">
+        <span class="values__icon"><BaseIcon name="heart" :size="24" /></span>
+        <h3 class="t-h3">Wertschätzung</h3>
+        <p>
+          Wir pflegen eine <strong>wertschätzende</strong> und unterstützende Umgebung, in der wir auf die individuellen
+          Ziele unserer Patienten eingehen.
+        </p>
+      </li>
+      <li v-reveal="60" class="values__card card">
+        <span class="values__icon"><BaseIcon name="spark" :size="24" /></span>
+        <h3 class="t-h3">Kreativität</h3>
+        <p>
+          Durch die fortlaufende Weiterbildung unserer Therapeuten und ihre <strong>kreative</strong> Herangehensweise an
+          die Behandlung gewährleisten wir eine professionelle Physiotherapie gemäss den aktuellen Standards.
+        </p>
+      </li>
+      <li v-reveal="120" class="values__card card">
+        <span class="values__icon"><BaseIcon name="shield" :size="24" /></span>
+        <h3 class="t-h3">Vertrauen und Respekt</h3>
+        <p>
+          Unsere Patienten und deren <strong>Vertrauen</strong> stehen für uns immer im Mittelpunkt der Therapie. Für eine
+          erfolgreiche Therapie ist eine <strong>respektvolle</strong> Beziehung und eine offene Kommunikation zwischen
+          Patienten und Therapeuten elementar.
+        </p>
+      </li>
+    </ul>
+  </section>
+</template>
+
 <style scoped>
-.basebox{
-    height: 1000px;
-}
-.illustration{
-    width: fit-content;
-    position: relative;
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-.illu_background{
-    width: 100%;
-    max-height: 1500px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
-.illu_text{
-    width: 22vw;
-    position: absolute;
-    top: 140%;
-}
-.text1{
-    left: -2%;
-}
-.text2{
-    left: 50%;
-    transform: translateX(-50%);
-}
-.text3{
-    right: -2%;
-}
-.icon{
-    position: absolute;
-    width: 15%;
-}
-.icon_1{
- 
-    width: 15%;
-    left: 6%;
-    top: 45%;
-    transform: translateY(-50%);
-
-}
-.icon_2{
- 
- width: 15%;
- left: 50%;
- top: 45%;
- transform: translate(-50%, -50%);
-
-}
-.line{
-    top: 120% !important;
-}
-.icon_3{
- 
- width: 15%;
- right: 6%;
- top: 45%;
- transform: translateY(-50%);
-
-}
-.margin_button{
-    margin-top: 45%;
-}
-.height{
-    height: 100%;
-}
-    .safari{
-    width: 1306px !important;
+.values__grid {
+  display: grid;
+  gap: var(--gap);
 }
 
-@media (max-width:1490px){
-    .line{
-    top: 33vw !important;
+.values__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text-soft);
+  text-wrap: pretty;
 }
-.safari{
-    width: 100% !important;
-}
-.illu_text{
 
-    top: 40vw;
+.values__card strong {
+  color: var(--blue-950);
 }
-}
-@media (max-width:800px){
-    .basebox{
-    height: inherit;
-}
-    .illu_background{
-height: inherit;
-}
-.illustration{
-    width: 100%;
-    position: relative;
-    display: block;
-    margin-left: 0px;
-    margin-right: auto;
 
+.values__card--wide {
+  color: var(--blue-950);
 }
-.icon{
-    width: 50%;
+
+.values__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-block-end: var(--space-3);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--color-brand);
 }
-.icon_1{
 
-    left: 50%;
-    top: 8%;
-    transform: translateX(-50%) !important;
+@media (min-width: 48rem) {
+  .values__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
+  .values__card--wide {
+    grid-column: 1 / -1;
+  }
 }
-.icon_2{
 
-left: 50%;
-top: 42%;
-transform: translateX(-50%) !important;
+@media (min-width: 60rem) {
+  .values__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
+  .values__card--wide {
+    grid-column: auto;
+  }
 }
-.icon_3{
-left: 50%;
-top:80%;
-
-transform: translateX(-50%) !important;
-
-}
-}</style>
+</style>

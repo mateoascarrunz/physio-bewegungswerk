@@ -1,32 +1,86 @@
+<script setup>
+import { PRACTICE } from '@/content/practice';
+</script>
+
 <template>
-    <div class="component center">
-        <span class="title blue bold">Impressum</span>
-        <br>
-        <br>
-        <span class="paragraph bold blue">Physio Bewegungswerk GmbH</span>
-        <br>
-        <span class="paragraph">Bergstrasse 3 <br>
-8625 Gossau <br>
-Schweiz</span>
-<br>
-<br>
-<span class="paragraph bold">E-Mail:</span><span class="paragraph"> info@physio-bewegungswerk.ch</span>
-<br>
-<span class="paragraph bold">Telefon:</span><span class="paragraph"> 044 543 63 68</span>
-<br>
-<span class="paragraph bold">Internet:</span><span class="paragraph"> www.physio-bewegungswerk.ch</span>
-<br>
-<br>
-<span class="paragraph bold">Vertretungsberechtigte Personen:
-</span>
-<br>
-<span class="paragraph">Geschäftsführer: D. Geissberger, M. Hesse</span>
-<br>
-<br>
-<span class="bold paragraph">UID:</span><span class="paragraph"> CHE-463.407.674</span>
-<br>
-<br>
-<br>
-<br>
+  <div class="page shell">
+    <div class="legal">
+      <h1 class="t-h1">Impressum</h1>
+      <dl class="legal__facts">
+        <div>
+          <dt>Unternehmen</dt>
+          <dd>
+            {{ PRACTICE.company }}<br />
+            {{ PRACTICE.street }}<br />
+            {{ PRACTICE.city }}<br />
+            Schweiz
+          </dd>
+        </div>
+        <div>
+          <dt>E-Mail</dt>
+          <dd><a :href="PRACTICE.email.href">{{ PRACTICE.email.label }}</a></dd>
+        </div>
+        <div>
+          <dt>Telefon</dt>
+          <dd><a :href="PRACTICE.phone.href">{{ PRACTICE.phone.label }}</a></dd>
+        </div>
+        <div>
+          <dt>Internet</dt>
+          <dd><a href="https://www.physio-bewegungswerk.ch">www.physio-bewegungswerk.ch</a></dd>
+        </div>
+        <div>
+          <dt>Vertretungsberechtigte Personen</dt>
+          <dd>Geschäftsführer: D. Geissberger, M. Hesse</dd>
+        </div>
+        <div>
+          <dt>UID</dt>
+          <dd>CHE-463.407.674</dd>
+        </div>
+      </dl>
     </div>
+  </div>
 </template>
+
+<style scoped>
+.legal {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--container-reading);
+  margin-inline: auto;
+  padding-block-start: clamp(1rem, 3vw, 2.5rem);
+}
+
+.legal__facts {
+  display: grid;
+  border-block-start: 1px solid var(--line);
+}
+
+.legal__facts div {
+  display: grid;
+  gap: var(--space-1) var(--space-5);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--line);
+}
+
+.legal__facts dt {
+  color: var(--color-text-faint);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.legal__facts dd {
+  color: var(--blue-950);
+  font-weight: var(--weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.legal__facts a {
+  color: var(--color-brand);
+}
+
+@media (min-width: 40rem) {
+  .legal__facts div {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+</style>

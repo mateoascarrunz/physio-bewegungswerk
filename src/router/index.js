@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { applyPageMeta } from './pageMeta'
 
+// Keeps the address as typed while showing the not found page.
+function notFound(to) {
+  return { name: 'NotFound', params: { catchAll: to.path.slice(1).split('/') }, query: to.query, hash: to.hash }
+}
+
+const PAGE_LEAVE_MS = 120
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,21 +29,26 @@ const router = createRouter({
     {
       path: '/behandlungstechniken',
       name: 'behandlungstechniken',
-      meta: {title: "Therapieangebot - Physio Bewegungswerk",description: "Herzlich willkommen beim Phyiso Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen."},
+      meta: {title: "Therapieangebot - Physio Bewegungswerk",description: "Herzlich willkommen beim Physio Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen."},
       component: () => import('../views/BehandlungstechnikenView.vue'),
     },
     {
       path: '/behandlungstechniken/:serviceid',
       name: 'behandlungstechnikenitem',
-      meta: { title: 'Therapieangebot - Physio Bewegungswerk', description: "Herzlich willkommen beim Phyiso Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen." },
-      component: () => import('../views/BehandlungstechnikenView.vue'),
+      props: true,
+      async beforeEnter(to) {
+        const { findService } = await import('../content/services.js')
+        if (!findService(to.params.serviceid)) return notFound(to)
+      },
+      meta: { title: 'Therapieangebot - Physio Bewegungswerk', description: "Herzlich willkommen beim Physio Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen." },
+      component: () => import('../views/ServiceDetailView.vue'),
 
     },
 
     {
       path: '/uberuns',
       name: 'uberuns',
-      meta: {title: "Über uns - Physio Bewegungswerk",description: "In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel. Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen. um gemeinsam Strategien zu gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen."},
+      meta: {title: "Über uns - Physio Bewegungswerk",description: "In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel. Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen, um gemeinsam Strategien zu gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen."},
 
       component: () => import('../views/UberUnsView.vue'),
 
@@ -89,7 +101,7 @@ const router = createRouter({
       component: () => import('../views/AdminView.vue'),
     },
     { 
-      path: '/:catchAll(.*)', 
+      path: '/:catchAll(.*)*', 
       name: 'NotFound',
       meta: { title: 'Seite nicht gefunden - Physio Bewegungswerk', noindex: true },
       component: () => import('../views/404View.vue')
@@ -97,9 +109,12 @@ const router = createRouter({
     }
   ],
   scrollBehavior(to, from, savedPosition) {
-    return { top: 0 }
+    // Opening a modal only changes the query, so the page must stay where it is.
+    if (to.path === from.path) return to.hash ? { el: to.hash } : false;
+    const position = savedPosition ?? (to.hash ? { el: to.hash } : { top: 0 });
+    // Wait for the old page to fade out, so it does not jump before it leaves.
+    return new Promise((resolve) => setTimeout(() => resolve(position), PAGE_LEAVE_MS));
   },
-  
 })
 
 
