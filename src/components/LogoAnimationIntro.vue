@@ -1,32 +1,109 @@
 <template>
-    <div class="page_intro">
-<BaseLogoAnimation class="logo"></BaseLogoAnimation>
-    </div>
+  <div
+    v-if="isVisible"
+    class="page_intro"
+    :class="{ page_intro_leaving: isLeaving }"
+    @click="leave"
+    @transitionend.self="isVisible = false"
+  >
+    <div ref="logoContainer" class="logo"></div>
+  </div>
 </template>
-<script>
-import BaseLogoAnimation from './base/BaseLogoAnimation.vue';
-export default{
-    components:{
-        BaseLogoAnimation
-    },
-}</script>
-<style scoped>
-.page_intro{
-    margin-top: 0px;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-background-color: rgb(255, 255, 255);
-display: flex;
-place-content: center;
-    align-items: center;
-    z-index: 9999;  
-    transition: all ease 0.5s;
+
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+
+const SEEN_KEY = 'introSeen';
+const PLAYBACK_SPEED = 1.5;
+const MAX_DURATION_MS = 4000;
+const SKIP_EVENTS = ['wheel', 'touchmove', 'keydown'];
+
+function readSeen() {
+  try {
+    return sessionStorage.getItem(SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
 }
-.logo{
-    width: 30vw;
-    max-width: 400px;
-    min-width: 200px;
-    height: fit-content;
+
+function markSeen() {
+  try {
+    sessionStorage.setItem(SEEN_KEY, '1');
+  } catch {
+    // Private browsing may block storage; the intro just plays again next visit.
+  }
+}
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isVisible = ref(!prefersReducedMotion && !readSeen());
+const isLeaving = ref(false);
+const logoContainer = ref(null);
+
+let animation = null;
+let safetyTimer = null;
+
+function removeSkipListeners() {
+  SKIP_EVENTS.forEach((event) => window.removeEventListener(event, leave));
+}
+
+function leave() {
+  isLeaving.value = true;
+  markSeen();
+  clearTimeout(safetyTimer);
+  removeSkipListeners();
+}
+
+onMounted(async () => {
+  if (!isVisible.value) return;
+
+  SKIP_EVENTS.forEach((event) => window.addEventListener(event, leave, { passive: true }));
+  safetyTimer = setTimeout(leave, MAX_DURATION_MS);
+
+  try {
+    const [{ default: lottie }, { default: animationData }] = await Promise.all([
+      import('lottie-web/build/player/lottie_light'),
+      import('@/assets/images/logo-intro.json'),
+    ]);
+    if (isLeaving.value) return;
+    animation = lottie.loadAnimation({
+      container: logoContainer.value,
+      renderer: 'svg',
+      loop: false,
+      autoplay: true,
+      animationData,
+    });
+    animation.setSpeed(PLAYBACK_SPEED);
+    animation.addEventListener('complete', leave);
+  } catch {
+    leave();
+  }
+});
+
+onBeforeUnmount(() => {
+  clearTimeout(safetyTimer);
+  removeSkipListeners();
+  animation?.destroy();
+});
+</script>
+
+<style scoped>
+.page_intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  place-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  transition: opacity 0.4s ease;
+}
+.page_intro_leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+.logo {
+  width: 30vw;
+  min-width: 200px;
+  max-width: 400px;
 }
 </style>

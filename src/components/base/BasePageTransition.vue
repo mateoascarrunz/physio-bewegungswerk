@@ -1,31 +1,14 @@
 <template>
-    <div class="page_container" v-if="PageTransition" >
+    <div class="page_container" v-if="PageTransition" @animationend.self="PageTransition = false">
         <div class="fade_out_animation">
         <img class="icon_page" src="../../assets/images/physio_icon.svg" alt="">
     </div>
     </div>
 </template>
-<script>
-export default {
-    data() {
-        return {
-            PageTransition: true,
+<script setup>
+import { ref } from 'vue';
 
-
-        }
-    },
-    mounted() {
-        setTimeout(() => {
-            this.PageTransition = false;
-        }, 1500);
-        setTimeout(() => {
-            document.body.classList.remove('popup-open');
-        }, 1500);
-    },
-    beforeMount() {
-        document.body.classList.add('popup-open');
-    }
-};
+const PageTransition = ref(true);
 </script>
 <style scoped>
 .page_container {
@@ -42,19 +25,20 @@ export default {
     top: 0px;
     left: 0px;
     z-index: 10;
-    animation: fade-out 0.5s forwards ease;
-    animation-delay: 1s;
+    pointer-events: none;
+    animation: fade-out 0.25s forwards ease;
+    animation-delay: 0.25s;
 }
 
 .icon_page {
     width: 100px;
-    animation: fade-in 0.5s forwards ease;
+    animation: fade-in 0.2s forwards ease;
     opacity: 0;
     filter: blur(50px);
 }
 .fade_out_animation{
-    animation: fade-out 0.5s forwards ease;
-    animation-delay: 1s;
+    animation: fade-out 0.25s forwards ease;
+    animation-delay: 0.25s;
     display: flex;
     flex-direction: column;
     justify-content: center;
