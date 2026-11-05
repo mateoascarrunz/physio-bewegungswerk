@@ -248,15 +248,17 @@ test.describe('news', () => {
   test('closes with the back button without losing the reader\'s place', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 600 });
     await page.goto('/news');
-    await page.locator('.news-card').last().scrollIntoViewIfNeeded();
-    const scrolled = await page.evaluate(() => window.scrollY);
-    await page.locator('.news-card').last().click();
+    await page.evaluate(() => document.fonts.ready);
+    const card = page.locator('.news-card').last();
+    await card.scrollIntoViewIfNeeded();
+    await card.click();
     await expect(page.locator('dialog[open]')).toBeVisible();
+    // Measured once the article is open, because the click itself may scroll the card into view.
+    const readerPosition = await page.evaluate(() => window.scrollY);
     await page.goBack();
     await expect(page.locator('dialog')).toHaveCount(0);
     await expect(page).toHaveURL(/\/news$/);
-    // Focus returns to the card, which may nudge it fully into view, but the page never jumps back to the top.
-    expect(Math.abs((await page.evaluate(() => window.scrollY)) - scrolled)).toBeLessThan(160);
+    await expect.poll(() => page.evaluate((position) => Math.abs(window.scrollY - position), readerPosition)).toBeLessThan(40);
   });
 
   test('opens from a shared link and closes to the news page', async ({ page }) => {
