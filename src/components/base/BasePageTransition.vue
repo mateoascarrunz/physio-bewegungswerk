@@ -60,7 +60,6 @@ const PageTransition = ref(true);
 @keyframes fade-out {
     to {
         opacity: 0;
-        backdrop-filter: blur(0)px;
         -webkit-backdrop-filter: blur(0px);
     }
 }</style>

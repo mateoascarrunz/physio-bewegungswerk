@@ -517,7 +517,6 @@ right: 5%;
   width: auto;
   height: 110vw;
 
-right: 5;
 
 }
 .center_mini_mobile{

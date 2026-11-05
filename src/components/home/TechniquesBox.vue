@@ -171,7 +171,6 @@ width: 100%;
 height: 100%;
 position: absolute;
 top: 0px;
-left: 0x;
 z-index: -1;
 opacity: 1;
 position: relative;
