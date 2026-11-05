@@ -29,6 +29,7 @@
   --ink-faint: #5d6680;
   --line: #e1e5ee;
   --line-strong: #bfc7d8;
+  --line-field: #848da4; /* 3:1 against white and the grey surface, for form field edges */
   --surface: #f4f5f8;
   --white: #ffffff;
 

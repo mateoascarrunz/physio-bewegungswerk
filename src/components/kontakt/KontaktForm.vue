@@ -236,7 +236,7 @@ async function submit(event) {
   border-radius: var(--radius-md);
   outline: none;
   background: var(--white);
-  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  box-shadow: inset 0 0 0 1.5px var(--line-field);
   font-size: 1rem;
   line-height: 1.4;
   transition: box-shadow var(--duration-fast) var(--ease-out);
@@ -256,7 +256,7 @@ async function submit(event) {
 @media (hover: hover) and (pointer: fine) {
   .field input:hover,
   .field textarea:hover {
-    box-shadow: inset 0 0 0 1.5px var(--color-text-faint);
+    box-shadow: inset 0 0 0 1.5px var(--blue-800);
   }
 }
 

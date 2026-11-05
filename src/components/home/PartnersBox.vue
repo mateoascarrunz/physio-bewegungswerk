@@ -3,8 +3,8 @@ import { partners } from '@/services/cms';
 </script>
 
 <template>
-  <section v-if="partners.length" class="partners" aria-labelledby="partners-title">
-    <h2 id="partners-title" class="t-label">Partners</h2>
+  <section v-if="partners.length" class="partners card card--line" aria-labelledby="partners-title">
+    <h2 id="partners-title" class="t-h3">Partners</h2>
     <ul class="partners__list">
       <li v-for="partner in partners" :key="partner.id">
         <img
@@ -20,8 +20,12 @@ import { partners } from '@/services/cms';
 
 <style scoped>
 .partners {
-  display: grid;
-  gap: var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5) var(--space-7);
+  padding-block: clamp(1.25rem, 2.4vw, 2rem);
 }
 
 .partners__list {
@@ -34,7 +38,7 @@ import { partners } from '@/services/cms';
 .partners__list img {
   width: auto;
   max-width: 11rem;
-  height: 3.25rem;
+  height: 3.5rem;
   object-fit: contain;
 }
 </style>

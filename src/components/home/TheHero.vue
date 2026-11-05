@@ -198,11 +198,6 @@ onBeforeUnmount(() => {
   animation-delay: 240ms;
 }
 
-:global(html.intro-active) .hero__text > *,
-:global(html.intro-active) .hero__stage {
-  animation-play-state: paused;
-}
-
 @keyframes hero-rise {
   from {
     opacity: 0;
@@ -450,5 +445,14 @@ onBeforeUnmount(() => {
   .hero__base {
     mask-image: linear-gradient(90deg, transparent 20%, #000 46%);
   }
+}
+</style>
+
+<style>
+/* Not scoped: Vue's :global() would drop everything after the html selector.
+   While the logo intro covers the page, the entrance waits, then plays as it lifts. */
+html.intro-active .hero__text > *,
+html.intro-active .hero__stage {
+  animation-play-state: paused;
 }
 </style>

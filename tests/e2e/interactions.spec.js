@@ -174,6 +174,8 @@ test.describe('hero', () => {
     const page = await context.newPage();
     await page.goto('/');
     await expect(page.locator('html')).toHaveClass(/intro-active/);
+    // Paused, not finished: the headline must not have played behind the intro.
+    expect(await page.locator('.hero__title').evaluate((element) => element.getAnimations().map((animation) => animation.playState))).toEqual(['paused']);
     await page.keyboard.press('Escape');
     await expect(page.locator('html')).not.toHaveClass(/intro-active/);
     await expect(page.locator('.hero__title')).toHaveCSS('opacity', '1');

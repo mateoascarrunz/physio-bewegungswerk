@@ -17,6 +17,9 @@ const SEEN_KEY = 'introSeen';
 const PLAYBACK_SPEED = 1.5;
 const MAX_DURATION_MS = 4000;
 const SKIP_EVENTS = ['wheel', 'touchmove', 'keydown'];
+// Slightly longer than the fade. If the fade never ran, for example because the
+// player failed before the first paint, no transitionend arrives to remove it.
+const REMOVE_AFTER_MS = 600;
 
 function readSeen() {
   try {
@@ -45,13 +48,18 @@ if (isVisible.value) document.documentElement.classList.add(INTRO_ACTIVE_CLASS);
 
 let animation = null;
 let safetyTimer = null;
+let removeTimer = null;
 
 function removeSkipListeners() {
   SKIP_EVENTS.forEach((event) => window.removeEventListener(event, leave));
 }
 
 function leave() {
+  if (isLeaving.value) return;
   isLeaving.value = true;
+  removeTimer = setTimeout(() => {
+    isVisible.value = false;
+  }, REMOVE_AFTER_MS);
   document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
   markSeen();
   clearTimeout(safetyTimer);
@@ -87,6 +95,7 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   document.documentElement.classList.remove(INTRO_ACTIVE_CLASS);
   clearTimeout(safetyTimer);
+  clearTimeout(removeTimer);
   removeSkipListeners();
   animation?.destroy();
 });

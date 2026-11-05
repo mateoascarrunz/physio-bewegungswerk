@@ -8,11 +8,18 @@ import LogoAnimationIntro from './components/LogoAnimationIntro.vue';
 import { banners } from '@/services/cms';
 
 const route = useRoute();
+const router = useRouter();
 const main = ref(null);
 const isFirstRouteLoading = ref(true);
+// The first page appears at once; only moves between pages fade.
+const hasNavigated = ref(false);
 
-useRouter().isReady().finally(() => {
+router.isReady().finally(() => {
   isFirstRouteLoading.value = false;
+});
+
+router.afterEach((_to, from) => {
+  if (from.matched.length) hasNavigated.value = true;
 });
 
 function focusMain() {
@@ -36,7 +43,7 @@ watch(
   <TheNavBar />
   <main id="main" ref="main" tabindex="-1" :class="{ main_first_load: isFirstRouteLoading }">
     <RouterView v-slot="{ Component, route: viewRoute }">
-      <Transition name="page" mode="out-in">
+      <Transition :name="hasNavigated ? 'page' : 'page-none'" mode="out-in">
         <component :is="Component" :key="viewRoute.path" />
       </Transition>
     </RouterView>
