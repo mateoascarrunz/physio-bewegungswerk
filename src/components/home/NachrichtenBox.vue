@@ -33,7 +33,7 @@
       <div class="news_container">
         <BaseCard v-for="newsItem in latestNews" :key="newsItem.id" class="cards_news">
           <template v-slot:img_card>
-            <img loading="lazy" class="img_card" :src="newsItem.img.url"
+            <img loading="lazy" class="img_card" :src="cardImageUrl(newsItem.img.url)"
               :alt="newsItem.img.name">
           </template>
           <span class="subtitle bold block">{{ truncateDescription(newsItem.title, 5) }}</span>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { news } from '@/services/cms';
+import { cardImageUrl, news } from '@/services/cms';
 import BaseButtonMag from '../base/BaseButtonMag.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
@@ -96,6 +96,7 @@ export default {
     },
   },
   methods: {
+    cardImageUrl,
     openPopup(newsItem) {
       this.selectedNews = newsItem;
       this.popup = true;

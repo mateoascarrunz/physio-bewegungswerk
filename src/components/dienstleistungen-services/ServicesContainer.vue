@@ -102,7 +102,7 @@ export default{
         `Sobald die Triggerpunkte identifiziert sind, werden verschiedene Techniken angewendet, um sie zu behandeln. Dies umfasst in der Regel manuellen Druck, bei dem der Therapeut gezielt Druck auf die Triggerpunkte ausübt, um die Verspannungen zu lösen. Gleichzeitig können spezielle Dehnungsübungen gezeigt werden, um die Muskeln zu entspannen und die Flexibilität zu fördern.`,
         `Die Therapie kann auch Massage und myofasziale Techniken beinhalten, um die Muskulatur weiter zu entspannen und die Durchblutung zu verbessern. Oft erhält der Patient Anleitungen für Selbstmanagement-Techniken, einschließlich der Möglichkeit, Triggerpunkte selbst zu massieren und Dehnungsübungen zu Hause durchzuführen, um die Schmerzen zu lindern.`,
         `Diese Therapie kann bei verschiedenen Erkrankungen eingesetzt werden, bei denen Muskelverspannungen und schmerzhafte Triggerpunkte eine Rolle spielen, wie beispielsweise bei Nacken- und Rückenschmerzen, Kopfschmerzen, Tennisellenbogen und Fibromyalgie. Trotz möglicher Schmerzen während der Therapie zielt die Triggerpunkttherapie darauf ab, langfristige Linderung und eine verbesserte Muskelgesundheit zu bieten.`,],
-                   img:'/img_services_myofasziale.jpg', 
+                   img:'/img_services_myofasziale.webp', 
                    vertical: true,
                 },
                 {
@@ -172,7 +172,7 @@ export default{
         `Entzündliche Erkrankungen: Bei bestimmten entzündlichen Erkrankungen, wie Rheuma, kann MLD zur Linderung von Schwellungen und Beschwerden beitragen.`,
         `Die Kombination aus Manueller Lymphdrainage und Kompressionsbehandlung ist oft sehr effektiv bei der Behandlung von Lymphödemen und anderen lymphatischen Erkrankungen. Die MLD löst Stauungen und bewegt die Lymphflüssigkeit, während die Kompressionsbehandlung hilft, den Fortschritt der Schwellung zu verhindern und die erzielten Effekte aufrechtzuerhalten.`,
       ],
-                   img:'/img_services_lymphdrainage.jpg', 
+                   img:'/img_services_lymphdrainage.webp', 
                 },
                 {
                     id:'6',
@@ -258,7 +258,7 @@ export default{
         `Einer der Hauptzwecke des Kinesiotapings ist die Unterstützung und Stabilisierung von Gelenken und Muskeln. Dies kann besonders hilfreich bei Verletzungen oder zur Vorbeugung von Überlastungsschäden sein. Das elastische Tape erlaubt jedoch immer noch eine gewisse Bewegungsfreiheit, im Gegensatz zu starren Verbänden oder Gips, was während der Rehabilitation von Vorteil sein kann.`,
         `Ein weiterer Vorteil des Kinesiotapings ist die Schmerzlinderung. Das Tape kann die Durchblutung fördern und Druck von schmerzhaften Stellen nehmen, was dazu beitragen kann, Schmerzen zu reduzieren. Durch das Anheben der Haut unter dem Tape kann auch der Lymphfluss verbessert werden, was bei der Reduzierung von Schwellungen hilfreich ist.`,
         `Darüber hinaus beeinflusst das Kinesiotape die sensorische Wahrnehmung der Haut, was dem Körper helfen kann, auf Verletzungen oder Beschwerden zu reagieren. Kinesiotape wird bei verschiedenen Zuständen eingesetzt, einschließlich Muskelverletzungen, Gelenkschmerzen und Überlastungssyndromen, und kann auch zur Verbesserung der sportlichen Leistung verwendet werden.`,],
-                   img:'/img_services_kinesio.jpg', 
+                   img:'/img_services_kinesio.webp', 
                 },
                 {
                     id:'14',

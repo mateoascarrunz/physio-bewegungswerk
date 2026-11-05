@@ -4,6 +4,7 @@
         <span class=" tech_title title bold blue text_break center">Behandlungs&shy;techniken</span>
        
         <swiper-container
+        v-if="isNearViewport"
         class="swiper"
     :slides-per-view="1"
     :spaceBetween="40"
@@ -155,9 +156,26 @@
 <script>
 import { registerSwiperElement } from '@/services/swiperElement';
 
+const LOAD_MARGIN = '300px';
+
 export default {
-  created() {
-    registerSwiperElement();
+  data() {
+    return { isNearViewport: false };
+  },
+  mounted() {
+    this.observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        this.observer.disconnect();
+        registerSwiperElement();
+        this.isNearViewport = true;
+      },
+      { rootMargin: LOAD_MARGIN },
+    );
+    this.observer.observe(this.$el);
+  },
+  beforeUnmount() {
+    this.observer.disconnect();
   },
 };
 </script>
@@ -204,7 +222,7 @@ position: relative;
     background-color: transparent;
 }
 .img1{
-  background-image: url(../../assets/images/img_services_myofasziale.jpg);
+  background-image: url(../../assets/images/img_services_myofasziale.webp);
 }
 .img2{
   background-image: url(../../assets/images/img_services_manuelle.webp);
@@ -216,7 +234,7 @@ position: relative;
   background-image: url(../../assets/images/img_services_mtt.webp);
 }
 .img5{
-  background-image: url(../../assets/images/img_services_lymphdrainage.jpg);
+  background-image: url(../../assets/images/img_services_lymphdrainage.webp);
 }
 .img6{
   background-image: url(../../assets/images/img_services_neurologische.webp);
@@ -237,7 +255,7 @@ position: relative;
   background-image: url(../../assets/images/img_services_mobilisation.webp);
 }
 .img12{
-  background-image: url(../../assets/images/img_services_kinesio.jpg);
+  background-image: url(../../assets/images/img_services_kinesio.webp);
 }
 
 .swiper{

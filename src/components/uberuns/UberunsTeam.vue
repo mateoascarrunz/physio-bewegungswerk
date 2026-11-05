@@ -105,7 +105,7 @@
                     <swiper-slide v-for="team in teams" :key="team.id">
                         <BaseCard :theheight="'25%'" class="block-center" @click="openPopup(team)">
                             <template v-slot:img_card>
-<img loading="lazy" class="img_card" :src="team.profilePicture.url" :alt="team.name">
+<img loading="lazy" class="img_card" :src="cardImageUrl(team.profilePicture.url)" :alt="team.name">
   </template>
                             <span class="paragraph blue bold">{{ team.name }}</span>
                             <br>
@@ -127,7 +127,7 @@ import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
-import { teams } from '@/services/cms';
+import { cardImageUrl, teams } from '@/services/cms';
 import { registerSwiperElement } from '@/services/swiperElement';
 export default {
     
@@ -167,6 +167,7 @@ beforeUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
   },
   methods: {
+    cardImageUrl,
         openPopup(team) {
             this.selectedTeam = team;
             this.popup = true;
