@@ -13,7 +13,7 @@
 </template>
 <script>
 import BaseStelleBox from '../base/BaseStelleBox.vue';
-import { fetchJobs } from '@/services/cms';
+import { jobs } from '@/services/cms';
 export default{
 
     components:{
@@ -25,9 +25,7 @@ jobs:[],
         }
     },
     mounted() {
-        fetchJobs().then((jobs) => {
-      this.jobs = jobs;
-    });
+        this.jobs = jobs;
     },
 }
 </script>

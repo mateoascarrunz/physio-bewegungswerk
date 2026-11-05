@@ -34,7 +34,7 @@ Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer E
     </div>
 </template>
 <script>
-import { fetchJobs } from '@/services/cms';
+import { jobs } from '@/services/cms';
 export default {
   data(){
         return{
@@ -54,9 +54,7 @@ jobs:[],
     },
   },
   mounted() {
-        fetchJobs().then((jobs) => {
-      this.jobs = jobs;
-    });
+        this.jobs = jobs;
     },
 };
 </script>

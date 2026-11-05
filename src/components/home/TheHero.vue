@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 relative">
                     <div class="coverphoto_container">
-<img class="img_coverphoto" :src="selectedTeam.attributes.profilePicture.data.attributes.url" :alt="selectedTeam.attributes.name">
+<img class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
 </div>
 </div>
                 <div class="col-lg-6 relative">
@@ -15,24 +15,24 @@
                         <!-- hero -->
                         <div class="center">
                             <br>
-                            <span class="subtitle">"{{ selectedTeam.attributes.quote }}"</span>
+                            <span class="subtitle">"{{ selectedTeam.quote }}"</span>
                             <br>
                             <br>
-                            <span class="title bold blue">{{ selectedTeam.attributes.name }} </span>
+                            <span class="title bold blue">{{ selectedTeam.name }} </span>
                             <br>
-                            <span class="info magenta">{{ selectedTeam.attributes.workPosition }}</span>
+                            <span class="info magenta">{{ selectedTeam.workPosition }}</span>
                         </div>
                         <!-- description -->
                         <div>
                             <br>
-                            <span class="paragraph left">{{ selectedTeam.attributes.description }}</span>
+                            <span class="paragraph left">{{ selectedTeam.description }}</span>
 
                             <div>
                                 
                                 <div class="info_team">
                                     
-                                <span class="info"><IconDiploma/> {{ selectedTeam.attributes.diploma }}</span>
-                                <span class="info"><IconLanguages/> {{ selectedTeam.attributes.languages }}</span>
+                                <span class="info"><IconDiploma/> {{ selectedTeam.diploma }}</span>
+                                <span class="info"><IconLanguages/> {{ selectedTeam.languages }}</span>
                             </div>
                                 <br>
                                 <br>
@@ -47,7 +47,7 @@
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.attributes.education.split('•').filter(Boolean)"
+                                            <li v-for="item in selectedTeam.education.split('•').filter(Boolean)"
                                                 :key="item.trim()">
                                                 <span class="paragraph">{{ item.trim() }}</span>
                                             </li>
@@ -67,7 +67,7 @@
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.attributes.specialties.split('•').filter(Boolean)"
+                                            <li v-for="item in selectedTeam.specialties.split('•').filter(Boolean)"
                                                 :key="item.trim()">
                                                 <span class="paragraph">{{ item.trim() }}</span>
                                             </li>
@@ -84,11 +84,11 @@
                     </div>
 
                 </div>
-                <BaseContactBox v-if="selectedTeam.attributes.linkedIn !== null || selectedTeam.attributes.email !== null || selectedTeam.attributes.phone !== null">
+                <BaseContactBox v-if="selectedTeam.linkedIn !== null || selectedTeam.email !== null || selectedTeam.phone !== null">
               
-                    <IconLinkedIn v-if="selectedTeam.attributes.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.linkedIn" />
-                    <IconEmail v-if="selectedTeam.attributes.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.email" />
-                    <IconPhone v-if="selectedTeam.attributes.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.phone" />
+                    <IconLinkedIn v-if="selectedTeam.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.linkedIn" />
+                    <IconEmail v-if="selectedTeam.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.email" />
+                    <IconPhone v-if="selectedTeam.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.phone" />
 
             </BaseContactBox>
             </div>
@@ -104,12 +104,12 @@
         </picture>
         <div class="marit_hover_container">
           <div class="marit_hover" @mouseover="isMaritHovered = true" @mouseout="isMaritHovered = false">
-            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupById(1)">Marit Hesse</BaseButtonBlue>
+            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isMaritHovered }"  @click="openPopupByName('Marit Hesse')">Marit Hesse</BaseButtonBlue>
           </div>
 
 
           <div class="dominik_hover" @mouseover="isDominikHovered = true" @mouseout="isDominikHovered = false">
-            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isDominikHovered }" @click="openPopupById(2)">Dominik Geissberger
+            <BaseButtonBlue class="hero_team_button" :class="{ 'active': isDominikHovered }" @click="openPopupByName('Dominik Geissberger')">Dominik Geissberger
             </BaseButtonBlue>
           </div>
         </div>
@@ -148,7 +148,7 @@ import IconLinkedIn from '../icon/IconLinkedIn.vue';
 import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
-import { fetchTeams } from '@/services/cms';
+import { teams } from '@/services/cms';
 export default {
       
   components: {
@@ -174,9 +174,7 @@ export default {
     };
   },
   mounted() {
-        fetchTeams().then((teams) => {
-      this.teams = teams;
-    });
+        this.teams = teams;
     },
   created() {
     // Add an event listener to monitor window resize
@@ -202,8 +200,8 @@ export default {
     goToLink() {
     window.open(this.LinkAppointment, '_blank');
   },
-    openPopupById(teamId) {
-  const team = this.teams.find((t) => t.id === teamId);
+    openPopupByName(name) {
+  const team = this.teams.find((t) => t.name === name);
   if (team) {
     this.selectedTeam = team;
     this.popup = true;

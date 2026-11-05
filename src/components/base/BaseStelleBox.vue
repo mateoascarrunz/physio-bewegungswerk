@@ -1,10 +1,10 @@
 <template>
    <div class="stelle_container" v-for="job in jobs">
-    <span class="paragraph paragraph_absolute">{{job.attributes.name}}</span>
+    <span class="paragraph paragraph_absolute">{{job.name}}</span>
     <div class="links">
         
-        <a :href="job.attributes.linkedInLink" target="_blank" rel="noopener noreferrer"><BaseButtonBlue class="btn">LinkedIn</BaseButtonBlue></a>
-        <a :href="job.attributes.pdfLink" target="_blank" rel="noopener noreferrer"><BaseButtonMag class="btn">Mehr</BaseButtonMag></a>
+        <a :href="job.linkedInLink" target="_blank" rel="noopener noreferrer"><BaseButtonBlue class="btn">LinkedIn</BaseButtonBlue></a>
+        <a :href="job.pdfLink" target="_blank" rel="noopener noreferrer"><BaseButtonMag class="btn">Mehr</BaseButtonMag></a>
     </div>
    </div>
    
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { fetchJobs } from '@/services/cms';
+import { jobs } from '@/services/cms';
 export default{
     data(){
         return{
@@ -23,9 +23,7 @@ jobs:[],
         }
     },
     mounted() {
-        fetchJobs().then((jobs) => {
-      this.jobs = jobs;
-    });
+        this.jobs = jobs;
     },
 }</script>
 

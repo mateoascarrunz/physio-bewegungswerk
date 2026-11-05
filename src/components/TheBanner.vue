@@ -1,39 +1,39 @@
 <template>
   <div v-for="banner in bannerMessage" :key="banner.id">
-    <div class="banner-container" v-if="banner.attributes.Visible">
+    <div class="banner-container" v-if="banner.Visible">
 
         <div class="banner-message" >
-  <span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
+  <span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
           
       </div>
       <div class="banner-message" >
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
-<span>{{ banner.attributes.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
+<span>{{ banner.BannerTitle + ' ' + '-' + ' ' }}</span>
 
 
 

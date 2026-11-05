@@ -7,21 +7,21 @@
         </BaseCloseButton>
 <div class="row">
 <div class="col-lg-6">
-  <img class="img_card_popup" :src="selectedNews.attributes.img.data.attributes.url" :alt="selectedNews.attributes.img.data.attributes.name">
+  <img class="img_card_popup" :src="selectedNews.img.url" :alt="selectedNews.img.name">
 </div>
 <div class="col-lg-6 center center_items">
 
-  <span class="title bold blue title_news_popup"> {{ selectedNews.attributes.title }}</span>
+  <span class="title bold blue title_news_popup"> {{ selectedNews.title }}</span>
   <div class="left_mobile">
-  <br><br><span class="subtitle blue"> {{ selectedNews.attributes.subtitle }}</span>
+  <br><br><span class="subtitle blue"> {{ selectedNews.subtitle }}</span>
 </div>
   <div class="icons margin_top">
-    <div><img class="icon" src="../../assets/images/user_icon.svg" alt=""><span class="paragraph paragraph_mobile "> by {{selectedNews.attributes.author}}</span></div>
-    <div><img class="icon" src="../../assets/images/calendar_icon.svg" alt=""><span class="paragraph paragraph_mobile">{{' ' + formattedDate(selectedNews.attributes.date)}}</span></div>
+    <div><img class="icon" src="../../assets/images/user_icon.svg" alt=""><span class="paragraph paragraph_mobile "> by {{selectedNews.author}}</span></div>
+    <div><img class="icon" src="../../assets/images/calendar_icon.svg" alt=""><span class="paragraph paragraph_mobile">{{' ' + formattedDate(selectedNews.date)}}</span></div>
   </div>
 </div>
 <div class="col-lg-12 margin_top">
- <BaseRitchText :markdownText="selectedNews.attributes.text"></BaseRitchText> 
+ <BaseRitchText :markdownText="selectedNews.text"></BaseRitchText> 
 </div>
 </div>
 </div>
@@ -35,11 +35,11 @@
 
 <BaseCard  :theheight="'50%'" v-for="newsItem in latestNews" :key="newsItem.id" class="center_box center">
   <template v-slot:img_card>
-<img class="img_card" :src="newsItem.attributes.img.data.attributes.url" :alt="newsItem.attributes.img.data.attributes.name">
+<img class="img_card" :src="newsItem.img.url" :alt="newsItem.img.name">
   </template>
-            <span class="subtitle bold block">{{ truncateDescription(newsItem.attributes.title, 5) }}</span>
+            <span class="subtitle bold block">{{ truncateDescription(newsItem.title, 5) }}</span>
             <br>
-            <span class="info block left description_news">{{ truncateDescription(newsItem.attributes.subtitle, maxWordsForDescription) }}</span>
+            <span class="info block left description_news">{{ truncateDescription(newsItem.subtitle, maxWordsForDescription) }}</span>
             <br>
             <BaseButtonMag @click="openPopup(newsItem)" class="news_button">mehr</BaseButtonMag>
         </BaseCard>
@@ -55,7 +55,7 @@
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BasePopUp from '../base/BasePopUp.vue';
-import { fetchNews } from '@/services/cms';
+import { news } from '@/services/cms';
 import { defineAsyncComponent } from 'vue';
 
 const BaseRitchText = defineAsyncComponent(() => import('../base/BaseRitchText.vue'));
@@ -76,9 +76,7 @@ export default {
     };
   },
   mounted() {
-    fetchNews().then((news) => {
-      this.news = news;
-    });
+    this.news = news;
 
     // Add a resize event listener to update maxWordsForDescription on window resize
     window.addEventListener('resize', this.updateMaxWordsForDescription);
@@ -115,8 +113,8 @@ export default {
   },
   computed: {
     latestNews() {
-      const sortedNews = this.news.sort((a, b) => {
-        return new Date(b.attributes.date) - new Date(a.attributes.date);
+      const sortedNews = [...this.news].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
       });
       return sortedNews;
     },

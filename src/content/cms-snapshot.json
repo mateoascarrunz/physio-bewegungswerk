@@ -1,0 +1,206 @@
+{
+  "fetchedAt": "2026-11-05T00:45:43.108Z",
+  "banners": [],
+  "jobs": [],
+  "news": [
+    {
+      "id": 1,
+      "title": "Jetzt neu! Gemeinsam in Bewegung",
+      "subtitle": "Vom Traum zur Realität: Unsere eigene Praxis - Eine Reise von 10 Jahren Zusammenarbeit",
+      "author": "Marit Hesse, Dominik Geissberger",
+      "date": "2023-10-16",
+      "text": "Mit einem Hauch von Lampenfieber, einem Schuss Stolz und vor allem mit großer Freude eröffnen wir unsere neue Physiotherapiepraxis in der Bergstrasse 3 in Gossau. Der Weg zur Gründung unseres eigenen Unternehmens war lang und nicht ohne Herausforderungen, aber letztendlich haben sich alle Puzzleteile zusammengefügt, und wir sind nun voller Leidenschaft bereit, unsere Arbeit als Physiotherapeuten anzugehen.\n\nLiebe Patienten und Patientinnen, wir möchten uns herzlich bei Ihnen für Ihr Vertrauen bedanken. Wir freuen uns darauf, Sie auf Ihrem individuellen Rehabilitationsweg zu beraten und zu betreuen, und wir wünschen Ihnen für die Zukunft alles erdenklich Gute.\n",
+      "createdAt": "2023-10-13T08:58:58.982Z",
+      "updatedAt": "2023-10-19T19:47:19.526Z",
+      "publishedAt": "2023-10-13T08:59:00.364Z",
+      "img": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1697187530/standort_00703d37da.jpg",
+        "name": "standort.jpg",
+        "alternativeText": null,
+        "width": 4032,
+        "height": 3024
+      }
+    },
+    {
+      "id": 7,
+      "title": "Frischer Look, neue Energie!",
+      "subtitle": "Wir freuen uns, einige Updates aus unseren Räumlichkeiten mit euch zu teilen! ",
+      "author": "Marit Hesse",
+      "date": "2025-07-28",
+      "text": "In den letzten Wochen haben wir neue Trainingsgeräte erhalten und auch unsere Fenster mit neuen Designelementen verschönert – passend zu unserem Logo, den Farben und der Atmosphäre, die wir schaffen möchten. Alles fügt sich perfekt zusammen und verleiht dem Raum einen frischen, modernen und einladenden Look.\n\nAuch im Innenbereich hat sich einiges getan – die Räume wirken jetzt noch inspirierender und motivierender für alle, die bei uns trainieren oder vorbeischauen.\n\n📸 Hier ein paar aktuelle Eindrücke – von außen und von innen!\n\nUnd das ist erst der Anfang: Weitere Neuerungen folgen bald…\n![img_standort_10.webp](https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753772958/img_standort_10_30aa1e23fd.webp)\n![img_standort_7.webp](https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753772957/img_standort_7_09584720e3.webp)\n![img_standort_8.webp](https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753772993/img_standort_8_0b0a987dc5.webp)\n![img_standort_9.webp](https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753772535/img_standort_9_1324ed74ce.webp)",
+      "createdAt": "2025-07-28T16:44:34.538Z",
+      "updatedAt": "2025-07-29T07:16:27.837Z",
+      "publishedAt": "2025-07-28T16:44:35.629Z",
+      "img": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753773378/IMG_7625_3_f112dfe1e6.jpg",
+        "name": "IMG_7625-3.jpg",
+        "alternativeText": null,
+        "width": 2446,
+        "height": 1747
+      }
+    }
+  ],
+  "partners": [],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Marit Hesse",
+      "workPosition": "Physiotherapeutin",
+      "quote": "Fragt man meine Mama, was ihre Tochter schon im Alter von 9 Jahren beruflich werden wollte, wird sie zweifelslos sagen, Physiotherapeutin",
+      "description": "Und genauso ist es gekommen und das mit Leidenschaft schon seit 25 Jahren. Durch meine frühe Hingabe für Sport und besonders dem Handball habe ich im präventiven als auch im rehabilitativen Bereich die Physiotherapie im Laufe meiner aktiven Zeit erleben und kennenlernen dürfen.\nDa stand sehr früh fest, das möchte ich auch werden. Und so kam es….",
+      "show": true,
+      "languages": "Deutsch,Englisch",
+      "diploma": "Eidg. dipl. Physiotherapeutin SRK",
+      "specialties": "•\tRegenerative Therapie nach Endoprothetik (Hüfte, Knie, Schulter..)\n•\tNeurologische Erkrankungen (Hemiplegie, M. Parkinson, Pat. mit Mehrfachbehinderungen, MS)\n•\tAkute und chronische Beschwerden der Wirbelsäule \n•\tHüft- und Kniegelenksarthrose\n•\tErkrankungen des Lymphsystems\n•\tGeriatrie\n•\tSportverletzungen\n",
+      "education": "•\tNeurologische Therapie nach Bobath\n•\tLymphdrainage\n•\tManuelle Therapie\n•\tMulligan Konzept Level A / B / C – Mobilisation mit Bewegung\n•\tMcConnell Schulter",
+      "email": "marit.hesse@physio-bewegungswerk.ch",
+      "phone": "076 543 63 68",
+      "linkedIn": null,
+      "createdAt": "2023-10-13T09:42:55.826Z",
+      "updatedAt": "2025-01-17T23:58:07.243Z",
+      "publishedAt": "2023-10-13T09:42:57.724Z",
+      "coverPhoto": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158267/img_team_0000_dd7b4ddaff.webp",
+        "name": "img_team_0000.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      },
+      "profilePicture": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158267/img_team_0000_dd7b4ddaff.webp",
+        "name": "img_team_0000.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      }
+    },
+    {
+      "id": 2,
+      "name": "Dominik Geissberger",
+      "workPosition": "Physiotherapeut",
+      "quote": "Gemeinsam schaffen wir mehr",
+      "description": "Früh in meinem Leben gab es bereits einen starken Einfluss auf die Physiotherapie, da meine Mutter selbst Physiotherapeutin war. Es hat jedoch eine Weile gedauert, bis ich mich davon überzeugen ließ. Im Nachhinein bin ich sehr dankbar dafür, dass ich schließlich auf die Ratschläge meiner Eltern gehört habe und meinen Traumberuf gefunden habe. Die Möglichkeit, mit Menschen in Kontakt zu treten und sie auf ihrem therapeutischen Weg zu begleiten, erfüllt mich mit großer Leidenschaft und Freude.\nAls aktiver Teamsportler habe ich gelernt, dass gemeinsam mehr erreicht werden kann, und dieser Grundsatz ist ein wichtiger Bestandteil meiner beruflichen Arbeit. Gemeinsam können wir mehr erreichen.",
+      "show": true,
+      "languages": "Deutsch, Englisch",
+      "diploma": "SRK BSc in Physiotherapie SUPSI",
+      "specialties": "•\tNeurologische Erkrankungen (Hemiplegie, M. Parkinson, Pat. mit Mehrfachbehinderungen, MS)\n•\tChronische Schmerzen (HWS, LWS)\n•\tHüft- und Kniegelenksarthrose\n•\tSportverletzungen\n•\tGeriatrie\n•\tOrthopädische Rehabilitation\n•\tDry Needling",
+      "education": "•\tMyofasciale Triggerpunkttherapie\n•\tMedical Taping\n•\tManuelle Therapie nach Mulligan\n•\tNeurologische Therapie nach Bobath",
+      "email": null,
+      "phone": null,
+      "linkedIn": null,
+      "createdAt": "2023-10-13T09:50:10.214Z",
+      "updatedAt": "2025-01-17T23:58:41.318Z",
+      "publishedAt": "2023-10-18T09:31:07.448Z",
+      "coverPhoto": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158310/img_team_0001_2a11a01b2f.webp",
+        "name": "img_team_0001.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      },
+      "profilePicture": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158310/img_team_0001_2a11a01b2f.webp",
+        "name": "img_team_0001.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      }
+    },
+    {
+      "id": 5,
+      "name": "Martina Schätti",
+      "workPosition": "Physiotherapeutin",
+      "quote": "Bewegung ist Leben – lass uns gemeinsam stärker werden!",
+      "description": "Bewegung ist eine grosse Leidenschaft von mir. Was in jungen Jahren mit Kunstturnen begann, führte auch über Unihockey zu Geräteturnen und Aerobic heute. Ich gebe meine Freude und mein Wissen über Bewegung und Mobilität gerne im Beruf und in der Freizeit an Jung und Alt weiter. Grössere Bewegungseinschränkungen fordern mich besonders heraus, gemeinsam möglichst viel an Selbständigkeit zu erreichen.",
+      "show": true,
+      "languages": null,
+      "diploma": null,
+      "specialties": "•\tNeurologische Erkrankungen\n•\tGeriatrie(Sturzprophylaxe, Mehrfachbeeinträchtigungen, Mobilitätsprobleme)\n•\tWiederaufbau nach Operationen \n•\tGelenksbeschwerden Knie, Fuss, Schulter, Ellbogen",
+      "education": "•\tKinesiotaping Grundkurs\n•\tParkinson Fortbildung\n•\tPosturale Kontrolle\n•\tLymphologische Physiotherapie\n•\tCAS aktutstationär",
+      "email": null,
+      "phone": null,
+      "linkedIn": null,
+      "createdAt": "2024-12-18T12:58:43.722Z",
+      "updatedAt": "2025-01-17T23:59:11.895Z",
+      "publishedAt": "2024-12-18T12:59:30.960Z",
+      "coverPhoto": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158340/img_team_0002_afa05c008a.webp",
+        "name": "img_team_0002.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      },
+      "profilePicture": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158340/img_team_0002_afa05c008a.webp",
+        "name": "img_team_0002.webp",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      }
+    },
+    {
+      "id": 6,
+      "name": "Nadine Schwarz ",
+      "workPosition": "Physiotherapeutin",
+      "quote": "Ich begleite Sie dabei, Ihre Bewegungsgewohnheiten zu erkennen, gezielt zu verbessern und so langfristig mehr Wohlbefinden und körperliche Freiheit zu erleben.",
+      "description": "Meine Wurzeln liegen im Tanz. Bewegung ist für mich Ausdruck unserer Persönlichkeit und unseres Wohlbefindens. Körper und Psyche lassen sich nicht klar voneinander trennen – sie beeinflussen sich gegenseitig.\n\n\nIn meiner Arbeit schaue ich genau hin: Wie bewegen Sie sich und welche Muster haben sich über die Zeit entwickelt? Gemeinsam erkunden wir die Ursachen Ihrer Beschwerden und entwickeln Strategien, die Sie im Alltag selbst anwenden können, damit Sie langfristig selbst etwas für Ihr Wohlbefinden tun können.\n\nPhysiotherapie verstehe ich als gemeinsamen Weg. Mein Ziel ist es, dass Sie Ihren Körper besser verstehen und Vertrauen in seine Fähigkeiten gewinnen.\n\n",
+      "show": true,
+      "languages": "Deutsch, Englisch, Französisch, Grundkenntnisse Italienisch",
+      "diploma": null,
+      "specialties": "•\tHaltung und Bewegungsschulung\n•\tRumpfstabilisation und Kraftaufbau\n•\tKoordination und Körperwahrnehmung fördern\n•\tRehabilitation nach Operationen\n•\tBewegen mit neurologischen Herausforderungen",
+      "education": "•\tESP Sportphysiotherapie\n•\tSpiraldynamik\n•\tPilates / Pilates Reformer\n•\tFaszientechnik\n•\tTriggerpunkt\n•\tMulligan Concept\n•\tConnect – Tanzen mit neurologischen Herausforderungen\n",
+      "email": null,
+      "phone": null,
+      "linkedIn": null,
+      "createdAt": "2025-09-03T20:34:58.901Z",
+      "updatedAt": "2025-10-17T16:32:33.998Z",
+      "publishedAt": "2025-09-19T08:10:00.904Z",
+      "coverPhoto": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
+        "name": "Nadine Schwarz.jpg",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      },
+      "profilePicture": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
+        "name": "Nadine Schwarz.jpg",
+        "alternativeText": null,
+        "width": 1600,
+        "height": 2400
+      }
+    },
+    {
+      "id": 7,
+      "name": "Mogens Gies",
+      "workPosition": "Physiotherapeut",
+      "quote": null,
+      "description": "Sport und Bewegung haben in meinem Leben schon immer eine zentrale Rolle gespielt. Ich habe früh erfahren, wie wichtig ein gesunder, funktionierender Körper ist – vor allem dann, wenn Verletzungen einen plötzlich ausbremsen. Ich sehe Physiotherapie als gemeinsamen Weg: Wir arbeiten als Team daran, Bewegung, Kraft und Lebensqualität zurückzugewinnen. Dabei ist mir wichtig, individuell auf jede Patientin und jeden Patienten einzugehen und Fortschritte gemeinsam zu feiern. Denn Bewegung bedeutet für mich nicht nur körperliche Aktivität, sondern auch Lebensfreude und Selbstständigkeit.",
+      "show": true,
+      "languages": "Deutsch, Englisch",
+      "diploma": "Eidg. dipl. Physiotherapeut",
+      "specialties": "•\tRegenerative Therapie nach Endoprothetik\n•\tAkute und chronische Beschwerden der Wirbelsäule\n•\tErkrankungen des Lymphsystems\n•\tSportverletzungen\n•\tGeriatrie\n•\tAkute und chronische Beschwerden der Wirbelsäule",
+      "education": "•\tLymphdrainage\n•\tMTT ",
+      "email": null,
+      "phone": null,
+      "linkedIn": null,
+      "createdAt": "2025-12-14T22:05:49.649Z",
+      "updatedAt": "2025-12-15T07:53:27.470Z",
+      "publishedAt": "2025-12-14T22:09:12.689Z",
+      "coverPhoto": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
+        "name": "fa53a588-dcac-4883-a635-e52967d1563d.JPG",
+        "alternativeText": null,
+        "width": 1200,
+        "height": 1600
+      },
+      "profilePicture": {
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
+        "name": "fa53a588-dcac-4883-a635-e52967d1563d.JPG",
+        "alternativeText": null,
+        "width": 1200,
+        "height": 1600
+      }
+    }
+  ]
+}

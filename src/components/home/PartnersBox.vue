@@ -13,8 +13,8 @@
     autoplay-disable-on-interaction="false"
   >
   <swiper-slide v-for="partner in partnerImages" :key="partner.id" class="img_container">
-    <img class="img_partner" :class="{ 'horizontal_img': partner.attributes.isHorizontal }" :src="partner.attributes.Partner_logo.data[0].attributes.url"
-        :alt="partner.attributes.Partner_logo.data[0].attributes.name" />
+    <img class="img_partner" :class="{ 'horizontal_img': partner.isHorizontal }" :src="partner.Partner_logo[0].url"
+        :alt="partner.Partner_logo[0].name" />
   </swiper-slide>
 
 </swiper-container>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { fetchPartners } from '@/services/cms';
+import { partners } from '@/services/cms';
 import { registerSwiperElement } from '@/services/swiperElement';
 
 export default {
@@ -41,9 +41,7 @@ export default {
     this.handleWindowResize();
   },
   mounted() {
-    fetchPartners().then((partners) => {
-      this.partnerImages = partners;
-    });
+    this.partnerImages = partners;
   },
   computed: {
     computedSlidesPerView() {

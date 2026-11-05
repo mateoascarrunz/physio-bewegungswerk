@@ -6,22 +6,22 @@
       </BaseCloseButton>
       <div class="row">
         <div class="col-lg-6">
-          <img class="img_card_popup" :src="selectedNews.attributes.img.data.attributes.url"
-            :alt="selectedNews.attributes.img.data.attributes.name">
+          <img class="img_card_popup" :src="selectedNews.img.url"
+            :alt="selectedNews.img.name">
         </div>
         <div class="col-lg-6 center center_items">
 
-          <span class="title bold blue "> {{ selectedNews.attributes.title }}</span>
-          <br><br><span class="subtitle blue"> {{ selectedNews.attributes.subtitle }}</span>
+          <span class="title bold blue "> {{ selectedNews.title }}</span>
+          <br><br><span class="subtitle blue"> {{ selectedNews.subtitle }}</span>
           <div class="icons margin_top">
             <div><img class="icon" src="../../assets/images/user_icon.svg" alt=""><span class="paragraph "> by
-                {{ selectedNews.attributes.author }}</span></div>
+                {{ selectedNews.author }}</span></div>
             <div><img class="icon" src="../../assets/images/calendar_icon.svg" alt=""><span class="paragraph ">{{ ' ' +
-              formattedDate(selectedNews.attributes.date) }}</span></div>
+              formattedDate(selectedNews.date) }}</span></div>
           </div>
         </div>
         <div class="col-lg-12 margin_top">
-          <BaseRitchText :markdownText="selectedNews.attributes.text"></BaseRitchText>
+          <BaseRitchText :markdownText="selectedNews.text"></BaseRitchText>
         </div>
       </div>
     </div>
@@ -33,12 +33,12 @@
       <div class="news_container">
         <BaseCard v-for="newsItem in latestNews" :key="newsItem.id" class="cards_news">
           <template v-slot:img_card>
-            <img class="img_card" :src="newsItem.attributes.img.data.attributes.url"
-              :alt="newsItem.attributes.img.data.attributes.name">
+            <img class="img_card" :src="newsItem.img.url"
+              :alt="newsItem.img.name">
           </template>
-          <span class="subtitle bold block">{{ truncateDescription(newsItem.attributes.title, 5) }}</span>
+          <span class="subtitle bold block">{{ truncateDescription(newsItem.title, 5) }}</span>
           <br>
-          <span class="info block left description_news">{{ truncateDescription(newsItem.attributes.subtitle,
+          <span class="info block left description_news">{{ truncateDescription(newsItem.subtitle,
             maxWordsForDescription) }}</span>
           <br>
           <BaseButtonMag @click="openPopup(newsItem)" class="news_button">mehr</BaseButtonMag>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { fetchNews } from '@/services/cms';
+import { news } from '@/services/cms';
 import BaseButtonMag from '../base/BaseButtonMag.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
@@ -83,16 +83,14 @@ export default {
     };
   },
   mounted() {
-    fetchNews().then((news) => {
-      this.news = news;
-    });
+    this.news = news;
     window.addEventListener('resize', this.updateMaxWordsForDescription);
     this.updateMaxWordsForDescription();
   },
   computed: {
     latestNews() {
-      const sortedNews = this.news.sort((a, b) => {
-        return new Date(b.attributes.date) - new Date(a.attributes.date);
+      const sortedNews = [...this.news].sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
       });
       return sortedNews.slice(0, 3);
     },

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 relative">
                     <div class="coverphoto_container">
-<img class="img_coverphoto" :src="selectedTeam.attributes.profilePicture.data.attributes.url" :alt="selectedTeam.attributes.name">
+<img class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
 </div>
 </div>
                 <div class="col-lg-6 relative">
@@ -15,30 +15,30 @@
                         <!-- hero -->
                         <div class="center">
                             <br>
-                            <span class="subtitle">"{{ selectedTeam.attributes.quote }}"</span>
+                            <span class="subtitle">"{{ selectedTeam.quote }}"</span>
                             <br>
                             <br>
-                            <span class="title bold blue">{{ selectedTeam.attributes.name }} </span>
+                            <span class="title bold blue">{{ selectedTeam.name }} </span>
                             <br>
-                            <span class="info magenta">{{ selectedTeam.attributes.workPosition }}</span>
+                            <span class="info magenta">{{ selectedTeam.workPosition }}</span>
                         </div>
                         <!-- description -->
                         <div>
                             <br>
-                            <span class="paragraph left">{{ selectedTeam.attributes.description }}</span>
+                            <span class="paragraph left">{{ selectedTeam.description }}</span>
 
                             <div>
                                 
                                 <div class="info_team">
                                     
-                                <span v-if="selectedTeam.attributes.diploma " class="info"><IconDiploma/> {{ selectedTeam.attributes.diploma }}</span>
-                                <span v-if="selectedTeam.attributes.languages" class="info"><IconLanguages/> {{ selectedTeam.attributes.languages }}</span>
+                                <span v-if="selectedTeam.diploma " class="info"><IconDiploma/> {{ selectedTeam.diploma }}</span>
+                                <span v-if="selectedTeam.languages" class="info"><IconLanguages/> {{ selectedTeam.languages }}</span>
                             </div>
                                 <br>
                                 <br>
                                 <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                                    @click="collapse = !collapse" v-if="selectedTeam.attributes.education">
+                                    @click="collapse = !collapse" v-if="selectedTeam.education">
                                     <span> Aus- und Weiterbildungen:</span>
                                     <span class="icon blue title " v-show="!collapse">+</span>
                                     <span class="icon icon2 blue title" v-show="collapse">-</span>
@@ -47,7 +47,7 @@
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.attributes.education.split('•').filter(Boolean)"
+                                            <li v-for="item in selectedTeam.education.split('•').filter(Boolean)"
                                                 :key="item.trim()">
                                                 <span class="paragraph">{{ item.trim() }}</span>
                                             </li>
@@ -57,17 +57,17 @@
                                 <br>
                                 <BaseButtonBlue class="btn center dropdown" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample2" aria-expanded="false"
-                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2" v-if="selectedTeam.attributes.specialties">
+                                    aria-controls="collapseExample2" @click="collapse2 = !collapse2" v-if="selectedTeam.specialties">
                                     <span> Therapeutische Spezialgebiete:</span>
                                     <span class="icon blue title " v-show="!collapse2">+</span>
                                     <span class="icon icon2 blue title" v-show="collapse2">-</span>
                                 </BaseButtonBlue>
 
-                                <div class="collapse" id="collapseExample2" v-if="selectedTeam.attributes.specialties">
+                                <div class="collapse" id="collapseExample2" v-if="selectedTeam.specialties">
                                     <div class="card card-body">
                                         <ul>
                                             <!-- Split the educationList by bullet points (•) and render each item as a list item -->
-                                            <li v-for="item in selectedTeam.attributes.specialties.split('•').filter(Boolean)"
+                                            <li v-for="item in selectedTeam.specialties.split('•').filter(Boolean)"
                                                 :key="item.trim()">
                                                 <span class="paragraph">{{ item.trim() }}</span>
                                             </li>
@@ -84,11 +84,11 @@
                     </div>
 
                 </div>
-                <BaseContactBox v-if="selectedTeam.attributes.linkedIn !== null || selectedTeam.attributes.email !== null || selectedTeam.attributes.phone !== null">
+                <BaseContactBox v-if="selectedTeam.linkedIn !== null || selectedTeam.email !== null || selectedTeam.phone !== null">
               
-                    <IconLinkedIn v-if="selectedTeam.attributes.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.linkedIn" />
-                    <IconEmail v-if="selectedTeam.attributes.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.email" />
-                    <IconPhone v-if="selectedTeam.attributes.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.attributes.phone" />
+                    <IconLinkedIn v-if="selectedTeam.linkedIn !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.linkedIn" />
+                    <IconEmail v-if="selectedTeam.email !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.email" />
+                    <IconPhone v-if="selectedTeam.phone !== null" target="_blank" rel="noopener noreferrer" :href="selectedTeam.phone" />
 
             </BaseContactBox>
             </div>
@@ -105,11 +105,11 @@
                     <swiper-slide v-for="team in teams" >
                         <BaseCard :theheight="'25%'" class="block-center" @click="openPopup(team)">
                             <template v-slot:img_card>
-<img class="img_card" :src="team.attributes.profilePicture.data.attributes.url" :alt="team.attributes.name">
+<img class="img_card" :src="team.profilePicture.url" :alt="team.name">
   </template>
-                            <span class="paragraph blue bold">{{ team.attributes.name }}</span>
+                            <span class="paragraph blue bold">{{ team.name }}</span>
                             <br>
-                            <span class="info magenta">{{ team.attributes.workPosition }}</span>
+                            <span class="info magenta">{{ team.workPosition }}</span>
                             <br>
                         </BaseCard>
                     </swiper-slide>
@@ -127,7 +127,7 @@ import IconEmail from '../icon/IconEmail.vue';
 import IconPhone from '../icon/IconPhone.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
-import { fetchTeams } from '@/services/cms';
+import { teams } from '@/services/cms';
 import { registerSwiperElement } from '@/services/swiperElement';
 export default {
     
@@ -160,9 +160,7 @@ export default {
   },
     mounted() {
         registerSwiperElement();
-        fetchTeams().then((teams) => {
-      this.teams = teams;
-    });
+        this.teams = teams;
     },
 
 beforeDestroy() {
@@ -175,9 +173,9 @@ beforeDestroy() {
         },
         getTeamCoverPhotoUrl(team) {
 
-        if (team && team.attributes.coverPhoto && team.attributes.coverPhoto.data.attributes.url) {
+        if (team && team.coverPhoto && team.coverPhoto.url) {
 
-            return team.attributes.coverPhoto.data.attributes.url;
+            return team.coverPhoto.url;
         } else {
            
             return ''; 
