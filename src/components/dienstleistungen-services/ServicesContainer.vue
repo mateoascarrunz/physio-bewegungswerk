@@ -40,8 +40,8 @@ Egal, ob Sie sich von einer Operation erholen, mit chronischen Schmerzen kämpfe
                                 
                             <div class="img_services_container center">
                                
-                                <img v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="selectedService.img" alt="">
-                                <img v-if="selectedService === null" class="icon" src="../../assets/images/physio_icon.svg" alt="">
+                                <img loading="lazy" v-if="selectedService !== null" class="img_services" :class="{ 'services_vertical': selectedService.vertical }" :src="selectedService.img" alt="">
+                                <img loading="lazy" v-if="selectedService === null" class="icon" src="../../assets/images/physio_icon.svg" alt="">
                                 
                             </div>
                             <div class="text_info_btns center">
@@ -70,7 +70,7 @@ um mehr zu erfahren</span>
                             </div></BaseButtonBlue>
                             <br>
                             <br>
-                            <span v-if="selectedService !== null" class="paragraph block" v-for="(paragraph, index) in selectedService.description" :key="index" v-html="paragraph"></span>
+                            <span class="paragraph block" v-for="(paragraph, index) in selectedService?.description ?? []" :key="index" v-html="paragraph"></span>
                         </div>
                     </div>
                 </div>
@@ -87,8 +87,7 @@ import BaseCloseButton from '../base/BaseCloseButton.vue'
 export default{
     components:{
         DropdownMenu,
-        IconArrow,
-        BaseCloseButton
+        IconArrow
     },
     data(){
         return{

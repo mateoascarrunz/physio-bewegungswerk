@@ -8,7 +8,7 @@
 <div class="illustration" :class="{'safari': isSafari}">
 <IconExpertiseContainer class="illu_background"  v-if="viewportWidth > 800"></IconExpertiseContainer>
 <IconExpertiseContainerVertical class="illu_background"  v-if="viewportWidth < 800"></IconExpertiseContainerVertical>
-<img class="icon icon_1" src="../../assets/images/icon_expertise_1.svg" alt=" expertise_1">
+<img loading="lazy" class="icon icon_1" src="../../assets/images/icon_expertise_1.svg" alt=" expertise_1">
 <IconLineDot v-if="viewportWidth > 800" class="icon icon_1 line"/>
     <div class="center illu_text text1" v-if="viewportWidth > 800">
         <span class="paragraph blue bold">Wertschätzung</span>
@@ -18,7 +18,7 @@
         </div>
     </div>
 <BaseButtonBlue @click="popup1 = !popup1" v-if="viewportWidth < 800" class=" icon icon_1 margin_button"><span class="info">Wertschätzung</span></BaseButtonBlue>
-<img class="icon icon_2" src="../../assets/images/icon_expertise_2.svg" alt="expertise_2">
+<img loading="lazy" class="icon icon_2" src="../../assets/images/icon_expertise_2.svg" alt="expertise_2">
 <div class="center illu_text text2" v-if="viewportWidth > 800">
         <span class="paragraph blue bold">Kreativität</span>
         <br>
@@ -28,7 +28,7 @@
     </div>
 <IconLineDot v-if="viewportWidth > 800" class="icon icon_2 line"/>
 <BaseButtonBlue @click="popup2 = !popup2" v-if="viewportWidth < 800" class=" icon icon_2 margin_button"><span class="info">Kreativität</span></BaseButtonBlue>
-<img class="icon icon_3" src="../../assets/images/icon_expertise_3.svg" alt="expertise_3">
+<img loading="lazy" class="icon icon_3" src="../../assets/images/icon_expertise_3.svg" alt="expertise_3">
 <div class="center illu_text text3" v-if="viewportWidth > 800">
         <span class="paragraph blue bold">Vertrauen und Respekt</span>
         <br>
@@ -117,7 +117,7 @@ data() {
     // Listen for window resize events to update viewportWidth
     window.addEventListener('resize', this.handleResize);
   },
-  destroyed() {
+  unmounted() {
     // Remove the resize event listener when the component is destroyed
     window.removeEventListener('resize', this.handleResize);
   },

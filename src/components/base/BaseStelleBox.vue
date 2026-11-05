@@ -1,5 +1,5 @@
 <template>
-   <div class="stelle_container" v-for="job in jobs">
+   <div class="stelle_container" v-for="job in jobs" :key="job.id">
     <span class="paragraph paragraph_absolute">{{job.name}}</span>
     <div class="links">
         

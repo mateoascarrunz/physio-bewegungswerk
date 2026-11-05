@@ -7,7 +7,7 @@
         </BaseCloseButton>
 <div class="row">
 <div class="col-lg-6">
-  <img class="img_card_popup" :src="selectedNews.img.url" :alt="selectedNews.img.name">
+  <img loading="lazy" class="img_card_popup" :src="selectedNews.img.url" :alt="selectedNews.img.name">
 </div>
 <div class="col-lg-6 center center_items">
 
@@ -16,8 +16,8 @@
   <br><br><span class="subtitle blue"> {{ selectedNews.subtitle }}</span>
 </div>
   <div class="icons margin_top">
-    <div><img class="icon" src="../../assets/images/user_icon.svg" alt=""><span class="paragraph paragraph_mobile "> by {{selectedNews.author}}</span></div>
-    <div><img class="icon" src="../../assets/images/calendar_icon.svg" alt=""><span class="paragraph paragraph_mobile">{{' ' + formattedDate(selectedNews.date)}}</span></div>
+    <div><img loading="lazy" class="icon" src="../../assets/images/user_icon.svg" alt=""><span class="paragraph paragraph_mobile "> by {{selectedNews.author}}</span></div>
+    <div><img loading="lazy" class="icon" src="../../assets/images/calendar_icon.svg" alt=""><span class="paragraph paragraph_mobile">{{' ' + formattedDate(selectedNews.date)}}</span></div>
   </div>
 </div>
 <div class="col-lg-12 margin_top">
@@ -35,7 +35,7 @@
 
 <BaseCard  :theheight="'50%'" v-for="newsItem in latestNews" :key="newsItem.id" class="center_box center">
   <template v-slot:img_card>
-<img class="img_card" :src="newsItem.img.url" :alt="newsItem.img.name">
+<img loading="lazy" class="img_card" :src="newsItem.img.url" :alt="newsItem.img.name">
   </template>
             <span class="subtitle bold block">{{ truncateDescription(newsItem.title, 5) }}</span>
             <br>
@@ -107,7 +107,7 @@ export default {
       this.maxWordsForDescription = window.innerWidth < 990 ? 10 : 26;
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // Remove the resize event listener when the component is destroyed
     window.removeEventListener('resize', this.updateMaxWordsForDescription);
   },

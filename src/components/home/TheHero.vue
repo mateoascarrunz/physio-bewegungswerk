@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 relative">
                     <div class="coverphoto_container">
-<img class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
+<img loading="lazy" class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
 </div>
 </div>
                 <div class="col-lg-6 relative">
@@ -114,10 +114,10 @@
           </div>
         </div>
 
-        <img :class="{ 'active': isMaritHovered }" class="img_marit" src="../../assets/images/hero_img_physio_marit.webp"
+        <img loading="lazy" :class="{ 'active': isMaritHovered }" class="img_marit" src="../../assets/images/hero_img_physio_marit.webp"
           alt="">
 
-        <img :class="{ 'active': isDominikHovered }" class="img_dominik"
+        <img loading="lazy" :class="{ 'active': isDominikHovered }" class="img_dominik"
           src="../../assets/images/hero_img_physio_dominik.webp" alt="">
 
       </div>
@@ -208,7 +208,7 @@ export default {
   }
 }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // Remove the event listener when the component is destroyed
     window.removeEventListener('resize', this.handleWindowResize);
   },

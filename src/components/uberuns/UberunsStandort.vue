@@ -20,36 +20,36 @@
           
         <!-- <swiper-container slides-per-view="1" speed="500" loop="true" css-mode="true" class="swiper_container" navigation="true" pagination="true" space-between="50px">
                                 <swiper-slide class="swiper_slide" >
-<img class="office_photo" src="../../assets/images/img_standort_7.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_7.webp" alt="">
                     </swiper-slide>
                                         <swiper-slide class="swiper_slide" >
-<img class="office_photo vertical" src="../../assets/images/img_standort_8.webp" alt="">
+<img loading="lazy" class="office_photo vertical" src="../../assets/images/img_standort_8.webp" alt="">
                     </swiper-slide>
                                         <swiper-slide class="swiper_slide" >
-<img class="office_photo vertical" src="../../assets/images/img_standort_9.webp" alt="">
+<img loading="lazy" class="office_photo vertical" src="../../assets/images/img_standort_9.webp" alt="">
                     </swiper-slide>
                                         <swiper-slide class="swiper_slide" >
-<img class="office_photo" src="../../assets/images/img_standort_10.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_10.webp" alt="">
                     </swiper-slide>        
             
             <swiper-slide class="swiper_slide" >
-<img class="office_photo" src="../../assets/images/img_standort_2.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_2.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_3.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_3.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_4.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_4.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo vertical" src="../../assets/images/img_standort_5.webp" alt="">
+<img loading="lazy" class="office_photo vertical" src="../../assets/images/img_standort_5.webp" alt="">
                     </swiper-slide>
 
                     <swiper-slide class="swiper_slide">
-<img class="office_photo" src="../../assets/images/img_standort_6.webp" alt="">
+<img loading="lazy" class="office_photo" src="../../assets/images/img_standort_6.webp" alt="">
                     </swiper-slide>
 
                 </swiper-container> -->

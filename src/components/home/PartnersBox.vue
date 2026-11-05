@@ -13,7 +13,7 @@
     autoplay-disable-on-interaction="false"
   >
   <swiper-slide v-for="partner in partnerImages" :key="partner.id" class="img_container">
-    <img class="img_partner" :class="{ 'horizontal_img': partner.isHorizontal }" :src="partner.Partner_logo[0].url"
+    <img loading="lazy" class="img_partner" :class="{ 'horizontal_img': partner.isHorizontal }" :src="partner.Partner_logo[0].url"
         :alt="partner.Partner_logo[0].name" />
   </swiper-slide>
 
@@ -62,7 +62,7 @@ export default {
       }
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // Remove the event listener when the component is destroyed
     window.removeEventListener('resize', this.handleWindowResize);
   },

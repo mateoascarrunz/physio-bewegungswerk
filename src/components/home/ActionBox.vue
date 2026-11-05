@@ -14,7 +14,7 @@
 
             </div>
         </div>
-        <img class="icon" src="../../assets/images/physio_icon_white.svg" alt="">
+        <img loading="lazy" class="icon" src="../../assets/images/physio_icon_white.svg" alt="">
     </BaseBox>
 </template>
 <script>

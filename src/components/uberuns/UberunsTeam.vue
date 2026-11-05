@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 relative">
                     <div class="coverphoto_container">
-<img class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
+<img loading="lazy" class="img_coverphoto" :src="selectedTeam.profilePicture.url" :alt="selectedTeam.name">
 </div>
 </div>
                 <div class="col-lg-6 relative">
@@ -102,10 +102,10 @@
             <div class="container-fluid">
                 <swiper-container :slides-per-view="computedSlidesPerView" speed="500" css-mode="true" autoplay="true"
                     navigation="true" pagination="true">
-                    <swiper-slide v-for="team in teams" >
+                    <swiper-slide v-for="team in teams" :key="team.id">
                         <BaseCard :theheight="'25%'" class="block-center" @click="openPopup(team)">
                             <template v-slot:img_card>
-<img class="img_card" :src="team.profilePicture.url" :alt="team.name">
+<img loading="lazy" class="img_card" :src="team.profilePicture.url" :alt="team.name">
   </template>
                             <span class="paragraph blue bold">{{ team.name }}</span>
                             <br>
@@ -163,7 +163,7 @@ export default {
         this.teams = teams;
     },
 
-beforeDestroy() {
+beforeUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
   },
   methods: {
@@ -189,25 +189,9 @@ beforeDestroy() {
 
     computed: {
         computedSlidesPerView() {
-  const totalTeams = this.teams.length;
-
-
-  if (totalTeams === 1) {
-    return 1;
-  } else if (totalTeams === 2) {
-    if (this.windowWidth < 890) {
-      return 1;}
-    return 2;
-  } else if (totalTeams >= 3) {
-    if (this.windowWidth < 890) {
-      return 1;
-    } else if (this.windowWidth < 1400){
-        return 2; 
-      } else {
-        return 3; 
-      }
-  } 
-  }
+    const maxSlides = this.windowWidth < 890 ? 1 : this.windowWidth < 1400 ? 2 : 3;
+    return Math.min(maxSlides, Math.max(this.teams.length, 1));
+  },
 },
 }
 </script>
