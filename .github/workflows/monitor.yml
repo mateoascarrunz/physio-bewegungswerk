@@ -1,0 +1,22 @@
+name: Uptime check
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Website responds
+        run: curl --silent --show-error --fail --max-time 30 --output /dev/null https://www.physio-bewegungswerk.ch/
+      - name: CMS responds
+        run: curl --silent --show-error --fail --max-time 60 --output /dev/null https://data.physio-bewegungswerk.ch/_health
+      - name: CMS serves team content
+        run: |
+          count=$(curl --silent --show-error --fail --max-time 60 https://data.physio-bewegungswerk.ch/api/teams | jq '.data | length')
+          test "$count" -gt 0
