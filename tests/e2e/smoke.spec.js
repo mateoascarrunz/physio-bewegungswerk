@@ -48,8 +48,8 @@ test('page reports when its content was fetched', async ({ page }) => {
 
 test('news article opens with its content', async ({ page }) => {
   await page.goto('/news');
-  await page.locator('.news_button').first().click({ force: true });
-  await expect(page.locator('#news_container')).not.toBeEmpty();
+  await page.locator('.news-card').first().click();
+  await expect(page.locator('.article__body')).not.toBeEmpty();
 });
 
 test('team section lists the CMS team', async ({ page }) => {
