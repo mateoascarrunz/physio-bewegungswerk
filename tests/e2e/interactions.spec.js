@@ -199,8 +199,9 @@ test.describe('treatments', () => {
     await expect(page.locator('.service__prose strong').first()).toContainText('Mobilisation mit Bewegung');
   });
 
-  test('sends an unknown treatment to the not found page', async ({ page }) => {
-    await page.goto('/behandlungstechniken/999');
+  test('answers an unknown treatment with a real not found page', async ({ page }) => {
+    const response = await page.goto('/behandlungstechniken/999');
+    expect(response.status()).toBe(404);
     await expect(page).toHaveTitle(/nicht gefunden/);
   });
 
@@ -218,11 +219,12 @@ test.describe('treatments', () => {
 });
 
 test.describe('news', () => {
-  test('opens an article as a titled dialog with its full content', async ({ page }) => {
+  const ARTICLE = '/news/7-frischer-look-neue-energie';
+
+  test('opens an article over the grid at its own address', async ({ page }) => {
     await page.goto('/news');
-    const card = page.locator('.news-card').first();
-    await card.click();
-    await expect(page).toHaveURL(/artikel=\d+/);
+    await page.locator('.news-card').first().click();
+    await expect(page).toHaveURL(new RegExp(`${ARTICLE}$`));
     const dialog = page.locator('dialog[open]');
     await expect(dialog).toBeVisible();
     await expect(dialog.locator('.article__body')).not.toBeEmpty();
@@ -230,6 +232,8 @@ test.describe('news', () => {
     const titleId = await dialog.getAttribute('aria-labelledby');
     await expect(page.locator(`[id="${titleId}"]`)).toHaveText('Frischer Look, neue Energie!');
     await expect(page).toHaveTitle(/Frischer Look/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.physio-bewegungswerk.ch${ARTICLE}`);
+    await expect(page.locator('.news-grid')).toBeAttached();
     expect(await focusedElementIsInside(page, 'dialog')).toBe(true);
   });
 
@@ -261,16 +265,33 @@ test.describe('news', () => {
     await expect.poll(() => page.evaluate((position) => Math.abs(window.scrollY - position), readerPosition)).toBeLessThan(40);
   });
 
-  test('opens from a shared link and closes to the news page', async ({ page }) => {
-    await page.goto('/news?artikel=1');
-    const dialog = page.locator('dialog[open]');
-    await expect(dialog).toContainText('Gemeinsam in Bewegung');
-    await dialog.getByRole('button', { name: 'Schliessen' }).click();
+  test('shows the full article page when its address is opened directly', async ({ page }) => {
+    const response = await page.goto(ARTICLE);
+    expect(response.status()).toBe(200);
     await expect(page.locator('dialog')).toHaveCount(0);
-    await expect(page).toHaveURL(/\/news$/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Frischer Look, neue Energie!');
+    await expect(page.locator('.article-page__body')).not.toBeEmpty();
+    await expect(page.getByRole('navigation', { name: 'Sie sind hier' })).toContainText('News');
   });
 
-  test('ignores a link to an article that no longer exists', async ({ page }) => {
+  test('sends links from before article pages to the article', async ({ page }) => {
+    await page.goto('/news?artikel=1');
+    await expect(page).toHaveURL(/\/news\/1-jetzt-neu-gemeinsam-in-bewegung$/);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Gemeinsam in Bewegung');
+  });
+
+  test('corrects an article address whose title has changed', async ({ page }) => {
+    await page.goto('/news/7-ein-alter-titel');
+    await expect(page).toHaveURL(new RegExp(`${ARTICLE}$`));
+  });
+
+  test('answers an unknown article with a real not found page', async ({ page }) => {
+    const response = await page.goto('/news/99999-gibt-es-nicht');
+    expect(response.status()).toBe(404);
+    await expect(page).toHaveTitle(/nicht gefunden/);
+  });
+
+  test('ignores an old link to an article that no longer exists', async ({ page }) => {
     await page.goto('/news?artikel=99999');
     await expect(page.locator('dialog')).toHaveCount(0);
     await expect(page).toHaveURL(/\/news$/);
@@ -279,25 +300,29 @@ test.describe('news', () => {
   test('closes when the backdrop is clicked', async ({ page, isMobile }) => {
     test.skip(isMobile, 'The phone sheet leaves no backdrop to click');
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto('/news?artikel=7');
+    await page.goto('/news');
+    await page.locator('.news-card').first().click();
     await expect(page.locator('dialog[open]')).toBeVisible();
+    await expect(page.locator('dialog[open]')).not.toHaveClass(/is-entering/);
     await page.mouse.click(40, 450);
     await expect(page.locator('dialog')).toHaveCount(0);
+    await expect(page).toHaveURL(/\/news$/);
   });
 
   test('turns inline photos into an optimised gallery', async ({ page }) => {
-    await page.goto('/news?artikel=7');
+    await page.goto(ARTICLE);
     const photos = page.locator('.article__gallery img');
     await expect(photos.first()).toBeAttached();
     await expect(photos.first()).toHaveAttribute('src', /f_auto,q_auto/);
     await expect(photos.first()).toHaveAttribute('alt', '');
   });
 
-  test('home page cards lead to the same article', async ({ page }) => {
+  test('home page cards lead to the article page', async ({ page }) => {
     await page.goto('/');
     await page.locator('.news-card').first().click();
-    await expect(page).toHaveURL(/\/news\?artikel=7$/);
-    await expect(page.locator('dialog[open]')).toContainText('Frischer Look');
+    await expect(page).toHaveURL(new RegExp(`${ARTICLE}$`));
+    await expect(page.locator('dialog')).toHaveCount(0);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Frischer Look, neue Energie!');
   });
 });
 

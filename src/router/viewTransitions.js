@@ -1,6 +1,12 @@
+import { isOverlayEntry, isOverlayOpen } from '@/services/articleOverlay';
+import { findArticleBySlug } from '@/services/news';
 import { canUseViewTransitions, startViewTransition } from '@/services/viewTransition';
 
-const DIALOG_QUERIES = { team: 'team', artikel: 'news' };
+const DIALOG_QUERIES = { team: 'team' };
+
+function articleId(route) {
+  return findArticleBySlug(route.params.article)?.id ?? null;
+}
 
 function queryValue(route, key) {
   const value = route.query[key];
@@ -21,6 +27,14 @@ export function describeNavigation(to, from) {
     }
     return null;
   }
+  if (to.name === 'newsArticle' && from.name === 'news' && isOverlayEntry()) {
+    return { type: 'dialog', kind: 'news', id: articleId(to), from: 'card', to: 'modal', modal: true };
+  }
+  if (from.name === 'newsArticle' && to.name === 'news' && isOverlayOpen()) {
+    return { type: 'dialog', kind: 'news', id: articleId(from), from: 'modal', to: 'card', modal: true };
+  }
+  if (to.name === 'newsArticle') return { type: 'page', kind: 'news', id: articleId(to), from: 'card', to: 'page' };
+  if (from.name === 'newsArticle') return { type: 'page', kind: 'news', id: articleId(from), from: 'page', to: 'card' };
   if (to.name === 'behandlungstechnikenitem') {
     return { type: 'page', kind: 'service', id: to.params.serviceid, from: 'card', to: 'page' };
   }

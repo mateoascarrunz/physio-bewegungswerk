@@ -19,6 +19,29 @@ export function findArticle(id) {
   return latestNews.find((article) => String(article.id) === String(id)) ?? null;
 }
 
+const TRANSLITERATION = { ä: 'ae', ö: 'oe', ü: 'ue', ß: 'ss' };
+
+/** Stable, readable address part: the CMS id first, so a changed title still resolves. */
+export function articleSlug(article) {
+  const words = article.title
+    .toLowerCase()
+    .replace(/[äöüß]/g, (letter) => TRANSLITERATION[letter])
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return `${article.id}-${words}`;
+}
+
+export function articlePath(article) {
+  return `/news/${articleSlug(article)}`;
+}
+
+export function findArticleBySlug(slug) {
+  const id = String(slug ?? '').match(/^\d+/)?.[0];
+  return id ? findArticle(id) : null;
+}
+
 /**
  * Column spans for a run of cards on the 12-column grid: alternating wide and
  * even rows, adjusted at the end so a row is never left with a lone small card.

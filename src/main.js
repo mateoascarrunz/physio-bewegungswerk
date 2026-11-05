@@ -1,10 +1,19 @@
-import { createApp } from 'vue';
+import { createWebHistory } from 'vue-router';
 import './assets/styles/base.css';
-import App from './App.vue';
-import router from './router';
-import { reveal } from './directives/reveal';
+import { createApp } from './createApp';
+import { setHydrating } from './directives/reveal';
 import { fetchedAt } from './services/cms';
 
 document.documentElement.dataset.contentFetchedAt = fetchedAt;
 
-createApp(App).use(router).directive('reveal', reveal).mount('#app');
+// Pre-rendered pages arrive with their content and are taken over in place;
+// a page without it, such as the admin redirect, is rendered from scratch.
+const container = document.getElementById('app');
+const hydrate = container.hasChildNodes();
+const { app, router } = createApp(createWebHistory(import.meta.env.BASE_URL), { hydrate });
+
+router.isReady().then(() => {
+  setHydrating(hydrate);
+  app.mount(container);
+  setHydrating(false);
+});

@@ -1,6 +1,6 @@
 <script setup>
-import { computed, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+import BaseBreadcrumbs from '@/components/base/BaseBreadcrumbs.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 import BaseCarousel from '@/components/base/BaseCarousel.vue';
 import BaseIcon from '@/components/base/BaseIcon.vue';
@@ -9,14 +9,12 @@ import { responsiveImage } from '@/content/media';
 import { BOOKING_URL } from '@/content/practice';
 import { serviceDescriptions } from '@/content/serviceDescriptions';
 import { findService, services, withSoftHyphens } from '@/content/services';
-import { applyPageMeta } from '@/router/pageMeta';
 import { sharedStyle } from '@/services/viewTransition';
 
 const props = defineProps({
   serviceid: { type: String, required: true },
 });
 
-const route = useRoute();
 
 const service = computed(() => findService(props.serviceid));
 const position = computed(() => services.indexOf(service.value));
@@ -26,28 +24,16 @@ const otherServices = computed(() => services.filter((entry) => entry !== servic
 const previous = computed(() => services[(position.value - 1 + services.length) % services.length]);
 const next = computed(() => services[(position.value + 1) % services.length]);
 
-function stripTags(html) {
-  return html.replace(/<[^>]+>/g, '');
-}
-
-// Unknown treatments never reach this view: the route sends them to the not found page.
-watchEffect(() => {
-  if (!service.value) return;
-  applyPageMeta({
-    path: route.path,
-    meta: {
-      title: `${service.value.title} - Physio Bewegungswerk`,
-      description: stripTags(paragraphs.value[0] ?? ''),
-    },
-  });
-});
+const trail = computed(() => [
+  { to: '/', label: 'Home' },
+  { to: '/behandlungstechniken', label: 'Behandlungstechniken' },
+  { label: service.value?.title ?? '' },
+]);
 </script>
 
 <template>
   <div v-if="service" class="page shell">
-    <BaseButton class="service__back" variant="text" size="sm" icon="arrow-left" to="/behandlungstechniken">
-      Alle Behandlungstechniken
-    </BaseButton>
+    <BaseBreadcrumbs class="service__breadcrumbs" :items="trail" />
 
     <div class="service bento">
       <article class="service__article">
@@ -141,7 +127,7 @@ watchEffect(() => {
 </template>
 
 <style scoped>
-.service__back {
+.service__breadcrumbs {
   margin-block-start: var(--space-2);
 }
 

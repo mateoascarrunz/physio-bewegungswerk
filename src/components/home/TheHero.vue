@@ -62,8 +62,7 @@ onBeforeUnmount(() => {
     <div class="hero__text">
       <p class="hero__eyebrow">Willkommen beim <strong>Physio Bewegungswerk</strong></p>
       <h1 id="hero-title" class="t-display hero__title">
-        <span class="hero__word"><span>Bleib</span></span>
-        <br />
+        <span class="hero__word"><span>Bleib</span></span>{{ ' ' }}<br />
         <span class="hero__word hero__word--accent"><span>beweglich</span></span>
       </h1>
       <p class="t-lead hero__lead">Gerne stellen wir uns vor…</p>

@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/fetch-cms-content.mjs",
-    "build": "vite build",
-    "preview": "vite preview",
-    "postbuild": "cp dist/index.html dist/404.html",
+    "build": "npm run build:site",
+    "preview": "node scripts/serve.mjs",
     "lint": "eslint .",
     "test:unit": "vitest run --dir tests/unit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "build:site": "vite build --ssrManifest && vite build --ssr src/entry-server.js --outDir dist-ssr && node scripts/prerender.mjs"
   },
   "engines": {
     "node": "22.x",

@@ -40,9 +40,23 @@ Breakpoints are written in rem so they follow the reader's text size: 30rem, 40r
 
 - Hover effects only apply to devices that can hover (`@media (hover: hover) and (pointer: fine)`). Touch gets `:active` feedback, and nothing is reachable only by hover.
 - Every interactive element shows a 2 px focus ring in `--focus-color`, which turns white on blue surfaces.
-- Modals take focus, contain it, close on Escape, the close button or the backdrop, return focus on close, and lock page scrolling. Articles and team profiles are tied to `?artikel=` and `?team=`, so the back button closes them and links can be shared.
+- Modals take focus, contain it, close on Escape, the close button or the backdrop, return focus on close, and lock page scrolling. Team profiles are tied to `?team=`; articles opened from the news grid show their own address `/news/<id>-<title>`. Either way the back button closes them and the link can be shared.
 - Motion uses opacity and transform only. Content is visible before any script runs; `v-reveal` only hides an element once its observer is attached. `prefers-reduced-motion` turns animation off globally.
-- The home page entrance waits for the logo intro (`html.intro-active`) and then plays in under a second.
+- The home page entrance waits for the logo intro (`html.intro-pending`) and then plays in a little over a second, without blocking anything.
+
+## Motion
+
+One family of curves (`--ease-out`, `--ease-out-expo`, `--ease-in-out`) and a few durations from `tokens.css`. Native platform features only, no animation library:
+
+| Pattern | How | Used for |
+|---|---|---|
+| Reveal | `v-reveal` with `rise`, `mask`, `title`, `assemble` or `expand`; IntersectionObserver, once per element | Cards, photos, headings, compositions, the booking banner |
+| Drift | `.drift` on a photo frame; CSS scroll-driven animation where supported | Large editorial photos |
+| Attention | `.attention` grid with `.attention__item` cards; transforms only | News, team and treatment cards |
+| Continuity | View Transitions API, named elements chosen by `sharedElement` | Page changes, cards growing into dialogs and detail pages |
+| Disclosure | `BaseDisclosure`, measured height animation | Team details, FAQ |
+
+Rules: content is visible before any script runs, elements already on screen when a pre-rendered page hydrates are never hidden, nothing animates layout properties of the page, reduced motion turns it all off, and browsers without the View Transitions API keep a short fade.
 
 ## Images
 

@@ -363,11 +363,6 @@ main:focus {
   outline: none;
 }
 
-/* Keeps the footer from flashing into view while the first route loads. */
-.main_first_load {
-  min-height: 100vh;
-}
-
 /*
  * The logo intro covers a first visit. index.html decides before the first
  * paint and draws this cover; it lifts itself after five seconds in case the

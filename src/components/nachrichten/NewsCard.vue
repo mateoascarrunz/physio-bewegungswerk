@@ -1,8 +1,10 @@
 <script setup>
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import BaseIcon from '../base/BaseIcon.vue';
+import { requestOverlay } from '@/services/articleOverlay';
 import { cardImageUrl, cmsSrcset } from '@/services/cms';
-import { formatNewsDate } from '@/services/news';
+import { articlePath, formatNewsDate } from '@/services/news';
 import { sharedStyle } from '@/services/viewTransition';
 
 const props = defineProps({
@@ -10,7 +12,22 @@ const props = defineProps({
   /** Column span on the 12-column grid, from newsCardSpans(). */
   span: { type: Number, default: 4 },
   headingTag: { type: String, default: 'h3' },
+  /** In the news grid the article opens as a dialog over it; elsewhere it opens as its page. */
+  overlay: { type: Boolean, default: false },
 });
+
+const router = useRouter();
+const path = computed(() => articlePath(props.article));
+
+// A plain link for crawlers, new tabs and modified clicks; inside the grid an
+// ordinary click keeps the grid behind the article.
+function follow(event, navigate) {
+  if (!props.overlay) return navigate(event);
+  if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  requestOverlay();
+  router.push({ path: path.value, state: { overlay: true } });
+}
 
 // Pairs of ratios keep neighbouring images level across a 7/5 row.
 const IMAGE_RATIOS = { 12: '21 / 9', 7: '8 / 5', 5: '8 / 7', 4: '4 / 3' };
@@ -20,11 +37,13 @@ const imageSizes = computed(() => `(max-width: 48rem) 92vw, ${Math.round((props.
 </script>
 
 <template>
-  <RouterLink
+  <RouterLink v-slot="{ href, navigate }" :to="path" custom>
+  <a
+    :href="href"
     class="news-card zoom-trigger attention__item"
     :class="{ 'news-card--wide': span === 12 }"
     :style="[{ '--span': span, '--image-ratio': imageRatio }, sharedStyle('news', article.id, 'card', 'shared-surface')]"
-    :to="{ path: '/news', query: { artikel: article.id } }"
+    @click="follow($event, navigate)"
   >
     <span class="news-card__media zoom-media" :style="sharedStyle('news', article.id, 'card', 'shared-media')">
       <img
@@ -47,6 +66,7 @@ const imageSizes = computed(() => `(max-width: 48rem) 92vw, ${Math.round((props.
         <BaseIcon class="news-card__arrow" name="arrow-right" :size="18" />
       </span>
     </div>
+  </a>
   </RouterLink>
 </template>
 

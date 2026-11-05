@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 
 const PAGES = [
-  ['/', 'Physio Bewegungswerk in Gossau'],
+  ['/', 'Physiotherapie in Gossau'],
   ['/uberuns', 'Über uns'],
   ['/news', 'News'],
   ['/kontakt', 'Kontakt'],
-  ['/behandlungstechniken', 'Therapieangebot'],
+  ['/behandlungstechniken', 'Behandlungstechniken'],
   ['/private', 'Privat'],
   ['/faq', 'FAQ'],
   ['/impressum', 'Impressum'],

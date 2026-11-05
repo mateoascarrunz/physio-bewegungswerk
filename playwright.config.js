@@ -12,7 +12,7 @@ export default defineConfig({
     baseURL: previewUrl ?? 'http://localhost:4173',
     trace: process.env.CI ? 'retain-on-failure' : 'off',
   },
-  webServer: previewUrl ? undefined : { command: 'npm run preview -- --port 4173 --strictPort', url: 'http://localhost:4173', reuseExistingServer: !process.env.CI },
+  webServer: previewUrl ? undefined : { command: 'node scripts/serve.mjs --port 4173', url: 'http://localhost:4173', reuseExistingServer: !process.env.CI },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     { name: 'mobile', use: { ...devices['Pixel 7'] } },

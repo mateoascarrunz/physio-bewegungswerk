@@ -1,48 +1,48 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
       "source": "/kontakt",
-      "destination": "/index.html"
+      "destination": "/kontakt/index.html"
     },
     {
       "source": "/behandlungstechniken",
-      "destination": "/index.html"
+      "destination": "/behandlungstechniken/index.html"
     },
     {
       "source": "/behandlungstechniken/:serviceid",
-      "destination": "/index.html"
+      "destination": "/behandlungstechniken/:serviceid/index.html"
     },
     {
       "source": "/uberuns",
-      "destination": "/index.html"
+      "destination": "/uberuns/index.html"
     },
     {
       "source": "/news",
-      "destination": "/index.html"
+      "destination": "/news/index.html"
+    },
+    {
+      "source": "/news/:article",
+      "destination": "/news/:article/index.html"
     },
     {
       "source": "/private",
-      "destination": "/index.html"
+      "destination": "/private/index.html"
     },
     {
       "source": "/faq",
-      "destination": "/index.html"
+      "destination": "/faq/index.html"
     },
     {
       "source": "/datenschutz",
-      "destination": "/index.html"
+      "destination": "/datenschutz/index.html"
     },
     {
       "source": "/impressum",
-      "destination": "/index.html"
+      "destination": "/impressum/index.html"
     },
     {
       "source": "/admin",
-      "destination": "/index.html"
+      "destination": "/shell.html"
     }
   ],
   "headers": [

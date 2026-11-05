@@ -1,30 +1,40 @@
 <script setup>
-import { computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import NewsCard from '@/components/nachrichten/NewsCard.vue';
+import { computed, onBeforeUnmount, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import NewsArticleModal from '@/components/nachrichten/NewsArticleModal.vue';
-import { useQueryModal } from '@/composables/useQueryModal';
-import { findArticle, latestNews, newsCardSpans } from '@/services/news';
+import NewsArticlePage from '@/components/nachrichten/NewsArticlePage.vue';
+import NewsCard from '@/components/nachrichten/NewsCard.vue';
+import { isOverlayEntry, setOverlayOpen } from '@/services/articleOverlay';
+import { findArticleBySlug, latestNews, newsCardSpans } from '@/services/news';
+
+const props = defineProps({
+  /** Slug of the article in the address, if any. */
+  article: { type: String, default: null },
+});
 
 const route = useRoute();
-const { value: articleId, close } = useQueryModal('artikel');
+const router = useRouter();
 
 const spans = newsCardSpans(latestNews.length);
-const article = computed(() => (articleId.value ? findArticle(articleId.value) : null));
+const current = computed(() => (props.article ? findArticleBySlug(props.article) : null));
+// Re-read on every navigation: whether this entry sits over the grid lives in history.
+const isOverlay = computed(() => {
+  void route.fullPath;
+  return Boolean(current.value) && isOverlayEntry();
+});
 
-watch(
-  [articleId, article],
-  ([id, found]) => {
-    // An old link may point at an article that has since been unpublished.
-    if (id && !found) close();
-    document.title = found ? `${found.title} - Physio Bewegungswerk` : route.meta.title;
-  },
-  { immediate: true },
-);
+watch(isOverlay, (value) => setOverlayOpen(value), { immediate: true });
+onBeforeUnmount(() => setOverlayOpen(false));
+
+function closeOverlay() {
+  if (window.history.state?.back === '/news') router.back();
+  else router.push('/news');
+}
 </script>
 
 <template>
-  <div class="page shell">
+  <NewsArticlePage v-if="current && !isOverlay" :article="current" />
+  <div v-else class="page shell">
     <header class="news-intro">
       <p class="t-label">Aktuelles aus der Praxis</p>
       <h1 v-reveal:title class="t-h1">News</h1>
@@ -38,11 +48,12 @@ watch(
         :article="entry"
         :span="spans[index]"
         heading-tag="h2"
+        overlay
       />
     </div>
     <p v-else class="t-lead">Weitere News: Coming soon.</p>
 
-    <NewsArticleModal :article="article" @close="close" />
+    <NewsArticleModal :article="isOverlay ? current : null" @close="closeOverlay" />
   </div>
 </template>
 

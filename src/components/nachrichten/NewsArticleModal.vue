@@ -118,24 +118,4 @@ watch(
   font-size: 1.0625rem;
 }
 
-.article__gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-2);
-  margin-block-start: var(--space-5);
-}
-
-.article__gallery img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-}
-
-.article__gallery img:only-child {
-  grid-column: span 2;
-  aspect-ratio: 16 / 9;
-}
 </style>
