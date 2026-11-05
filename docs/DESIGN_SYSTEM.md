@@ -1,0 +1,55 @@
+# Design system
+
+Swiss clinical clarity, warm photography of the real team, confident type. The palette, the logo and Montserrat are unchanged; everything else is built from the tokens below.
+
+## Tokens
+
+All values live in `src/assets/styles/tokens.css`. Components use the semantic names (`--color-brand`, `--color-text-soft`) rather than raw colours.
+
+| Group | Values |
+|---|---|
+| Brand | Blue `#3F63A7` for the brand and primary actions, light blue `#D6E3FF`, navy `#001C54` for headings |
+| Accent | Magenta `#E2097F`, kept for booking and small emphasis. Use `--color-accent-text` (`#B8096A`) for small magenta text on grey |
+| Neutrals | Ink `#0E1A3A`, soft ink `#454F6B`, faint ink `#5D6680`, surface `#F4F5F8`, lines `#E1E5EE` and `#BFC7D8` |
+| Type | Fluid `clamp()` steps from `--text-display` to `--text-label`. Headings use negative tracking and balanced wrapping |
+| Space | `--space-1` to `--space-8`, plus fluid `--gutter`, `--gap`, `--card-pad` and `--section-gap` |
+| Shape | `--radius-xl`, `--radius-lg`, `--radius-md`, `--radius-sm`, `--radius-pill` |
+| Motion | `--ease-out`, `--ease-in-out`; 160, 240, 420 and 700 ms |
+
+Breakpoints are written in rem so they follow the reader's text size: 30rem, 40rem, 48rem, 60rem and 75rem. Media queries cannot read custom properties, so `tokens.css` lists them for reference only.
+
+## Layout
+
+- `.shell` sets the page width (`--container`, 105rem) and the side gutter.
+- `.bento` is the 12-column grid. Modules span 12 on phones, usually 6 on tablets, and pair as 5 + 7 or 4 + 4 + 4 on desktops.
+- `.card`, `.card--blue`, `.card--brand` and `.card--line` are the only module surfaces. Shadows are reserved for floating things: the scrolled header, modals and the map panel.
+- Grids that can hold long words or scrolling rows use `minmax(0, 1fr)` columns, so content never widens the page.
+
+## Components
+
+| Component | Use |
+|---|---|
+| `BaseButton` | Variants `primary`, `secondary`, `accent` (booking only), `inverse` (on blue) and `text`. Renders a `RouterLink`, an anchor or a button from its props, never one inside another |
+| `BaseIconButton` | Icon-only control with a required accessible label |
+| `BaseIcon` | The single outline icon set (24 px grid, 1.75 stroke) |
+| `BaseModal` | Every dialog on the site, built on the native `<dialog>` |
+| `BaseCarousel` | Native scroll-snap row with previous and next buttons. Nothing moves on its own |
+| `ServiceCard`, `NewsCard`, `TeamModal` | Content patterns shared between pages |
+
+## Interaction rules
+
+- Hover effects only apply to devices that can hover (`@media (hover: hover) and (pointer: fine)`). Touch gets `:active` feedback, and nothing is reachable only by hover.
+- Every interactive element shows a 2 px focus ring in `--focus-color`, which turns white on blue surfaces.
+- Modals take focus, contain it, close on Escape, the close button or the backdrop, return focus on close, and lock page scrolling. Articles and team profiles are tied to `?artikel=` and `?team=`, so the back button closes them and links can be shared.
+- Motion uses opacity and transform only. Content is visible before any script runs; `v-reveal` only hides an element once its observer is attached. `prefers-reduced-motion` turns animation off globally.
+- The home page entrance waits for the logo intro (`html.intro-active`) and then plays in under a second.
+
+## Images
+
+- Local photos are generated at 640, 1024 and 1600 px in `src/assets/images/{services,places}` and used through `responsiveImage()` in `src/content/media.js`.
+- CMS photos get a Cloudinary `srcset` from `cmsSrcset()` in `src/services/cms.js`.
+- Every image has fixed dimensions or an aspect ratio, so nothing shifts while loading.
+
+## Copy
+
+Treatment texts live in `src/content/services.js` and `src/content/serviceDescriptions.js`; practice details and navigation in `src/content/practice.js`. Long German compounds in card titles get controlled soft hyphens from `withSoftHyphens()`.

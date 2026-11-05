@@ -1,0 +1,124 @@
+/*
+ * Design tokens for Physio Bewegungswerk.
+ * Every colour, size and timing used by the site starts here.
+ *
+ * Direction: Swiss clinical clarity, warm human photography, confident type.
+ * Blue carries the brand and actions, magenta is reserved for booking and
+ * small moments of emphasis, everything else stays neutral.
+ */
+
+:root {
+  /* Brand blue */
+  --blue-950: #001c54;
+  --blue-800: #243f78;
+  --blue-700: #2f4e8c;
+  --blue-600: #3f63a7; /* brand */
+  --blue-300: #a9c0ee;
+  --blue-200: #d6e3ff; /* brand light */
+  --blue-100: #e6eefd;
+  --blue-50: #f2f6fe;
+
+  /* Accent magenta. 700 is the accessible choice for small text on grey. */
+  --magenta-700: #b8096a;
+  --magenta-600: #e2097f;
+  --magenta-100: #fde9f4;
+
+  /* Neutrals with a cool lean so they sit beside the blue */
+  --ink: #0e1a3a;
+  --ink-soft: #454f6b;
+  --ink-faint: #5d6680;
+  --line: #e1e5ee;
+  --line-strong: #bfc7d8;
+  --surface: #f4f5f8;
+  --white: #ffffff;
+
+  /* Semantic roles */
+  --color-page: var(--white);
+  --color-text: var(--ink);
+  --color-text-soft: var(--ink-soft);
+  --color-text-faint: var(--ink-faint);
+  --color-heading: var(--blue-950);
+  --color-brand: var(--blue-600);
+  --color-brand-hover: var(--blue-700);
+  --color-accent: var(--magenta-600);
+  --color-accent-hover: var(--magenta-700);
+  --color-accent-text: var(--magenta-700);
+  --color-error: var(--magenta-700);
+  --color-success: #0b7a5a;
+  --color-overlay: rgb(0 28 84 / 0.52);
+
+  /* Type: fluid sizes settle at each end, so there are no giant headings */
+  --font-sans: 'Montserrat Variable', 'Montserrat Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-display: clamp(2.75rem, 1.9rem + 4.2vw, 5.75rem);
+  --text-h1: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
+  --text-h2: clamp(1.625rem, 1.32rem + 1.4vw, 2.5rem);
+  --text-h3: clamp(1.1875rem, 1.1rem + 0.45vw, 1.5rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.32vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.75rem;
+  --leading-tight: 1.08;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.024em;
+  --tracking-label: 0.08em;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --gutter: clamp(0.75rem, 2vw, 1.5rem);
+  --gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  --card-pad: clamp(1.25rem, 2.6vw, 2.75rem);
+  --section-gap: clamp(3.5rem, 7vw, 7rem);
+
+  /* Geometry */
+  --radius-xl: clamp(1.5rem, 2.6vw, 2.5rem);
+  --radius-lg: clamp(1.25rem, 2vw, 1.75rem);
+  --radius-md: 1rem;
+  --radius-sm: 0.625rem;
+  --radius-pill: 999px;
+
+  /* Containers */
+  --container: 105rem;
+  --container-reading: 44rem;
+
+  /* Breakpoints. Media queries cannot read custom properties, so these document
+     the values used across the components: sm 30rem, md 48rem, lg 60rem, xl 75rem. */
+  --bp-sm: 30rem;
+  --bp-md: 48rem;
+  --bp-lg: 60rem;
+  --bp-xl: 75rem;
+
+  /* Shadows are rare and always tinted with the navy */
+  --shadow-sm: 0 1px 2px rgb(0 28 84 / 0.05), 0 8px 24px rgb(0 28 84 / 0.07);
+  --shadow-md: 0 2px 6px rgb(0 28 84 / 0.08), 0 18px 40px rgb(0 28 84 / 0.12);
+  --shadow-lg: 0 6px 16px rgb(0 28 84 / 0.1), 0 32px 80px rgb(0 28 84 / 0.22);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 420ms;
+  --duration-slower: 700ms;
+
+  /* Focus */
+  --focus-color: var(--blue-600);
+  --focus-width: 2px;
+  --focus-offset: 3px;
+
+  /* Layout */
+  --header-h: clamp(3.75rem, 3.3rem + 1.2vw, 4.5rem);
+  --header-offset: clamp(0.5rem, 1vw, 1rem);
+}

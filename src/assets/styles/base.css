@@ -1,0 +1,448 @@
+@import '@fontsource-variable/montserrat/wght.css';
+@import './tokens.css';
+
+/* Metric-matched fallback keeps text from jumping when Montserrat arrives. */
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial');
+  size-adjust: 112.5%;
+  ascent-override: 86%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+  scroll-padding-top: calc(var(--header-h) + var(--header-offset) + var(--space-4));
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+strong,
+b {
+  font-weight: var(--weight-semibold);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+::selection {
+  background: var(--blue-200);
+  color: var(--blue-950);
+}
+
+/* Typography */
+.t-display,
+.t-h1,
+.t-h2,
+.t-h3 {
+  color: var(--color-heading);
+  text-wrap: balance;
+  hyphens: manual;
+  overflow-wrap: break-word;
+}
+
+.t-display {
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+}
+
+.t-h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-heading);
+}
+
+.t-h2 {
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  line-height: 1.14;
+  letter-spacing: var(--tracking-heading);
+}
+
+.t-h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: -0.014em;
+}
+
+.t-lead {
+  font-size: var(--text-lead);
+  line-height: 1.55;
+  color: var(--color-text-soft);
+  text-wrap: pretty;
+}
+
+.t-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-soft);
+  text-wrap: pretty;
+}
+
+.t-small {
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--color-text-soft);
+}
+
+.t-label {
+  font-size: var(--text-label);
+  font-weight: var(--weight-semibold);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+/* Layout */
+.shell {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.page {
+  display: flow-root;
+  padding-block-start: var(--gap);
+}
+
+.section {
+  margin-block-start: var(--section-gap);
+}
+
+.section--tight {
+  margin-block-start: var(--gap);
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-6);
+  margin-block-end: clamp(1.25rem, 2.4vw, 2.25rem);
+}
+
+.section-head__text {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 44rem;
+}
+
+/* Cards */
+.card {
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: var(--card-pad);
+}
+
+.card--blue {
+  background: var(--blue-100);
+}
+
+.card--brand {
+  background: var(--blue-600);
+  color: var(--white);
+  --focus-color: var(--white);
+}
+
+.card--line {
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+/* Long-form reading */
+.prose {
+  max-width: var(--container-reading);
+  color: var(--color-text-soft);
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.prose > * + * {
+  margin-block-start: 1em;
+}
+
+.prose h2,
+.prose h3 {
+  color: var(--color-heading);
+  letter-spacing: -0.016em;
+  line-height: var(--leading-snug);
+  text-wrap: balance;
+}
+
+.prose h2 {
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  margin-block-start: 2em;
+}
+
+.prose h3 {
+  font-size: 1.0625rem;
+  font-weight: var(--weight-semibold);
+  margin-block-start: 1.6em;
+}
+
+.prose strong {
+  color: var(--color-text);
+}
+
+.prose ul,
+.prose ol {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5em;
+}
+
+.prose li {
+  position: relative;
+  padding-inline-start: 1.25em;
+}
+
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.68em;
+  width: 0.375em;
+  height: 0.375em;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+
+.prose ol {
+  counter-reset: item;
+}
+
+.prose ol > li::before {
+  counter-increment: item;
+  content: counter(item) '.';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--color-brand);
+  font-weight: var(--weight-semibold);
+}
+
+.prose a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.prose a:hover {
+  color: var(--color-brand-hover);
+}
+
+/* Accessibility helpers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--blue-950);
+  color: var(--white);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Keeps the footer from flashing into view while the first route loads. */
+.main_first_load {
+  min-height: 100vh;
+}
+
+/* Scroll reveal: content is only hidden once the observer is attached. */
+.reveal {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.reveal_visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slower) var(--ease-out),
+    transform var(--duration-slower) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Page changes stay quick so navigation never feels blocked. */
+.page-enter-active {
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.page-leave-active {
+  transition: opacity 120ms ease-in;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Shared image hover used by every image-led card. */
+.zoom-media {
+  overflow: hidden;
+}
+
+.zoom-media img {
+  transition: transform var(--duration-slower) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .zoom-trigger:hover .zoom-media img {
+    transform: scale(1.035);
+  }
+}
+
+.zoom-trigger:focus-visible .zoom-media img {
+  transform: scale(1.035);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .zoom-trigger:hover .zoom-media img,
+  .zoom-trigger:focus-visible .zoom-media img {
+    transform: none;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
