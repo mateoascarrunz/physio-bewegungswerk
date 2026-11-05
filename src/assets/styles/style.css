@@ -316,7 +316,7 @@ grid-column: span 2;
   transform: none;
 }
 
-/* Keeps the footer below the fold until the lazy-loaded route renders. */
-main {
+/* Keeps the footer below the fold until the first lazy-loaded route renders. */
+.main_first_load {
   min-height: 100vh;
 }

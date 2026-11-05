@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { applyPageMeta } from './pageMeta'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -6,12 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: {title: "Physio Bewegungswerk in Gossau",description: "Bleib beweglich. Vom Traum zur Realität: Unsere eigene Praxis - Eine Reise von 10 Jahren Zusammenarbeit"},
       component: () => import('../views/HomeView.vue'),
 
     },
     {
       path: '/kontakt',
       name: 'kontakt',
+      meta: {title: "Kontakt - Physio Bewegungswerk",description: "Bergstrasse 3, 8625 Gossau. Bei offenen Fragen sind wir gerne per E-Mail oder telefonisch von Montag bis Freitag von 09:00 bis 17:00 Uhr erreichbar."},
 
       component: () => import('../views/KontaktView.vue'),
 
@@ -19,11 +22,13 @@ const router = createRouter({
     {
       path: '/behandlungstechniken',
       name: 'behandlungstechniken',
+      meta: {title: "Therapieangebot - Physio Bewegungswerk",description: "Herzlich willkommen beim Phyiso Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen."},
       component: () => import('../views/BehandlungstechnikenView.vue'),
     },
     {
       path: '/behandlungstechniken/:serviceid',
       name: 'behandlungstechnikenitem',
+      meta: { title: 'Therapieangebot - Physio Bewegungswerk', description: "Herzlich willkommen beim Phyiso Bewegungswerk. Wir freuen uns, Ihnen nicht nur therapeutische Dienstleistungen anzubieten, sondern Ihnen bei der Verbesserung Ihrer Lebensqualität zu helfen. Unser Team steht Ihnen zur Verfügung, um Sie auf Ihrem Weg zu begleiten und die bestmögliche Betreuung zu gewährleisten. Unsere Ansätze und Techniken umfassen eine breite Palette bewährter Methoden, da jeder Mensch einzigartige Beschwerden, Bedürfnisse und Ziele hat. Wir passen unsere Herangehensweise an, um Ihre individuellen Anforderungen zu erfüllen und Ihre persönlichen Ziele zu erreichen." },
       component: () => import('../views/BehandlungstechnikenView.vue'),
 
     },
@@ -31,6 +36,7 @@ const router = createRouter({
     {
       path: '/uberuns',
       name: 'uberuns',
+      meta: {title: "Über uns - Physio Bewegungswerk",description: "In unserer Praxis betrachten wir jeden Patienten als einzigartiges Individuum. Unser Therapieansatz ist flexibel. Wir entwickeln individuelle Behandlungspläne, die auf die spezifischen Bedürfnisse und Ziele jedes Patienten zugeschnitten sind. Wir arbeiten eng mit unseren Patienten zusammen. um gemeinsam Strategien zu gestalten/entwerfen, die darauf abzielen, die gewünschten Ergebnisse zu erreichen."},
 
       component: () => import('../views/UberUnsView.vue'),
 
@@ -38,6 +44,7 @@ const router = createRouter({
     {
       path: '/news',
       name: 'news',
+      meta: {title: "News - Physio Bewegungswerk",description: "Bleibe auf dem neuesten Stand in der Welt der Physiotherapie. Unsere News-Sektion bietet aktuelle Informationen, Forschungsergebnisse und Expertenmeinungen rund um physiotherapeutische Methoden, Gesundheitstipps und inspirierende Geschichten von Patienten. Entdecke die neuesten Entwicklungen und praktischen Ratschläge, um deine Gesundheit und Lebensqualität zu verbessern."},
 
       component: () => import('../views/NachrichtenView.vue'),
    
@@ -45,6 +52,7 @@ const router = createRouter({
         {
       path: '/private',
       name: 'private',
+      meta: {title: "Physiotherapie – Privat & Krankenkassen anerkannt | Physio Bewegungswerk",description: "Physiotherapie im Physio Bewegungswerk: Als Krankenkassen-anerkannte Praxis behandeln wir mit ärztlicher Verordnung (Kostenübernahme durch Grundversicherung, IV und MV). Zusätzlich bieten wir Private Physiotherapie ohne Verordnung an – ideal zur Prävention und zum Wohlbefinden. Termine ab CHF 75.–."},
 
       component: () => import('../views/PrivateView.vue'),
    
@@ -52,6 +60,7 @@ const router = createRouter({
     {
       path: '/faq',
       name: 'faq',
+      meta: {title: "FAQ - Physio Bewegungswerk"},
 
       component: () => import('../views/FaqView.vue'),
  
@@ -59,6 +68,7 @@ const router = createRouter({
     {
       path: '/datenschutz',
       name: 'datenschutz',
+      meta: {title: "Datenschutz - Physio Bewegungswerk"},
 
       component: () => import('../views/DatenschutzView.vue'),
  
@@ -66,6 +76,7 @@ const router = createRouter({
     {
       path: '/impressum',
       name: 'impressum',
+      meta: {title: "Impressum - Physio Bewegungswerk"},
 
       component: () => import('../views/ImpresumView.vue'),
  
@@ -73,12 +84,14 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
+      meta: { title: 'Admin - Physio Bewegungswerk', noindex: true },
 
       component: () => import('../views/AdminView.vue'),
     },
     { 
       path: '/:catchAll(.*)', 
       name: 'NotFound',
+      meta: { title: 'Seite nicht gefunden - Physio Bewegungswerk', noindex: true },
       component: () => import('../views/404View.vue')
 
     }
@@ -90,5 +103,7 @@ const router = createRouter({
 })
 
 
+
+router.afterEach(applyPageMeta)
 
 export default router

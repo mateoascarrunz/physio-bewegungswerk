@@ -1,11 +1,17 @@
+const CLOUDINARY_DELIVERY = 'f_auto,q_auto,c_limit,w_1400';
 const MEDIA_FIELDS = ['url', 'name', 'alternativeText', 'width', 'height'];
 
 function isMedia(value) {
   return typeof value.url === 'string' && typeof value.mime === 'string';
 }
 
+function optimiseCloudinaryUrl(url) {
+  return url.replace('/image/upload/', `/image/upload/${CLOUDINARY_DELIVERY}/`);
+}
+
 function pickMedia(media) {
-  return Object.fromEntries(MEDIA_FIELDS.map((field) => [field, media[field] ?? null]));
+  const picked = Object.fromEntries(MEDIA_FIELDS.map((field) => [field, media[field] ?? null]));
+  return { ...picked, url: optimiseCloudinaryUrl(media.url) };
 }
 
 // Strapi 4 nests entries under `attributes` and relations under `data`; Strapi 5 is already flat.

@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-05T00:45:43.108Z",
+  "fetchedAt": "2026-11-05T01:05:34.176Z",
   "banners": [],
   "jobs": [],
   "news": [
@@ -14,7 +14,7 @@
       "updatedAt": "2023-10-19T19:47:19.526Z",
       "publishedAt": "2023-10-13T08:59:00.364Z",
       "img": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1697187530/standort_00703d37da.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1697187530/standort_00703d37da.jpg",
         "name": "standort.jpg",
         "alternativeText": null,
         "width": 4032,
@@ -32,7 +32,7 @@
       "updatedAt": "2025-07-29T07:16:27.837Z",
       "publishedAt": "2025-07-28T16:44:35.629Z",
       "img": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1753773378/IMG_7625_3_f112dfe1e6.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1753773378/IMG_7625_3_f112dfe1e6.jpg",
         "name": "IMG_7625-3.jpg",
         "alternativeText": null,
         "width": 2446,
@@ -60,14 +60,14 @@
       "updatedAt": "2025-01-17T23:58:07.243Z",
       "publishedAt": "2023-10-13T09:42:57.724Z",
       "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158267/img_team_0000_dd7b4ddaff.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158267/img_team_0000_dd7b4ddaff.webp",
         "name": "img_team_0000.webp",
         "alternativeText": null,
         "width": 1600,
         "height": 2400
       },
       "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158267/img_team_0000_dd7b4ddaff.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158267/img_team_0000_dd7b4ddaff.webp",
         "name": "img_team_0000.webp",
         "alternativeText": null,
         "width": 1600,
@@ -92,14 +92,14 @@
       "updatedAt": "2025-01-17T23:58:41.318Z",
       "publishedAt": "2023-10-18T09:31:07.448Z",
       "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158310/img_team_0001_2a11a01b2f.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158310/img_team_0001_2a11a01b2f.webp",
         "name": "img_team_0001.webp",
         "alternativeText": null,
         "width": 1600,
         "height": 2400
       },
       "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158310/img_team_0001_2a11a01b2f.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158310/img_team_0001_2a11a01b2f.webp",
         "name": "img_team_0001.webp",
         "alternativeText": null,
         "width": 1600,
@@ -124,14 +124,14 @@
       "updatedAt": "2025-01-17T23:59:11.895Z",
       "publishedAt": "2024-12-18T12:59:30.960Z",
       "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158340/img_team_0002_afa05c008a.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158340/img_team_0002_afa05c008a.webp",
         "name": "img_team_0002.webp",
         "alternativeText": null,
         "width": 1600,
         "height": 2400
       },
       "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1737158340/img_team_0002_afa05c008a.webp",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158340/img_team_0002_afa05c008a.webp",
         "name": "img_team_0002.webp",
         "alternativeText": null,
         "width": 1600,
@@ -156,14 +156,14 @@
       "updatedAt": "2025-10-17T16:32:33.998Z",
       "publishedAt": "2025-09-19T08:10:00.904Z",
       "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
         "name": "Nadine Schwarz.jpg",
         "alternativeText": null,
         "width": 1600,
         "height": 2400
       },
       "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
         "name": "Nadine Schwarz.jpg",
         "alternativeText": null,
         "width": 1600,
@@ -188,14 +188,14 @@
       "updatedAt": "2025-12-15T07:53:27.470Z",
       "publishedAt": "2025-12-14T22:09:12.689Z",
       "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
         "name": "fa53a588-dcac-4883-a635-e52967d1563d.JPG",
         "alternativeText": null,
         "width": 1200,
         "height": 1600
       },
       "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
+        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1765749726/fa53a588_dcac_4883_a635_e52967d1563d_cfc49b1d9e.jpg",
         "name": "fa53a588-dcac-4883-a635-e52967d1563d.JPG",
         "alternativeText": null,
         "width": 1200,
