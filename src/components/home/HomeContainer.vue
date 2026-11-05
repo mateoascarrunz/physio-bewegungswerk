@@ -4,14 +4,14 @@
     <div class="grid_container">
       <PartnersBox class="grid-col-2 transition-3" :color="lightblue"   :delay="100">
       </PartnersBox>
-      <TechniquesBox class="grid_mobile transition-3"  v-motion-fade-visible-once>
+      <TechniquesBox class="grid_mobile transition-3"  v-reveal>
 
       </TechniquesBox>
-      <UberunsBox class="grid_mobile transition-3"  v-motion-fade-visible-once/>
+      <UberunsBox class="grid_mobile transition-3"  v-reveal/>
     </div>
     <NachrichtenBox />
     <div class="grid_container">
-      <ActionBox class="grid_mobile transition-3"  v-motion-fade-visible-once :delay="100"/>
+      <ActionBox class="grid_mobile transition-3"  v-reveal :delay="100"/>
     </div>
 
   </div>

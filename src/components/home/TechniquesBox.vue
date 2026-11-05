@@ -5,12 +5,8 @@
        
         <swiper-container
         class="swiper"
-    :modules="modules"
     :slides-per-view="1"
     :spaceBetween="40"
-    :pagination="{ el: '.swiper-pagination' }"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
     speed="300" autoplay="true"
                     navigation="true"
                     loop="true" 
@@ -157,38 +153,13 @@
 </BaseBox>
 </template>
 <script>
-  // import Swiper core and required modules
-  import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { registerSwiperElement } from '@/services/swiperElement';
 
-  // Import Swiper Vue.js components
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-
-  // Import Swiper styles
-  import 'swiper/css';
-  import 'swiper/css/navigation';
-  import 'swiper/css/pagination';
-
-  // Import Swiper styles
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-    setup() {
-      const onSwiper = (swiper) => {
-        console.log(swiper);
-      };
-      const onSlideChange = () => {
-        console.log('slide change');
-      };
-      return {
-        onSwiper,
-        onSlideChange,
-        modules: [Navigation, Pagination, A11y],
-      };
-    },
-
-  };
+export default {
+  created() {
+    registerSwiperElement();
+  },
+};
 </script>
 <style scoped>
 

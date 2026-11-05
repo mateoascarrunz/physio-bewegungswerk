@@ -5,37 +5,29 @@
 <span class="title blue partners_title">Partners</span>
 <br>
 
-        <swiper
-        class="swiper"
-    :modules="modules"
+        <swiper-container
+    class="swiper"
     :slides-per-view="computedSlidesPerView"
-    navigation
-    :autoplay="{ delay: 3000, disableOnInteraction: false }" 
-    @swiper="onSwiper"
-
-    @slideChange="onSlideChange"
+    navigation="true"
+    autoplay-delay="3000"
+    autoplay-disable-on-interaction="false"
   >
   <swiper-slide v-for="partner in partnerImages" :key="partner.id" class="img_container">
     <img class="img_partner" :class="{ 'horizontal_img': partner.attributes.isHorizontal }" :src="partner.attributes.Partner_logo.data[0].attributes.url"
         :alt="partner.attributes.Partner_logo.data[0].attributes.name" />
   </swiper-slide>
 
-</swiper>
+</swiper-container>
 
   </BaseBox>
 
 </template>
 
 <script>
-import { Navigation, Autoplay } from 'swiper/modules';
 import { fetchPartners } from '@/services/cms';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { registerSwiperElement } from '@/services/swiperElement';
 
 export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
   data() {
     return {
       partnerImages: [],
@@ -44,22 +36,9 @@ export default {
     };
   },
   created() {
-    // Add an event listener for window resize in the created hook
+    registerSwiperElement();
     window.addEventListener('resize', this.handleWindowResize);
     this.handleWindowResize();
-  },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log('slide change');
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-      modules: [Navigation, Autoplay],
-    };
   },
   mounted() {
     fetchPartners().then((partners) => {

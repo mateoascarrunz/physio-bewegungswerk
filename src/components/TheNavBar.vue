@@ -99,7 +99,7 @@ export default {
 .nav-link {
   color: rgba(0, 28, 84, 0.50);
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
 }
 
 .navbar-brand {

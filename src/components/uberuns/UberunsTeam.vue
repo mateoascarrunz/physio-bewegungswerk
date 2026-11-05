@@ -128,6 +128,7 @@ import IconPhone from '../icon/IconPhone.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseContactBox from '../base/BaseContactBox.vue';
 import { fetchTeams } from '@/services/cms';
+import { registerSwiperElement } from '@/services/swiperElement';
 export default {
     
     components: {
@@ -158,6 +159,7 @@ export default {
     this.handleWindowResize();
   },
     mounted() {
+        registerSwiperElement();
         fetchTeams().then((teams) => {
       this.teams = teams;
     });

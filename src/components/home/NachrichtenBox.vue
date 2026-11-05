@@ -28,7 +28,7 @@
   </BasePopUp>
 
   <div class="grid_container padding_null" v-if="latestNews.length ">
-    <BaseBox class="grid-col-2 center" v-motion-fade-visible-once>
+    <BaseBox class="grid-col-2 center" v-reveal>
       <span class="title bold blue">News</span>
       <div class="news_container">
         <BaseCard v-for="newsItem in latestNews" :key="newsItem.id" class="cards_news">
@@ -63,7 +63,9 @@ import BaseButtonMag from '../base/BaseButtonMag.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BaseEmptyCard from '../base/BaseEmptyCard.vue';
 import BasePopUp from '../base/BasePopUp.vue';
-import BaseRitchText from '../base/BaseRitchText.vue';
+import { defineAsyncComponent } from 'vue';
+
+const BaseRitchText = defineAsyncComponent(() => import('../base/BaseRitchText.vue'));
 
 export default {
   components: {

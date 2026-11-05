@@ -1,7 +1,7 @@
 
 <template>
         <div class="grid_container padding_null">
-    <BaseBox class="container_flex center grid-col-2 transition-3" v-motion-fade-visible-once>
+    <BaseBox class="container_flex center grid-col-2 transition-3" v-reveal>
         <span class="title bold blue z-1">Unser Standort</span>
         <br>
         <span class="paragraph z-1">Bergstrasse 3, 8625 Gossau</span>
@@ -75,7 +75,11 @@
 <script>
 import BasePopUp from '../base/BasePopUp.vue'
 import BaseCloseButton from '../base/BaseCloseButton.vue'
+import { registerSwiperElement } from '@/services/swiperElement';
 export default{
+    created() {
+        registerSwiperElement();
+    },
     components:{
     BasePopUp,
     BaseCloseButton

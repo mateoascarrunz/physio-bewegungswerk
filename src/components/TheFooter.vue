@@ -1,5 +1,5 @@
 <template>
-    <div class="grid_container transition-5"  v-motion-slide-visible-bottom >
+    <div class="grid_container transition-5"  v-reveal:slide >
         <BaseBox class="grid-col-2" >
             <div class="container-fluid">
             <div class="row">

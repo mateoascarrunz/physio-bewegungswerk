@@ -9,9 +9,9 @@
 <UberunsTeam/>
 <UberunsStandort/>
 <div class="grid_container">
-    <UberunsCompany class="grid-col-2 transition-3" v-motion-fade-visible-once/>
-    <UberunsExpertises class="grid-col-2 transition-3"  :color="lightblue" v-motion-fade-visible-once/>
-    <UberunsStellen class="grid-col-2 transition-3" v-motion-fade-visible-once/>
+    <UberunsCompany class="grid-col-2 transition-3" v-reveal/>
+    <UberunsExpertises class="grid-col-2 transition-3"  :color="lightblue" v-reveal/>
+    <UberunsStellen class="grid-col-2 transition-3" v-reveal/>
     </div>
    
     

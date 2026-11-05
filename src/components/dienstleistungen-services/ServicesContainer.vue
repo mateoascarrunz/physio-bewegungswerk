@@ -281,7 +281,6 @@ export default{
     },
     methods:{
         closeDropdown(){
-            console.log('emited close was called');
             this.Popup = false;
         },
     

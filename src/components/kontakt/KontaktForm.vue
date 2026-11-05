@@ -63,7 +63,7 @@
 </div>
 </template>
 <script>
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 export default {
   data() {
@@ -86,7 +86,6 @@ closeModal(){
   this.showmodal= false;
 },
     sendEmail() {
-      console.log('sendEmail method called');
       if (!this.name) {
         this.namenotfilled = true;
         this.validationFailed = true;
@@ -129,15 +128,13 @@ closeModal(){
       if(!this.validationFailed) {emailjs
         .send('service_bphnx5s', 'template_1yau1ec', templateParams, 'JwRQLh9SOb9XYUb-k')
         
-        .then((response) => {
+        .then(() => {
           this.validationFailed = false;
-          console.log('Email sent successfully:', response);
           this.success = 'success';
 
         })
-        .catch((error) => {
+        .catch(() => {
           this.validationFailed = false;
-          console.error('Email sending failed:', error);
           this.success = 'error';
         });
       }
@@ -174,13 +171,13 @@ closeModal(){
 
 <style>
 .form-label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
   margin-left: 13px;
 }
 
 .form-control {
   border-radius: 50px !important;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat Variable', 'Montserrat', sans-serif;
 }
 
 .text-area {

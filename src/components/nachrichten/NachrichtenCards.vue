@@ -56,7 +56,9 @@ import BaseEmptyCard from '../base/BaseEmptyCard.vue';
 import BaseCard from '../base/BaseCard.vue';
 import BasePopUp from '../base/BasePopUp.vue';
 import { fetchNews } from '@/services/cms';
-import BaseRitchText from '../base/BaseRitchText.vue';
+import { defineAsyncComponent } from 'vue';
+
+const BaseRitchText = defineAsyncComponent(() => import('../base/BaseRitchText.vue'));
 
 export default {
   components: {
