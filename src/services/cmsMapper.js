@@ -37,3 +37,11 @@ export function findInvalidEntries(collection, entries) {
     REQUIRED_FIELDS[collection].some((field) => entry[field] === null || entry[field] === undefined),
   );
 }
+
+const COLLECTIONS_REQUIRING_ENTRIES = ['teams'];
+
+export function assertCollectionHasEntries(collection, entries) {
+  if (COLLECTIONS_REQUIRING_ENTRIES.includes(collection) && entries.length === 0) {
+    throw new Error(`${collection}: no entries`);
+  }
+}

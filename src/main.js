@@ -10,8 +10,11 @@ import BasePopUp from './components/base/BasePopUp.vue';
 import BaseCloseButton from './components/base/BaseCloseButton.vue';
 import BasePageTransition from './components/base/BasePageTransition.vue';
 import { reveal } from './directives/reveal';
+import { fetchedAt } from './services/cms';
 
 import 'bootstrap/js/dist/collapse';
+document.documentElement.dataset.contentFetchedAt = fetchedAt;
+
 const app = createApp(App)
 
 app.use(router)

@@ -40,6 +40,12 @@ for (const [path, title] of PAGES) {
   });
 }
 
+test('page reports when its content was fetched', async ({ page }) => {
+  await page.goto('/');
+  const fetchedAt = await page.locator('html').getAttribute('data-content-fetched-at');
+  expect(Number.isNaN(Date.parse(fetchedAt))).toBe(false);
+});
+
 test('news article opens with its content', async ({ page }) => {
   await page.goto('/news');
   await page.locator('.news_button').first().click({ force: true });
