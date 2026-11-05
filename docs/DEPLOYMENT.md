@@ -7,9 +7,20 @@ Pushes to `main` deploy to production, and other branches create preview deploym
 ### Publishing webhook
 
 1. In Vercel, create a Deploy Hook for `main`.
-2. In Strapi, go to Settings > Webhooks and add that URL for entry publish, unpublish, update and delete events.
+2. In Strapi, go to Settings > Webhooks and add that URL with the events below.
 
-Treat the hook URL as a secret.
+| Strapi version | Events | Why |
+|---|---|---|
+| 4 | entry create, update, delete, publish, unpublish | Editing a published entry is expected to change it immediately, with no publish event |
+| 5 | entry publish, unpublish, delete | `entry.update` also fires on draft saves, which do not change the public site |
+
+Strapi 5 only accepts public webhook URLs, so a local address is rejected. Treat the hook URL as a secret, and update the events during the Strapi 5 migration.
+
+A rebuild takes one to two minutes. If it fails, the previous deployment stays live.
+
+### Preview differences
+
+Previews send `x-robots-tag: noindex` and try to load Vercel's feedback toolbar, which the Content Security Policy blocks. Lighthouse reports both on previews. Re-check SEO and console results on production after each release.
 
 ## CMS (Render)
 

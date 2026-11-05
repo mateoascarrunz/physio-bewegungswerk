@@ -17,6 +17,10 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    // Lightning CSS rewrites or drops some of this site's declarations, which changes its appearance.
+    cssMinify: 'esbuild',
+  },
   css: {
     preprocessorOptions: {
       scss: {
