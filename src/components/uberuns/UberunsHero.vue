@@ -13,7 +13,7 @@ function scrollToJobs() {
 
 <template>
   <section class="about-intro bento" aria-labelledby="about-title">
-    <div class="about-intro__lead">
+    <div v-reveal:assemble class="about-intro__lead">
       <p class="t-label">Über uns</p>
       <h1 id="about-title" class="t-h1">Unser Behandlungs&shy;ansatz</h1>
       <p class="t-lead">
@@ -28,7 +28,7 @@ function scrollToJobs() {
       </div>
     </div>
 
-    <div class="about-intro__media">
+    <div class="about-intro__media drift">
       <img
         v-bind="image"
         sizes="(max-width: 60rem) 96vw, 58vw"
@@ -40,7 +40,7 @@ function scrollToJobs() {
       />
     </div>
 
-    <div class="about-intro__point card">
+    <div v-reveal="120" class="about-intro__point card">
       <h2 class="t-h3">Ganzheitlich</h2>
       <p class="t-body">
         Unser Ansatz ist ganzheitlich, was bedeutet, dass wir nicht nur Symptome behandeln, sondern auch die zugrunde
@@ -48,7 +48,7 @@ function scrollToJobs() {
         im Wohlbefinden unserer Patienten zu erreichen.
       </p>
     </div>
-    <div class="about-intro__point card card--blue">
+    <div v-reveal="200" class="about-intro__point card card--blue">
       <h2 class="t-h3">Individuell</h2>
       <p class="t-body">
         Uns ist es besonders wichtig, jeden unserer Patienten mit Respekt und in ihrer Einzigartigkeit zu behandeln. Wir

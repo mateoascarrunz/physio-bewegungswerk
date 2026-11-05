@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import BaseIcon from '../base/BaseIcon.vue';
 import { cardImageUrl, cmsSrcset } from '@/services/cms';
 import { formatNewsDate } from '@/services/news';
+import { sharedStyle } from '@/services/viewTransition';
 
 const props = defineProps({
   article: { type: Object, required: true },
@@ -20,12 +21,12 @@ const imageSizes = computed(() => `(max-width: 48rem) 92vw, ${Math.round((props.
 
 <template>
   <RouterLink
-    class="news-card zoom-trigger"
+    class="news-card zoom-trigger attention__item"
     :class="{ 'news-card--wide': span === 12 }"
-    :style="{ '--span': span, '--image-ratio': imageRatio }"
+    :style="[{ '--span': span, '--image-ratio': imageRatio }, sharedStyle('news', article.id, 'card', 'shared-surface')]"
     :to="{ path: '/news', query: { artikel: article.id } }"
   >
-    <span class="news-card__media zoom-media">
+    <span class="news-card__media zoom-media" :style="sharedStyle('news', article.id, 'card', 'shared-media')">
       <img
         :src="cardImageUrl(article.img.url)"
         :srcset="cmsSrcset(article.img.url)"

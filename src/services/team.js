@@ -29,6 +29,7 @@ export function describeMember(member) {
   }
 
   return {
+    id: member.id,
     name: member.name.trim(),
     role: member.workPosition,
     quote: cleanQuote(member.quote),

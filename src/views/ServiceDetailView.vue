@@ -10,6 +10,7 @@ import { BOOKING_URL } from '@/content/practice';
 import { serviceDescriptions } from '@/content/serviceDescriptions';
 import { findService, services, withSoftHyphens } from '@/content/services';
 import { applyPageMeta } from '@/router/pageMeta';
+import { sharedStyle } from '@/services/viewTransition';
 
 const props = defineProps({
   serviceid: { type: String, required: true },
@@ -52,9 +53,12 @@ watchEffect(() => {
       <article class="service__article">
         <header class="service__header">
           <p class="t-label">Behandlungstechnik {{ position + 1 }} von {{ services.length }}</p>
-          <h1 class="t-h1">{{ withSoftHyphens(service.title) }}</h1>
+          <h1 v-reveal:title class="t-h1">{{ withSoftHyphens(service.title) }}</h1>
         </header>
-        <div class="service__media service__media--inline">
+        <div
+          class="service__media service__media--inline"
+          :style="sharedStyle('service', service.id, 'page', 'shared-media')"
+        >
           <img
             v-bind="image"
             :style="{ objectPosition: service.focus }"
@@ -97,7 +101,10 @@ watchEffect(() => {
       </article>
 
       <aside class="service__aside">
-        <div class="service__media service__media--aside">
+        <div
+          class="service__media service__media--aside"
+          :style="sharedStyle('service', service.id, 'page', 'shared-media')"
+        >
           <img
             v-bind="image"
             :style="{ objectPosition: service.focus }"
@@ -125,7 +132,7 @@ watchEffect(() => {
         <template #header>
           <h2 id="service-others-title" class="t-h2">Weitere Behandlungs&shy;techniken</h2>
         </template>
-        <li v-for="entry in otherServices" :key="entry.id" class="service__slide">
+        <li v-for="(entry, index) in otherServices" :key="entry.id" v-reveal="Math.min(index, 4) * 70" class="service__slide">
           <ServiceCard :service="entry" sizes="(max-width: 40rem) 78vw, 26vw" />
         </li>
       </BaseCarousel>

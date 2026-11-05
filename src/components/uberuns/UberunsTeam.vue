@@ -1,22 +1,23 @@
 <script setup>
 import BaseIcon from '../base/BaseIcon.vue';
 import { cardImageUrl, cmsSrcset, teams } from '@/services/cms';
+import { sharedStyle } from '@/services/viewTransition';
 </script>
 
 <template>
-  <section v-if="teams.length" class="team" aria-labelledby="team-title">
+  <section v-if="teams.length" class="team attention" aria-labelledby="team-title">
     <div class="team__intro card card--blue">
-      <h2 id="team-title" class="t-h2">Lernen Sie unser Team kennen</h2>
+      <h2 id="team-title" v-reveal:title class="t-h2">Lernen Sie unser Team kennen</h2>
       <p class="t-body">Wählen Sie eine Person, um mehr über ihre Ausbildung und ihre Spezialgebiete zu erfahren.</p>
     </div>
     <RouterLink
       v-for="(member, index) in teams"
       :key="member.id"
       v-reveal="(index % 3) * 60"
-      class="team-card zoom-trigger"
+      class="team-card zoom-trigger attention__item"
       :to="{ query: { team: member.id } }"
     >
-      <span class="team-card__media zoom-media">
+      <span class="team-card__media zoom-media" :style="sharedStyle('team', member.id, 'card', 'shared-media')">
         <img
           :src="cardImageUrl(member.profilePicture.url)"
           :srcset="cmsSrcset(member.profilePicture.url)"

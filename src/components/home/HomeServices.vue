@@ -12,11 +12,16 @@ const homeServices = services.filter((service) => service.onHome !== false);
     <BaseCarousel label="Behandlungstechniken">
       <template #header>
         <div class="section-head__text">
-          <h2 id="home-services-title" class="t-h2">Behandlungs&shy;techniken</h2>
+          <h2 id="home-services-title" v-reveal:title class="t-h2">Behandlungs&shy;techniken</h2>
           <BaseButton variant="text" arrow to="/behandlungstechniken">Alle Behandlungstechniken</BaseButton>
         </div>
       </template>
-      <li v-for="service in homeServices" :key="service.id" class="home-services__slide">
+      <li
+        v-for="(service, index) in homeServices"
+        :key="service.id"
+        v-reveal="Math.min(index, 4) * 70"
+        class="home-services__slide"
+      >
         <ServiceCard :service="service" :title="service.homeTitle" sizes="(max-width: 40rem) 78vw, 26vw" />
       </li>
     </BaseCarousel>

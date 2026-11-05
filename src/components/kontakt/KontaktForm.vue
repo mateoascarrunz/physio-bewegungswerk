@@ -73,7 +73,7 @@ async function submit(event) {
 </script>
 
 <template>
-  <section class="contact-form card" aria-labelledby="form-title">
+  <section v-reveal="160" class="contact-form card" aria-labelledby="form-title">
     <template v-if="status === 'success'">
       <div ref="resultElement" class="form-result form-result--success" tabindex="-1" role="status">
         <span class="form-result__icon"><BaseIcon name="check" :size="24" /></span>

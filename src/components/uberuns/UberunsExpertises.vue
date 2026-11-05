@@ -5,10 +5,10 @@ import BaseIcon from '../base/BaseIcon.vue';
 <template>
   <section class="values" aria-labelledby="values-title">
     <div class="section-head">
-      <h2 id="values-title" class="t-h2">Unsere Werte</h2>
+      <h2 id="values-title" v-reveal:title class="t-h2">Unsere Werte</h2>
     </div>
-    <ul class="values__grid">
-      <li v-reveal class="values__card values__card--wide card card--blue">
+    <ul v-reveal:assemble class="values__grid">
+      <li class="values__card values__card--wide card card--blue">
         <span class="values__icon"><BaseIcon name="heart" :size="24" /></span>
         <h3 class="t-h3">Wertschätzung</h3>
         <p>
@@ -16,7 +16,7 @@ import BaseIcon from '../base/BaseIcon.vue';
           Ziele unserer Patienten eingehen.
         </p>
       </li>
-      <li v-reveal="60" class="values__card card">
+      <li class="values__card card">
         <span class="values__icon"><BaseIcon name="spark" :size="24" /></span>
         <h3 class="t-h3">Kreativität</h3>
         <p>
@@ -24,7 +24,7 @@ import BaseIcon from '../base/BaseIcon.vue';
           die Behandlung gewährleisten wir eine professionelle Physiotherapie gemäss den aktuellen Standards.
         </p>
       </li>
-      <li v-reveal="120" class="values__card card">
+      <li class="values__card card">
         <span class="values__icon"><BaseIcon name="shield" :size="24" /></span>
         <h3 class="t-h3">Vertrauen und Respekt</h3>
         <p>

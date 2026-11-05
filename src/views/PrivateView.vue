@@ -29,7 +29,7 @@ const PRICES = [
 <template>
   <div class="page shell">
     <section class="private bento" aria-labelledby="private-title">
-      <header class="private__intro">
+      <header v-reveal:assemble class="private__intro">
         <p class="t-label">Ganz ohne ärztliche Verordnung</p>
         <h1 id="private-title" class="t-h1">Private Physiotherapie</h1>
         <p class="t-lead">
@@ -44,7 +44,7 @@ const PRICES = [
         </p>
       </header>
 
-      <aside class="private__prices card card--brand" aria-labelledby="prices-title">
+      <aside v-reveal="160" class="private__prices card card--brand" aria-labelledby="prices-title">
         <h2 id="prices-title" class="private__prices-title">Preise</h2>
         <dl class="private__price-list">
           <div v-for="entry in PRICES" :key="entry.minutes">
@@ -55,7 +55,7 @@ const PRICES = [
         <BaseButton variant="inverse" block arrow :href="BOOKING_URL">Termin vereinbaren</BaseButton>
       </aside>
 
-      <section class="private__list card" aria-labelledby="expect-title">
+      <section v-reveal class="private__list card" aria-labelledby="expect-title">
         <h2 id="expect-title" class="t-h3">Was Sie erwartet</h2>
         <ul>
           <li v-for="item in EXPECTATIONS" :key="item">
@@ -65,7 +65,7 @@ const PRICES = [
         </ul>
       </section>
 
-      <section class="private__list card card--blue" aria-labelledby="ideal-title">
+      <section v-reveal="80" class="private__list card card--blue" aria-labelledby="ideal-title">
         <h2 id="ideal-title" class="t-h3">Ideal für</h2>
         <ul>
           <li v-for="item in AUDIENCES" :key="item">

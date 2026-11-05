@@ -3,7 +3,7 @@ import { partners } from '@/services/cms';
 </script>
 
 <template>
-  <section v-if="partners.length" class="partners card card--line" aria-labelledby="partners-title">
+  <section v-if="partners.length" v-reveal class="partners card card--line" aria-labelledby="partners-title">
     <h2 id="partners-title" class="t-h3">Partners</h2>
     <ul class="partners__list">
       <li v-for="partner in partners" :key="partner.id">

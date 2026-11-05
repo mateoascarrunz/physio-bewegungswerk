@@ -22,7 +22,7 @@ const CONTACTS = [
       </p>
     </header>
 
-    <ul class="contact-info__list">
+    <ul v-reveal:assemble="120" class="contact-info__list">
       <li v-for="contact in CONTACTS" :key="contact.label">
         <a
           class="contact-row"
@@ -40,7 +40,7 @@ const CONTACTS = [
       </li>
     </ul>
 
-    <ul class="contact-info__notes">
+    <ul v-reveal="300" class="contact-info__notes">
       <li>
         <BaseIcon name="clock" :size="20" />
         <span><strong>{{ PRACTICE.hours }}</strong><br />Termine nach Vereinbarung</span>

@@ -1,6 +1,6 @@
 <script setup>
 import BaseButton from '@/components/base/BaseButton.vue';
-import BaseIcon from '@/components/base/BaseIcon.vue';
+import BaseDisclosure from '@/components/base/BaseDisclosure.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import BaseIcon from '@/components/base/BaseIcon.vue';
     <div class="faq bento">
       <header class="faq__intro">
         <p class="t-label">Häufige Fragen</p>
-        <h1 class="t-h1">FAQ</h1>
+        <h1 v-reveal:title class="t-h1">FAQ</h1>
         <div class="faq__help card card--blue">
           <h2 class="t-h3">Noch Fragen?</h2>
           <BaseButton size="sm" arrow to="/kontakt">Kontakt</BaseButton>
@@ -16,11 +16,8 @@ import BaseIcon from '@/components/base/BaseIcon.vue';
       </header>
 
       <div class="faq__list">
-        <details class="disclosure faq__item" open>
-          <summary>
-            <h2>Versäumte oder nicht rechtzeitig abgesagte Termine</h2>
-            <BaseIcon class="disclosure__icon" name="plus" :size="22" />
-          </summary>
+        <BaseDisclosure class="faq__item" open>
+          <template #summary><h2>Versäumte oder nicht rechtzeitig abgesagte Termine</h2></template>
           <div class="prose faq__answer">
             <p>
               Wir haben Verständnis dafür, dass Patienten in Ausnahmefällen einen Termin verschieben oder absagen müssen. Aus
@@ -50,13 +47,10 @@ import BaseIcon from '@/components/base/BaseIcon.vue';
               Frist. Bei leichten Grippesymptomen würden wir Sie bitten, eine Hygienemaske zu tragen.
             </p>
           </div>
-        </details>
+        </BaseDisclosure>
 
-        <details class="disclosure faq__item">
-          <summary>
-            <h2>Wird die Physiotherapie von der Krankenkasse übernommen?</h2>
-            <BaseIcon class="disclosure__icon" name="plus" :size="22" />
-          </summary>
+        <BaseDisclosure class="faq__item">
+          <template #summary><h2>Wird die Physiotherapie von der Krankenkasse übernommen?</h2></template>
           <div class="prose faq__answer">
             <p>
               Unsere Praxis ist von den Krankenkassen anerkannt. Mit einer ärztlichen Verordnung können Sie die Physiotherapie
@@ -64,7 +58,7 @@ import BaseIcon from '@/components/base/BaseIcon.vue';
               der Militärversicherung (MV) übernommen.
             </p>
           </div>
-        </details>
+        </BaseDisclosure>
       </div>
     </div>
   </div>
@@ -91,12 +85,12 @@ import BaseIcon from '@/components/base/BaseIcon.vue';
   grid-column: span 12;
 }
 
-.faq__item > summary {
+.faq__item > :deep(summary) {
   min-height: 4.5rem;
   padding-block: var(--space-4);
 }
 
-.faq__item > summary h2 {
+.faq__item > :deep(summary) h2 {
   color: inherit;
   font-size: var(--text-h3);
   font-weight: var(--weight-semibold);

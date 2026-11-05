@@ -4,6 +4,7 @@ import BaseModal from '../base/BaseModal.vue';
 import BaseIcon from '../base/BaseIcon.vue';
 import { cmsSrcset } from '@/services/cms';
 import { formatNewsDate } from '@/services/news';
+import { isSharedHolder, sharedStyle } from '@/services/viewTransition';
 
 const BaseRichText = defineAsyncComponent(() => import('../base/BaseRichText.vue'));
 
@@ -28,9 +29,15 @@ watch(
 </script>
 
 <template>
-  <BaseModal :open="Boolean(article)" :labelledby="titleId" size="md" @close="$emit('close')">
+  <BaseModal
+    :open="Boolean(article)"
+    :labelledby="titleId"
+    size="md"
+    :surface-name="shown && isSharedHolder('news', shown.id, 'modal') ? 'shared-surface' : null"
+    @close="$emit('close')"
+  >
     <article v-if="shown" class="article">
-      <div class="article__media">
+      <div class="article__media" :style="sharedStyle('news', shown.id, 'modal', 'shared-media')">
         <img
           :src="shown.img.url"
           :srcset="cmsSrcset(shown.img.url)"

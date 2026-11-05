@@ -28,7 +28,7 @@ const locationImage = responsiveImage('places/exterior');
       <BaseButton class="modules__action" variant="text" arrow to="/private">Mehr erfahren</BaseButton>
     </article>
 
-    <article v-reveal="80" class="modules__location">
+    <article v-reveal:mask="80" class="modules__location drift">
       <img
         v-bind="locationImage"
         sizes="(max-width: 60rem) 96vw, 58vw"

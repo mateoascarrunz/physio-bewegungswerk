@@ -6,12 +6,18 @@ import logoUrl from '@/assets/images/physio_logo.svg';
 const CMS_ADMIN_URL = 'https://data.physio-bewegungswerk.ch/admin/';
 
 const year = new Date().getFullYear();
+
+function backToTop() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  document.getElementById('main')?.focus({ preventScroll: true });
+}
 </script>
 
 <template>
   <footer class="site-footer shell">
     <div class="site-footer__panel">
-      <div class="site-footer__grid">
+      <div v-reveal:assemble class="site-footer__grid">
         <div class="site-footer__brand">
           <img class="site-footer__logo" :src="logoUrl" alt="Physio Bewegungswerk" width="120" height="137" loading="lazy" />
           <address class="site-footer__address">
@@ -67,6 +73,10 @@ const year = new Date().getFullYear();
           <li><RouterLink to="/datenschutz">Datenschutz</RouterLink></li>
         </ul>
         <p>© {{ year }} {{ PRACTICE.company }}. Alle Rechte vorbehalten.</p>
+        <button class="site-footer__top" type="button" @click="backToTop">
+          <BaseIcon name="arrow-up" :size="16" />
+          Nach oben
+        </button>
         <p>
           Designed and Developed by
           <a href="https://mateoascarrunz.com/" target="_blank" rel="noopener noreferrer">Mateo Ascarrunz</a>
@@ -177,6 +187,37 @@ const year = new Date().getFullYear();
   font-weight: var(--weight-medium);
   text-decoration: none;
   border-radius: 6px;
+}
+
+.site-footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.25rem;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--blue-700);
+  font-size: 0.8125rem;
+  font-weight: var(--weight-semibold);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.site-footer__top svg {
+  transition: transform var(--duration-base) var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer__top:hover {
+    background: var(--color-brand);
+    color: var(--white);
+  }
+
+  .site-footer__top:hover svg {
+    transform: translateY(-2px);
+  }
 }
 
 .site-footer__legal-links {

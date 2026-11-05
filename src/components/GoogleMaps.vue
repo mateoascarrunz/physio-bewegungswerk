@@ -16,7 +16,7 @@ const isMapLoaded = ref(false);
 </script>
 
 <template>
-  <section class="map" aria-labelledby="map-title">
+  <section v-reveal:mask class="map drift" aria-labelledby="map-title">
     <h2 id="map-title" class="sr-only">So finden Sie uns</h2>
     <iframe
       v-if="isMapLoaded"

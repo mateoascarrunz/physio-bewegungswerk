@@ -5,7 +5,7 @@ import watermarkUrl from '@/assets/images/physio_icon_white.svg';
 </script>
 
 <template>
-  <section v-reveal class="cta card card--brand" aria-labelledby="cta-title">
+  <section v-reveal:expand class="cta card card--brand" aria-labelledby="cta-title">
     <img class="cta__watermark" :src="watermarkUrl" alt="" width="58" height="60" loading="lazy" />
     <div class="cta__content">
       <h2 id="cta-title" class="t-h1 cta__title">Vereinbaren Sie gerne online einen Termin mit uns</h2>
@@ -61,6 +61,33 @@ import watermarkUrl from '@/assets/images/physio_icon_white.svg';
   .cta__phone:hover {
     text-decoration-color: var(--white);
   }
+}
+
+/* As the banner opens, its content rises and the brand mark turns into place. */
+.cta.reveal--expand .cta__content {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+.cta.reveal--expand .cta__watermark {
+  opacity: 0;
+  transform: rotate(-24deg) translate(8%, 8%);
+}
+
+.cta.reveal--expand.reveal_visible .cta__content {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slower) var(--ease-out) 260ms,
+    transform var(--duration-story) var(--ease-out-expo) 260ms;
+}
+
+.cta.reveal--expand.reveal_visible .cta__watermark {
+  opacity: 0.16;
+  transform: none;
+  transition:
+    opacity var(--duration-story) var(--ease-out) 200ms,
+    transform 1400ms var(--ease-out-expo) 200ms;
 }
 
 .cta__watermark {

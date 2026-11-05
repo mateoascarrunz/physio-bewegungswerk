@@ -22,7 +22,7 @@ function sizesFor(span) {
     <header class="services-intro bento">
       <div class="services-intro__title">
         <p class="t-label">Behandlungstechniken</p>
-        <h1 class="t-h1">Therapieangebot</h1>
+        <h1 v-reveal:title class="t-h1">Therapieangebot</h1>
       </div>
       <div class="services-intro__copy">
         <p class="t-lead services-intro__lead">
@@ -51,12 +51,12 @@ function sizesFor(span) {
           <p class="t-body">Wählen Sie eine Dienstleistung, um mehr zu erfahren.</p>
         </div>
       </div>
-      <ul class="services-grid">
+      <ul class="services-grid attention">
         <li
           v-for="(service, index) in services"
           :key="service.id"
           v-reveal
-          class="services-grid__item"
+          class="services-grid__item attention__item"
           :style="{ '--span': spanFor(index) }"
         >
           <ServiceCard :service="service" :index="index + 1" :sizes="sizesFor(spanFor(index))" />

@@ -27,10 +27,10 @@ watch(
   <div class="page shell">
     <header class="news-intro">
       <p class="t-label">Aktuelles aus der Praxis</p>
-      <h1 class="t-h1">News</h1>
+      <h1 v-reveal:title class="t-h1">News</h1>
     </header>
 
-    <div v-if="latestNews.length" class="news-grid">
+    <div v-if="latestNews.length" class="news-grid attention">
       <NewsCard
         v-for="(entry, index) in latestNews"
         :key="entry.id"

@@ -48,7 +48,7 @@ watch(carousel, (instance) => {
       </div>
     </div>
 
-    <div v-reveal="60" class="location__main">
+    <div v-reveal:mask="60" class="location__main drift">
       <img
         v-bind="heroImage"
         sizes="(max-width: 60rem) 96vw, 64vw"
@@ -61,8 +61,9 @@ watch(carousel, (instance) => {
     </div>
 
     <button
-      v-for="index in PREVIEW_INDEXES"
+      v-for="(index, position) in PREVIEW_INDEXES"
       :key="GALLERY[index].key"
+      v-reveal="120 + position * 70"
       class="location__thumb zoom-trigger"
       type="button"
       :aria-label="`Impressionen öffnen: ${GALLERY[index].alt}`"

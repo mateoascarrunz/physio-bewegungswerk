@@ -8,7 +8,7 @@ const image = responsiveImage('places/team-gym');
 <template>
   <section class="story bento" aria-labelledby="story-title">
     <div v-reveal class="story__text card card--blue">
-      <h2 id="story-title" class="t-h2">Vom Traum zur Realität</h2>
+      <h2 id="story-title" v-reveal:title="140" class="t-h2">Vom Traum zur Realität</h2>
       <p class="story__subtitle">Unsere eigene Praxis – eine Reise von 10 Jahren Zusammenarbeit</p>
       <p class="t-body">
         Im Mai 2023 haben wir unsere eigene Praxis gegründet, nachdem wir fast 10 Jahre Seite an Seite gearbeitet haben.
@@ -17,7 +17,7 @@ const image = responsiveImage('places/team-gym');
       </p>
       <BaseButton class="story__action" variant="text" arrow to="/uberuns">Mehr über uns</BaseButton>
     </div>
-    <div v-reveal="80" class="story__media">
+    <div v-reveal:mask="80" class="story__media drift">
       <img
         v-bind="image"
         sizes="(max-width: 60rem) 96vw, 58vw"

@@ -2,6 +2,8 @@
 import { computed, ref, useId, watch } from 'vue';
 import BaseModal from '../base/BaseModal.vue';
 import BaseIcon from '../base/BaseIcon.vue';
+import BaseDisclosure from '../base/BaseDisclosure.vue';
+import { sharedStyle } from '@/services/viewTransition';
 import { cmsSrcset } from '@/services/cms';
 import { describeMember } from '@/services/team';
 
@@ -35,7 +37,7 @@ const facts = computed(() =>
 <template>
   <BaseModal :open="Boolean(member)" :labelledby="titleId" size="lg" @close="$emit('close')">
     <article v-if="shown" class="team-modal">
-      <div class="team-modal__media">
+      <div class="team-modal__media" :style="sharedStyle('team', shown.id, 'modal', 'shared-media')">
         <img
           :src="shown.photo.url"
           :srcset="cmsSrcset(shown.photo.url)"
@@ -67,24 +69,18 @@ const facts = computed(() =>
         </dl>
 
         <div class="team-modal__details">
-          <details v-if="shown.education.length" class="disclosure">
-            <summary>
-              Aus- und Weiterbildungen
-              <BaseIcon class="disclosure__icon" name="plus" :size="18" />
-            </summary>
+          <BaseDisclosure v-if="shown.education.length">
+            <template #summary>Aus- und Weiterbildungen</template>
             <ul class="team-modal__list">
-              <li v-for="item in shown.education" :key="item">{{ item }}</li>
+              <li v-for="(item, index) in shown.education" :key="item" :style="{ '--line': index }">{{ item }}</li>
             </ul>
-          </details>
-          <details v-if="shown.specialties.length" class="disclosure">
-            <summary>
-              Therapeutische Spezialgebiete
-              <BaseIcon class="disclosure__icon" name="plus" :size="18" />
-            </summary>
+          </BaseDisclosure>
+          <BaseDisclosure v-if="shown.specialties.length">
+            <template #summary>Therapeutische Spezialgebiete</template>
             <ul class="team-modal__list">
-              <li v-for="item in shown.specialties" :key="item">{{ item }}</li>
+              <li v-for="(item, index) in shown.specialties" :key="item" :style="{ '--line': index }">{{ item }}</li>
             </ul>
-          </details>
+          </BaseDisclosure>
         </div>
 
         <ul v-if="shown.contacts.length" class="team-modal__contacts">
@@ -231,51 +227,6 @@ const facts = computed(() =>
   .team-modal__contacts a:hover {
     background: var(--color-brand);
     color: var(--white);
-  }
-}
-
-/* Shared disclosure for team details and the FAQ. */
-.disclosure {
-  border-block-start: 1px solid var(--line);
-}
-
-.disclosure:last-child {
-  border-block-end: 1px solid var(--line);
-}
-
-.disclosure > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  min-height: 3.25rem;
-  padding-block: var(--space-3);
-  border-radius: var(--radius-sm);
-  color: var(--blue-950);
-  font-size: 0.9375rem;
-  font-weight: var(--weight-semibold);
-  list-style: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: color var(--duration-fast) var(--ease-out);
-}
-
-.disclosure > summary::-webkit-details-marker {
-  display: none;
-}
-
-.disclosure__icon {
-  color: var(--color-brand);
-  transition: transform var(--duration-base) var(--ease-out);
-}
-
-.disclosure[open] > summary .disclosure__icon {
-  transform: rotate(45deg);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .disclosure > summary:hover {
-    color: var(--color-brand-hover);
   }
 }
 

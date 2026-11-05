@@ -173,11 +173,11 @@ test.describe('hero', () => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto('/');
-    await expect(page.locator('html')).toHaveClass(/intro-active/);
-    // Paused, not finished: the headline must not have played behind the intro.
-    expect(await page.locator('.hero__title').evaluate((element) => element.getAnimations().map((animation) => animation.playState))).toEqual(['paused']);
+    await expect(page.locator('html')).toHaveClass(/intro-pending/);
+    // Nothing plays behind the intro; the entrance starts fresh once it lifts.
+    expect(await page.locator('.hero__word > span').first().evaluate((element) => element.getAnimations().length)).toBe(0);
     await page.keyboard.press('Escape');
-    await expect(page.locator('html')).not.toHaveClass(/intro-active/);
+    await expect(page.locator('html')).not.toHaveClass(/intro-pending/);
     await expect(page.locator('.hero__title')).toHaveCSS('opacity', '1');
     await context.close();
   });
@@ -330,7 +330,7 @@ test.describe('team', () => {
   test('fits inside the screen at every width', async ({ page }) => {
     await page.goto('/uberuns?team=1');
     // Measure the settled dialog, not its entrance transform.
-    await expect.poll(() => page.locator('dialog[open]').evaluate((dialog) => dialog.getAnimations().length)).toBe(0);
+    await expect(page.locator('dialog[open]')).not.toHaveClass(/is-entering/);
     for (const [width, height] of [[320, 568], [390, 800], [768, 1024], [1024, 768], [1440, 900]]) {
       await page.setViewportSize({ width, height });
       expect(await page.locator('dialog[open]').evaluate((dialog) => dialog.getAnimations().length)).toBe(0);

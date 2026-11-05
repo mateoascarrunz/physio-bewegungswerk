@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import BaseIcon from '../base/BaseIcon.vue';
 import { responsiveImage } from '@/content/media';
 import { withSoftHyphens } from '@/content/services';
+import { sharedStyle } from '@/services/viewTransition';
 
 const props = defineProps({
   service: { type: Object, required: true },
@@ -25,7 +26,7 @@ const number = computed(() => (props.index === null ? null : String(props.index)
     class="service-card zoom-trigger"
     :to="{ name: 'behandlungstechnikenitem', params: { serviceid: service.id } }"
   >
-    <span class="service-card__media zoom-media">
+    <span class="service-card__media zoom-media" :style="sharedStyle('service', service.id, 'card', 'shared-media')">
       <img
         v-bind="image"
         :sizes="sizes"

@@ -12,10 +12,10 @@ const spans = newsCardSpans(articles.length);
 <template>
   <section v-if="articles.length" aria-labelledby="home-news-title">
     <div class="section-head">
-      <h2 id="home-news-title" class="t-h2">News</h2>
+      <h2 id="home-news-title" v-reveal:title class="t-h2">News</h2>
       <BaseButton variant="text" arrow to="/news">Alle News</BaseButton>
     </div>
-    <div class="news-grid">
+    <div class="news-grid attention">
       <NewsCard
         v-for="(article, index) in articles"
         :key="article.id"

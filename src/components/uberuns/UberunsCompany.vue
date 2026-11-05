@@ -13,7 +13,7 @@ const facts = [
 
 <template>
   <section id="uber_company" class="company bento" aria-labelledby="company-title">
-    <div v-reveal class="company__media">
+    <div v-reveal:mask class="company__media drift">
       <img
         v-bind="image"
         sizes="(max-width: 60rem) 96vw, 50vw"
@@ -35,7 +35,7 @@ const facts = [
         unseren Behandlungen und das gegenseitige volle Vertrauen waren für uns beste Voraussetzungen, uns in ein neues
         Abenteuer zu stürzen und das Projekt eigene Praxis umzusetzen.
       </p>
-      <dl class="company__facts">
+      <dl v-reveal:assemble="200" class="company__facts">
         <div v-for="fact in facts" :key="fact.label">
           <dt>{{ fact.label }}</dt>
           <dd>{{ fact.value }}</dd>

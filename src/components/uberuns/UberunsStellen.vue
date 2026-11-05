@@ -8,7 +8,7 @@ import { jobs } from '@/services/cms';
     <div class="section-head">
       <h2 id="jobs-title" class="t-h2">Offene Stellen</h2>
     </div>
-    <ul class="jobs__list">
+    <ul v-reveal:assemble class="jobs__list">
       <li v-for="job in jobs" :key="job.id" class="jobs__row">
         <h3 class="t-h3">{{ job.name }}</h3>
         <div class="jobs__actions">
