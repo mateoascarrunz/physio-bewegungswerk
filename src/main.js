@@ -3,8 +3,10 @@ import './assets/styles/base.css';
 import { createApp } from './createApp';
 import { setHydrating } from './directives/reveal';
 import { fetchedAt } from './services/cms';
+import { installPointerIntent } from './services/pointerIntent';
 
 document.documentElement.dataset.contentFetchedAt = fetchedAt;
+installPointerIntent();
 
 // Pre-rendered pages arrive with their content and are taken over in place;
 // a page without it, such as the admin redirect, is rendered from scratch.

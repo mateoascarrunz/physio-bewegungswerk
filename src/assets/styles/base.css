@@ -512,43 +512,53 @@ html.intro-pending body::after {
  * Attention: in a group of cards, the one under the pointer or keyboard focus
  * grows a little and its neighbours step back. Transforms only, so the grid
  * never reflows and nothing shifts.
+ *
+ * The pointer only leads once it has really moved (`html.pointer-intent`, see
+ * services/pointerIntent.js), so cards scrolling under a resting pointer stay
+ * still. Returning to rest waits a moment, so crossing the gap between two cards
+ * does not make the whole grid pulse.
  */
 .attention > .attention__item {
   transition:
-    transform var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo) 90ms,
     box-shadow var(--duration-slow) var(--ease-out);
 }
 
 .attention > .attention__item img {
   transition:
     transform var(--duration-slower) var(--ease-out),
-    filter var(--duration-slow) var(--ease-out);
+    filter var(--duration-slow) var(--ease-out) 90ms;
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .attention:has(> .attention__item:hover) > .attention__item:not(:hover) {
-    transform: scale(0.975);
+  .pointer-intent .attention:has(> .attention__item:hover) > .attention__item:not(:hover) {
+    transform: scale(0.985);
+    transition-delay: 0ms;
   }
 
-  .attention:has(> .attention__item:hover) > .attention__item:not(:hover) img {
-    filter: saturate(0.65);
+  .pointer-intent .attention:has(> .attention__item:hover) > .attention__item:not(:hover) img {
+    filter: saturate(0.75);
+    transition-delay: 0ms;
   }
 
-  .attention > .attention__item:hover {
+  .pointer-intent .attention > .attention__item:hover {
     z-index: 1;
-    transform: scale(1.015);
+    transform: scale(1.012);
+    transition-delay: 0ms;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .attention:has(> .attention__item:focus-visible, > .attention__item :focus-visible)
     > .attention__item:not(:focus-visible, :has(:focus-visible)) {
-    transform: scale(0.975);
+    transform: scale(0.985);
+    transition-delay: 0ms;
   }
 
   .attention > .attention__item:is(:focus-visible, :has(:focus-visible)) {
     z-index: 1;
-    transform: scale(1.015);
+    transform: scale(1.012);
+    transition-delay: 0ms;
   }
 }
 
