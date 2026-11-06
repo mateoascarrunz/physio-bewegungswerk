@@ -17,6 +17,8 @@ const SEEN_KEY = 'introSeen';
 // Added by the inline script in index.html before the first paint, so the page
 // never shows before the intro covers it. Entrances start when it is removed.
 const PENDING_CLASS = 'intro-pending';
+// Set as the intro lifts, for the entrances that only belong to that moment.
+const LIFTED_CLASS = 'intro-lifted';
 const PLAYBACK_SPEED = 1.5;
 const MAX_DURATION_MS = 4000;
 const SKIP_EVENTS = ['wheel', 'touchmove', 'keydown'];
@@ -51,7 +53,7 @@ function remove() {
 function leave() {
   if (isLeaving.value) return;
   isLeaving.value = true;
-  document.documentElement.classList.remove(PENDING_CLASS);
+  document.documentElement.classList.replace(PENDING_CLASS, LIFTED_CLASS);
   markSeen();
   clearTimeout(safetyTimer);
   removeSkipListeners();

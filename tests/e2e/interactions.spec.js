@@ -181,6 +181,32 @@ test.describe('hero', () => {
     await expect(page.locator('.hero__title')).toHaveCSS('opacity', '1');
     await context.close();
   });
+
+  test('enters without fading, so colours and contrast are true on every frame', async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto('/');
+    await page.keyboard.press('Escape');
+    await expect(page.locator('html')).toHaveClass(/intro-lifted/);
+    const entrances = await page.evaluate(() =>
+      document
+        .getAnimations()
+        .filter((animation) => animation instanceof CSSAnimation && !animation.effect.target.closest('.page_intro'))
+        .map((animation) => ({
+          name: animation.animationName,
+          fades: animation.effect.getKeyframes().some((frame) => 'opacity' in frame),
+        })),
+    );
+    expect(entrances.map((entrance) => entrance.name)).toEqual(expect.arrayContaining(['header-in', 'hero-rise']));
+    expect(entrances.filter((entrance) => entrance.fades)).toEqual([]);
+    await context.close();
+  });
+
+  test('shows the header straight away when there is no intro', async ({ page }) => {
+    await page.goto('/kontakt');
+    await expect(page.locator('.site-header__bar')).toBeVisible();
+    expect(await page.locator('.site-header__bar').evaluate((element) => element.getAnimations().length)).toBe(0);
+  });
 });
 
 test.describe('treatments', () => {

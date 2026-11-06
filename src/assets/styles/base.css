@@ -1,13 +1,59 @@
 @import '@fontsource-variable/montserrat/wght.css';
 @import './tokens.css';
 
-/* Metric-matched fallback keeps text from jumping when Montserrat arrives. */
+/*
+ * Metric-matched fallback keeps text from jumping when Montserrat arrives. Montserrat
+ * widens with its weight faster than Arial, so each weight the site uses gets its
+ * own face, measured to run within 0.1% of Montserrat's width. The vertical metrics
+ * are Montserrat's (ascent 0.968, descent 0.251) divided by each size-adjust.
+ */
 @font-face {
   font-family: 'Montserrat Fallback';
-  src: local('Arial');
-  size-adjust: 112.5%;
-  ascent-override: 86%;
-  descent-override: 22%;
+  src: local('Arial'), local('ArialMT');
+  font-weight: 100 449;
+  size-adjust: 113.4%;
+  ascent-override: 85.36%;
+  descent-override: 22.13%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial'), local('ArialMT');
+  font-weight: 450 524;
+  size-adjust: 114.9%;
+  ascent-override: 84.25%;
+  descent-override: 21.85%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 525 574;
+  size-adjust: 108%;
+  ascent-override: 89.63%;
+  descent-override: 23.24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 575 649;
+  size-adjust: 108.8%;
+  ascent-override: 88.97%;
+  descent-override: 23.07%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 650 1000;
+  size-adjust: 110.6%;
+  ascent-override: 87.52%;
+  descent-override: 22.69%;
   line-gap-override: 0%;
 }
 

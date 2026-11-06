@@ -644,10 +644,16 @@ onBeforeUnmount(() => {
   }
 }
 
+/* Text and buttons are unmasked rather than faded, so their colours and contrast
+   are true on every frame of the entrance. */
 @keyframes hero-rise {
   from {
-    opacity: 0;
-    transform: translateY(1rem);
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    clip-path: inset(0);
   }
 }
 
@@ -671,8 +677,12 @@ onBeforeUnmount(() => {
 
 @keyframes hero-chip {
   from {
-    opacity: 0;
+    clip-path: inset(0 50% round var(--radius-pill));
     translate: 0 0.75rem;
+  }
+
+  to {
+    clip-path: inset(0 round var(--radius-pill));
   }
 }
 

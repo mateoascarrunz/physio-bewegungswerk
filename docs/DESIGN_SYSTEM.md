@@ -14,7 +14,7 @@ All values live in `src/assets/styles/tokens.css`. Components use the semantic n
 | Type | Fluid `clamp()` steps from `--text-display` to `--text-label`. Headings use negative tracking and balanced wrapping |
 | Space | `--space-1` to `--space-8`, plus fluid `--gutter`, `--gap`, `--card-pad` and `--section-gap` |
 | Shape | `--radius-xl`, `--radius-lg`, `--radius-md`, `--radius-sm`, `--radius-pill` |
-| Motion | `--ease-out`, `--ease-in-out`; 160, 240, 420 and 700 ms |
+| Motion | `--ease-out`, `--ease-out-expo`, `--ease-in-out`; 120, 160, 240, 420, 700 and 900 ms; `--stagger` 70 ms |
 
 Breakpoints are written in rem so they follow the reader's text size: 30rem, 40rem, 48rem, 60rem and 75rem. Media queries cannot read custom properties, so `tokens.css` lists them for reference only.
 
@@ -57,6 +57,10 @@ One family of curves (`--ease-out`, `--ease-out-expo`, `--ease-in-out`) and a fe
 | Disclosure | `BaseDisclosure`, measured height animation | Team details, FAQ |
 
 Rules: content is visible before any script runs, elements already on screen when a pre-rendered page hydrates are never hidden, nothing animates layout properties of the page, reduced motion turns it all off, and browsers without the View Transitions API keep a short fade.
+
+What enters with the first screen (the header after the logo intro, the home hero) moves or unmasks with `clip-path` instead of fading. Its colours, and so its contrast, are then true on every frame, for readers and for automated checks alike. The header only enters after the intro; on every other load it is simply there.
+
+Text set in the fallback font runs as wide as Montserrat at every weight the site uses (400, 500, 550, 600, 700), so nothing moves when the web font arrives. A new weight needs its own `Montserrat Fallback` face in `base.css`.
 
 ## Images
 

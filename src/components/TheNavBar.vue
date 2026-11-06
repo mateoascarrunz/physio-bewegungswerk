@@ -119,17 +119,18 @@ onBeforeUnmount(() => observer?.disconnect());
     box-shadow var(--duration-slow) var(--ease-out),
     background-color var(--duration-slow) var(--ease-out),
     transform var(--duration-slow) var(--ease-out-expo);
-  animation: header-in 640ms var(--ease-out-expo) backwards;
 }
 
-html.intro-pending .site-header__bar {
-  animation: none;
+/* The bar arrives with the page when the logo intro lifts; on every other load it
+   is simply there. It slides in rather than fading, so its colours, and the
+   contrast of the booking button, are true on every frame. */
+html.intro-lifted .site-header__bar {
+  animation: header-in 640ms var(--ease-out-expo) backwards;
 }
 
 @keyframes header-in {
   from {
-    opacity: 0;
-    transform: translateY(-0.75rem);
+    transform: translateY(calc(-100% - var(--header-offset) - 0.5rem));
   }
 }
 
