@@ -28,16 +28,19 @@ const locationImage = responsiveImage('places/exterior');
       <BaseButton class="modules__action" variant="text" arrow to="/private">Mehr erfahren</BaseButton>
     </article>
 
-    <article v-reveal:mask="80" class="modules__location drift">
-      <img
-        v-bind="locationImage"
-        sizes="(max-width: 60rem) 96vw, 58vw"
-        alt="Die Praxis von aussen, mit dem Logo von Physio Bewegungswerk auf den Fenstern"
-        width="1600"
-        height="999"
-        loading="lazy"
-        decoding="async"
-      />
+    <article v-reveal:mask="80" class="modules__location">
+      <!-- The photo drifts inside its own frame, so it can never reach over the panel below. -->
+      <div class="modules__location-media drift">
+        <img
+          v-bind="locationImage"
+          sizes="(max-width: 60rem) 96vw, 58vw"
+          alt="Die Praxis von aussen, mit dem Logo von Physio Bewegungswerk auf den Fenstern"
+          width="1600"
+          height="999"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div class="modules__location-panel">
         <div>
           <p class="t-label">Unser Standort</p>
@@ -108,11 +111,19 @@ const locationImage = responsiveImage('places/exterior');
   background: var(--surface);
 }
 
-.modules__location img {
-  flex: 1;
+.modules__location-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.modules__location-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  min-height: 15rem;
+  height: 100%;
   object-fit: cover;
+  object-position: 50% 60%;
 }
 
 .modules__location-panel {
@@ -151,6 +162,13 @@ const locationImage = responsiveImage('places/exterior');
 
   .modules__location {
     grid-column: span 7;
+  }
+
+  /* Beside the price card the photo takes whatever height the row leaves it. */
+  .modules__location-media {
+    flex: 1;
+    min-height: 15rem;
+    aspect-ratio: auto;
   }
 }
 </style>
