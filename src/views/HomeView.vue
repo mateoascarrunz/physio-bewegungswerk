@@ -37,11 +37,13 @@ watch(
   <div class="page">
     <div class="shell">
       <TheHero @select-person="selectPerson" />
+      <!-- The visit, in order: who we are, what we treat, what it costs and where
+           we are, what is new, then booking. -->
       <HomeStory class="section--tight" />
-      <HomeServices class="section" />
-      <HomeNews class="section" />
       <PartnersBox class="section" />
+      <HomeServices class="section" />
       <HomeModules class="section" />
+      <HomeNews class="section" />
       <ActionBox class="section--tight" />
     </div>
     <TeamModal :member="member" @close="close" />
