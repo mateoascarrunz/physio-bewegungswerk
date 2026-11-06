@@ -175,10 +175,13 @@ html.intro-lifted .site-header__bar {
   min-width: 0;
 }
 
+/* Captured as its own layer in page transitions, above the travelling marker
+   (see the layer order in base.css), so the labels never disappear under it. */
 .site-nav__list {
   display: flex;
   justify-content: center;
   gap: 0.125rem;
+  view-transition-name: nav-links;
 }
 
 .site-nav__link {

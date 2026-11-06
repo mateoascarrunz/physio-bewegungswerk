@@ -621,6 +621,31 @@ html.intro-pending body::after {
   }
 }
 
+/*
+ * Layers during a transition, bottom to top: the page, the header's surface, the
+ * travelling active-link marker, the link labels, then cards growing into their
+ * detail. Without this order the marker passes over the labels and hides them.
+ */
+::view-transition-group(site-header) {
+  z-index: 1;
+}
+
+::view-transition-group(nav-indicator) {
+  z-index: 2;
+}
+
+::view-transition-group(nav-links) {
+  z-index: 3;
+}
+
+::view-transition-group(shared-media) {
+  z-index: 4;
+}
+
+::view-transition-group(shared-surface) {
+  z-index: 5;
+}
+
 @keyframes vt-leave {
   to {
     opacity: 0;
