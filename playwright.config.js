@@ -6,8 +6,9 @@ export default defineConfig({
   testDir: 'tests/e2e',
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
-  // CI keeps an HTML report and traces of failures, so a red run can be diagnosed from its artifact.
-  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
+  // CI keeps an HTML report and traces of failures, and states each failure as an annotation
+  // on the run, which can be read without signing in to GitHub.
+  reporter: process.env.CI ? [['list'], ['github'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: previewUrl ?? 'http://localhost:4173',
     trace: process.env.CI ? 'retain-on-failure' : 'off',
