@@ -22,7 +22,7 @@ const isMapLoaded = ref(false);
       v-if="isMapLoaded"
       class="map__frame"
       :src="EMBED_URL"
-      title="Karte: Physio Bewegungswerk, Bergstrasse 3, 8625 Gossau"
+      title="Karte: Physio Bewegungswerk, Bergstrasse 3, 8625 Gossau ZH"
       referrerpolicy="no-referrer-when-downgrade"
     ></iframe>
     <template v-else>

@@ -16,8 +16,10 @@ export function absoluteUrl(path) {
   return SITE_URL + (path === '/' ? '/' : path.replace(/\/$/, ''));
 }
 
-// Only facts the site itself shows: address, phone, email, the hours in which the
-// practice answers questions, and the map pin of its own embed.
+// Only facts the site itself shows: address, phone, email and the hours in which the
+// practice answers questions. The address is spelled as in the Swiss UID register
+// (CHE-463.407.674), and the coordinates are those of the building (EGID 9006634)
+// in the federal address register.
 const practice = {
   '@type': 'Physiotherapy',
   '@id': PRACTICE_ID,
@@ -32,11 +34,11 @@ const practice = {
     '@type': 'PostalAddress',
     streetAddress: PRACTICE.street,
     postalCode: '8625',
-    addressLocality: 'Gossau',
+    addressLocality: 'Gossau ZH',
     addressRegion: 'ZH',
     addressCountry: 'CH',
   },
-  geo: { '@type': 'GeoCoordinates', latitude: 47.30415, longitude: 8.75616 },
+  geo: { '@type': 'GeoCoordinates', latitude: 47.30397, longitude: 8.75905 },
   medicalSpecialty: 'https://schema.org/Physiotherapy',
   contactPoint: {
     '@type': 'ContactPoint',

@@ -4,8 +4,8 @@ export const BOOKING_URL =
 export const PRACTICE = {
   company: 'Physio Bewegungswerk GmbH',
   street: 'Bergstrasse 3',
-  city: '8625 Gossau',
-  address: 'Bergstrasse 3, 8625 Gossau',
+  city: '8625 Gossau ZH',
+  address: 'Bergstrasse 3, 8625 Gossau ZH',
   mapsUrl: 'https://maps.app.goo.gl/cF5gTcjpVvmXUC6T7',
   linkedInUrl: 'https://www.linkedin.com/company/100080030',
   phone: { label: '044 543 63 68', href: 'tel:+41445436368' },

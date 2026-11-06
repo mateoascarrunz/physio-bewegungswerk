@@ -30,7 +30,7 @@ export const routes = [
     meta: {
       title: 'Kontakt | Physio Bewegungswerk in Gossau ZH',
       description:
-        'Bergstrasse 3, 8625 Gossau. Bei offenen Fragen sind wir gerne per E-Mail oder telefonisch von Montag bis Freitag von 09:00 bis 17:00 Uhr erreichbar.',
+        'Bergstrasse 3, 8625 Gossau ZH. Bei offenen Fragen sind wir gerne per E-Mail oder telefonisch von Montag bis Freitag von 09:00 bis 17:00 Uhr erreichbar.',
     },
     component: () => import('../views/KontaktView.vue'),
   },
@@ -119,7 +119,7 @@ export const routes = [
     name: 'datenschutz',
     meta: {
       title: 'Datenschutz | Physio Bewegungswerk',
-      description: 'Datenschutzerklärung der Physio Bewegungswerk GmbH, Bergstrasse 3, 8625 Gossau.',
+      description: 'Datenschutzerklärung der Physio Bewegungswerk GmbH, Bergstrasse 3, 8625 Gossau ZH.',
     },
     component: () => import('../views/DatenschutzView.vue'),
   },
@@ -128,7 +128,7 @@ export const routes = [
     name: 'impressum',
     meta: {
       title: 'Impressum | Physio Bewegungswerk',
-      description: 'Impressum der Physio Bewegungswerk GmbH, Bergstrasse 3, 8625 Gossau, Schweiz.',
+      description: 'Impressum der Physio Bewegungswerk GmbH, Bergstrasse 3, 8625 Gossau ZH, Schweiz.',
     },
     component: () => import('../views/ImpresumView.vue'),
   },

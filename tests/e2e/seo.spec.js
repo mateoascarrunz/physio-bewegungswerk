@@ -54,7 +54,9 @@ test.describe('pre-rendered pages', () => {
       graphs[path] = JSON.parse(json)['@graph'];
     }
     const practice = graphs['/'].find((node) => node['@type'] === 'Physiotherapy');
-    expect(practice.address).toMatchObject({ streetAddress: 'Bergstrasse 3', postalCode: '8625', addressLocality: 'Gossau' });
+    // Spelled and placed as in the UID register and the federal address register.
+    expect(practice.address).toMatchObject({ streetAddress: 'Bergstrasse 3', postalCode: '8625', addressLocality: 'Gossau ZH' });
+    expect(practice.geo).toMatchObject({ latitude: 47.30397, longitude: 8.75905 });
     expect(practice.telephone).toBe('+41 44 543 63 68');
     expect(graphs['/behandlungstechniken'][0].hasOfferCatalog.itemListElement).toHaveLength(14);
     expect(graphs['/uberuns'][0].employee.map((person) => person.name)).toContain('Marit Hesse');
