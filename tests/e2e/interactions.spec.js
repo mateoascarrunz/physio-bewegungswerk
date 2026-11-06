@@ -358,12 +358,12 @@ test.describe('team', () => {
     await page.locator('.team-card').first().click();
     const dialog = page.locator('dialog[open]');
     await expect(dialog.getByRole('heading', { name: 'Marit Hesse' })).toBeVisible();
-    await expect(dialog.locator('.team-modal__quote')).toBeVisible();
+    await expect(dialog.locator('.team-viewer__quote')).toBeVisible();
     await expect(dialog.getByRole('link', { name: /marit\.hesse/ })).toHaveAttribute('href', 'mailto:marit.hesse@physio-bewegungswerk.ch');
     await expect(dialog.getByRole('link', { name: '076 543 63 68' })).toHaveAttribute('href', 'tel:+41765436368');
 
     const summary = dialog.getByText('Aus- und Weiterbildungen');
-    const list = dialog.locator('.team-modal__list').first();
+    const list = dialog.locator('.team-viewer__list').first();
     await expect(list).toBeHidden();
     await summary.click();
     await expect(list).toBeVisible();
@@ -374,8 +374,8 @@ test.describe('team', () => {
     await page.goto('/uberuns?team=7');
     const dialog = page.locator('dialog[open]');
     await expect(dialog.getByRole('heading', { name: 'Mogens Gies' })).toBeVisible();
-    await expect(dialog.locator('.team-modal__quote')).toHaveCount(0);
-    await expect(dialog.locator('.team-modal__contacts')).toHaveCount(0);
+    await expect(dialog.locator('.team-viewer__quote')).toHaveCount(0);
+    await expect(dialog.locator('.team-viewer__contacts')).toHaveCount(0);
   });
 
   test('fits inside the screen at every width', async ({ page }) => {
@@ -392,6 +392,61 @@ test.describe('team', () => {
       expect(box.x + box.width).toBeLessThanOrEqual(width + 1);
       expect(box.y + box.height).toBeLessThanOrEqual(height + 1);
     }
+  });
+
+  test('keeps one shell size for the shortest and the longest profile', async ({ page }) => {
+    const sizes = [];
+    for (const id of [5, 2]) {
+      await page.goto(`/uberuns?team=${id}`);
+      const dialog = page.locator('dialog[open]');
+      await expect(dialog).not.toHaveClass(/is-entering/);
+      for (const summary of await dialog.locator('summary').all()) await summary.click();
+      const box = await dialog.boundingBox();
+      sizes.push([Math.round(box.width), Math.round(box.height)]);
+    }
+    expect(sizes[0]).toEqual(sizes[1]);
+  });
+
+  test('steps through the team and starts each profile from the top', async ({ page }) => {
+    await page.goto('/uberuns');
+    await page.locator('.team-card').first().click();
+    const dialog = page.locator('dialog[open]');
+    await expect(dialog.getByRole('heading', { name: 'Marit Hesse' })).toBeVisible();
+    await dialog.locator('summary').first().click();
+    await expect(dialog.locator('details[open]')).toHaveCount(1);
+
+    await dialog.getByRole('button', { name: /Nächstes Profil/ }).click();
+    await expect(dialog.getByRole('heading', { name: 'Dominik Geissberger' })).toBeVisible();
+    await expect(page).toHaveURL(/\?team=2$/);
+    await expect(dialog.locator('details[open]')).toHaveCount(0);
+    expect(await dialog.locator('.modal__scroll').evaluate((element) => element.scrollTop)).toBe(0);
+    await expect(dialog.locator('[aria-live]')).toContainText('2 von 5');
+
+    await page.keyboard.press('ArrowLeft');
+    await expect(dialog.getByRole('heading', { name: 'Marit Hesse' })).toBeVisible();
+    await dialog.getByRole('button', { name: /Vorheriges Profil/ }).click();
+    await expect(dialog.getByRole('heading', { name: 'Mogens Gies' })).toBeVisible();
+
+    // Stepping replaces the address, so Back still returns to the grid in one step.
+    await page.goBack();
+    await expect(page.locator('dialog[open]')).toHaveCount(0);
+    await expect(page).toHaveURL(/\/uberuns$/);
+  });
+
+  test('scrolls the text inside the shell without moving the portrait or the controls', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'On phones the portrait scrolls away with the text by design');
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/uberuns?team=2');
+    const dialog = page.locator('dialog[open]');
+    await expect(dialog).not.toHaveClass(/is-entering/);
+    for (const summary of await dialog.locator('summary').all()) await summary.click();
+    const before = await dialog.locator('.team-viewer__media').boundingBox();
+    await dialog.locator('.modal__scroll').evaluate((element) => element.scrollTo(0, element.scrollHeight));
+    const after = await dialog.locator('.team-viewer__media').boundingBox();
+    expect(Math.round(after.y)).toBe(Math.round(before.y));
+    const shell = await dialog.boundingBox();
+    const nav = await dialog.locator('.team-viewer__nav').boundingBox();
+    expect(Math.round(nav.y + nav.height)).toBe(Math.round(shell.y + shell.height));
   });
 
   test('opens the gallery and pages through photos', async ({ page }) => {
@@ -564,6 +619,52 @@ test.describe('layout and motion', () => {
     await expect(page.locator('.skip-link')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('main')).toBeFocused();
+  });
+
+  test('the treatments row on the home page never captures vertical scrolling', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Wheel input is a desktop gesture');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    const track = page.locator('.home-services .carousel__track');
+    await track.scrollIntoViewIfNeeded();
+    expect(await track.evaluate((element) => getComputedStyle(element).overflowY)).toBe('hidden');
+    const box = await track.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    const start = await page.evaluate(() => scrollY);
+    for (let i = 0; i < 6; i += 1) await page.mouse.wheel(0, 120);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(start + 500);
+    expect(await track.evaluate((element) => element.scrollTop)).toBe(0);
+  });
+
+  test('cards scrolling under a resting pointer stay still until the pointer moves', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Hover emphasis only applies to a precise pointer');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/behandlungstechniken');
+    await page.mouse.move(720, 450);
+    await page.mouse.move(724, 452);
+    for (let i = 0; i < 8; i += 1) await page.mouse.wheel(0, 100);
+    await page.waitForTimeout(500);
+    await expect(page.locator('html')).not.toHaveClass(/pointer-intent/);
+    // Cards may still be rising into view; what must not happen is any card growing or shrinking.
+    const scales = await page.locator('.attention > .attention__item').evaluateAll((items) =>
+      items.map((item) => new DOMMatrix(getComputedStyle(item).transform).a),
+    );
+    expect(scales.every((scale) => Math.abs(scale - 1) < 0.001)).toBe(true);
+
+    const card = page.locator('.attention > .attention__item').nth(1);
+    await card.scrollIntoViewIfNeeded();
+    const box = await card.boundingBox();
+    await page.mouse.move(box.x + 20, box.y + 20);
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 5 });
+    await expect(page.locator('html')).toHaveClass(/pointer-intent/);
+    await expect.poll(() => card.evaluate((element) => new DOMMatrix(getComputedStyle(element).transform).a)).toBeGreaterThan(1.005);
+  });
+
+  test('navigation labels are their own layer above the moving marker in page changes', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'The phone header has no inline links');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/kontakt');
+    expect(await page.locator('.site-nav__list').evaluate((element) => getComputedStyle(element).viewTransitionName)).toBe('nav-links');
   });
 
   test('each page has one main heading', async ({ page }) => {

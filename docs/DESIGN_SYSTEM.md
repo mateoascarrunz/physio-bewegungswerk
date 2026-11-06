@@ -34,12 +34,14 @@ Breakpoints are written in rem so they follow the reader's text size: 30rem, 40r
 | `BaseIcon` | The single outline icon set (24 px grid, 1.75 stroke) |
 | `BaseModal` | Every dialog on the site, built on the native `<dialog>` |
 | `BaseCarousel` | Native scroll-snap row with previous and next buttons. Nothing moves on its own |
-| `ServiceCard`, `NewsCard`, `TeamModal` | Content patterns shared between pages |
+| `ServiceCard`, `NewsCard` | Content patterns shared between pages |
+| `TeamModal` | Team profile viewer: one shell size for every person, only the text scrolls, the name stays on top, and the controls at the bottom step through the team (buttons or arrow keys) |
 
 ## Interaction rules
 
 - Hover effects only apply to devices that can hover (`@media (hover: hover) and (pointer: fine)`). Touch gets `:active` feedback, and nothing is reachable only by hover.
 - Every interactive element shows a 2 px focus ring in `--focus-color`, which turns white on blue surfaces.
+- Rows that scroll sideways clip their vertical axis, so a vertical wheel or trackpad gesture always moves the page.
 - Modals take focus, contain it, close on Escape, the close button or the backdrop, return focus on close, and lock page scrolling. Team profiles are tied to `?team=`; articles opened from the news grid show their own address `/news/<id>-<title>`. Either way the back button closes them and the link can be shared.
 - Motion uses opacity and transform only. Content is visible before any script runs; `v-reveal` only hides an element once its observer is attached. `prefers-reduced-motion` turns animation off globally.
 - The home page entrance waits for the logo intro (`html.intro-pending`) and then plays in a little over a second, without blocking anything.
@@ -52,7 +54,7 @@ One family of curves (`--ease-out`, `--ease-out-expo`, `--ease-in-out`) and a fe
 |---|---|---|
 | Reveal | `v-reveal` with `rise`, `mask`, `title`, `assemble` or `expand`; IntersectionObserver, once per element | Cards, photos, headings, compositions, the booking banner |
 | Drift | `.drift` on a photo frame; CSS scroll-driven animation where supported | Large editorial photos |
-| Attention | `.attention` grid with `.attention__item` cards; transforms only | News, team and treatment cards |
+| Attention | `.attention` grid with `.attention__item` cards; transforms only, and only after the mouse has really moved (`html.pointer-intent`), so cards scrolling under a resting pointer stay still | News, team and treatment cards |
 | Continuity | View Transitions API, named elements chosen by `sharedElement` | Page changes, cards growing into dialogs and detail pages |
 | Disclosure | `BaseDisclosure`, measured height animation | Team details, FAQ |
 
