@@ -238,8 +238,10 @@ defineExpose({ dialog });
   }
 }
 
+/* 100vw rather than 100%: with classic scrollbars (Windows, Linux) the page keeps a
+   gutter for its scrollbar, and 100% would leave that strip of the page showing. */
 .modal--full {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   height: 100dvh;
   max-height: none;
