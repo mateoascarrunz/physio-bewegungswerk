@@ -129,7 +129,12 @@ onBeforeUnmount(() => {
   /* The track runs out to the screen edge so a cropped card signals more to come. */
   margin-inline: calc(-1 * var(--gutter));
   padding: 2px var(--gutter);
+  /* A row that scrolls sideways also becomes a vertical scroller whenever anything
+     inside it reaches lower, such as a card still rising into view. The wheel then
+     scrolls the row instead of the page. Clipping the vertical axis keeps every
+     vertical gesture for the page. */
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--gutter);
   scrollbar-width: none;
