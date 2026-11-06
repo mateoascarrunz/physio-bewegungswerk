@@ -253,14 +253,64 @@ test.describe('news', () => {
     await expect(page).toHaveURL(new RegExp(`${ARTICLE}$`));
     const dialog = page.locator('dialog[open]');
     await expect(dialog).toBeVisible();
-    await expect(dialog.locator('.article__body')).not.toBeEmpty();
-    await expect(dialog.locator('.article__meta')).toContainText('2025');
+    await expect(dialog.locator('.news-viewer__body')).not.toBeEmpty();
+    await expect(dialog.locator('.news-viewer__meta')).toContainText('2025');
     const titleId = await dialog.getAttribute('aria-labelledby');
     await expect(page.locator(`[id="${titleId}"]`)).toHaveText('Frischer Look, neue Energie!');
     await expect(page).toHaveTitle(/Frischer Look/);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.physio-bewegungswerk.ch${ARTICLE}`);
     await expect(page.locator('.news-grid')).toBeAttached();
     expect(await focusedElementIsInside(page, 'dialog')).toBe(true);
+  });
+
+  test('keeps one shell size for every article', async ({ page }) => {
+    const sizes = [];
+    for (const path of ['/news/7-frischer-look-neue-energie', '/news/1-jetzt-neu-gemeinsam-in-bewegung']) {
+      await page.goto('/news');
+      await page.locator(`.news-card[href="${path}"]`).click();
+      const dialog = page.locator('dialog[open]');
+      await expect(dialog).not.toHaveClass(/is-entering/);
+      await expect(dialog.locator('.news-viewer__body')).not.toBeEmpty();
+      const box = await dialog.boundingBox();
+      sizes.push([Math.round(box.width), Math.round(box.height)]);
+    }
+    expect(sizes[0]).toEqual(sizes[1]);
+  });
+
+  test('steps between articles inside the viewer and starts each at the top', async ({ page }) => {
+    await page.goto('/news');
+    await page.locator('.news-card').first().click();
+    const dialog = page.locator('dialog[open]');
+    await expect(dialog.getByRole('heading', { name: 'Frischer Look, neue Energie!' })).toBeVisible();
+    const before = await page.evaluate(() => scrollY);
+    await dialog.locator('.modal__scroll').evaluate((element) => element.scrollTo(0, 400));
+
+    await dialog.getByRole('button', { name: /Nächster Artikel/ }).click();
+    await expect(page).toHaveURL(/\/news\/1-jetzt-neu-gemeinsam-in-bewegung$/);
+    await expect(dialog.getByRole('heading', { name: 'Jetzt neu! Gemeinsam in Bewegung' })).toBeVisible();
+    await expect(page).toHaveTitle(/Jetzt neu/);
+    expect(await dialog.locator('.modal__scroll').evaluate((element) => element.scrollTop)).toBe(0);
+    await expect(dialog.locator('[aria-live]')).toContainText('2 von 2');
+    await expect(page.locator('dialog[open]')).toHaveCount(1);
+
+    await page.keyboard.press('ArrowLeft');
+    await expect(dialog.getByRole('heading', { name: 'Frischer Look, neue Energie!' })).toBeVisible();
+    // The grid behind never moved, and Back closes the viewer in one step.
+    expect(await page.evaluate(() => scrollY)).toBe(before);
+    await page.goBack();
+    await expect(page.locator('dialog[open]')).toHaveCount(0);
+    await expect(page).toHaveURL(/\/news$/);
+  });
+
+  test('survives repeated clicks on a card', async ({ page }) => {
+    await page.goto('/news');
+    const card = page.locator('.news-card').first();
+    await card.click();
+    await card.click({ force: true }).catch(() => {});
+    await expect(page.locator('dialog[open]')).toHaveCount(1);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('dialog')).toHaveCount(0);
+    await expect(page).toHaveURL(/\/news$/);
   });
 
   test('closes on Escape and hands focus back to the card', async ({ page }) => {
@@ -420,7 +470,7 @@ test.describe('team', () => {
     await expect(page).toHaveURL(/\?team=2$/);
     await expect(dialog.locator('details[open]')).toHaveCount(0);
     expect(await dialog.locator('.modal__scroll').evaluate((element) => element.scrollTop)).toBe(0);
-    await expect(dialog.locator('[aria-live]')).toContainText('2 von 5');
+    await expect(dialog.locator('[aria-live]')).toContainText(/2 von \d/);
 
     await page.keyboard.press('ArrowLeft');
     await expect(dialog.getByRole('heading', { name: 'Marit Hesse' })).toBeVisible();
@@ -445,7 +495,7 @@ test.describe('team', () => {
     const after = await dialog.locator('.team-viewer__media').boundingBox();
     expect(Math.round(after.y)).toBe(Math.round(before.y));
     const shell = await dialog.boundingBox();
-    const nav = await dialog.locator('.team-viewer__nav').boundingBox();
+    const nav = await dialog.locator('.viewer-nav').boundingBox();
     expect(Math.round(nav.y + nav.height)).toBe(Math.round(shell.y + shell.height));
   });
 
@@ -665,6 +715,44 @@ test.describe('layout and motion', () => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/kontakt');
     expect(await page.locator('.site-nav__list').evaluate((element) => getComputedStyle(element).viewTransitionName)).toBe('nav-links');
+  });
+
+  test('the home page leads from treatments to prices, location, news and booking', async ({ page }) => {
+    await page.goto('/');
+    // Document order, which is also the reading and keyboard order.
+    const inOrder = await page.evaluate(() => {
+      const sequence = ['.home-services', '.modules__private', '.modules__location', '#home-news-title', '.cta'].map((selector) =>
+        document.querySelector(selector),
+      );
+      if (sequence.some((element) => !element)) return false;
+      return sequence.every((element, index) => index === 0 || sequence[index - 1].compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+    expect(inOrder).toBe(true);
+    // News is the last section before the booking band.
+    const lastSections = await page.evaluate(() =>
+      [...document.querySelector('.page .shell').children]
+        .slice(-2)
+        .map((element) => element.getAttribute('aria-labelledby')),
+    );
+    expect(lastSections).toEqual(['home-news-title', 'cta-title']);
+  });
+
+  test('the location photo stays inside its frame and never covers the address', async ({ page }) => {
+    for (const width of [390, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const card = page.locator('.modules__location');
+      await card.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(300);
+      const gap = await page.evaluate(() => {
+        const photo = document.querySelector('.modules__location img').getBoundingClientRect();
+        const frame = document.querySelector('.modules__location-media').getBoundingClientRect();
+        const panel = document.querySelector('.modules__location-panel').getBoundingClientRect();
+        return { frameToPanel: panel.top - frame.bottom, photoClipped: getComputedStyle(document.querySelector('.modules__location-media')).overflow, photoBottom: photo.bottom };
+      });
+      expect(gap.frameToPanel).toBeGreaterThanOrEqual(-0.5);
+      expect(gap.photoClipped).toBe('hidden');
+    }
   });
 
   test('each page has one main heading', async ({ page }) => {

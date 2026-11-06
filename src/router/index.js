@@ -149,8 +149,8 @@ export const routes = [
 function scrollBehavior(to, from, savedPosition) {
   // Opening a dialog only changes the query, so the page must stay where it is.
   if (to.path === from.path) return to.hash ? { el: to.hash } : false;
-  // The news grid stays in place while an article opens over it.
-  if (to.name === 'newsArticle' && from.name === 'news' && isOverlayEntry()) return false;
+  // The news grid stays in place while an article opens over it, or the viewer steps to the next one.
+  if (to.name === 'newsArticle' && ['news', 'newsArticle'].includes(from.name) && isOverlayEntry()) return false;
   const position = savedPosition ?? (to.hash ? { el: to.hash } : { top: 0 });
   // A view transition captures the old page first, so the scroll can happen at once.
   // The fallback fade has to finish before the old page may jump.

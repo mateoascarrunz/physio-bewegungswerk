@@ -28,6 +28,8 @@ const props = defineProps({
   surfaceName: { type: String, default: null },
   /** Viewport point a full-screen dialog grows out of, as "x y". */
   revealOrigin: { type: String, default: null },
+  /** A deeper, lightly blurred backdrop for reading views, so the page behind recedes. */
+  immersive: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(['close', 'closed']);
@@ -122,7 +124,11 @@ defineExpose({ dialog });
     v-if="isRendered"
     ref="dialog"
     class="modal"
-    :class="[`modal--${variant}`, `modal--${size}`, { 'is-entering': isEntering, 'is-closing': isClosing }]"
+    :class="[
+      `modal--${variant}`,
+      `modal--${size}`,
+      { 'modal--immersive': immersive, 'is-entering': isEntering, 'is-closing': isClosing },
+    ]"
     :aria-labelledby="labelledby || undefined"
     :aria-label="labelledby ? undefined : label"
     :style="{ viewTransitionName: surfaceName ?? undefined, '--reveal-origin': revealOrigin ?? undefined }"
@@ -173,6 +179,21 @@ defineExpose({ dialog });
 
 .modal::backdrop {
   background: var(--color-overlay);
+}
+
+/* Reading views: the page behind becomes a calm blue field. The blur is a fixed
+   radius on the backdrop alone (only its opacity animates); browsers without
+   backdrop-filter get a more opaque overlay instead. */
+.modal--immersive::backdrop {
+  background: rgb(0 20 62 / 0.78);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .modal--immersive::backdrop {
+    background: rgb(0 28 84 / 0.62);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
 }
 
 .modal.is-entering::backdrop {

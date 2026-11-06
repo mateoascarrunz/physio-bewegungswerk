@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import BaseModal from '../base/BaseModal.vue';
 import BaseIcon from '../base/BaseIcon.vue';
 import BaseDisclosure from '../base/BaseDisclosure.vue';
+import BaseViewerNav from '../base/BaseViewerNav.vue';
 import { sharedStyle } from '@/services/viewTransition';
 import { cmsSrcset, teams } from '@/services/cms';
 import { describeMember } from '@/services/team';
@@ -35,7 +36,11 @@ const roster = teams.map((entry) => ({ id: entry.id, name: entry.name.trim() }))
 const position = computed(() => roster.findIndex((entry) => entry.id === shown.value?.id));
 const previous = computed(() => roster[(position.value - 1 + roster.length) % roster.length]);
 const next = computed(() => roster[(position.value + 1) % roster.length]);
-const count = (value) => String(value).padStart(2, '0');
+
+function toTop() {
+  const scroller = article.value?.closest('.modal__scroll');
+  if (scroller) scroller.scrollTop = 0;
+}
 
 watch(
   () => props.member,
@@ -50,8 +55,7 @@ watch(
     announcement.value = `${shown.value.name}, ${shown.value.role}, ${position.value + 1} von ${roster.length}`;
     // A new person starts at the top, with every section closed (the content is keyed).
     await nextTick();
-    const scroller = article.value?.closest('.modal__scroll');
-    if (scroller) scroller.scrollTop = 0;
+    toTop();
   },
   { immediate: true },
 );
@@ -61,6 +65,7 @@ function step(offset) {
   if (roster.length < 2) return;
   direction.value = offset > 0 ? 'next' : 'previous';
   const target = offset > 0 ? next.value : previous.value;
+  toTop();
   router.replace({ query: { ...route.query, team: target.id } });
 }
 
@@ -82,7 +87,14 @@ const facts = computed(() =>
 </script>
 
 <template>
-  <BaseModal class="team-viewer" :open="Boolean(member)" :labelledby="titleId" size="lg" @close="$emit('close')">
+  <BaseModal
+    class="team-viewer"
+    :open="Boolean(member)"
+    :labelledby="titleId"
+    size="lg"
+    immersive
+    @close="$emit('close')"
+  >
     <article v-if="shown" ref="article" class="team-viewer__shell" :data-direction="direction" @keydown="onKeydown">
       <div class="team-viewer__media" :style="sharedStyle('team', shown.id, 'modal', 'shared-media')">
         <img
@@ -159,29 +171,16 @@ const facts = computed(() =>
           </div>
         </div>
 
-        <nav v-if="roster.length > 1" class="team-viewer__nav" aria-label="Weitere Teammitglieder">
-          <button
-            type="button"
-            class="team-viewer__step"
-            :aria-label="`Vorheriges Profil: ${previous.name}`"
-            @click="step(-1)"
-          >
-            <BaseIcon name="arrow-left" :size="18" />
-            <span class="team-viewer__step-name">{{ previous.name }}</span>
-          </button>
-          <p class="team-viewer__count" aria-hidden="true">
-            <span>{{ count(position + 1) }}</span> / {{ count(roster.length) }}
-          </p>
-          <button
-            type="button"
-            class="team-viewer__step team-viewer__step--next"
-            :aria-label="`Nächstes Profil: ${next.name}`"
-            @click="step(1)"
-          >
-            <span class="team-viewer__step-name">{{ next.name }}</span>
-            <BaseIcon name="arrow-right" :size="18" />
-          </button>
-        </nav>
+        <BaseViewerNav
+          v-if="roster.length > 1"
+          label="Weitere Teammitglieder"
+          noun="Profil"
+          :previous="previous.name"
+          :next="next.name"
+          :position="position + 1"
+          :total="roster.length"
+          @step="step"
+        />
         <p class="sr-only" aria-live="polite">{{ announcement }}</p>
       </div>
     </article>
@@ -194,22 +193,10 @@ const facts = computed(() =>
  * scrolls inside it instead, and only once (the dialog's own scroll area).
  */
 .team-viewer {
-  --viewer-h: min(42rem, calc(100vh - 3rem));
-  --viewer-h: min(42rem, calc(100dvh - 3rem));
+  /* 42rem, or 64% of a tall screen such as a tablet held upright, never taller than the screen. */
+  --viewer-h: min(max(42rem, 64vh), calc(100vh - 3rem));
+  --viewer-h: min(max(42rem, 64dvh), calc(100dvh - 3rem));
   height: var(--viewer-h);
-}
-
-/* A deeper, calmer backdrop for this dialog, with a light blur where it is cheap enough. */
-.team-viewer::backdrop {
-  background: rgb(0 20 62 / 0.78);
-}
-
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .team-viewer::backdrop {
-    background: rgb(0 28 84 / 0.62);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-  }
 }
 
 /* Block layout, so the shell grows with a long profile (and the portrait can stay
@@ -419,101 +406,10 @@ const facts = computed(() =>
     color var(--duration-fast) var(--ease-out);
 }
 
-/* Steps through the team; always in reach at the bottom of the shell. */
-.team-viewer__nav {
-  position: sticky;
-  z-index: 1;
-  bottom: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  padding-block-end: max(var(--space-2), env(safe-area-inset-bottom));
-  border-block-start: 1px solid var(--line);
-  background: var(--white);
-}
-
-.team-viewer__step {
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  gap: var(--space-2);
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  max-width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: var(--blue-950);
-  font: inherit;
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    background-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
-}
-
-.team-viewer__step--next {
-  justify-self: end;
-}
-
-.team-viewer__step svg {
-  flex: none;
-  color: var(--color-brand);
-  transition: transform var(--duration-base) var(--ease-out);
-}
-
-.team-viewer__step-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.team-viewer__step:active {
-  background: var(--blue-100);
-}
-
-.team-viewer__count {
-  color: var(--color-text-faint);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-}
-
-.team-viewer__count span {
-  color: var(--blue-950);
-  font-weight: var(--weight-bold);
-}
-
 @media (hover: hover) and (pointer: fine) {
   .team-viewer__contacts a:hover {
     background: var(--color-brand);
     color: var(--white);
-  }
-
-  .team-viewer__step:hover {
-    background: var(--surface);
-    color: var(--color-brand-hover);
-  }
-
-  .team-viewer__step:hover svg {
-    transform: translateX(-2px);
-  }
-
-  .team-viewer__step--next:hover svg {
-    transform: translateX(2px);
-  }
-}
-
-/* Phones: the names would crowd the controls, so the arrows carry them (they keep their labels). */
-@media (max-width: 29.99rem) {
-  .team-viewer__step-name {
-    display: none;
   }
 }
 
@@ -550,10 +446,6 @@ const facts = computed(() =>
     padding-inline: clamp(1.75rem, 3.2vw, 2.75rem);
   }
 
-  .team-viewer__nav {
-    padding-inline: clamp(1rem, 2.2vw, 2rem);
-  }
-
   .team-viewer__facts {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   }
@@ -573,27 +465,6 @@ const facts = computed(() =>
 
   .team-viewer__shell[data-direction] .team-viewer__photo {
     animation: viewer-photo 520ms var(--ease-out-expo) both;
-  }
-}
-
-@keyframes viewer-next {
-  from {
-    opacity: 0;
-    transform: translateX(1.25rem);
-  }
-}
-
-@keyframes viewer-previous {
-  from {
-    opacity: 0;
-    transform: translateX(-1.25rem);
-  }
-}
-
-@keyframes viewer-photo {
-  from {
-    opacity: 0;
-    transform: scale(1.04);
   }
 }
 </style>

@@ -562,6 +562,29 @@ html.intro-pending body::after {
   }
 }
 
+/* Reading views (team profiles, news articles): stepping to the next entry brings its
+   text in from the side of the step and lets its picture settle. */
+@keyframes viewer-next {
+  from {
+    opacity: 0;
+    transform: translateX(1.25rem);
+  }
+}
+
+@keyframes viewer-previous {
+  from {
+    opacity: 0;
+    transform: translateX(-1.25rem);
+  }
+}
+
+@keyframes viewer-photo {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
 /* Fallback page change where the View Transitions API is missing. */
 .page-enter-active {
   transition:

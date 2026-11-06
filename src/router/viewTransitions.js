@@ -27,6 +27,8 @@ export function describeNavigation(to, from) {
     }
     return null;
   }
+  // Stepping from one article to the next inside the open viewer animates in the viewer itself.
+  if (to.name === 'newsArticle' && from.name === 'newsArticle' && isOverlayOpen()) return null;
   if (to.name === 'newsArticle' && from.name === 'news' && isOverlayEntry()) {
     return { type: 'dialog', kind: 'news', id: articleId(to), from: 'card', to: 'modal', modal: true };
   }
