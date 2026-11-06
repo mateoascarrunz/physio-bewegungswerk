@@ -11,8 +11,22 @@ Pushes to `main` deploy to production, and other branches create preview deploym
 
 | Strapi version | Events | Why |
 |---|---|---|
-| 4 | entry create, update, delete, publish, unpublish | Editing a published entry is expected to change it immediately, with no publish event |
-| 5 | entry publish, unpublish, delete | `entry.update` also fires on draft saves, which do not change the public site |
+| 4 (production now) | entry create, update, delete, publish, unpublish; media create, update, delete | Editing a published entry changes it immediately, with no publish event. Replacing or deleting a photo is a media event |
+| 5 (migration branch) | entry publish, unpublish, delete; media create, update, delete | `entry.update` also fires on draft saves, which do not change the public site |
+
+Every build reads the published content only, so unpublishing or deleting an entry removes it from the next build. Production builds stop if the CMS is unreachable or answers with invalid or empty content, and the previous deployment stays live; they never fall back to the stored snapshot, which could bring back removed content.
+
+One edit can fire two events (for example update and publish). Each starts a build, which is harmless: builds only read from Strapi, so they cannot trigger each other.
+
+#### Checking that it works
+
+1. In Strapi, open the webhook and use **Trigger**. It should answer 201. Strapi lists failed calls on the webhook page.
+2. In Vercel, a new production deployment appears with the source "Deploy Hook" and finishes in one to two minutes. Its build log ends the CMS step with `CMS snapshot updated: … teams 4 …; content <fingerprint>`. The fingerprint changes only when published content changed.
+3. On the live site, `document.documentElement.dataset.contentFetchedAt` shows when the deployed content was read.
+
+#### Without a webhook
+
+Publishing in Strapi changes nothing until the next build. Until the hook works, rebuild by hand: Vercel > Deployments > the current production deployment > **Redeploy**. The build cache can stay on: every build reads the CMS afresh.
 
 Strapi 5 only accepts public webhook URLs, so a local address is rejected. Treat the hook URL as a secret, and update the events during the Strapi 5 migration.
 

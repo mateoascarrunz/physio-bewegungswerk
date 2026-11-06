@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-05T08:24:25.280Z",
+  "fetchedAt": "2026-11-06T10:19:25.339Z",
   "banners": [],
   "jobs": [],
   "news": [
@@ -133,38 +133,6 @@
       "profilePicture": {
         "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1737158340/img_team_0002_afa05c008a.webp",
         "name": "img_team_0002.webp",
-        "alternativeText": null,
-        "width": 1600,
-        "height": 2400
-      }
-    },
-    {
-      "id": 6,
-      "name": "Nadine Schwarz ",
-      "workPosition": "Physiotherapeutin",
-      "quote": "Ich begleite Sie dabei, Ihre Bewegungsgewohnheiten zu erkennen, gezielt zu verbessern und so langfristig mehr Wohlbefinden und körperliche Freiheit zu erleben.",
-      "description": "Meine Wurzeln liegen im Tanz. Bewegung ist für mich Ausdruck unserer Persönlichkeit und unseres Wohlbefindens. Körper und Psyche lassen sich nicht klar voneinander trennen – sie beeinflussen sich gegenseitig.\n\n\nIn meiner Arbeit schaue ich genau hin: Wie bewegen Sie sich und welche Muster haben sich über die Zeit entwickelt? Gemeinsam erkunden wir die Ursachen Ihrer Beschwerden und entwickeln Strategien, die Sie im Alltag selbst anwenden können, damit Sie langfristig selbst etwas für Ihr Wohlbefinden tun können.\n\nPhysiotherapie verstehe ich als gemeinsamen Weg. Mein Ziel ist es, dass Sie Ihren Körper besser verstehen und Vertrauen in seine Fähigkeiten gewinnen.\n\n",
-      "show": true,
-      "languages": "Deutsch, Englisch, Französisch, Grundkenntnisse Italienisch",
-      "diploma": null,
-      "specialties": "•\tHaltung und Bewegungsschulung\n•\tRumpfstabilisation und Kraftaufbau\n•\tKoordination und Körperwahrnehmung fördern\n•\tRehabilitation nach Operationen\n•\tBewegen mit neurologischen Herausforderungen",
-      "education": "•\tESP Sportphysiotherapie\n•\tSpiraldynamik\n•\tPilates / Pilates Reformer\n•\tFaszientechnik\n•\tTriggerpunkt\n•\tMulligan Concept\n•\tConnect – Tanzen mit neurologischen Herausforderungen\n",
-      "email": null,
-      "phone": null,
-      "linkedIn": null,
-      "createdAt": "2025-09-03T20:34:58.901Z",
-      "updatedAt": "2025-10-17T16:32:33.998Z",
-      "publishedAt": "2025-09-19T08:10:00.904Z",
-      "coverPhoto": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
-        "name": "Nadine Schwarz.jpg",
-        "alternativeText": null,
-        "width": 1600,
-        "height": 2400
-      },
-      "profilePicture": {
-        "url": "https://res.cloudinary.com/dbaxsxo1d/image/upload/f_auto,q_auto,c_limit,w_1400/v1760718742/Nadine_Schwarz_97116a87f4.jpg",
-        "name": "Nadine Schwarz.jpg",
         "alternativeText": null,
         "width": 1600,
         "height": 2400

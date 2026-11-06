@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { assertCollectionHasEntries, findInvalidEntries, flatten } from '../src/services/cmsMapper.js';
 
@@ -53,9 +54,13 @@ try {
       await fetchCollection(collection, path),
     ]),
   );
-  const snapshot = { fetchedAt: new Date().toISOString(), ...Object.fromEntries(entries) };
+  const content = Object.fromEntries(entries);
+  const snapshot = { fetchedAt: new Date().toISOString(), ...content };
   writeFileSync(SNAPSHOT_PATH, `${JSON.stringify(snapshot, null, 2)}\n`);
-  console.log(`CMS snapshot updated: ${entries.map(([name, list]) => `${name} ${list.length}`).join(', ')}`);
+  // The fingerprint changes only when published content does, so two build logs show at a
+  // glance whether a rebuild picked up an edit.
+  const fingerprint = createHash('sha256').update(JSON.stringify(content)).digest('hex').slice(0, 12);
+  console.log(`CMS snapshot updated: ${entries.map(([name, list]) => `${name} ${list.length}`).join(', ')}; content ${fingerprint}`);
 } catch (error) {
   handleUnavailableContent(error.message);
 }
