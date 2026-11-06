@@ -623,8 +623,9 @@ html.intro-pending body::after {
 
 /*
  * Layers during a transition, bottom to top: the page, the header's surface, the
- * travelling active-link marker, the link labels, then cards growing into their
- * detail. Without this order the marker passes over the labels and hides them.
+ * travelling active-link marker, the link labels, a card's surface growing into its
+ * dialog, and the card's photo travelling on top of that surface. Without this order
+ * the marker hides the labels, or the dialog surface hides the photo until it lands.
  */
 ::view-transition-group(site-header) {
   z-index: 1;
@@ -638,11 +639,11 @@ html.intro-pending body::after {
   z-index: 3;
 }
 
-::view-transition-group(shared-media) {
+::view-transition-group(shared-surface) {
   z-index: 4;
 }
 
-::view-transition-group(shared-surface) {
+::view-transition-group(shared-media) {
   z-index: 5;
 }
 

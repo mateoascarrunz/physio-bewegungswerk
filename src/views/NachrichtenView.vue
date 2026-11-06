@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import NewsArticleModal from '@/components/nachrichten/NewsArticleModal.vue';
 import NewsArticlePage from '@/components/nachrichten/NewsArticlePage.vue';
@@ -24,6 +24,10 @@ const isOverlay = computed(() => {
 });
 
 watch(isOverlay, (value) => setOverlayOpen(value), { immediate: true });
+
+// The article text renders through a separate chunk. Fetching it with the grid means
+// the dialog opens complete, instead of settling first and having its text arrive later.
+onMounted(() => import('@/components/base/BaseRichText.vue'));
 onBeforeUnmount(() => setOverlayOpen(false));
 
 function closeOverlay() {
