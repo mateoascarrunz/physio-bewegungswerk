@@ -60,7 +60,7 @@ Rules: content is visible before any script runs, elements already on screen whe
 
 What enters with the first screen (the header after the logo intro, the home hero) moves or unmasks with `clip-path` instead of fading. Its colours, and so its contrast, are then true on every frame, for readers and for automated checks alike. The header only enters after the intro; on every other load it is simply there.
 
-Text set in the fallback font runs as wide as Montserrat at every weight the site uses (400, 500, 550, 600, 700), so nothing moves when the web font arrives. A new weight needs its own `Montserrat Fallback` face in `base.css`.
+Text set in the fallback font runs within about half a percent of Montserrat's width at every weight the site uses (400, 500, 550, 600, 700). Compared with a single fallback face, that cuts the layout shift from the font swap to about a third, although a paragraph can still gain or lose a line. A new weight needs its own `Montserrat Fallback` face in `base.css`.
 
 ## Images
 

@@ -2,10 +2,12 @@
 @import './tokens.css';
 
 /*
- * Metric-matched fallback keeps text from jumping when Montserrat arrives. Montserrat
- * widens with its weight faster than Arial, so each weight the site uses gets its
- * own face, measured to run within 0.1% of Montserrat's width. The vertical metrics
- * are Montserrat's (ascent 0.968, descent 0.251) divided by each size-adjust.
+ * Metric-matched fallback, so text moves as little as possible when Montserrat
+ * arrives. Montserrat widens with its weight faster than Arial, so each weight the
+ * site uses gets its own face; on the site's own text each runs within about half a
+ * percent of Montserrat's width. A paragraph can still gain or lose a line, because
+ * single words differ more than whole texts. The vertical metrics are Montserrat's
+ * (ascent 0.968, descent 0.251) divided by each size-adjust.
  */
 @font-face {
   font-family: 'Montserrat Fallback';
